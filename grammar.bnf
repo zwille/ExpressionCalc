@@ -1,0 +1,19 @@
+// basic definitions
+<Expression> 	::= <Literal> | <Sum>   
+<Sum>			::= [ <opSum> ] <Product> { <opSum> <Product> }
+<Product> 		::= <Power> { <opProduct> <Power> | <Constant>} 
+<Power>			::= <Expression> [ <opExponent> <Expression> ]
+<Literal> 		::= <Number> | <Identifier> | '(' <Expression ')'
+<Identifier> 	::= <Constant> | <Variable> | <Function> 
+<Constant>		::= e | π
+<Variable> 		::= a | b | c | d | p | q | r | s | t
+<Function> 		::= <FunctionName> <Expression>
+<FunctionName> 	::= √ | cos | sin | tan | acos | asin | atan | exp | !
+
+//operators and special character
+<opSum> 		::=	'+' | '-' 
+<opProduct>		::= '*' | '/'
+<opExponent>	::= '^'
+
+
+
