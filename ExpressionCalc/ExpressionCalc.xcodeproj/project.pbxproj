@@ -24,6 +24,7 @@
 		00051170165A5B2F009ACDD7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00051148165A5B2E009ACDD7 /* Foundation.framework */; };
 		00051178165A5B2F009ACDD7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 00051176165A5B2F009ACDD7 /* InfoPlist.strings */; };
 		0005117B165A5B2F009ACDD7 /* ExpressionCalcTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0005117A165A5B2F009ACDD7 /* ExpressionCalcTests.m */; };
+		00051186165A62AA009ACDD7 /* XCTokenizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 00051185165A62AA009ACDD7 /* XCTokenizer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,9 @@
 		00051177165A5B2F009ACDD7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		00051179165A5B2F009ACDD7 /* ExpressionCalcTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExpressionCalcTests.h; sourceTree = "<group>"; };
 		0005117A165A5B2F009ACDD7 /* ExpressionCalcTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExpressionCalcTests.m; sourceTree = "<group>"; };
+		00051184165A62AA009ACDD7 /* XCTokenizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCTokenizer.h; sourceTree = "<group>"; };
+		00051185165A62AA009ACDD7 /* XCTokenizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCTokenizer.m; sourceTree = "<group>"; };
+		00051187165A787C009ACDD7 /* Symbols.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Symbols.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +130,9 @@
 				00051161165A5B2E009ACDD7 /* XCViewController_iPhone.xib */,
 				00051164165A5B2E009ACDD7 /* XCViewController_iPad.xib */,
 				0005114D165A5B2E009ACDD7 /* Supporting Files */,
+				00051184165A62AA009ACDD7 /* XCTokenizer.h */,
+				00051187165A787C009ACDD7 /* Symbols.h */,
+				00051185165A62AA009ACDD7 /* XCTokenizer.m */,
 			);
 			path = ExpressionCalc;
 			sourceTree = "<group>";
@@ -278,6 +285,7 @@
 				00051153165A5B2E009ACDD7 /* main.m in Sources */,
 				00051157165A5B2E009ACDD7 /* XCAppDelegate.m in Sources */,
 				00051160165A5B2E009ACDD7 /* XCViewController.m in Sources */,
+				00051186165A62AA009ACDD7 /* XCTokenizer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

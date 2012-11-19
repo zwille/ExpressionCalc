@@ -7,17 +7,28 @@
 //
 
 #import "XCViewController.h"
+#import "XCTokenizer.h"
 
 @interface XCViewController ()
 
 @end
 
 @implementation XCViewController
-
+@synthesize tfE;
+@synthesize tfExp;
+@synthesize tfPi;
+@synthesize tfSqrt;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    unichar tmp = EULER;
+	[tfE setText:[[NSString alloc] initWithCharacters: &tmp length:1]];
+    tmp = SQRT;
+    [tfSqrt setText:[[NSString alloc] initWithCharacters: &tmp length:1]];
+    tmp = OP_EXP;
+    [tfExp setText:[[NSString alloc] initWithCharacters: &tmp length:1]];
+    tmp = PI;
+    [tfPi setText:[[NSString alloc] initWithCharacters: &tmp length:1]];
 }
 
 - (void)didReceiveMemoryWarning

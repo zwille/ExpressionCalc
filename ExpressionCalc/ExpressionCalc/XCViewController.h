@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface XCViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UITextField *tfExp;
+@property (weak, nonatomic) IBOutlet UITextField *tfSqrt;
+@property (weak, nonatomic) IBOutlet UITextField *tfE;
+@property (weak, nonatomic) IBOutlet UITextField *tfPi;
 
 @end
