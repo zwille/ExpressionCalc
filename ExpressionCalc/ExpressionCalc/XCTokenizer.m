@@ -53,7 +53,7 @@ bool isSpecial(unichar c) {
         _tokenType = OPERATOR;
         _token = [[NSString alloc] initWithCharacters:&c  length:1];
     } else if (isdigit(c) || ispunct(c)) {
-        //[self parseNumber(c)];
+        [self parseNumber: c];
     } else if (isWhitespace(c)) {
         _tokenType = WHITESPACE;
         _token = [[NSString alloc] initWithCharacters:&c  length:1];
@@ -71,6 +71,22 @@ bool isSpecial(unichar c) {
         _index++;
     }
     return -1;
+}
+-(void) parseNumber: (unichar) c {
+    //<Decimal> [ 'E' ( <Digit> )+ ]
+    //<Decimal>  		::= ( ( <Digit> )+ [ '.' ( <Digit> )* ] ) | ( ( <Digit> )* '.' ( <Digit> )+ )
+    //<Digit> ::= '0' | '1'| '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9'
+    NSMutableString * numberStr = [[NSMutableString alloc] init];
+    //parse decimal
+    bool hasPrefix=NO;
+    while(isdigit(c)) {
+        hasPrefix=YES;
+        [numberStr appendFormat:@"%c",c];
+        c = [self readNextChar];
+    }
+if(ispunct(c)) {
+    
+}
 }
 
 @end

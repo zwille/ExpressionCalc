@@ -25,7 +25,7 @@
 	[tfE setText:[[NSString alloc] initWithCharacters: &tmp length:1]];
     tmp = SQRT;
     [tfSqrt setText:[[NSString alloc] initWithCharacters: &tmp length:1]];
-    tmp = OP_EXP;
+    tmp = '^';
     [tfExp setText:[[NSString alloc] initWithCharacters: &tmp length:1]];
     tmp = PI;
     [tfPi setText:[[NSString alloc] initWithCharacters: &tmp length:1]];

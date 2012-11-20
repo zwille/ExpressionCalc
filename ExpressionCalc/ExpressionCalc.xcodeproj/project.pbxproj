@@ -25,6 +25,7 @@
 		00051178165A5B2F009ACDD7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 00051176165A5B2F009ACDD7 /* InfoPlist.strings */; };
 		0005117B165A5B2F009ACDD7 /* ExpressionCalcTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0005117A165A5B2F009ACDD7 /* ExpressionCalcTests.m */; };
 		00051186165A62AA009ACDD7 /* XCTokenizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 00051185165A62AA009ACDD7 /* XCTokenizer.m */; };
+		00AC4513165B72BE00C6C27D /* grammar_bnf.txt in Resources */ = {isa = PBXBuildFile; fileRef = 00AC4512165B72BE00C6C27D /* grammar_bnf.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 		00051184165A62AA009ACDD7 /* XCTokenizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCTokenizer.h; sourceTree = "<group>"; };
 		00051185165A62AA009ACDD7 /* XCTokenizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCTokenizer.m; sourceTree = "<group>"; };
 		00051187165A787C009ACDD7 /* Symbols.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Symbols.h; sourceTree = "<group>"; };
+		00AC4512165B72BE00C6C27D /* grammar_bnf.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = grammar_bnf.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +95,7 @@
 		00051137165A5B2E009ACDD7 = {
 			isa = PBXGroup;
 			children = (
+				00AC4512165B72BE00C6C27D /* grammar_bnf.txt */,
 				0005114C165A5B2E009ACDD7 /* ExpressionCalc */,
 				00051173165A5B2F009ACDD7 /* ExpressionCalcTests */,
 				00051145165A5B2E009ACDD7 /* Frameworks */,
@@ -248,6 +251,7 @@
 				0005115D165A5B2E009ACDD7 /* Default-568h@2x.png in Resources */,
 				00051163165A5B2E009ACDD7 /* XCViewController_iPhone.xib in Resources */,
 				00051166165A5B2E009ACDD7 /* XCViewController_iPad.xib in Resources */,
+				00AC4513165B72BE00C6C27D /* grammar_bnf.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -469,6 +473,7 @@
 				00051180165A5B2F009ACDD7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		00051181165A5B2F009ACDD7 /* Build configuration list for PBXNativeTarget "ExpressionCalcTests" */ = {
 			isa = XCConfigurationList;
@@ -477,6 +482,7 @@
 				00051183165A5B2F009ACDD7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
