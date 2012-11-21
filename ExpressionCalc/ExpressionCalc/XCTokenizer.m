@@ -7,6 +7,7 @@
 //
 
 #import "XCTokenizer.h"
+#import "XCNumber.h"
 bool isOperator(unichar c) {
     switch (c) {
         case OP_ADD:
@@ -31,13 +32,15 @@ bool isSpecial(unichar c) {
             return false;
     }
 }
+
 @implementation XCTokenizer
 @synthesize index = _index;
-@synthesize tokenType = _tokenType;
--(id)initWithStatement:(NSString *)statement {
+
+-(id)initWithStatement: (id<XCCharIterator>) statement {
     self = [super init];
-    _statement = statement;
-    _index = 0;
+    chars = statement;
+    numformat = [[NSNumberFormatter alloc] init];
+    [self nextToken];
     return self;
 }
 -(id)previewToken{
@@ -45,48 +48,57 @@ bool isSpecial(unichar c) {
 }
 -(id)nextToken{
     id rc = _token;
-    unichar c = [self readNextChar];
-    if(c==-1) {
-        _tokenType = END_OF_STATEMENT;
-        _token = nil;
-    } else if(isOperator(c)) {
-        _tokenType = OPERATOR;
-        _token = [[NSString alloc] initWithCharacters:&c  length:1];
-    } else if (isdigit(c) || ispunct(c)) {
-        [self parseNumber: c];
-    } else if (isWhitespace(c)) {
-        _tokenType = WHITESPACE;
-        _token = [[NSString alloc] initWithCharacters:&c  length:1];
-    } else if (isSpecial(c)) {
-        _tokenType = WHITESPACE;
-        _token = [[NSString alloc] initWithCharacters:&c  length:1];
+    _index = [chars index];
+    unichar c = -1;
+    if ([chars hasNextChar]) {
+        c = [chars nextChar];
+        if(isOperator(c)) {
+            _token = [[XCToken alloc] initWithContent:
+                    [NSString stringWithFormat: @"%C",c]
+                                       andType: OPERATOR];
+        } else if (isdigit(c) || c==PUNCT) {
+            XCNumber* num = [self parseNumberWithFirstChar: c];
+            _token = (num==nil) ?
+            [[XCToken alloc] initWithContent:@"malformed number" andType:PARSE_ERROR] :
+            [[XCToken alloc] initWithContent:num andType: NUMBER];
+        } else if (isWhitespace(c)) {
+            _token =  [[XCToken alloc] initWithContent:
+                    [NSString stringWithFormat: @"%C",c]
+                                       andType: WHITESPACE];
+        } else if (isSpecial(c)) {
+            _token =  [[XCToken alloc] initWithContent:
+                    [NSString stringWithFormat: @"%C",c]
+                                       andType: SPECIAL];
+        } else {
+            //TODO
+            //[self parseIdentifier(c)];
+        }
     } else {
-        //[self parseIdentifier(c)];
+        _token = [[XCToken alloc] initWithContent: nil
+                                   andType: END_OF_STATEMENT];
     }
     return rc;
 }
--(unichar) readNextChar {
-    if(_index<[_statement length]) {
-        return [_statement characterAtIndex:_index];
-        _index++;
+-(XCNumber*) parseNumberWithFirstChar: (unichar) c {
+    NSMutableString * buf = [[NSMutableString alloc] init];
+    while (true) {
+        if(isdigit(c)) { 
+            [buf appendFormat:@"%C",c];
+        } else if(c==PUNCT) {
+            [buf appendString:@"."];
+        } else if (c==EXP_BASE10) {
+            [buf appendString:@"E"];
+        } else {
+            break;
+        }
+        if ([chars hasNextChar]) {
+            c = [chars nextChar];
+        } else {
+            break;
+        }
     }
-    return -1;
+    return [XCNumber numberFromString:buf];
 }
--(void) parseNumber: (unichar) c {
-    //<Decimal> [ 'E' ( <Digit> )+ ]
-    //<Decimal>  		::= ( ( <Digit> )+ [ '.' ( <Digit> )* ] ) | ( ( <Digit> )* '.' ( <Digit> )+ )
-    //<Digit> ::= '0' | '1'| '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9'
-    NSMutableString * numberStr = [[NSMutableString alloc] init];
-    //parse decimal
-    bool hasPrefix=NO;
-    while(isdigit(c)) {
-        hasPrefix=YES;
-        [numberStr appendFormat:@"%c",c];
-        c = [self readNextChar];
-    }
-if(ispunct(c)) {
-    
-}
-}
+
 
 @end

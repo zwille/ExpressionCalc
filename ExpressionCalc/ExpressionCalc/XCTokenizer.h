@@ -8,18 +8,23 @@
 
 #import <Foundation/Foundation.h>
 #import "Symbols.h"
+#import "XCCharIterator.h"
+#import "XCToken.h"
 
 @interface XCTokenizer : NSObject {
+    XCToken * _token;
     NSUInteger _index;
-    id _token;
-    TokenType _tokenType;
-    NSString * _statement;
+    id<XCCharIterator> chars;
+    NSNumberFormatter * numformat;
 }
+/*
+ * points to the start of the token
+ */
 @property (readonly) NSUInteger index;
-@property (readonly) TokenType tokenType;
--(id) initWithStatement: (NSString*) statement;
--(id) previewToken;
--(id) nextToken;
+-(id) initWithStatement: (id<XCCharIterator>) statement;
+-(XCToken*) previewToken;
+-(XCToken*) nextToken;
+-(NSUInteger) index;
 
 
 @end

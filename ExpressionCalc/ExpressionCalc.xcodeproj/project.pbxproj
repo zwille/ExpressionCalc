@@ -25,7 +25,14 @@
 		00051178165A5B2F009ACDD7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 00051176165A5B2F009ACDD7 /* InfoPlist.strings */; };
 		0005117B165A5B2F009ACDD7 /* ExpressionCalcTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0005117A165A5B2F009ACDD7 /* ExpressionCalcTests.m */; };
 		00051186165A62AA009ACDD7 /* XCTokenizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 00051185165A62AA009ACDD7 /* XCTokenizer.m */; };
+		001AC7F6165B8C9900D4CE85 /* XCStringIterator.m in Sources */ = {isa = PBXBuildFile; fileRef = 001AC7F5165B8C9900D4CE85 /* XCStringIterator.m */; };
+		001AC81F165BC00100D4CE85 /* XCToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 001AC81E165BC00100D4CE85 /* XCToken.m */; };
+		001AC822165BCB5500D4CE85 /* XCStringIteratorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 001AC821165BCB5500D4CE85 /* XCStringIteratorTest.m */; };
+		001AC825165BDC2100D4CE85 /* XCTokenizerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 001AC824165BDC2100D4CE85 /* XCTokenizerTest.m */; };
 		00AC4513165B72BE00C6C27D /* grammar_bnf.txt in Resources */ = {isa = PBXBuildFile; fileRef = 00AC4512165B72BE00C6C27D /* grammar_bnf.txt */; };
+		00EF5C71165CEF960074325F /* XCElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 00EF5C70165CEF960074325F /* XCElement.m */; };
+		00EF5C74165CEFAA0074325F /* XCLiteral.m in Sources */ = {isa = PBXBuildFile; fileRef = 00EF5C73165CEFAA0074325F /* XCLiteral.m */; };
+		00EF5C77165CEFBC0074325F /* XCNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 00EF5C76165CEFBC0074325F /* XCNumber.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,7 +72,22 @@
 		00051184165A62AA009ACDD7 /* XCTokenizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCTokenizer.h; sourceTree = "<group>"; };
 		00051185165A62AA009ACDD7 /* XCTokenizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCTokenizer.m; sourceTree = "<group>"; };
 		00051187165A787C009ACDD7 /* Symbols.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Symbols.h; sourceTree = "<group>"; };
+		001AC7F4165B8C9900D4CE85 /* XCStringIterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCStringIterator.h; sourceTree = "<group>"; };
+		001AC7F5165B8C9900D4CE85 /* XCStringIterator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCStringIterator.m; sourceTree = "<group>"; };
+		001AC7F8165B8D4200D4CE85 /* XCCharIterator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCCharIterator.h; sourceTree = "<group>"; };
+		001AC81D165BC00100D4CE85 /* XCToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCToken.h; sourceTree = "<group>"; };
+		001AC81E165BC00100D4CE85 /* XCToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCToken.m; sourceTree = "<group>"; };
+		001AC820165BCB5500D4CE85 /* XCStringIteratorTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XCStringIteratorTest.h; path = ../ExpressionCalc/XCStringIteratorTest.h; sourceTree = "<group>"; };
+		001AC821165BCB5500D4CE85 /* XCStringIteratorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XCStringIteratorTest.m; path = ../ExpressionCalc/XCStringIteratorTest.m; sourceTree = "<group>"; };
+		001AC823165BDC2100D4CE85 /* XCTokenizerTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCTokenizerTest.h; sourceTree = "<group>"; };
+		001AC824165BDC2100D4CE85 /* XCTokenizerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCTokenizerTest.m; sourceTree = "<group>"; };
 		00AC4512165B72BE00C6C27D /* grammar_bnf.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = grammar_bnf.txt; sourceTree = "<group>"; };
+		00EF5C6F165CEF960074325F /* XCElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCElement.h; sourceTree = "<group>"; };
+		00EF5C70165CEF960074325F /* XCElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCElement.m; sourceTree = "<group>"; };
+		00EF5C72165CEFAA0074325F /* XCLiteral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCLiteral.h; sourceTree = "<group>"; };
+		00EF5C73165CEFAA0074325F /* XCLiteral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCLiteral.m; sourceTree = "<group>"; };
+		00EF5C75165CEFBC0074325F /* XCNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCNumber.h; sourceTree = "<group>"; };
+		00EF5C76165CEFBC0074325F /* XCNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCNumber.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,16 +148,15 @@
 		0005114C165A5B2E009ACDD7 /* ExpressionCalc */ = {
 			isa = PBXGroup;
 			children = (
+				001AC81B165BA8D900D4CE85 /* Parse */,
 				00051155165A5B2E009ACDD7 /* XCAppDelegate.h */,
+				00EF5C6D165CEF620074325F /* Elment */,
 				00051156165A5B2E009ACDD7 /* XCAppDelegate.m */,
 				0005115E165A5B2E009ACDD7 /* XCViewController.h */,
 				0005115F165A5B2E009ACDD7 /* XCViewController.m */,
 				00051161165A5B2E009ACDD7 /* XCViewController_iPhone.xib */,
 				00051164165A5B2E009ACDD7 /* XCViewController_iPad.xib */,
 				0005114D165A5B2E009ACDD7 /* Supporting Files */,
-				00051184165A62AA009ACDD7 /* XCTokenizer.h */,
-				00051187165A787C009ACDD7 /* Symbols.h */,
-				00051185165A62AA009ACDD7 /* XCTokenizer.m */,
 			);
 			path = ExpressionCalc;
 			sourceTree = "<group>";
@@ -157,6 +178,10 @@
 		00051173165A5B2F009ACDD7 /* ExpressionCalcTests */ = {
 			isa = PBXGroup;
 			children = (
+				001AC823165BDC2100D4CE85 /* XCTokenizerTest.h */,
+				001AC824165BDC2100D4CE85 /* XCTokenizerTest.m */,
+				001AC820165BCB5500D4CE85 /* XCStringIteratorTest.h */,
+				001AC821165BCB5500D4CE85 /* XCStringIteratorTest.m */,
 				00051179165A5B2F009ACDD7 /* ExpressionCalcTests.h */,
 				0005117A165A5B2F009ACDD7 /* ExpressionCalcTests.m */,
 				00051174165A5B2F009ACDD7 /* Supporting Files */,
@@ -171,6 +196,34 @@
 				00051176165A5B2F009ACDD7 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		001AC81B165BA8D900D4CE85 /* Parse */ = {
+			isa = PBXGroup;
+			children = (
+				00051187165A787C009ACDD7 /* Symbols.h */,
+				00051184165A62AA009ACDD7 /* XCTokenizer.h */,
+				00051185165A62AA009ACDD7 /* XCTokenizer.m */,
+				001AC7F4165B8C9900D4CE85 /* XCStringIterator.h */,
+				001AC7F8165B8D4200D4CE85 /* XCCharIterator.h */,
+				001AC7F5165B8C9900D4CE85 /* XCStringIterator.m */,
+				001AC81D165BC00100D4CE85 /* XCToken.h */,
+				001AC81E165BC00100D4CE85 /* XCToken.m */,
+			);
+			name = Parse;
+			sourceTree = "<group>";
+		};
+		00EF5C6D165CEF620074325F /* Elment */ = {
+			isa = PBXGroup;
+			children = (
+				00EF5C6F165CEF960074325F /* XCElement.h */,
+				00EF5C70165CEF960074325F /* XCElement.m */,
+				00EF5C72165CEFAA0074325F /* XCLiteral.h */,
+				00EF5C73165CEFAA0074325F /* XCLiteral.m */,
+				00EF5C75165CEFBC0074325F /* XCNumber.h */,
+				00EF5C76165CEFBC0074325F /* XCNumber.m */,
+			);
+			name = Elment;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -290,6 +343,11 @@
 				00051157165A5B2E009ACDD7 /* XCAppDelegate.m in Sources */,
 				00051160165A5B2E009ACDD7 /* XCViewController.m in Sources */,
 				00051186165A62AA009ACDD7 /* XCTokenizer.m in Sources */,
+				001AC7F6165B8C9900D4CE85 /* XCStringIterator.m in Sources */,
+				001AC81F165BC00100D4CE85 /* XCToken.m in Sources */,
+				00EF5C71165CEF960074325F /* XCElement.m in Sources */,
+				00EF5C74165CEFAA0074325F /* XCLiteral.m in Sources */,
+				00EF5C77165CEFBC0074325F /* XCNumber.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,6 +356,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				0005117B165A5B2F009ACDD7 /* ExpressionCalcTests.m in Sources */,
+				001AC822165BCB5500D4CE85 /* XCStringIteratorTest.m in Sources */,
+				001AC825165BDC2100D4CE85 /* XCTokenizerTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
