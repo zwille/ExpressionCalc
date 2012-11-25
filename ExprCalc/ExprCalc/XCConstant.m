@@ -16,6 +16,9 @@ static XCConstant * XC_PI = nil, * XC_EULER = nil;
     XC_PI = [[XCConstant alloc] initWithDouble:M_PI];
     XC_EULER = [[XCConstant alloc] initWithDouble:M_E];
 }
+-(XCNumber *)value{
+    return _value;
+}
 
 -(id) initWithDouble: (double) value {
     self = [super init];
@@ -23,6 +26,7 @@ static XCConstant * XC_PI = nil, * XC_EULER = nil;
     return self;
 }
 +(id)parseWithTokenizer:(XCTokenizer *)tok andArg:(id)arg{
+    assert(arg!=nil);
     if ([arg tokenType]==SPECIAL) {
         switch ([[arg content] characterAtIndex:0]) {
             case PI:

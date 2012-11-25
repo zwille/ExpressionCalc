@@ -8,10 +8,13 @@
 
 #import "XCVariable.h"
 static NSMutableDictionary * variables = nil;
+static NSArray * names = nil;
 
 @implementation XCVariable
 @synthesize name = _name;
-@synthesize value = _value;
+-(XCNumber *)value{
+    return _value;
+}
 -(id)initWithName:(NSString *)name{
     self = [super init];
     _name = name;
@@ -21,8 +24,11 @@ static NSMutableDictionary * variables = nil;
 +(XCVariable *)variableByName:(NSString *)name{
     return [variables objectForKey:name];
 }
++(NSArray *)variableNames{
+    return names;
+}
 +(void)initialize{
-    NSArray * names = [NSArray arrayWithObjects:@"a",@"b",@"c",@"d",@"p",@"q",@"r",@"s",@"t", nil];
+    names = [NSArray arrayWithObjects:@"a",@"b",@"c",@"d", nil];
     variables = [[NSMutableDictionary alloc] initWithCapacity:9];
     for (NSString* name in names) {
         [variables setObject:[[XCVariable alloc] initWithName: name ]
@@ -30,6 +36,7 @@ static NSMutableDictionary * variables = nil;
     }
 }
 +(id)parseWithTokenizer:(XCTokenizer *)tok andArg:(id)arg {
+    assert(arg!=nil);
     return [XCVariable variableByName:[arg content]];
 }
 @end

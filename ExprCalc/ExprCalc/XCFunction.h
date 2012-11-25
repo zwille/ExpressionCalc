@@ -7,15 +7,13 @@
 //
 
 #import "XCLiteral.h"
+#import "XCFunctionPrototype.h"
+#import "XCHasValue.h"
 
-@interface XCFunction : XCLiteral<XCElementParser> {
-    NSString * _name;
-    XCElement * _value;
-    SEL _call;
+@interface XCFunction : XCLiteral<XCElementParser, XCHasValue> {
+    XCFunctionPrototype * _prototype;
+    id<XCHasValue> _arg;
 }
-@property (strong, readonly) NSString * name;
 
 
--(id)initWithName:(NSString*) name andCall: (SEL) call;
-+(XCVariable*) variableByName: (NSString*) name;
 @end

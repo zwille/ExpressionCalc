@@ -9,6 +9,16 @@
 #import "XCTokenizer.h"
 #import "XCNumber.h"
 #import "XCErrorToken.h"
+bool isIdChar(unichar c) {
+    switch (c) {
+        case PI:
+        case EULER:
+        case SQRT:
+            return true;
+        default:
+            return false;
+    }
+}
 bool isOperator(unichar c) {
     switch (c) {
         case OP_ADD:
@@ -28,9 +38,6 @@ bool isSpecial(unichar c) {
     switch (c) {
         case LEFT_BRACE:
         case RIGHT_BRACE:
-        case PI:
-        case EULER:
-        case SQRT:
             return true;
         default:
             return false;
@@ -77,6 +84,10 @@ bool isSpecial(unichar c) {
             _token = [[XCToken alloc] initWithContent:
                 [self parseWordWithFirstChar: c ]
                 andType:WORD];
+        } else if (isIdChar(c)) {
+            _token = [[XCToken alloc] initWithContent:
+                      [NSString stringWithFormat:@"%C",c]
+                                              andType:WORD];
         }
         else {
             assert(false);

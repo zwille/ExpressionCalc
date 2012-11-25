@@ -13,9 +13,9 @@
 #import "XCErrorToken.h"
 
 @implementation XCIdentifier
-+(id)parseWithTokenizer:(XCTokenizer *)tok{
-    NSUInteger index = [tok index];
-    XCToken token = [tok nextToken];
++(id)parseWithTokenizer:(XCTokenizer *)tok andArg:(id)arg{
+    assert(arg!=nil);
+    XCToken *token = arg;
     id rc = [XCConstant parseWithTokenizer:tok andArg:token];
     if (rc!=nil) {
         return rc;
@@ -24,12 +24,8 @@
     if (rc!=nil) {
         return rc;
     }
-    rc = [XCVariable parseWithTokenizer:tok andArg:token];
-    return (rc!=nil) ?
-        rc :
-        [[XCErrorToken alloc] initWithMessage:@"not identified"
-                                     andIndex:index];
-    }
+    return [XCVariable parseWithTokenizer:tok andArg:token];
+    
 }
 
 @end

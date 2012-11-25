@@ -8,7 +8,10 @@
 
 #import "XCElement.h"
 #import "XCElementParser.h"
+#import "XCHasValue.h"
 
-@interface XCPower : XCElement<XCElementParser>
+@interface XCPower : XCElement<XCElementParser,XCHasValue> {
+    NSMutableArray * operands;
+}
 
 @end

@@ -8,16 +8,35 @@
 
 #import "XCFunction.h"
 #import "XCNumber.h"
+#import "XCErrorToken.h"
 
 @implementation XCFunction
--(id)initWithName:(NSString *)name andCall:(SEL)call {
-    self = [super init];
-    _name = name;
-    _call = call;
+
++(id)parseWithTokenizer:(XCTokenizer *)tok andArg:(id)arg{
+    assert(arg!=nil);
+    XCToken * token = arg;
+    NSString * name = [token content];
+    XCFunctionPrototype * p = [XCFunctionPrototype prototypeByName:name];
+    if (p==nil) {
+        return nil;
+    }
+    id funcarg = [XCLiteral parseWithTokenizer:tok andArg:nil];
+    if ([funcarg isKindOfClass:[XCErrorToken class]]) {
+        return funcarg;
+    } else if([funcarg conformsToProtocol: @protocol(XCHasValue)]) {
+        return [[XCFunction alloc] initWithProtoype:p andArg:funcarg];
+    } else {
+        return nil;
+    }
 }
--(XCNumber*) compute{
-    
-    
+-(id)initWithProtoype:(XCFunctionPrototype *)proto andArg:(id<XCHasValue>)arg {
+    self = [super init];
+    _prototype = proto;
+    _arg = arg;
+}
+-(XCNumber*) value{
+    XCNumber * argval = [_arg value];
+    return [argval execFunc:_prototype];
 }
 
 @end

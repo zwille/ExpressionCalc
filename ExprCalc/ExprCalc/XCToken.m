@@ -22,7 +22,7 @@
     [buf appendFormat:@"XCToken: token=%@ type=%@",_content,[XCToken stringOfType:_type]];
     return buf;
 }
-+(NSString *)stringOfType:(XCTokenType)type{
++(NSString*)stringOfType:(XCTokenType)type{
     switch (type) {
         case NUMBER: return @"number";
             case OPERATOR: return @"operator";

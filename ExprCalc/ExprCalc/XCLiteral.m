@@ -8,21 +8,53 @@
 
 #import "XCLiteral.h"
 #import "XCIdentifier.h"
+#import "XCErrorToken.h"
+#import "XCExpression.h"
 
 @implementation XCLiteral
-+(id)parseWithTokenizer:(XCTokenizer *)tok{
-    XCToken * token = [tok previewToken];
++(id)parseWithTokenizer:(XCTokenizer *)tok andArg:(id)arg {
+    //int sgn = [arg intValue];
+    assert(arg==nil);
+    NSUInteger index = [tok index];
+    XCToken * token = [tok nextToken];
     XCTokenType tokenType = [token tokenType];
     //TODO parse Expression
     switch (tokenType) {
         case PARSE_ERROR:
-            [tok nextToken];
             return token;
         case NUMBER:
-            [tok nextToken];
             return [token content];
+        case SPECIAL:
+            if ([[token content] characterAtIndex:0]!=LEFT_BRACE) {
+                return [[XCErrorToken alloc] initWithMessage:
+                [NSString stringWithFormat:@"asserted %c",LEFT_BRACE]
+                                                    andIndex:index];
+            }
+            id rc = [XCExpression parseWithTokenizer:tok andArg:nil];
+            if([rc isKindOfClass:[XCErrorToken class]]) {
+                return rc;
+            }
+            assert([rc isKindOfClass:[XCExpression class]]);
+            index = [tok index];
+            token = [tok nextToken];
+            if([token tokenType]==SPECIAL
+               && [[token content]characterAtIndex:0]==RIGHT_BRACE) {
+               return rc;
+            } else {
+                return [[XCErrorToken alloc] initWithMessage:
+                        [NSString stringWithFormat:@"asserted %c",RIGHT_BRACE]
+                                                    andIndex:index];          
+            }
         default:
-            return [XCIdentifier parseWithTokenizer: tok];
+            id rc = [XCIdentifier parseWithTokenizer: tok andArg:token];
+            if (rc==nil) {
+                return [[XCErrorToken alloc] initWithMessage:
+                        [NSString stringWithFormat:@"could not find identifier: %@",[token content]]
+                                                    andIndex:index];
+            } else {
+                return rc;
+            }
     }
 }
+
 @end

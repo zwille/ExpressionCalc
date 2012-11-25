@@ -7,7 +7,14 @@
 //
 
 #import "XCElement.h"
-
+#import "XCErrorToken.h"
+#import "Symbols.h"
+bool isError(id parsed) {
+    return [parsed isKindOfClass:[XCErrorToken class]];
+}
+bool isSpecial(XCToken * token, Special specchar) {
+    
+}
 @implementation XCElement
 
 @end

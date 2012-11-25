@@ -1,15 +1,14 @@
 // basic definitions
 <Statement> 	::= 'var' <Whitespace> <Variable> '=' <Whitespace>] <Expression>   
-<Expression> 	::= <Literal> | <Sum>  
-<Sum>			::= [ <opSum> ] <Product> ( <opSum> <Product> )*
-<Product> 		::= <Power> ( <opProduct> <Power> | <Constant> )* 
-<Power>			::= <Literal> [ <opExponent> <Literal> ]
+<Expression> 	::=  [ <opSum> ] <Product> ( <opSum> <Product> )*
+<Product> 		::= <Power> ( <opProduct> <Power> )* 
+<Power>			::= <Literal> ( <opExponent> <Literal> )*
 <Literal> 		::= <Number> | <Identifier> | '(' <Expression ')'
 <Identifier> 	::= <Constant> | <Variable> | <Function> 
 <Constant>		::= 'ℯ' | 'π' | ans
 <Variable> 		::= a | b | c | d | p | q | r | s | t
-<Function> 		::= <FunctionName> <Expression>
-<FunctionName> 	::= '√' | 'cos' | 'sin' | 'tan' | 'acos' | 'asin' | 'atan' | 'exp' | '!'
+<Function> 		::= <FunctionName> <Literal>
+<FunctionName> 	::= '√' | 'cos' | 'sin' | 'tan' | 'acos' | 'asin' | 'atan' | 'exp'
 
 //tokentype: operator
 <opSum> 		::=	'+' | '-' 

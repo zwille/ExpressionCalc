@@ -8,14 +8,15 @@
 
 #import "XCLiteral.h"
 #import "XCNumber.h"
+#import "XCHasValue.h"
 
-@interface XCVariable : XCLiteral<XCElementParser> {
+@interface XCVariable : XCLiteral<XCElementParser, XCHasValue> {
     NSString * _name;
     XCNumber * _value;
 }
 @property (strong, readonly) NSString * name;
-@property (strong) XCNumber * value;
--(id)initWithName:(NSString*) name;
+
 +(XCVariable*) variableByName: (NSString*) name;
++(NSArray*) variableNames;
 
 @end

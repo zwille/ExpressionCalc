@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "Symbols.h"
+#import "XCToken.h"
+bool isSpecial(XCToken * token, Special specchar);
+bool isError(id parsed);
 @interface XCElement : NSObject
 
 @end

@@ -1,33 +1,33 @@
 //
-//  XCProduct.m
+//  XCExpression.m
 //  ExprCalc
 //
-//  Created by Christoph Cwelich on 21.11.12.
+//  Created by Christoph Cwelich on 25.11.12.
 //  Copyright (c) 2012 Christoph Cwelich. All rights reserved.
 //
 
+#import "XCExpression.h"
 #import "XCProduct.h"
-#import "XCPower.h"
-#import "XCInvert.h"
+#import "XCNegate.h"
 
-int isOpProd(XCToken * token) {
+int isOpSum(XCToken * token) {
     if ([token tokenType]==OPERATOR) {
         unichar c =[[token content] characterAtIndex:0];
-        if (c==OP_MULT) {
+        if (c==OP_ADD) {
             return 1;
-        } else if (c==OP_DIV) {
+        } else if (c==OP_SUB) {
             return -1;
         }
     }
     return 0;
 }
-@implementation XCProduct
+@implementation XCExpression
 -(XCNumber *)value{
-    XCNumber * prod = [XCNumber numberFromDouble:1];
+    XCNumber * sum = [XCNumber numberFromDouble:0];
     for (id<XCHasValue> operand in operands) {
-        prod = [prod mult: [operand value]];
+        sum = [sum add: [operand value]];
     }
-    return prod;
+    return sum;
 }
 -(id) initWithOperands: (NSMutableArray*) ops {
     self = [super init];
@@ -36,32 +36,30 @@ int isOpProd(XCToken * token) {
 }
 
 +(id)parseWithTokenizer:(XCTokenizer *)tok andArg:(id)arg {
-    id operand = [XCPower parseWithTokenizer:tok andArg:nil];
+    id operand = [XCProduct parseWithTokenizer:tok andArg:nil];
     if (isError(operand)) {
         return operand;
     }
     XCToken * token = [tok previewToken];
     id rc = operand;
-    int op = isOpProd(token);
+    int op = isOpSum(token);
     if(op) {
         NSMutableArray * operands = [[NSMutableArray alloc]init];
-        rc = [[XCProduct alloc] initWithOperands:operands];
+        rc = [[XCExpression alloc] initWithOperands:operands];
         [operands addObject:operand];
         do {
             [tok nextToken];
-            operand = [XCPower parseWithTokenizer:tok andArg:nil];
+            operand = [XCProduct parseWithTokenizer:tok andArg:nil];
             if (isError(operand)) {
                 return operand;
             }
             if (op<0) {
-                operand = [XCInvert invertValue:operand];
+                operand = [XCNegate negateValue:operand];
             }
             [operands addObject:operand];
             token = [tok previewToken];
-        } while (isOpProd(token));
+        } while (isOpSum(token));
     }
     return rc;
 }
-    
-
 @end

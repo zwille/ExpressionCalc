@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "XCElement.h"
 #import "XCElementParser.h"
+#import "XCElement.h"
+#import "XCHasValue.h"
 
-@interface XCLiteral : XCElement <XCElementParser> 
+@interface XCLiteral : XCElement <XCElementParser, XCHasValue>
 
 @end

@@ -8,13 +8,20 @@
 
 #import <Foundation/Foundation.h>
 #import "XCLiteral.h"
+#import "XCFunctionPrototype.h"
+#import "XCHasValue.h"
 
-@interface XCNumber : XCLiteral {
+@interface XCNumber : XCLiteral<XCHasValue> {
     double val;
 }
 -(id) initWithDouble: (double) value;
 +(XCNumber*) numberFromDouble: (double) value;
 +(XCNumber*) numberFromString: (NSString *) numStr;
--(XCNumber*) cos;
+-(XCNumber*) execFunc: (XCFunctionPrototype*) f;
+-(XCNumber*) negate;
+-(XCNumber*) invert;
+-(XCNumber*) add: (XCNumber*) rhs;
+-(XCNumber*) mult: (XCNumber*) rhs;
+-(XCNumber*) pow: (XCNumber*) exp;
 
 @end

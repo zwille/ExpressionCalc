@@ -34,8 +34,26 @@ const double EPS = 1e-10;
 -(NSString *)description{
     return [NSString stringWithFormat:@"%f",val];
 }
--(XCNumber *)cos {
-    return [XCNumber numberFromDouble: cos(val)];
+-(XCNumber*) negate {
+    return [XCNumber numberFromDouble:-val];
 }
-
+-(XCNumber*) invert {
+    return [XCNumber numberFromDouble:1/val];
+}
+-(XCNumber*) add: (XCNumber*) rhs {
+    return [XCNumber numberFromDouble: val+rhs->val];
+}
+-(XCNumber*) mult: (XCNumber*) rhs{
+    return [XCNumber numberFromDouble: val*rhs->val];
+}
+-(XCNumber*) pow: (XCNumber*) exp{
+    return [XCNumber numberFromDouble: pow(val,exp->val)];
+}
+-(XCNumber*)value{
+    return self;
+}
+-(XCNumber *)execFunc:(XCFunctionPrototype *)f {
+    func_t func = [f function];
+    return [XCNumber numberFromDouble: func(val)];
+}
 @end
