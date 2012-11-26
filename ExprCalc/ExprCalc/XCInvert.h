@@ -9,9 +9,10 @@
 #import "XCElement.h"
 #import "XCHasValue.h"
 #import "XCElementParser.h"
-@interface XCInvert : XCElement {
+#import "XCNumber.h"
+@interface XCInvert : XCElement<XCHasValue> {
     id<XCHasValue> _value;
 }
-+(id)invertValue: (id<XCHasValue>) value;
--(id)initWithValue: (id<XCHasValue>) value;
++(id)invertValue: (id) value;
+
 @end

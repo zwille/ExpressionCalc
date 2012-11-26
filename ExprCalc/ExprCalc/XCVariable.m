@@ -12,6 +12,9 @@ static NSArray * names = nil;
 
 @implementation XCVariable
 @synthesize name = _name;
+-(void)setValue:(XCNumber*)value {
+    _value = value;
+}
 -(XCNumber *)value{
     return _value;
 }

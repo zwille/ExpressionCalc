@@ -9,17 +9,18 @@
 #import "XCNegate.h"
 
 @implementation XCNegate
-+(id)negateValue:(id<XCHasValue>)value {
++(id)negateValue:(id)value {
     return [[XCNegate alloc] initWithValue:value];
 }
--(id)initWithValue:(id<XCHasValue>)value {
+
+-(id)initWithValue:(id)value {
     self = [super init];
     _value = value;
     return self;
 }
 
 -(XCNumber *)value {
-    return [[_value value] negate:];
+    return [[_value value] negate];
 }
 
 @end

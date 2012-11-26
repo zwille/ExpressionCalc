@@ -21,6 +21,7 @@
  * points to the start of the token
  */
 @property (readonly) NSUInteger index;
++(id) tokenizerWithString: (NSString*) str;
 -(id) initWithStatement: (id<XCCharIterator>) statement;
 -(XCToken*) previewToken;
 -(XCToken*) nextToken;

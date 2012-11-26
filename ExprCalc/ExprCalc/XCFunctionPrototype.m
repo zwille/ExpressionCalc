@@ -20,16 +20,13 @@ static NSMutableDictionary * protoIndex = nil;
     return self;
 }
 
-+(XCFunctionPrototype*) prototypeBySymbol:(Function)sym {
++(XCFunctionPrototype*) prototypeBySymbol:(XCFunctionSymbol)sym {
     return [protos objectAtIndex:sym];
 }
 +(XCFunctionPrototype*) prototypeByName: (NSString*) name {
     return [protoIndex objectForKey:name];
 }
-+(id)parseWithTokenizer:(XCTokenizer *)tok andArg:(id)arg{
-    XCToken * token = arg;
-    return [XCFunctionPrototype prototypeByName:[token content]];
-}
+
 +(void)insertAtIndex:(NSUInteger)i withName: (NSString*) name andFunc: (func_t) func {
     XCFunctionPrototype * fp = [[XCFunctionPrototype alloc]
                                 initWithName:name

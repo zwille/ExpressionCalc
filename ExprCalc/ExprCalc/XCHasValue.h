@@ -12,6 +12,4 @@
 
 @protocol XCHasValue <NSObject>
 -(XCNumber*) value;
-
-
 @end

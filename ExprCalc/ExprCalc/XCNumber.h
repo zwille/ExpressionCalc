@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "XCLiteral.h"
 #import "XCFunctionPrototype.h"
-#import "XCHasValue.h"
+
 
 @interface XCNumber : XCLiteral {
     double val;
@@ -23,5 +23,6 @@
 -(XCNumber*) add: (XCNumber*) rhs;
 -(XCNumber*) mult: (XCNumber*) rhs;
 -(XCNumber*) pow: (XCNumber*) exp;
+-(XCNumber*) value;
 
 @end

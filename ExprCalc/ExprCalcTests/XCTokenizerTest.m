@@ -130,8 +130,9 @@ XCTokenizer * XCTokFromString(NSString* str) {
     [self fullCheckWithTokenizer:tok andAssertedIndex:11 andContent:@"aB" andType:WORD];
     [self fullCheckWithTokenizer: tok andAssertedIndex: 13 andContent: @" " andType: WHITESPACE];
     [self fullCheckWithTokenizer:tok andAssertedIndex:14 andContent:@"abc" andType:WORD];
-    [self fullCheckWithTokenizer:tok andAssertedIndex:15 andContent:@"√" andType:WORD];
-    [self assertFinishedWithTokenizer: tok andAssertedIndex: 16];
+    [self fullCheckWithTokenizer: tok andAssertedIndex: 17 andContent: @" " andType: WHITESPACE];
+    [self fullCheckWithTokenizer:tok andAssertedIndex:18 andContent:@"√" andType:WORD];
+    [self assertFinishedWithTokenizer: tok andAssertedIndex: 19];
 }
 -(void)testMixed {
     XCTokenizer * tok = XCTokFromString(@"-2E3 * (.5+1.5) cos");
@@ -147,7 +148,7 @@ XCTokenizer * XCTokFromString(NSString* str) {
     [self fullCheckWithTokenizer:tok andAssertedIndex:14 andContent:@")" andType:SPECIAL];
     [self fullCheckWithTokenizer:tok andAssertedIndex:15 andContent:@" " andType:WHITESPACE];
     [self fullCheckWithTokenizer:tok andAssertedIndex:16 andContent:@"cos" andType:WORD];
-    [self assertFinishedWithTokenizer: tok andAssertedIndex: 1];
+    [self assertFinishedWithTokenizer: tok andAssertedIndex: 19];
     
 }
 @end

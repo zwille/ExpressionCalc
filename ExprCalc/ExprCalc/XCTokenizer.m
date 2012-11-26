@@ -9,6 +9,8 @@
 #import "XCTokenizer.h"
 #import "XCNumber.h"
 #import "XCErrorToken.h"
+#import "XCStringIterator.h"
+
 bool isIdChar(unichar c) {
     switch (c) {
         case PI:
@@ -126,11 +128,15 @@ bool isSpecial(unichar c) {
         if ([chars hasNextChar]) {
             c = [chars nextChar];
         } else {
-            break;
+            return buf;
         }
     }
     [chars back];
     return buf;
+}
++(id)tokenizerWithString:(NSString *)str {
+    XCStringIterator * it = [[XCStringIterator alloc] initWithString:str];
+    return [[XCTokenizer alloc] initWithStatement:it];
 }
 
 

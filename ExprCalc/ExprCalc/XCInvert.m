@@ -9,12 +9,12 @@
 #import "XCInvert.h"
 
 @implementation XCInvert 
--(id)initWithValue:(id<XCHasValue>)value {
+-(id)initWithValue:(id)value {
     self = [super init];
     _value = value;
     return self;
 }
-+(id)invertValue:(id<XCHasValue>)value {
++(id)invertValue:(id)value {
     return [[XCInvert alloc] initWithValue:value];
 }
 

@@ -7,17 +7,16 @@
 //
 
 #import "XCLiteral.h"
-#import "XCNumber.h"
 
 typedef double(*func_t)(double);
-@interface XCFunctionPrototype : XCLiteral<XCElementParser> {
+@interface XCFunctionPrototype : XCLiteral {
     NSString * _name;
     func_t _call;
 }
 @property (readonly,strong) NSString * name;
 @property (readonly) func_t function;
 
-+(XCFunctionPrototype*) prototypeBySymbol: (Function) sym;
++(XCFunctionPrototype*) prototypeBySymbol: (XCFunctionSymbol) sym;
 +(XCFunctionPrototype*) prototypeByName: (NSString*) name;
 
 

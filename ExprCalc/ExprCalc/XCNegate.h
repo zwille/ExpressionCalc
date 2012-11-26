@@ -13,8 +13,6 @@
 @interface XCNegate : XCElement<XCHasValue>{
     id<XCHasValue> _value;
 }
-+(id)negateValue: (id<XCHasValue>) value;
--(id)initWithValue: (id<XCHasValue>) value;
-
++(id)negateValue: (id) value;
 
 @end

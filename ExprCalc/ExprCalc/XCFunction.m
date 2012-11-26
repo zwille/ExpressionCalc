@@ -33,6 +33,7 @@
     self = [super init];
     _prototype = proto;
     _arg = arg;
+    return self;
 }
 -(XCNumber*) value{
     XCNumber * argval = [_arg value];

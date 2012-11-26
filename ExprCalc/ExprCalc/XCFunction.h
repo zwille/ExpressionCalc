@@ -10,7 +10,7 @@
 #import "XCFunctionPrototype.h"
 #import "XCHasValue.h"
 
-@interface XCFunction : XCLiteral<XCElementParser> {
+@interface XCFunction : XCLiteral<XCElementParser, XCHasValue> {
     XCFunctionPrototype * _prototype;
     id<XCHasValue> _arg;
 }

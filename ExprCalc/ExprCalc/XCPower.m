@@ -30,7 +30,8 @@ bool isExpOp(XCToken * token) {
     return self;
 }
 
-+(id)parseWithTokenizer:(XCTokenizer *)tok {
++(id)parseWithTokenizer:(XCTokenizer *)tok andArg:(id)arg {
+    assert(arg==nil);
     id parsed = [XCLiteral parseWithTokenizer:tok andArg:nil];
     if (isError(parsed)) {
         return parsed;

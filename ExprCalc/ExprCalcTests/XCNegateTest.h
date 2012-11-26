@@ -9,5 +9,5 @@
 #import <SenTestingKit/SenTestingKit.h>
 
 @interface XCNegateTest : SenTestCase
-
+-(void) testNegateValue;
 @end

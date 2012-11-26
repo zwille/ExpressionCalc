@@ -7,6 +7,7 @@
 //
 
 #import "XCLiteral.h"
+#import "XCHasValue.h"
 
 
 @interface XCIdentifier : XCLiteral<XCElementParser>

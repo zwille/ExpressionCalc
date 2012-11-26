@@ -10,9 +10,10 @@
 #import "XCNumber.h"
 #import "XCHasValue.h"
 
-@interface XCConstant : XCLiteral<XCElementParser> {
+@interface XCConstant : XCLiteral<XCElementParser, XCHasValue> {
     XCNumber * _value;
 }
+
 
 @end
 

@@ -10,13 +10,15 @@
 #import "XCNumber.h"
 #import "XCHasValue.h"
 
-@interface XCVariable : XCLiteral<XCElementParser> {
+@interface XCVariable : XCLiteral<XCElementParser, XCHasValue> {
     NSString * _name;
     XCNumber * _value;
 }
 @property (strong, readonly) NSString * name;
 
+
 +(XCVariable*) variableByName: (NSString*) name;
 +(NSArray*) variableNames;
+-(void) setValue:(XCNumber*)value;
 
 @end
