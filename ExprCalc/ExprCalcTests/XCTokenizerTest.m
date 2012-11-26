@@ -118,7 +118,7 @@ XCTokenizer * XCTokFromString(NSString* str) {
    [self checkNumberAssertError: @".E"];
 }
 -(void)testWord {
-    XCTokenizer * tok = XCTokFromString(@"A Ab Abc a aB abc");
+    XCTokenizer * tok = XCTokFromString(@"A Ab Abc a aB abc √");
     [self fullCheckWithTokenizer:tok andAssertedIndex:0 andContent:@"A" andType:WORD];
     [self fullCheckWithTokenizer: tok andAssertedIndex: 1 andContent: @" " andType: WHITESPACE];
     [self fullCheckWithTokenizer:tok andAssertedIndex:2 andContent:@"Ab" andType:WORD];
@@ -130,10 +130,11 @@ XCTokenizer * XCTokFromString(NSString* str) {
     [self fullCheckWithTokenizer:tok andAssertedIndex:11 andContent:@"aB" andType:WORD];
     [self fullCheckWithTokenizer: tok andAssertedIndex: 13 andContent: @" " andType: WHITESPACE];
     [self fullCheckWithTokenizer:tok andAssertedIndex:14 andContent:@"abc" andType:WORD];
-    [self assertFinishedWithTokenizer: tok andAssertedIndex: 15];
+    [self fullCheckWithTokenizer:tok andAssertedIndex:15 andContent:@"√" andType:WORD];
+    [self assertFinishedWithTokenizer: tok andAssertedIndex: 16];
 }
 -(void)testMixed {
-    XCTokenizer * tok = XCTokFromString(@"-2E3 * (.5+1.5)");
+    XCTokenizer * tok = XCTokFromString(@"-2E3 * (.5+1.5) cos");
     [self fullCheckWithTokenizer:tok andAssertedIndex:0 andContent:@"-" andType:OPERATOR];
     [self checkNumberWithTokenizer:tok andAssertedValue:2e3 andIndex: 1];
     [self fullCheckWithTokenizer:tok andAssertedIndex:4 andContent:@" " andType:WHITESPACE];
@@ -144,6 +145,8 @@ XCTokenizer * XCTokFromString(NSString* str) {
     [self fullCheckWithTokenizer:tok andAssertedIndex:10 andContent:@"+" andType:OPERATOR];
     [self checkNumberWithTokenizer:tok andAssertedValue:1.5 andIndex:11];
     [self fullCheckWithTokenizer:tok andAssertedIndex:14 andContent:@")" andType:SPECIAL];
+    [self fullCheckWithTokenizer:tok andAssertedIndex:15 andContent:@" " andType:WHITESPACE];
+    [self fullCheckWithTokenizer:tok andAssertedIndex:16 andContent:@"cos" andType:WORD];
     [self assertFinishedWithTokenizer: tok andAssertedIndex: 1];
     
 }

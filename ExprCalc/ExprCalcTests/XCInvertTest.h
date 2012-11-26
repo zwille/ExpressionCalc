@@ -9,5 +9,5 @@
 #import <SenTestingKit/SenTestingKit.h>
 
 @interface XCInvertTest : SenTestCase
-
+-(void)testInvertValue;
 @end

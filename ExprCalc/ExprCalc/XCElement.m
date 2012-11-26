@@ -13,7 +13,7 @@ bool isError(id parsed) {
     return [parsed isKindOfClass:[XCErrorToken class]];
 }
 bool isSpecial(XCToken * token, Special specchar) {
-    
+    return <#expression#>
 }
 @implementation XCElement
 

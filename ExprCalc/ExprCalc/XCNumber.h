@@ -11,7 +11,7 @@
 #import "XCFunctionPrototype.h"
 #import "XCHasValue.h"
 
-@interface XCNumber : XCLiteral<XCHasValue> {
+@interface XCNumber : XCLiteral {
     double val;
 }
 -(id) initWithDouble: (double) value;

@@ -19,7 +19,7 @@
 }
 
 -(XCNumber *)value {
-    return [[_value value] multSgn:-1];
+    return [[_value value] negate:];
 }
 
 @end

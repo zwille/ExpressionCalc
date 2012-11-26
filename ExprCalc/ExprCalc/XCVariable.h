@@ -10,7 +10,7 @@
 #import "XCNumber.h"
 #import "XCHasValue.h"
 
-@interface XCVariable : XCLiteral<XCElementParser, XCHasValue> {
+@interface XCVariable : XCLiteral<XCElementParser> {
     NSString * _name;
     XCNumber * _value;
 }
