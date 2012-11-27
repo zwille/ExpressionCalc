@@ -12,10 +12,11 @@
 @implementation XCVariableTest
 -(void)testVariableByName {
     XCVariable * a = [XCVariable variableByName:@"a"];
-    STAssertTrue([[a name] isEqualToString:@"a" ],  nil);
-    STAssertEqualObjects([a value], [XCNumber numberFromDouble:0], nil);
     XCNumber * one = [XCNumber numberFromDouble:1];
+    [a setValue:one];
+    STAssertTrue([[a name] isEqualToString:@"a" ],  nil);
     STAssertEqualObjects([a value], one, nil);
+   
     
 }
 @end
