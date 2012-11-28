@@ -1,5 +1,5 @@
 //
-//  XCLiteralTest.h
+//  XCPowerTest.h
 //  ExprCalc
 //
 //  Created by Christoph Cwelich on 27.11.12.
@@ -8,10 +8,7 @@
 
 #import <SenTestingKit/SenTestingKit.h>
 
-@interface XCLiteralTest : SenTestCase
--(void) testFunction;
--(void) testConstant;
--(void) testVariable;
--(void) parseExpression;
+@interface XCPowerTest : SenTestCase
+-(void) testParse;
 -(void) testMalformed;
 @end

@@ -16,11 +16,14 @@ bool isExpOp(XCToken * token) {
 
 @implementation XCPower
 -(XCNumber *)value{
+    assert([operands count] > 1);
     XCNumber * base = [operands objectAtIndex:0];
     for (NSUInteger i=1;i<[operands count];i++) {
         id<XCHasValue> exp = [operands objectAtIndex:i];
-        base = [base pow: [exp value]];
+        NSLog(@">>> XCPower value base = %@, exp = %@",base,exp);
+        base = [[base value] pow: [exp value]];
     }
+    NSLog(@">>> XCPower value base = %@",base);
     return base;
 }
 
@@ -30,29 +33,37 @@ bool isExpOp(XCToken * token) {
     return self;
 }
 
-+(id)parseWithTokenizer:(XCTokenizer *)tok andArg:(id)arg {
-    assert(arg==nil);
++(id) parseOperandWithTokenizer: (XCTokenizer *)tok addTo: (NSMutableArray*) operands   {
+    uint index = [tok index];
     id parsed = [XCLiteral parseWithTokenizer:tok andArg:nil];
     if (isError(parsed)) {
         return parsed;
     }
-   // XCLiteral * lit = parsed;
-    XCToken * token = [tok previewToken];
-    id rc = parsed;
-    if(isExpOp(token)) { // has at least one exponent
-        NSMutableArray * operands = [[NSMutableArray alloc]init];
-        rc = [[XCPower alloc] initWithOperands:operands];
+    if ([parsed isKindOfClass:[XCLiteral class]]) {
         [operands addObject:parsed];
-        do {
-            [tok nextToken];
-            parsed = [XCLiteral parseWithTokenizer:tok andArg:nil];
-            if (isError(parsed)) {
-                return parsed;
-            }
-            [operands addObject:parsed];
-            token = [tok previewToken];
-        } while (isExpOp(token));
+        return nil;
+    } else {
+        return [[XCErrorToken alloc] initWithMessage:@"asserted literal" andIndex:index];
     }
-    return rc;
+}
++(id)parseWithTokenizer:(XCTokenizer *)tok andArg:(id)arg{
+    assert(arg==nil);
+    NSMutableArray * operands = [[NSMutableArray alloc]init];
+    id state=[self parseOperandWithTokenizer:tok addTo:operands];
+    if(state!=nil) {
+        return state;
+    }
+    XCToken * token = [tok previewToken];
+    while (isExpOp(token)){
+        [tok nextToken];
+        state=[self parseOperandWithTokenizer:tok addTo:operands];
+        if(state!=nil) {
+            return state;
+        }
+        token = [tok previewToken];
+    }
+    return ([operands count]>1) ?
+    [[XCPower alloc] initWithOperands:operands] :
+    [operands objectAtIndex:0];
 }
 @end

@@ -34,6 +34,9 @@ static NSMutableDictionary * protoIndex = nil;
     [protos insertObject: fp atIndex: i];
     [protoIndex setObject: fp forKey:name];
 }
+-(NSString *)description {
+    return [NSString stringWithFormat:@"XCFuncProto: %@",_name];
+}
 +(void)initialize{
     NSUInteger CAPACITY = 8;
     protos = [NSMutableArray arrayWithCapacity:CAPACITY];

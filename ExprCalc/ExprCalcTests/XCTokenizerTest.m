@@ -11,6 +11,7 @@
 #import "XCStringIterator.h"
 #import "XCToken.h"
 #import "XCNumber.h"
+#import "XCErrorToken.h"
 
 XCTokenizer * XCTokFromString(NSString* str) {
     XCStringIterator * it = [[XCStringIterator alloc] initWithString:str];
@@ -116,9 +117,11 @@ XCTokenizer * XCTokFromString(NSString* str) {
     [self checkNumberWithNumberString: @"20.505E20" andAssertedValue: 20.505e20];
     [self checkNumberAssertError: @"."];
    [self checkNumberAssertError: @".E"];
+    [self checkNumberAssertError: @"1EE2"];
+
 }
 -(void)testWord {
-    XCTokenizer * tok = XCTokFromString(@"A Ab Abc a aB abc √");
+    XCTokenizer * tok = XCTokFromString(@"A Ab Abc a aB abc √ ℯ π");
     [self fullCheckWithTokenizer:tok andAssertedIndex:0 andContent:@"A" andType:WORD];
     [self fullCheckWithTokenizer: tok andAssertedIndex: 1 andContent: @" " andType: WHITESPACE];
     [self fullCheckWithTokenizer:tok andAssertedIndex:2 andContent:@"Ab" andType:WORD];
@@ -132,7 +135,11 @@ XCTokenizer * XCTokFromString(NSString* str) {
     [self fullCheckWithTokenizer:tok andAssertedIndex:14 andContent:@"abc" andType:WORD];
     [self fullCheckWithTokenizer: tok andAssertedIndex: 17 andContent: @" " andType: WHITESPACE];
     [self fullCheckWithTokenizer:tok andAssertedIndex:18 andContent:@"√" andType:WORD];
-    [self assertFinishedWithTokenizer: tok andAssertedIndex: 19];
+     [self fullCheckWithTokenizer: tok andAssertedIndex: 19 andContent: @" " andType: WHITESPACE];
+     [self fullCheckWithTokenizer:tok andAssertedIndex:20 andContent:@"ℯ" andType:WORD];
+     [self fullCheckWithTokenizer: tok andAssertedIndex: 21 andContent: @" " andType: WHITESPACE];
+     [self fullCheckWithTokenizer:tok andAssertedIndex:22 andContent:@"π" andType:WORD];
+    [self assertFinishedWithTokenizer: tok andAssertedIndex: 23];
 }
 -(void)testMixed {
     XCTokenizer * tok = XCTokFromString(@"-2E3 * (.5+1.5) cos");
@@ -151,4 +158,5 @@ XCTokenizer * XCTokFromString(NSString* str) {
     [self assertFinishedWithTokenizer: tok andAssertedIndex: 19];
     
 }
+
 @end

@@ -58,7 +58,7 @@ int isOpProd(XCToken * token) {
             }
             [operands addObject:operand];
             token = [tok previewToken];
-        } while (isOpProd(token));
+        } while ((op = isOpProd(token)));
     }
     return rc;
 }

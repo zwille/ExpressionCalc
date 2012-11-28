@@ -57,7 +57,7 @@
     if([rc isKindOfClass:[XCErrorToken class]]) {
         return rc;
     }
-    assert([rc isKindOfClass:[XCExpression class]]);
+    
     index = [tok index];
     token = [tok nextToken];
     if([token tokenType]==SPECIAL

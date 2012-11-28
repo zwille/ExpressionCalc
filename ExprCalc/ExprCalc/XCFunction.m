@@ -23,7 +23,8 @@
     id funcarg = [XCLiteral parseWithTokenizer:tok andArg:nil];
     if ([funcarg isKindOfClass:[XCErrorToken class]]) {
         return funcarg;
-    } else if([funcarg conformsToProtocol: @protocol(XCHasValue)]) {
+    } else if([funcarg conformsToProtocol: @protocol(XCHasValue)] ||
+              [funcarg isKindOfClass:[XCNumber class]]) {
         return [[XCFunction alloc] initWithProtoype:p andArg:funcarg];
     } else {
         return nil;
@@ -38,6 +39,9 @@
 -(XCNumber*) value{
     XCNumber * argval = [_arg value];
     return [argval execFunc:_prototype];
+}
+-(NSString *)description{
+    return [NSString stringWithFormat:@"%@%@",_prototype,_arg];
 }
 
 @end

@@ -36,13 +36,21 @@ int isOpSum(XCToken * token) {
 }
 
 +(id)parseWithTokenizer:(XCTokenizer *)tok andArg:(id)arg {
+    XCToken * token = [tok previewToken];
+    int op = isOpSum(token);
+    if (op) {
+        [tok nextToken];
+    }
     id operand = [XCProduct parseWithTokenizer:tok andArg:nil];
     if (isError(operand)) {
         return operand;
     }
-    XCToken * token = [tok previewToken];
+    if (op<0) {
+        operand = [XCNegate negateValue:operand];
+    }
+    token = [tok previewToken];
     id rc = operand;
-    int op = isOpSum(token);
+    op = isOpSum(token);
     if(op) {
         NSMutableArray * operands = [[NSMutableArray alloc]init];
         rc = [[XCExpression alloc] initWithOperands:operands];
@@ -58,7 +66,7 @@ int isOpSum(XCToken * token) {
             }
             [operands addObject:operand];
             token = [tok previewToken];
-        } while (isOpSum(token));
+        } while ((op = isOpSum(token)));
     }
     return rc;
 }

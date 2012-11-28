@@ -12,7 +12,9 @@
 
 @interface XCConstant : XCLiteral<XCElementParser, XCHasValue> {
     XCNumber * _value;
+    NSString * _name;
 }
+@property (strong) NSString * name;
 
 
 @end

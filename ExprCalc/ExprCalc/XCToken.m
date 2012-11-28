@@ -29,6 +29,7 @@
             case IDENTIFIER: return @"identifier";
             case WHITESPACE: return @"whitespace";
             case SPECIAL: return @"special";
+            case WORD: return @"word";
             case END_OF_STATEMENT: return @"end of statement";
         default:
             return nil;

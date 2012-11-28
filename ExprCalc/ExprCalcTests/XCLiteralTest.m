@@ -12,6 +12,7 @@
 #import "XCIdentifier.h"
 #import "XCFunction.h"
 #import "XCVariable.h"
+#import "XCErrorToken.h"
 @implementation XCLiteralTest
 -(void)testConstant{
     [self parseWithString:@"ℯ" andAssertedVal:M_E];
@@ -26,13 +27,29 @@
 -(void)testFunction{
     [self parseWithString:@"cos0" andAssertedVal:1];
     [self parseWithString:@"cos(0)" andAssertedVal:1];
+    [self parseWithString:@"cos(1-1)" andAssertedVal:1];
+}
+-(void)testMalformed {
+    [self parseMalformedWithString:@"co"];
+    [self parseMalformedWithString:@"e"];
+    [self parseMalformedWithString:@"cos (0)"];
+    [self parseMalformedWithString:@"sin 5"];
+    
+}
+-(void)parseExpression {
+    [self parseWithString:@"(1+2)" andAssertedVal:3];
 }
 -(void)parseWithString: (NSString*) str andAssertedVal: (double) asserted {
     XCTokenizer *tok = [XCTokenizer tokenizerWithString:str];
-    NSLog(@"XCLiteralTest token = %@",[tok previewToken]);
     XCFunction *f =[XCLiteral parseWithTokenizer:tok andArg: nil];
     XCNumber * actual = [f value];
     XCNumber * expected = [XCNumber numberFromDouble:asserted];
     STAssertEqualObjects(actual, expected, @"expected %@ but was %@",expected,actual);
+}
+-(void)parseMalformedWithString: (NSString*) str {
+    XCTokenizer *tok = [XCTokenizer tokenizerWithString:str];
+    id f =[XCLiteral parseWithTokenizer:tok andArg: nil];
+    STAssertTrue([f isKindOfClass:[XCErrorToken class]], @"%@", f);
+    
 }
 @end
