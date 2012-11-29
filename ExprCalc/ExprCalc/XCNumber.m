@@ -14,7 +14,8 @@ const double EPS = 1e-10;
     NSScanner * scanner = [NSScanner scannerWithString:numStr];
     double val = 0.0;
     bool success = [scanner scanDouble:&val];
-    return (success) ? [XCNumber numberFromDouble: val] : nil;
+    bool isAtEnd = [scanner isAtEnd];
+    return (success && isAtEnd) ? [XCNumber numberFromDouble: val] : nil;
 }
 +(XCNumber*)numberFromDouble:(double)value {
     return [[XCNumber alloc] initWithDouble:value];
