@@ -41,7 +41,6 @@ XCTokenizer * XCTokFromString(NSString* str) {
     NSUInteger index = [tok index];
     STAssertTrue(index == assertedIndex,@"asserted %d, but was %d",assertedIndex,index);
     XCToken * t = [tok previewToken];
-    //  NSLog(@">>> %@",t);
     STAssertNil([t content], @"asserted nil, but was %@",[t content]);
     STAssertTrue([t tokenType]==END_OF_STATEMENT,@"asserted end of statement, but was %@",[XCToken stringOfType:[t tokenType]]);
     t = [tok nextToken];
@@ -116,8 +115,7 @@ XCTokenizer * XCTokFromString(NSString* str) {
     [self checkNumberWithNumberString: @"1.5E2" andAssertedValue: 1.5e2];
     [self checkNumberWithNumberString: @"20.505E20" andAssertedValue: 20.505e20];
     [self checkNumberAssertError: @"."];
-   [self checkNumberAssertError: @".E"];
-    [self checkNumberAssertError: @"1EE2"];
+    [self checkNumberAssertError: @".E"];
 
 }
 -(void)testWord {

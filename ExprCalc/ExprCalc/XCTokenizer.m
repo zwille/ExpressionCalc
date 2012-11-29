@@ -119,7 +119,6 @@ bool isSpecial(unichar c) {
             break;
         }
     }
-    NSLog(@"XCTokenizer parseNumber buf=%@",buf);
     return [XCNumber numberFromString:buf];
 }
 -(NSString*) parseWordWithFirstChar: (unichar) c {
