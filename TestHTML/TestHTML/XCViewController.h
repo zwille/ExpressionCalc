@@ -8,16 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "XCElement.h"
-
+#import "XCKernel.h"
 @interface XCViewController : UIViewController {
-    XCElement * _root;
-    XCElement * _head;
+    XCKernel * _kernel;
 }
 @property (weak, nonatomic) IBOutlet UIWebView *textView;
 
 - (IBAction)numkey:(id)sender;
 - (IBAction)plus:(id)sender;
-- (IBAction)mult:(id)sender;
+- (IBAction)minus:(id)sender;
 - (IBAction)reset:(id)sender;
 - (IBAction)del:(id)sender;
 

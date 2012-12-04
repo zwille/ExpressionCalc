@@ -10,5 +10,5 @@
 #import "XCComplexElement.h"
 
 @interface XCExpr : XCComplexElement
-+(XCExpr*) emptyExpression;
++(XCExpr*) emptyExpressionWithRoot: (XCElement*) root;
 @end

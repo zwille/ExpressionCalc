@@ -19,7 +19,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self reset:nil];
+    kernel = [[XCKernel alloc] init];
 }
 
 - (void)didReceiveMemoryWarning
@@ -29,42 +29,43 @@
 }
 
 - (IBAction)numkey:(id)sender {
-    _head = [_head triggerNum:[sender tag]+'0'];
-    NSLog(@"numkey tag: %d",[sender tag]);
+    NSUInteger tag = [sender tag];
+    char c = tag + '0';
+    if (tag==10) {
+        c = '.';
+    } else if(tag==11) {
+        c = 'E';
+    }
+    [_kernel triggerNum:c];
     [self print];
 }
 
 - (IBAction)plus:(id)sender {
-    _head = [_head triggerPlus];
-    NSLog(@"plus");
+    [_kernel triggerOperator:XC_OP_PLUS];
+    [self print];
+}
+-(void)minus:(id)sender {
+    [_kernel triggerOperator:XC_OP_MINUS];
     [self print];
 }
 
 - (IBAction)mult:(id)sender {
-    _head = [_head triggerMult];
-    NSLog(@"mult");
+    [_kernel triggerOperator:XC_OP_MULT];
     [self print];
 }
 
 - (IBAction)reset:(id)sender {
-    _head = [XCExpr emptyExpression];
-    _root = _head;
+    [_kernel reset];
     [self print];
 }
 
 - (IBAction)del:(id)sender {
-    _head = [_head triggerDel];
-    NSLog(@"mult");
+    [_kernel triggerDel];
     [self print];
 
 }
 
 - (void) print {
-    NSString * headDesc = [NSString stringWithFormat:@"head: %@ %@",_head,([_head waitingForLiteral]) ? @"WFL" : @""];
-    NSString * rootDesc = [NSString stringWithFormat:@"root: %@ %@",_root,([_root waitingForLiteral]) ? @"WFL" : @""];
-    NSLog(@"%@",headDesc);
-    NSLog(@"%@",rootDesc);
-    [textView loadHTMLString: [_root toHTML] baseURL:nil];
-  
+    [textView loadHTMLString: [_kernel toHTML] baseURL:nil];
 }
 @end

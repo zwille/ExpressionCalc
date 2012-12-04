@@ -7,18 +7,28 @@
 //
 
 #import <Foundation/Foundation.h>
-typedef enum {XC_SYMBOL_SQUARE = 9643} XC_SYMBOL;
-@interface XCElement : NSObject {
+#import "XCHasTriggers.h"
+#import "XCHasHtmlOutput.h"
+typedef struct {
+    Byte focus : 1;
+    Byte error : 1;
+} XCElementState;
+
+extern NSString * XC_HTML_FOCUS_FORMAT, * XC_HTML_ERROR_FORMAT;
+@interface XCElement : NSObject<XCHasTriggers> {
     XCElement * _root;
-   // XCElement * _head;
+    XCElementState _state;
 }
 @property (strong) XCElement * root;
-//@property (strong) XCElement * head;
--(XCElement*)triggerNum:(char) c;
--(XCElement*)triggerPlus;
--(XCElement*)triggerMult;
--(XCElement*)triggerDel;
--(bool) waitingForLiteral;
--(NSString*) toHTML;
+
+-(id) initWithRoot: (XCElement*) root;
+-(void) setFocus: (BOOL) val;
+-(BOOL) hasFocus;
+-(void) setError: (BOOL) val;
+-(BOOL) hasError;
+-(NSString*) toHTMLfromChild;
+-(BOOL) isEmpty;
+-(void) replaceWithElement: (XCElement*) element;
+
 
 @end

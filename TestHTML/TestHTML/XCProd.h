@@ -10,5 +10,8 @@
 #import "XCComplexElement.h"
 
 @interface XCProd : XCComplexElement
-+(XCProd*) prodWithElement: (XCElement*) element;
++(XCProd*) prodWithFirstElement: (XCElement*) arg0
+              multSecondElement: (XCElement*) arg2;
++(XCProd*) prodWithFirstElement: (XCElement*) arg0
+               divSecondElement: (XCElement*) arg2;
 @end

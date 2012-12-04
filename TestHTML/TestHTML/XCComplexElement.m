@@ -9,103 +9,67 @@
 #import "XCComplexElement.h"
 
 @implementation XCComplexElement
-@synthesize operands = _operands;
 
--(id)init{
-    self = [super init];
-    _operands = [NSMutableArray arrayWithCapacity:2];
-    _idx = 0;
-    _waitingForLiteral = YES;
+-(id)initWithRoot:(XCElement *)root{
+    self = [super initWithRoot:root];
+    _content =[[XCComplexElementContent alloc] init];
     return self;
 }
--(XCElement *)triggerMult {
-    return (_waitingForLiteral) ? self : [super triggerMult];
+-(id<XCHasTriggers>)triggerEnter {
+    return [_content currentElement];
 }
--(XCElement *)triggerPlus {
-    return (_waitingForLiteral) ? self : [super triggerPlus];
-}
--(XCElement *)triggerNum:(char)c {
-    if(_waitingForLiteral) {
-        XCElement * num = [super triggerNum: c];
-        [self setCurrentWithElement:num];
-        _waitingForLiteral = NO;
-        return num;
+-(id<XCHasTriggers>)triggerNext {
+    if ([_content hasNext]) {
+        [_content nextIndex];
+        return self;
     } else {
+        return [super triggerNext];
+    }
+}
+
+-(id<XCHasTriggers>)triggerPrevious {
+    if ([_content hasPrevious]) {
+        [_content previousIndex];
+        return self;
+    } else {
+        return [super triggerPrevious];
+    }
+}
+
+-(XCElement *)triggerDel {
+    NSUInteger len = [_content length];
+    if (len<2) {
+        return [[self root] triggerDel];
+    } else {
+        [_content removeCurrent];
         return self;
     }
 }
--(XCElement *)triggerDel {
-    NSUInteger len = [_operands count];
-    if (len==0) {
-        return (_root!=nil) ? _root : self;
-    } else if(_idx == len) {
-        [self shiftLeft];
-        _waitingForLiteral=NO;
-    } else if(_idx < len) {
-        [_operands removeObjectAtIndex:_idx];
-    } else { // remove last object
-        [_operands removeObjectAtIndex:len-1];
-    }
-    return self;
-
-}
--(void)setCurrentWithElement:(XCElement *)e {
-    if(_idx<[_operands count]) {
-        [_operands setObject:e atIndexedSubscript:_idx];
-    } else {
-        [_operands addObject: e];
-    }
-    [e setRoot:self];
-}
--(void)shiftRight {
-    if(_idx < [_operands count]) {
-        _idx++;
-    }
-}
--(void)shiftLeft {
-    if(_idx > 0) {
-        _idx--;
-    }
-}
--(bool)waitingForLiteral {
-    return _waitingForLiteral;
-}
--(XCElement *)currentElement {
-    return [_operands objectAtIndex:_idx];
+-(void)replaceWithElement:(XCElement *)element {
+    [element setRoot:self];
+    [_content replaceCurrentWith: element];
 }
 
 -(NSString *)description{
-    NSMutableString * buf = [NSMutableString stringWithFormat:@"%@[",[self class]];
-    for (XCElement * e in _operands) {
-        [buf appendFormat:@" %@",e ];
-    }
-    [buf appendString:@" ]"];
-    return buf;
+    return [NSString stringWithFormat:@"%@%@",[self class],_content];
 }
 -(NSString *)toHTML {
-    NSUInteger len = [[self operands] count];
-    NSString * SQUARE = [NSString stringWithFormat:@"&#%d",XC_SYMBOL_SQUARE];
-    if (len==0) {
-        assert(_waitingForLiteral);
-        return SQUARE;
-    }
-    NSMutableString * buf = [NSMutableString stringWithCapacity:4];
-    NSUInteger i = 0;
-    XCElement * e = (XCElement*)[_operands objectAtIndex:i];
-    NSString * opStr = [self htmlFromElement: e isFirstElement: YES];
-    [buf appendString: opStr];
-    for (NSUInteger i = 1; i<len; i++ ) {
-        e = (XCElement*)[_operands objectAtIndex:i];
-        opStr = [self htmlFromElement: e isFirstElement: NO];
-        [buf appendString: opStr];
-    }
-    if(_waitingForLiteral) {
-        [buf appendFormat: @" %@ %@",[self htmlLastOp],SQUARE ];
+    NSUInteger len = [_content length];
+    NSMutableString * buf = [NSMutableString stringWithString:@""];
+    for (NSUInteger i = 0; i<len; i++) {
+        NSString * html =
+         [self htmlFromElement:
+          [_content elementAtIndex:i]
+                       atIndex: i
+              andContentLength: len];
+        [buf appendString: ([self hasFocus] && i==[_content index]) ?
+         [NSString stringWithFormat:XC_HTML_FOCUS_FORMAT,html]: html];
     }
     return buf;
 }
--(NSString *)htmlFromElement:(XCElement *)e isFirstElement:(bool) isFirst { return nil; }
--(NSString *)htmlLastOp{ return nil; }
-
+-(NSString *)htmlFromElement:(XCElement *)el atIndex:(NSUInteger)i andContentLength:(NSUInteger)len {
+    assert(false);
+    return nil;
+}
 
 @end

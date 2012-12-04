@@ -7,18 +7,24 @@
 //
 
 #import "XCElement.h"
+#import "XCComplexElementState.h"
+#import "XCComplexElementContent.h"
 
 @interface XCComplexElement : XCElement {
-    NSMutableArray * _operands;
-    NSUInteger _idx;
+   
     @protected
-    bool _waitingForLiteral;
+    XCComplexElementContent * _content;
+    //id<XCComplexElementState> _state;
+    
 }
+-(NSString*) htmlFromElement: (XCElement*) el atIndex: (NSUInteger) i andContentLength: (NSUInteger)len;
+/*
 @property (strong,readonly) NSArray * operands;
+@property (readonly) NSUInteger index;
 -(void)setCurrentWithElement: (XCElement*) e;
 -(void)shiftRight;
 -(XCElement*) currentElement;
--(NSString*) htmlFromElement: (XCElement*) e isFirstElement: (bool) isFirst;
--(NSString*) htmlLastOp;
+ */
+
 
 @end
