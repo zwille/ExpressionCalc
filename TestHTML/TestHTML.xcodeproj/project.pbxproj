@@ -37,6 +37,8 @@
 		008C4BA6166E5BA000461751 /* XCKernel.m in Sources */ = {isa = PBXBuildFile; fileRef = 008C4BA5166E5BA000461751 /* XCKernel.m */; };
 		00E8D55C166F5894003856DD /* XCComplexElementContentTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E8D55B166F5894003856DD /* XCComplexElementContentTest.m */; };
 		00E8D57C166FCE3E003856DD /* XCExpo.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E8D57B166FCE3D003856DD /* XCExpo.m */; };
+		00E8D581166FFA00003856DD /* XCFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E8D580166FFA00003856DD /* XCFunction.m */; };
+		00E8D58A1670084C003856DD /* XCFuncAlg.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E8D5891670084B003856DD /* XCFuncAlg.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +103,10 @@
 		00E8D55B166F5894003856DD /* XCComplexElementContentTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCComplexElementContentTest.m; sourceTree = "<group>"; };
 		00E8D57A166FCE3D003856DD /* XCExpo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCExpo.h; sourceTree = "<group>"; };
 		00E8D57B166FCE3D003856DD /* XCExpo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCExpo.m; sourceTree = "<group>"; };
+		00E8D57F166FFA00003856DD /* XCFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFunction.h; sourceTree = "<group>"; };
+		00E8D580166FFA00003856DD /* XCFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFunction.m; sourceTree = "<group>"; };
+		00E8D5881670084B003856DD /* XCFuncAlg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFuncAlg.h; sourceTree = "<group>"; };
+		00E8D5891670084B003856DD /* XCFuncAlg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFuncAlg.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -250,6 +256,7 @@
 		008C4BA2166E32F400461751 /* Simple */ = {
 			isa = PBXGroup;
 			children = (
+				00E8D57D166FF99D003856DD /* Function */,
 				008C4B9B166E2FDF00461751 /* XCSimpleElement.h */,
 				008C4B9C166E2FE000461751 /* XCSimpleElement.m */,
 				008C4B95166E29B000461751 /* XCInvert.h */,
@@ -278,6 +285,17 @@
 				00E8D55B166F5894003856DD /* XCComplexElementContentTest.m */,
 			);
 			name = Complex;
+			sourceTree = "<group>";
+		};
+		00E8D57D166FF99D003856DD /* Function */ = {
+			isa = PBXGroup;
+			children = (
+				00E8D57F166FFA00003856DD /* XCFunction.h */,
+				00E8D580166FFA00003856DD /* XCFunction.m */,
+				00E8D5881670084B003856DD /* XCFuncAlg.h */,
+				00E8D5891670084B003856DD /* XCFuncAlg.m */,
+			);
+			name = Function;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -408,6 +426,8 @@
 				008C4BA0166E300B00461751 /* XCTerminalElement.m in Sources */,
 				008C4BA6166E5BA000461751 /* XCKernel.m in Sources */,
 				00E8D57C166FCE3E003856DD /* XCExpo.m in Sources */,
+				00E8D581166FFA00003856DD /* XCFunction.m in Sources */,
+				00E8D58A1670084C003856DD /* XCFuncAlg.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

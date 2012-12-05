@@ -17,6 +17,9 @@ NSString * XC_HTML_FOCUS_FORMAT = @"<b>%@</b>",
 -(XCElement *)content{
     return self;
 }
+-(XCElement *)head {
+    return [self content];
+}
 -(id)initWithRoot:(XCElement *)root {
     self = [super init];
     _root = root;
@@ -37,7 +40,15 @@ NSString * XC_HTML_FOCUS_FORMAT = @"<b>%@</b>",
 
 
 -(NSString *)description {
-    return [NSString stringWithFormat:@"%@",[self class]];
+    NSString * format = @"%@:%@";
+    if ([self hasError]) {
+        format = [NSString stringWithFormat: @"!!!%@!!!",format ];
+    }
+    NSString * text = [[self class] description];
+    return [NSString stringWithFormat:format,
+            ([self hasFocus]) ? [text uppercaseString] : text,
+            [[self root] class]
+            ];
 }
 
 
@@ -67,15 +78,17 @@ NSString * XC_HTML_FOCUS_FORMAT = @"<b>%@</b>",
 }
 
 -(id<XCHasTriggers>)triggerEnter {
-    return [self content];
+    return [self head];
 }
 
 -(id<XCHasTriggers>)triggerNum:(char)c {
     return [[self content] triggerNum:c];
 }
 -(id<XCHasTriggers>)triggerExpression {
-    assert(false);
-    return nil;
+    return self; //pass
+}
+-(id<XCHasTriggers>)triggerFunction:(XCFunctionSymbol) fn {
+    return self; //pass
 }
 -(id<XCHasTriggers>)triggerNext {
     return (_root) ? [_root triggerNext] : self;

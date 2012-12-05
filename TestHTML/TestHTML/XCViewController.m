@@ -72,6 +72,12 @@
 
 }
 
+- (IBAction)expr:(id)sender {
+    NSLog(@"VC::expo");
+    [_kernel triggerExpression];
+    [self print];
+}
+
 - (IBAction)reset:(id)sender {
     NSLog(@"VC::reset");
     [_kernel reset];

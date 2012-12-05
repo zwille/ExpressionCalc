@@ -20,6 +20,7 @@
 - (IBAction)mult:(id)sender;
 - (IBAction)div:(id)sender;
 - (IBAction)expo:(id)sender;
+- (IBAction)expr:(id)sender;
 
 - (IBAction)reset:(id)sender;
 - (IBAction)del:(id)sender;

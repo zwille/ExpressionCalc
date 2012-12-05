@@ -8,28 +8,37 @@
 
 #import "XCSimpleElement.h"
 
+
 @implementation XCSimpleElement
+
 -(id)initWithContent:(XCElement *)content
              andRoot:(XCElement *)root {
     self = [super initWithRoot:root];
-    _content = content;
-    [_content setRoot:self];
+    [self setContent:content];
     return self;
 }
+-(void)setContent:(XCElement *)content {
+    [content setRoot:self];
+    _content = content;
+}
 -(XCElement*)replaceContentWithElement:(XCElement *)element {
-    [element setRoot:self];
-    _content = element;
+    [self setContent:element];
     return _content;
 }
 -(XCElement *)content {
     return _content;
+}
+-(XCElement *)head {
+    return [_content head];
 }
 -(NSString *)description {
     return [NSString stringWithFormat:@"%@[%@]",[super description],_content];
 }
 //trigger
 -(id<XCHasTriggers>)triggerDel {
+    assert([self root]);
     return [[self root] triggerDel];
 }
+
 
 @end

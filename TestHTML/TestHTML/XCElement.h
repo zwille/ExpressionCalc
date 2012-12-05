@@ -30,5 +30,6 @@ extern NSString * XC_HTML_FOCUS_FORMAT, * XC_HTML_ERROR_FORMAT;
 -(BOOL) isEmpty;
 -(XCElement*) replaceContentWithElement: (XCElement*) element;
 -(XCElement*) content;
+-(XCElement*) head;
 
 @end

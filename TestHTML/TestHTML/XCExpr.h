@@ -11,4 +11,7 @@
 
 @interface XCExpr : XCComplexElement
 +(XCExpr*) emptyExpressionWithRoot: (XCElement*) root;
++(XCExpr*) expressionWithElement: (XCElement*) first
+                         andRoot: (XCElement*) root;
+
 @end

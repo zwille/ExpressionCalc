@@ -10,6 +10,9 @@
 #import "XCNum.h"
 #import "XCNegate.h"
 #import "XCInvert.h"
+#import "XCExpr.h"
+#import "XCFunction.h"
+
 @implementation XCSpacer
 +(id)spacerWithRoot: (XCElement*) root {
     return [[XCSpacer alloc] initWithRoot:root];
@@ -22,13 +25,26 @@
 -(BOOL)isEqual:(id)object {
     return [object isKindOfClass:[XCSpacer class]];
 }
+-(XCSpacer*) swapWithElement: (XCElement*) el {
+    assert([self root]);
+    [[self root] replaceContentWithElement:el];
+    return self;
+}
 //trigger
 
 -(id<XCHasTriggers>)triggerNum:(char) c {
-    assert([self root]);
-    XCNum * num = [XCNum numWithFirstChar: c];
-    [[self root] replaceContentWithElement:num];
-    return num;
+    return [self swapWithElement:
+            [XCNum numWithFirstChar: c]];
+}
+-(id<XCHasTriggers>)triggerExpression {
+    return [self swapWithElement:
+            [XCExpr expressionWithElement: self
+                                  andRoot: nil]];
+}
+-(id<XCHasTriggers>)triggerFunction: (XCFunctionSymbol) fn {
+    return [self swapWithElement:
+            [XCFunction functionWithElement: self
+                                  andRoot: nil]];
 }
 
 -(id<XCHasTriggers>)triggerOperator: (XCOperator) op {
@@ -55,5 +71,6 @@
 -(id<XCHasTriggers>)triggerNext {
     return [self triggerDel];
 }
+
 
 @end

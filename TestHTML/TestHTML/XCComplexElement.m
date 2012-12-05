@@ -23,7 +23,7 @@
 }
 
 -(NSString *)description{
-    return [NSString stringWithFormat:@"%@%@",[self class],_content];
+    return [NSString stringWithFormat:@"%@%@",[super description],_content];
 }
 -(NSString *)toHTMLfromChild {
     NSUInteger len = [_content length];
@@ -80,6 +80,9 @@
 }
 -(XCElement *)content {
     return [_content currentElement];
+}
+-(XCElement *)head {
+    return [[_content currentElement] head];
 }
 
 @end

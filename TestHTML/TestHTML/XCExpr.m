@@ -13,18 +13,27 @@
 #import "XCExpo.h"
 
 @implementation XCExpr
-- (id)initWithRoot:(XCElement *)root;
-{
+- (id)initWithRoot:(XCElement*)root
+   andFirstElement:(XCElement*)first {
     self = [super initWithRoot:root];
     if (self) {
-        [_content insertElement:[XCSpacer spacerWithRoot:self]];
+        [_content insertElement:first];
+        [first setRoot:self];
         [_content nextIndex];
         // current index = 0 with spacer
     }
     return self;
 }
 +(XCExpr *)emptyExpressionWithRoot:(XCElement *)root{
-    return [[XCExpr alloc] initWithRoot:root];
+    
+    return [[XCExpr alloc]
+            initWithRoot:root
+            andFirstElement:[XCSpacer spacerWithRoot:nil]];
+}
++(XCExpr *)expressionWithElement:(XCElement *)first
+                         andRoot:(XCElement *)root {
+    return [[XCExpr alloc] initWithRoot: root
+                        andFirstElement: first];
 }
 -(NSString *)toHTMLfromChild { //override due to braces
     NSString * inner = [super toHTMLfromChild];

@@ -14,6 +14,7 @@
 
 -(id) initWithContent: (XCElement*) content
               andRoot: (XCElement*) root;
+-(void) setContent:(XCElement *)content;
 
 
 @end
