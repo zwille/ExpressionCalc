@@ -7,28 +7,34 @@
 //
 
 #import "XCComplexElementContent.h"
-
+BOOL indexOkay(NSUInteger i, NSUInteger len);
 @implementation XCComplexElementContent
 @synthesize index = _idx;
 -(id)init {
     self = [super init];
     _operands = [NSMutableArray arrayWithCapacity:2];
-    _idx =0;
+    _idx = -1;
     return self;
 }
 -(NSUInteger) length {
     return [_operands count];
 }
 -(bool)isEmpty {
-    NSUInteger len = [self length];
-    assert(len == 0 && _idx == -1 || len > 0);
+    assert(indexOkay(_idx, [self length]));
     return [self length]==0;
 }
 -(bool)hasNext {
-    return _idx < [self length];
+    return [self length] - _idx > 1;
 }
 -(bool) hasPrevious {
-    return _idx > 0;
+    return _idx > 0 && _idx != (NSUInteger) -1;
+}
+-(XCElement *)currentElement {
+    assert(! [self isEmpty]);
+    return [_operands objectAtIndex: _idx];
+}
+-(XCElement *)elementAtIndex:(NSUInteger)index {
+    return [_operands objectAtIndex:index];
 }
 -(NSUInteger)nextIndex {
     assert([self hasNext]);
@@ -38,28 +44,24 @@
     assert([self hasPrevious]);
     return --_idx;
 }
--(XCElement *)currentElement {
-    assert(_idx < [self length] );
-    assert(! [self isEmpty]);
-    return [_operands objectAtIndex: _idx];
-}
+
 -(void)insertElement:(XCElement *)element {
-    assert(_idx < [self length]);
+    assert(indexOkay(_idx, [self length]));
     //append or insert after current
     [_operands insertObject:element atIndex:_idx+1];
 }
 -(void)replaceCurrentWith:(XCElement *)element {
-    assert(! [self isEmpty] && _idx < [self length]);
+    assert(! [self isEmpty]);
+    [_operands replaceObjectAtIndex:_idx withObject:element];
 }
 -(void)removeCurrent {
-    assert(! [self isEmpty] && _idx < [self length]);
+    assert(! [self isEmpty]);
     [_operands removeObjectAtIndex: _idx];
-    --_idx;
+    if (_idx==[self length]) {
+        --_idx;
+    }
 }
 
--(BOOL)isSingleElement {
-    return [self length]==1;
-}
 -(NSString *)description {
     if ([self isEmpty]) {
         return @"[]";
@@ -76,3 +78,6 @@
 
 
 @end
+BOOL indexOkay(NSUInteger i, NSUInteger len) {
+    return i<len || i==(NSUInteger)-1;
+}

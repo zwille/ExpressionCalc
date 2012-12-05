@@ -16,7 +16,6 @@
 @property (readonly) NSUInteger index;
 -(NSUInteger) length;
 -(bool) isEmpty;
--(BOOL) isSingleElement;
 -(bool) hasNext;
 -(bool) hasPrevious;
 -(XCElement*) currentElement;

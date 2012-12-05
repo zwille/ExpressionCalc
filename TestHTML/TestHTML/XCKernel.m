@@ -10,49 +10,59 @@
 #import "XCExpr.h"
 
 @implementation XCKernel
--(id<XCHasTriggers>)triggerNum:(char) c {
-    _head = [_head triggerNum:c];
-    //NSLog(@"num: %c",c);
-    //[self log];
-    return _head;
+-(id)init{
+    self = [super init];
+    [self reset];
+    return self;
 }
--(id<XCHasTriggers>)triggerOperator: (XCOperator) op {
-    _head = [_head triggerOperator: op];
-    return _head;
-}
--(id<XCHasTriggers>)triggerEnter {
-    _head = [_head triggerEnter];
-    return _head;
-}
--(id<XCHasTriggers>)triggerNext {
-    _head = [_head triggerNext];
-    return _head;
-}
--(id<XCHasTriggers>)triggerPrevious {
-    _head = [_head triggerPrevious];
-    return _head;
-}
--(id<XCHasTriggers>)triggerDel {
-    _head = [_head triggerDel];
-    if(_head==nil) [self reset];
-    return _head;
-}
--(id<XCHasTriggers>)triggerExpression {
-    _head = [_head triggerExpression];
-    return _head;
-}
+
 -(void)reset {
     _root = [XCExpr emptyExpressionWithRoot:nil];
-    _head = _root;
+    [self setHeadWithTriggered:[_root content]];
 }
 - (void) log {
-    NSString * headDesc = [NSString stringWithFormat:@"head: %@",_head];
-    NSString * rootDesc = [NSString stringWithFormat:@"root: %@",_root];
-    NSLog(@"%@",headDesc);
-    NSLog(@"%@",rootDesc);
-   
+    NSString * headDesc = [NSString stringWithFormat:@"%@",_head];
+    NSString * rootDesc = [NSString stringWithFormat:@"%@",_root];
+    NSLog(@"XCKernel head = %@",headDesc);
+    NSLog(@"XCKernel root = %@",rootDesc);
+    NSLog(@"XCKernel html = %@",[_root toHTML]);
 }
 -(NSString *)toHTML {
     return [_root toHTML];
+}
+-(XCElement*) setHeadWithTriggered: (id<XCHasTriggers>) triggered {
+    [_head setFocus:NO];
+    if(triggered) {
+        _head = (XCElement*)triggered;
+        [_head setFocus:YES];
+    } else {
+        NSLog(@"XCKernel::setHead reset, triggered was null");
+        [self reset];
+    }
+    [self log];
+    return _head;
+}
+
+//trigger
+-(id<XCHasTriggers>)triggerNum:(char) c {
+    return [self setHeadWithTriggered:[_head triggerNum:c]];
+}
+-(id<XCHasTriggers>)triggerOperator: (XCOperator) op {
+    return [self setHeadWithTriggered:[_head triggerOperator: op]];
+}
+-(id<XCHasTriggers>)triggerEnter {
+    return [self setHeadWithTriggered:[_head triggerEnter]];
+}
+-(id<XCHasTriggers>)triggerNext {
+    return [self setHeadWithTriggered:[_head triggerNext]];
+}
+-(id<XCHasTriggers>)triggerPrevious {
+    return [self setHeadWithTriggered:[_head triggerPrevious]];
+}
+-(id<XCHasTriggers>)triggerDel {
+    return [self setHeadWithTriggered:[_head triggerDel]];
+}
+-(id<XCHasTriggers>)triggerExpression {
+    return [self setHeadWithTriggered:[_head triggerExpression]];
 }
 @end

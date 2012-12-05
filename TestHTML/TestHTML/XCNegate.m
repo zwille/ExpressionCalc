@@ -17,10 +17,30 @@ withRoot:(XCElement *)root {
     return [[XCNegate alloc] initWithContent:value
                                      andRoot:root];
 }
--(NSString *)toHTML{
-    return [NSString stringWithFormat:@" -%@", [[self content] toHTML]];
-}
 
+-(NSString *)toHTMLfromChild{
+    return [NSString stringWithFormat:@" - %@", [[self content] toHTML]];
+}
+-(XCElement*)replaceContentWithElement:(XCElement *)element {
+    if ([element isKindOfClass:[self class]]) {
+        element = [element content];
+        id root = [self root];
+        [root replaceContentWithElement:element];
+        return element;
+    }
+    return [super replaceContentWithElement:element];
+}
+//trigger
+-(id<XCHasTriggers>)triggerOperator:(XCOperator)op {
+    if(op==XC_OP_MINUS) {
+        XCElement* element = [self content];
+        id root = [self root];
+        [root replaceContentWithElement:element];
+        return element;
+    } else {
+        return [super triggerOperator:op];
+    }
+}
 
 
 @end

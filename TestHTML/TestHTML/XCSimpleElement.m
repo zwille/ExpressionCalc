@@ -16,9 +16,20 @@
     [_content setRoot:self];
     return self;
 }
--(void)replaceWithElement:(XCElement *)element {
+-(XCElement*)replaceContentWithElement:(XCElement *)element {
     [element setRoot:self];
     _content = element;
+    return _content;
+}
+-(XCElement *)content {
+    return _content;
+}
+-(NSString *)description {
+    return [NSString stringWithFormat:@"%@[%@]",[super description],_content];
+}
+//trigger
+-(id<XCHasTriggers>)triggerDel {
+    return [[self root] triggerDel];
 }
 
 @end

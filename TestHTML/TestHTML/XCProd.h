@@ -11,7 +11,9 @@
 
 @interface XCProd : XCComplexElement
 +(XCProd*) prodWithFirstElement: (XCElement*) arg0
-              multSecondElement: (XCElement*) arg2;
+              multSecondElement: (XCElement*) arg1
+                        andRoot: (XCElement*) root;
 +(XCProd*) prodWithFirstElement: (XCElement*) arg0
-               divSecondElement: (XCElement*) arg2;
+               divSecondElement: (XCElement*) arg1
+                        andRoot: (XCElement*) root;
 @end

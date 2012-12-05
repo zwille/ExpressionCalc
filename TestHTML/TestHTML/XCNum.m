@@ -7,37 +7,63 @@
 //
 
 #import "XCNum.h"
-
+#import "XCHasTriggers.h"
+static NSNumberFormatter * formatter;
 @implementation XCNum
++(void)initialize {
+    formatter = [[NSNumberFormatter alloc] init];
+    [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
+}
 -(id)init{
     self = [super init];
-    str = [NSMutableString stringWithCapacity:4];
+    _buf = [NSMutableString stringWithCapacity:4];
+    return self;
+}
+-(id)initWithString:(NSString*)str{
+    self = [super init];
+    _buf = [NSMutableString stringWithString:str];
     return self;
 }
 +(XCNum*) numWithFirstChar: (char) c {
     XCNum * rc = [[XCNum alloc] init];
     return (XCNum*)[rc triggerNum:c];
 }
--(XCElement *)triggerNum:(char)c {
-    [str appendFormat: @"%c",c];
++(XCNum *)numWithString:(NSString *)str {
+    return [[XCNum alloc] initWithString:str];
+}
+-(NSString *)description{
+    return _buf;
+}
+-(NSString *)toHTMLfromChild {
+    return ([self hasFocus]) ?
+    [NSString stringWithFormat:@"%@_",_buf] :
+    _buf;
+}
+-(NSNumber *)numericValue {
+    return [formatter numberFromString:_buf];
+}
+//trigger
+-(id<XCHasTriggers>)triggerNum:(char)c {
+    [_buf appendFormat: @"%c",c];
     return self;
 }
--(XCElement *)triggerDel {
-    NSUInteger len = [str length];
+-(id<XCHasTriggers>)triggerDel {
+    NSUInteger len = [_buf length];
     if (len < 2) {
         return [_root triggerDel];
     } else {
         NSRange last = {len-1,1};
-        [str deleteCharactersInRange:last];
+        [_buf deleteCharactersInRange:last];
         return self;
     }
 }
--(NSString *)description{
-    return str;
+-(BOOL)isEqual:(id)object {
+    if ([object isKindOfClass:[self class]]) {
+        return [[self numericValue] isEqual:[object numericValue]];
+    }
+    return false;
 }
--(NSString *)toHTML {
-    return str;
-}
+
 
 
 @end

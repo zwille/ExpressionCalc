@@ -7,11 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "XCLiteral.h"
-@interface XCNum : XCLiteral {
-    NSMutableString * str;
+#import "XCTerminalElement.h"
+@interface XCNum : XCTerminalElement {
+    NSMutableString * _buf;
 }
 +(XCNum*) numWithFirstChar:(char)c;
-
++(XCNum*) numWithString:(NSString*) str;
+-(NSNumber*) numericValue;
 
 @end

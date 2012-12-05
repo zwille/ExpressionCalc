@@ -11,7 +11,7 @@
 @interface XCSimpleElement : XCElement {
     XCElement * _content;
 }
-@property (strong,readonly) XCElement * content;
+
 -(id) initWithContent: (XCElement*) content
               andRoot: (XCElement*) root;
 

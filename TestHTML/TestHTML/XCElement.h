@@ -15,7 +15,7 @@ typedef struct {
 } XCElementState;
 
 extern NSString * XC_HTML_FOCUS_FORMAT, * XC_HTML_ERROR_FORMAT;
-@interface XCElement : NSObject<XCHasTriggers> {
+@interface XCElement : NSObject<XCHasTriggers, XCHasHtmlOutput> {
     XCElement * _root;
     XCElementState _state;
 }
@@ -28,7 +28,7 @@ extern NSString * XC_HTML_FOCUS_FORMAT, * XC_HTML_ERROR_FORMAT;
 -(BOOL) hasError;
 -(NSString*) toHTMLfromChild;
 -(BOOL) isEmpty;
--(void) replaceWithElement: (XCElement*) element;
-
+-(XCElement*) replaceContentWithElement: (XCElement*) element;
+-(XCElement*) content;
 
 @end

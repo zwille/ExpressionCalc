@@ -23,13 +23,11 @@
 		0051986216678172000A9C36 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0051983916678170000A9C36 /* UIKit.framework */; };
 		0051986316678172000A9C36 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0051983B16678170000A9C36 /* Foundation.framework */; };
 		0051986B16678172000A9C36 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0051986916678172000A9C36 /* InfoPlist.strings */; };
-		0051986E16678172000A9C36 /* TestHTMLTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0051986D16678172000A9C36 /* TestHTMLTests.m */; };
 		0051987916679119000A9C36 /* XCElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 0051987816679119000A9C36 /* XCElement.m */; };
 		0051987C1667924C000A9C36 /* XCExpr.m in Sources */ = {isa = PBXBuildFile; fileRef = 0051987B1667924C000A9C36 /* XCExpr.m */; };
 		0051987F16679269000A9C36 /* XCProd.m in Sources */ = {isa = PBXBuildFile; fileRef = 0051987E16679269000A9C36 /* XCProd.m */; };
 		0051988216679286000A9C36 /* XCNum.m in Sources */ = {isa = PBXBuildFile; fileRef = 0051988116679286000A9C36 /* XCNum.m */; };
 		0051988516679A48000A9C36 /* XCComplexElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 0051988416679A48000A9C36 /* XCComplexElement.m */; };
-		008C4B8B166DF5E600461751 /* XCCESawaitingLiteral.m in Sources */ = {isa = PBXBuildFile; fileRef = 008C4B8A166DF5E600461751 /* XCCESawaitingLiteral.m */; };
 		008C4B90166E003A00461751 /* XCComplexElementContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 008C4B8F166E003A00461751 /* XCComplexElementContent.m */; };
 		008C4B94166E0F5A00461751 /* XCSpacer.m in Sources */ = {isa = PBXBuildFile; fileRef = 008C4B93166E0F5A00461751 /* XCSpacer.m */; };
 		008C4B99166E29B100461751 /* XCInvert.m in Sources */ = {isa = PBXBuildFile; fileRef = 008C4B96166E29B000461751 /* XCInvert.m */; };
@@ -37,6 +35,8 @@
 		008C4B9D166E2FE100461751 /* XCSimpleElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 008C4B9C166E2FE000461751 /* XCSimpleElement.m */; };
 		008C4BA0166E300B00461751 /* XCTerminalElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 008C4B9F166E300A00461751 /* XCTerminalElement.m */; };
 		008C4BA6166E5BA000461751 /* XCKernel.m in Sources */ = {isa = PBXBuildFile; fileRef = 008C4BA5166E5BA000461751 /* XCKernel.m */; };
+		00E8D55C166F5894003856DD /* XCComplexElementContentTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E8D55B166F5894003856DD /* XCComplexElementContentTest.m */; };
+		00E8D57C166FCE3E003856DD /* XCExpo.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E8D57B166FCE3D003856DD /* XCExpo.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,8 +71,6 @@
 		0051986016678172000A9C36 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		0051986816678172000A9C36 /* TestHTMLTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TestHTMLTests-Info.plist"; sourceTree = "<group>"; };
 		0051986A16678172000A9C36 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		0051986C16678172000A9C36 /* TestHTMLTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestHTMLTests.h; sourceTree = "<group>"; };
-		0051986D16678172000A9C36 /* TestHTMLTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestHTMLTests.m; sourceTree = "<group>"; };
 		0051987716679119000A9C36 /* XCElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCElement.h; sourceTree = "<group>"; };
 		0051987816679119000A9C36 /* XCElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCElement.m; sourceTree = "<group>"; };
 		0051987A1667924C000A9C36 /* XCExpr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCExpr.h; sourceTree = "<group>"; };
@@ -83,9 +81,6 @@
 		0051988116679286000A9C36 /* XCNum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCNum.m; sourceTree = "<group>"; };
 		0051988316679A47000A9C36 /* XCComplexElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCComplexElement.h; sourceTree = "<group>"; };
 		0051988416679A48000A9C36 /* XCComplexElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCComplexElement.m; sourceTree = "<group>"; };
-		008C4B87166DF4FF00461751 /* XCComplexElementState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCComplexElementState.h; sourceTree = "<group>"; };
-		008C4B89166DF5E600461751 /* XCCESawaitingLiteral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCCESawaitingLiteral.h; sourceTree = "<group>"; };
-		008C4B8A166DF5E600461751 /* XCCESawaitingLiteral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCCESawaitingLiteral.m; sourceTree = "<group>"; };
 		008C4B8D166DF68F00461751 /* XCHasTriggers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCHasTriggers.h; sourceTree = "<group>"; };
 		008C4B8E166E003A00461751 /* XCComplexElementContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCComplexElementContent.h; sourceTree = "<group>"; };
 		008C4B8F166E003A00461751 /* XCComplexElementContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCComplexElementContent.m; sourceTree = "<group>"; };
@@ -102,6 +97,10 @@
 		008C4BA4166E5B9F00461751 /* XCKernel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCKernel.h; sourceTree = "<group>"; };
 		008C4BA5166E5BA000461751 /* XCKernel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCKernel.m; sourceTree = "<group>"; };
 		008C4BA7166E62D100461751 /* XCHasHtmlOutput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCHasHtmlOutput.h; sourceTree = "<group>"; };
+		00E8D55A166F5894003856DD /* XCComplexElementContentTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCComplexElementContentTest.h; sourceTree = "<group>"; };
+		00E8D55B166F5894003856DD /* XCComplexElementContentTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCComplexElementContentTest.m; sourceTree = "<group>"; };
+		00E8D57A166FCE3D003856DD /* XCExpo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCExpo.h; sourceTree = "<group>"; };
+		00E8D57B166FCE3D003856DD /* XCExpo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCExpo.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,8 +194,6 @@
 			isa = PBXGroup;
 			children = (
 				008C4B91166E0D5100461751 /* Element */,
-				0051986C16678172000A9C36 /* TestHTMLTests.h */,
-				0051986D16678172000A9C36 /* TestHTMLTests.m */,
 				0051986716678172000A9C36 /* Supporting Files */,
 			);
 			path = TestHTMLTests;
@@ -214,16 +211,13 @@
 		008C4B8C166DF5FC00461751 /* Element */ = {
 			isa = PBXGroup;
 			children = (
-				008C4B92166E0F5A00461751 /* XCSpacer.h */,
-				008C4B93166E0F5A00461751 /* XCSpacer.m */,
 				0051987716679119000A9C36 /* XCElement.h */,
 				0051987816679119000A9C36 /* XCElement.m */,
+				008C4B92166E0F5A00461751 /* XCSpacer.h */,
+				008C4B93166E0F5A00461751 /* XCSpacer.m */,
 				008C4BA3166E32FF00461751 /* Terminal */,
 				008C4BA2166E32F400461751 /* Simple */,
 				008C4BA1166E32EA00461751 /* Complex */,
-				008C4B87166DF4FF00461751 /* XCComplexElementState.h */,
-				008C4B89166DF5E600461751 /* XCCESawaitingLiteral.h */,
-				008C4B8A166DF5E600461751 /* XCCESawaitingLiteral.m */,
 			);
 			name = Element;
 			sourceTree = "<group>";
@@ -231,6 +225,7 @@
 		008C4B91166E0D5100461751 /* Element */ = {
 			isa = PBXGroup;
 			children = (
+				00E8D559166F586B003856DD /* Complex */,
 			);
 			name = Element;
 			sourceTree = "<group>";
@@ -246,6 +241,8 @@
 				0051987B1667924C000A9C36 /* XCExpr.m */,
 				0051987D16679269000A9C36 /* XCProd.h */,
 				0051987E16679269000A9C36 /* XCProd.m */,
+				00E8D57A166FCE3D003856DD /* XCExpo.h */,
+				00E8D57B166FCE3D003856DD /* XCExpo.m */,
 			);
 			name = Complex;
 			sourceTree = "<group>";
@@ -272,6 +269,15 @@
 				0051988116679286000A9C36 /* XCNum.m */,
 			);
 			name = Terminal;
+			sourceTree = "<group>";
+		};
+		00E8D559166F586B003856DD /* Complex */ = {
+			isa = PBXGroup;
+			children = (
+				00E8D55A166F5894003856DD /* XCComplexElementContentTest.h */,
+				00E8D55B166F5894003856DD /* XCComplexElementContentTest.m */,
+			);
+			name = Complex;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -394,7 +400,6 @@
 				0051987F16679269000A9C36 /* XCProd.m in Sources */,
 				0051988216679286000A9C36 /* XCNum.m in Sources */,
 				0051988516679A48000A9C36 /* XCComplexElement.m in Sources */,
-				008C4B8B166DF5E600461751 /* XCCESawaitingLiteral.m in Sources */,
 				008C4B90166E003A00461751 /* XCComplexElementContent.m in Sources */,
 				008C4B94166E0F5A00461751 /* XCSpacer.m in Sources */,
 				008C4B99166E29B100461751 /* XCInvert.m in Sources */,
@@ -402,6 +407,7 @@
 				008C4B9D166E2FE100461751 /* XCSimpleElement.m in Sources */,
 				008C4BA0166E300B00461751 /* XCTerminalElement.m in Sources */,
 				008C4BA6166E5BA000461751 /* XCKernel.m in Sources */,
+				00E8D57C166FCE3E003856DD /* XCExpo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,7 +415,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0051986E16678172000A9C36 /* TestHTMLTests.m in Sources */,
+				00E8D55C166F5894003856DD /* XCComplexElementContentTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

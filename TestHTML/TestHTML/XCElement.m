@@ -14,7 +14,9 @@ NSString * XC_HTML_FOCUS_FORMAT = @"<b>%@</b>",
 @implementation XCElement
 @synthesize root=_root;
 
-
+-(XCElement *)content{
+    return self;
+}
 -(id)initWithRoot:(XCElement *)root {
     self = [super init];
     _root = root;
@@ -32,14 +34,44 @@ NSString * XC_HTML_FOCUS_FORMAT = @"<b>%@</b>",
 -(BOOL)hasError {
     return _state.error;
 }
--(id<XCHasTriggers>)triggerEnter {
+
+
+-(NSString *)description {
+    return [NSString stringWithFormat:@"%@",[self class]];
+}
+
+
+-(NSString*) toHTML {
+    NSString * format = ([self hasFocus]) ? XC_HTML_FOCUS_FORMAT : @"%@";
+    if([self hasError]) {
+        format = [NSString stringWithFormat:format, XC_HTML_ERROR_FORMAT];
+    }
+  
+    //NSLog(@"XCExpression::toHTML self=%@ hasFocus? %d  hasError? %d format=%@", self,[self hasFocus],[self hasError],format);
+    return [NSString stringWithFormat:format,[self toHTMLfromChild]];
+}
+-(NSString *)toHTMLfromChild {
     assert(false);
     return nil;
 }
+-(XCElement*)replaceContentWithElement:(XCElement *)element {
+    assert(false);
+}
+-(BOOL)isEmpty {
+    assert(false);
+    return YES;
+}
+//trigger
+-(id<XCHasTriggers>)triggerDel {
+    return [[self root] triggerDel];
+}
+
+-(id<XCHasTriggers>)triggerEnter {
+    return [self content];
+}
 
 -(id<XCHasTriggers>)triggerNum:(char)c {
-    assert(false);
-    return nil;
+    return [[self content] triggerNum:c];
 }
 -(id<XCHasTriggers>)triggerExpression {
     assert(false);
@@ -55,28 +87,5 @@ NSString * XC_HTML_FOCUS_FORMAT = @"<b>%@</b>",
     return [_root triggerOperator:op];
 }
 
--(NSString *)description {
-    return [NSString stringWithFormat:@"%@",[self class]];
-}
-
--(XCElement *)triggerDel {
-    assert(false);
-    return nil;
-}
--(NSString*) toHTML {
-    NSString * format = ([self hasFocus]) ? XC_HTML_FOCUS_FORMAT : @"%@";
-    if([self hasError]) {
-        format = [NSString stringWithFormat:format, XC_HTML_ERROR_FORMAT];
-    }
-    format = ([self hasError]) ? @"<b>%@</b>" : @"%@";
-    return [NSString stringWithFormat:format,[self toHTMLfromChild]];
-}
--(NSString *)toHTMLfromChild {
-    assert(false);
-    return nil;
-}
--(void)replaceCurrentWithElement:(XCElement *)element {
-    assert(false);
-}
 
 @end
