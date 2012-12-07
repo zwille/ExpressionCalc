@@ -7,11 +7,13 @@
 //
 
 #import "XCSpacer.h"
-#import "XCNum.h"
+#import "XCNumString.h"
 #import "XCNegate.h"
 #import "XCInvert.h"
 #import "XCExpr.h"
 #import "XCFunction.h"
+#import "XCConstant.h"
+#import "XCVariable.h"
 
 @implementation XCSpacer
 +(id)spacerWithRoot: (XCElement*) root {
@@ -34,17 +36,29 @@
 
 -(id<XCHasTriggers>)triggerNum:(char) c {
     return [self swapWithElement:
-            [XCNum numWithFirstChar: c]];
+            [XCNumString numWithFirstChar: c]];
 }
 -(id<XCHasTriggers>)triggerExpression {
     return [self swapWithElement:
             [XCExpr expressionWithElement: self
                                   andRoot: nil]];
 }
--(id<XCHasTriggers>)triggerFunction: (XCFunctionSymbol) fn {
+-(id<XCHasTriggers>)triggerFunction: (NSString*) fn {
     return [self swapWithElement:
-            [XCFunction functionWithElement: self
-                                  andRoot: nil]];
+            [XCFunction functionWithName:fn
+                             withElement:self
+                                 andRoot:nil]];
+}
+-(id<XCHasTriggers>)triggerConstant:(XCConstants)cid {
+    return [self swapWithElement:
+            [XCConstant constantForID:cid]];
+}
+-(id<XCHasTriggers>)triggerVariable:(NSUInteger)idx {
+    return [self swapWithElement:
+            [XCVariable variableForIndex:idx]];
+}
+-(id<XCHasTriggers>)triggerAssign:(NSUInteger) varIdx {
+    return self;
 }
 
 -(id<XCHasTriggers>)triggerOperator: (XCOperator) op {

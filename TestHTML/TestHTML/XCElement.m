@@ -7,10 +7,9 @@
 //
 
 #import "XCElement.h"
-#import "XCNum.h"
+#import "XCNumString.h"
 
-NSString * XC_HTML_FOCUS_FORMAT = @"<b>%@</b>",
-    * XC_HTML_ERROR_FORMAT = @"<font color=\"red\">%@</font>";
+
 @implementation XCElement
 @synthesize root=_root;
 
@@ -72,6 +71,14 @@ NSString * XC_HTML_FOCUS_FORMAT = @"<b>%@</b>",
     assert(false);
     return YES;
 }
+
+//evaluate
+
+-(NSNumber *)eval {
+    [self setError:YES];
+    return [NSNumber numberWithDouble:NAN];
+}
+
 //trigger
 -(id<XCHasTriggers>)triggerDel {
     return [[self root] triggerDel];
@@ -82,13 +89,23 @@ NSString * XC_HTML_FOCUS_FORMAT = @"<b>%@</b>",
 }
 
 -(id<XCHasTriggers>)triggerNum:(char)c {
+    //TODO check
     return [[self content] triggerNum:c];
 }
 -(id<XCHasTriggers>)triggerExpression {
     return self; //pass
 }
--(id<XCHasTriggers>)triggerFunction:(XCFunctionSymbol) fn {
+-(id<XCHasTriggers>)triggerFunction:(NSString*) fn {
     return self; //pass
+}
+-(id<XCHasTriggers>)triggerConstant:(XCConstants)cid {
+    return self; //pass
+}
+-(id<XCHasTriggers>)triggerVariable:(NSUInteger)idx {
+    return self; //pass
+}
+-(id<XCHasTriggers>)triggerAssign: (NSUInteger) varIdx {
+    return [[self root] triggerAssign: varIdx];
 }
 -(id<XCHasTriggers>)triggerNext {
     return (_root) ? [_root triggerNext] : self;

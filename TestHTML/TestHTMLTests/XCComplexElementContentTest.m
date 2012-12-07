@@ -9,7 +9,7 @@
 #import "XCComplexElementContentTest.h"
 #import "XCComplexElementContent.h"
 #import "XCSpacer.h"
-#import "XCNum.h"
+#import "XCNumString.h"
 @implementation XCComplexElementContentTest
 
 -(void) checkStateOf: (XCComplexElementContent*) cont
@@ -46,10 +46,10 @@
 -(void)testAll {
     XCComplexElementContent * cont = [[XCComplexElementContent alloc] init];
     XCElement * e0 = [XCSpacer spacerWithRoot:nil];
-    XCElement * e1 = [XCNum numWithString:@"1"];
-    XCElement * e2 = [XCNum numWithString:@"2"];
-    XCElement * e1a = [XCNum numWithString:@"1.5"];
-    XCElement * e1a2 = [XCNum numWithString:@"1.8"];
+    XCElement * e1 = [XCNumString numWithString:@"1"];
+    XCElement * e2 = [XCNumString numWithString:@"2"];
+    XCElement * e1a = [XCNumString numWithString:@"1.5"];
+    XCElement * e1a2 = [XCNumString numWithString:@"1.8"];
     
     //inserts
     [self checkStateOf:cont withAssertedIndex:-1 andLength:0 ifIsEmpty:YES ifHasNext:NO ifHasPrevious:NO];

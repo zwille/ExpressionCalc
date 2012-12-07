@@ -15,7 +15,7 @@
     return self;
 }
 -(NSNumber *)evaluateArgument:(NSNumber *)arg {
-    double rc = alg([arg doubleValue]);
+    double rc = _alg([arg doubleValue]);
     return [NSNumber numberWithDouble:rc];
 }
 +(id)with:(func_t)algo{

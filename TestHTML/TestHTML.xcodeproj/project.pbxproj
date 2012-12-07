@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		004A9CC81672085C00DB394A /* NSNumber+XCNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 004A9CC71672085C00DB394A /* NSNumber+XCNumber.m */; };
+		004A9CCC1672464000DB394A /* XCNumString.m in Sources */ = {isa = PBXBuildFile; fileRef = 004A9CCB1672464000DB394A /* XCNumString.m */; };
+		004A9CD01672682200DB394A /* XCIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 004A9CCF1672682200DB394A /* XCIdentifier.m */; };
+		004A9CD316726CEB00DB394A /* XCConstant.m in Sources */ = {isa = PBXBuildFile; fileRef = 004A9CD216726CEA00DB394A /* XCConstant.m */; };
+		004A9CD616726D1E00DB394A /* XCVariable.m in Sources */ = {isa = PBXBuildFile; fileRef = 004A9CD516726D1E00DB394A /* XCVariable.m */; };
+		004A9CD9167271A100DB394A /* XCStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 004A9CD8167271A000DB394A /* XCStorage.m */; };
 		0051983A16678170000A9C36 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0051983916678170000A9C36 /* UIKit.framework */; };
 		0051983C16678170000A9C36 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0051983B16678170000A9C36 /* Foundation.framework */; };
 		0051983E16678170000A9C36 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0051983D16678170000A9C36 /* CoreGraphics.framework */; };
@@ -26,7 +32,6 @@
 		0051987916679119000A9C36 /* XCElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 0051987816679119000A9C36 /* XCElement.m */; };
 		0051987C1667924C000A9C36 /* XCExpr.m in Sources */ = {isa = PBXBuildFile; fileRef = 0051987B1667924C000A9C36 /* XCExpr.m */; };
 		0051987F16679269000A9C36 /* XCProd.m in Sources */ = {isa = PBXBuildFile; fileRef = 0051987E16679269000A9C36 /* XCProd.m */; };
-		0051988216679286000A9C36 /* XCNum.m in Sources */ = {isa = PBXBuildFile; fileRef = 0051988116679286000A9C36 /* XCNum.m */; };
 		0051988516679A48000A9C36 /* XCComplexElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 0051988416679A48000A9C36 /* XCComplexElement.m */; };
 		008C4B90166E003A00461751 /* XCComplexElementContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 008C4B8F166E003A00461751 /* XCComplexElementContent.m */; };
 		008C4B94166E0F5A00461751 /* XCSpacer.m in Sources */ = {isa = PBXBuildFile; fileRef = 008C4B93166E0F5A00461751 /* XCSpacer.m */; };
@@ -35,6 +40,8 @@
 		008C4B9D166E2FE100461751 /* XCSimpleElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 008C4B9C166E2FE000461751 /* XCSimpleElement.m */; };
 		008C4BA0166E300B00461751 /* XCTerminalElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 008C4B9F166E300A00461751 /* XCTerminalElement.m */; };
 		008C4BA6166E5BA000461751 /* XCKernel.m in Sources */ = {isa = PBXBuildFile; fileRef = 008C4BA5166E5BA000461751 /* XCKernel.m */; };
+		00C6649D1671FBBB00BF7E8D /* XCGlobal.m in Sources */ = {isa = PBXBuildFile; fileRef = 00C6649C1671FBBB00BF7E8D /* XCGlobal.m */; };
+		00D90C3F1672849F0093DA8B /* XCStatement.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D90C3E1672849F0093DA8B /* XCStatement.m */; };
 		00E8D55C166F5894003856DD /* XCComplexElementContentTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E8D55B166F5894003856DD /* XCComplexElementContentTest.m */; };
 		00E8D57C166FCE3E003856DD /* XCExpo.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E8D57B166FCE3D003856DD /* XCExpo.m */; };
 		00E8D581166FFA00003856DD /* XCFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E8D580166FFA00003856DD /* XCFunction.m */; };
@@ -52,6 +59,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		004A9CC61672085C00DB394A /* NSNumber+XCNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSNumber+XCNumber.h"; path = "../NSNumber+XCNumber.h"; sourceTree = "<group>"; };
+		004A9CC71672085C00DB394A /* NSNumber+XCNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSNumber+XCNumber.m"; path = "../NSNumber+XCNumber.m"; sourceTree = "<group>"; };
+		004A9CC91672441000DB394A /* XCEvaluable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCEvaluable.h; sourceTree = "<group>"; };
+		004A9CCA1672464000DB394A /* XCNumString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCNumString.h; sourceTree = "<group>"; };
+		004A9CCB1672464000DB394A /* XCNumString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCNumString.m; sourceTree = "<group>"; };
+		004A9CCE1672682100DB394A /* XCIdentifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCIdentifier.h; sourceTree = "<group>"; };
+		004A9CCF1672682200DB394A /* XCIdentifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCIdentifier.m; sourceTree = "<group>"; };
+		004A9CD116726CEA00DB394A /* XCConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCConstant.h; sourceTree = "<group>"; };
+		004A9CD216726CEA00DB394A /* XCConstant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCConstant.m; sourceTree = "<group>"; };
+		004A9CD416726D1D00DB394A /* XCVariable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCVariable.h; sourceTree = "<group>"; };
+		004A9CD516726D1E00DB394A /* XCVariable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCVariable.m; sourceTree = "<group>"; };
+		004A9CD71672719F00DB394A /* XCStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCStorage.h; sourceTree = "<group>"; };
+		004A9CD8167271A000DB394A /* XCStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCStorage.m; sourceTree = "<group>"; };
 		0051983516678170000A9C36 /* TestHTML.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestHTML.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0051983916678170000A9C36 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0051983B16678170000A9C36 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -79,8 +99,6 @@
 		0051987B1667924C000A9C36 /* XCExpr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCExpr.m; sourceTree = "<group>"; };
 		0051987D16679269000A9C36 /* XCProd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCProd.h; sourceTree = "<group>"; };
 		0051987E16679269000A9C36 /* XCProd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCProd.m; sourceTree = "<group>"; };
-		0051988016679286000A9C36 /* XCNum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCNum.h; sourceTree = "<group>"; };
-		0051988116679286000A9C36 /* XCNum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCNum.m; sourceTree = "<group>"; };
 		0051988316679A47000A9C36 /* XCComplexElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCComplexElement.h; sourceTree = "<group>"; };
 		0051988416679A48000A9C36 /* XCComplexElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCComplexElement.m; sourceTree = "<group>"; };
 		008C4B8D166DF68F00461751 /* XCHasTriggers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCHasTriggers.h; sourceTree = "<group>"; };
@@ -99,6 +117,10 @@
 		008C4BA4166E5B9F00461751 /* XCKernel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCKernel.h; sourceTree = "<group>"; };
 		008C4BA5166E5BA000461751 /* XCKernel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCKernel.m; sourceTree = "<group>"; };
 		008C4BA7166E62D100461751 /* XCHasHtmlOutput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCHasHtmlOutput.h; sourceTree = "<group>"; };
+		00C6649B1671FBBB00BF7E8D /* XCGlobal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCGlobal.h; sourceTree = "<group>"; };
+		00C6649C1671FBBB00BF7E8D /* XCGlobal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCGlobal.m; sourceTree = "<group>"; };
+		00D90C3D1672849E0093DA8B /* XCStatement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCStatement.h; sourceTree = "<group>"; };
+		00D90C3E1672849F0093DA8B /* XCStatement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCStatement.m; sourceTree = "<group>"; };
 		00E8D55A166F5894003856DD /* XCComplexElementContentTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCComplexElementContentTest.h; sourceTree = "<group>"; };
 		00E8D55B166F5894003856DD /* XCComplexElementContentTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCComplexElementContentTest.m; sourceTree = "<group>"; };
 		00E8D57A166FCE3D003856DD /* XCExpo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCExpo.h; sourceTree = "<group>"; };
@@ -133,6 +155,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		004A9CCD1672468E00DB394A /* Kernel */ = {
+			isa = PBXGroup;
+			children = (
+				008C4BA4166E5B9F00461751 /* XCKernel.h */,
+				008C4BA5166E5BA000461751 /* XCKernel.m */,
+				00C6649B1671FBBB00BF7E8D /* XCGlobal.h */,
+				00C6649C1671FBBB00BF7E8D /* XCGlobal.m */,
+				004A9CC61672085C00DB394A /* NSNumber+XCNumber.h */,
+				004A9CC71672085C00DB394A /* NSNumber+XCNumber.m */,
+				004A9CC91672441000DB394A /* XCEvaluable.h */,
+				008C4B8D166DF68F00461751 /* XCHasTriggers.h */,
+				008C4BA7166E62D100461751 /* XCHasHtmlOutput.h */,
+				008C4B8C166DF5FC00461751 /* Element */,
+			);
+			name = Kernel;
+			sourceTree = "<group>";
+		};
 		0051982A16678170000A9C36 = {
 			isa = PBXGroup;
 			children = (
@@ -166,9 +205,7 @@
 		0051983F16678170000A9C36 /* TestHTML */ = {
 			isa = PBXGroup;
 			children = (
-				008C4B8D166DF68F00461751 /* XCHasTriggers.h */,
-				008C4BA7166E62D100461751 /* XCHasHtmlOutput.h */,
-				008C4B8C166DF5FC00461751 /* Element */,
+				004A9CCD1672468E00DB394A /* Kernel */,
 				0051984816678171000A9C36 /* XCAppDelegate.h */,
 				0051984916678171000A9C36 /* XCAppDelegate.m */,
 				0051985116678171000A9C36 /* XCViewController.h */,
@@ -176,8 +213,6 @@
 				0051985416678171000A9C36 /* XCViewController_iPhone.xib */,
 				0051985716678171000A9C36 /* XCViewController_iPad.xib */,
 				0051984016678170000A9C36 /* Supporting Files */,
-				008C4BA4166E5B9F00461751 /* XCKernel.h */,
-				008C4BA5166E5BA000461751 /* XCKernel.m */,
 			);
 			path = TestHTML;
 			sourceTree = "<group>";
@@ -263,6 +298,8 @@
 				008C4B96166E29B000461751 /* XCInvert.m */,
 				008C4B97166E29B100461751 /* XCNegate.h */,
 				008C4B98166E29B100461751 /* XCNegate.m */,
+				00D90C3D1672849E0093DA8B /* XCStatement.h */,
+				00D90C3E1672849F0093DA8B /* XCStatement.m */,
 			);
 			name = Simple;
 			sourceTree = "<group>";
@@ -272,8 +309,16 @@
 			children = (
 				008C4B9E166E300900461751 /* XCTerminalElement.h */,
 				008C4B9F166E300A00461751 /* XCTerminalElement.m */,
-				0051988016679286000A9C36 /* XCNum.h */,
-				0051988116679286000A9C36 /* XCNum.m */,
+				004A9CCA1672464000DB394A /* XCNumString.h */,
+				004A9CCB1672464000DB394A /* XCNumString.m */,
+				004A9CCE1672682100DB394A /* XCIdentifier.h */,
+				004A9CCF1672682200DB394A /* XCIdentifier.m */,
+				004A9CD71672719F00DB394A /* XCStorage.h */,
+				004A9CD8167271A000DB394A /* XCStorage.m */,
+				004A9CD116726CEA00DB394A /* XCConstant.h */,
+				004A9CD216726CEA00DB394A /* XCConstant.m */,
+				004A9CD416726D1D00DB394A /* XCVariable.h */,
+				004A9CD516726D1E00DB394A /* XCVariable.m */,
 			);
 			name = Terminal;
 			sourceTree = "<group>";
@@ -416,7 +461,6 @@
 				0051987916679119000A9C36 /* XCElement.m in Sources */,
 				0051987C1667924C000A9C36 /* XCExpr.m in Sources */,
 				0051987F16679269000A9C36 /* XCProd.m in Sources */,
-				0051988216679286000A9C36 /* XCNum.m in Sources */,
 				0051988516679A48000A9C36 /* XCComplexElement.m in Sources */,
 				008C4B90166E003A00461751 /* XCComplexElementContent.m in Sources */,
 				008C4B94166E0F5A00461751 /* XCSpacer.m in Sources */,
@@ -428,6 +472,14 @@
 				00E8D57C166FCE3E003856DD /* XCExpo.m in Sources */,
 				00E8D581166FFA00003856DD /* XCFunction.m in Sources */,
 				00E8D58A1670084C003856DD /* XCFuncAlg.m in Sources */,
+				00C6649D1671FBBB00BF7E8D /* XCGlobal.m in Sources */,
+				004A9CC81672085C00DB394A /* NSNumber+XCNumber.m in Sources */,
+				004A9CCC1672464000DB394A /* XCNumString.m in Sources */,
+				004A9CD01672682200DB394A /* XCIdentifier.m in Sources */,
+				004A9CD316726CEB00DB394A /* XCConstant.m in Sources */,
+				004A9CD616726D1E00DB394A /* XCVariable.m in Sources */,
+				004A9CD9167271A100DB394A /* XCStorage.m in Sources */,
+				00D90C3F1672849F0093DA8B /* XCStatement.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

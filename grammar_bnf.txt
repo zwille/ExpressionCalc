@@ -5,7 +5,7 @@
 <Power>			::= <Literal> ( <opExponent> <Literal> )*
 <Literal> 		::= <Number> | <Identifier> | '(' <Expression ')'
 <Identifier> 	::= <Constant> | <Variable> | <Function> 
-<Constant>		::= 'ℯ' | 'π' | ans
+<Constant>		::= 'ℯ' | 'π'
 <Variable> 		::= a | b | c | d | p | q | r | s | t
 <Function> 		::= <FunctionName> <Literal>
 <FunctionName> 	::= '√' | 'cos' | 'sin' | 'tan' | 'acos' | 'asin' | 'atan' | 'exp'

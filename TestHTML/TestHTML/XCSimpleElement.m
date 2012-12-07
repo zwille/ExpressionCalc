@@ -39,6 +39,11 @@
     assert([self root]);
     return [[self root] triggerDel];
 }
-
-
+                  
+//evaluate
+-(NSNumber *)eval {
+    NSNumber * rc = [[self content] eval];
+    [self setError:[rc isNaN]];
+    return rc;
+}
 @end

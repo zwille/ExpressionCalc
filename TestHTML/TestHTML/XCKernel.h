@@ -8,9 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "XCHasTriggers.h"
+#import "XCEvaluable.h"
 #import "XCElement.h"
 
-@interface XCKernel : NSObject<XCHasTriggers, XCHasHtmlOutput> {
+@interface XCKernel : NSObject<XCHasTriggers, XCHasHtmlOutput, XCEvaluable> {
     XCElement * _root, * _head;
 }
 -(void) reset;

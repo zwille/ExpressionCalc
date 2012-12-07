@@ -56,4 +56,14 @@
     }
     return nil;
 }
+// evaluate
+-(NSNumber *)eval {
+    NSUInteger len = [_content length];
+    assert(len>0);
+    NSNumber * base = [[_content elementAtIndex:0] eval];
+    for (NSUInteger i=1; i<len; ++i) {
+        base = [base powExp: [[_content elementAtIndex:i] eval]];
+    }
+    return base;
+}
 @end

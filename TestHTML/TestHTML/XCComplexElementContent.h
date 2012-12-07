@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "XCElement.h"
 
-@interface XCComplexElementContent : NSObject {
+@interface XCComplexElementContent : NSObject<NSFastEnumeration> {
     NSMutableArray * _operands;
     NSUInteger _idx;
 }

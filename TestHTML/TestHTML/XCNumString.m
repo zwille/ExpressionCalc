@@ -6,10 +6,12 @@
 //  Copyright (c) 2012 Christoph Cwelich. All rights reserved.
 //
 
-#import "XCNum.h"
+#import "XCNumString.h"
 #import "XCHasTriggers.h"
+
+
 static NSNumberFormatter * formatter;
-@implementation XCNum
+@implementation XCNumString
 +(void)initialize {
     formatter = [[NSNumberFormatter alloc] init];
     [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
@@ -24,12 +26,12 @@ static NSNumberFormatter * formatter;
     _buf = [NSMutableString stringWithString:str];
     return self;
 }
-+(XCNum*) numWithFirstChar: (char) c {
-    XCNum * rc = [[XCNum alloc] init];
-    return (XCNum*)[rc triggerNum:c];
++(XCNumString*) numWithFirstChar: (char) c {
+    XCNumString * rc = [[XCNumString alloc] init];
+    return (XCNumString*)[rc triggerNum:c];
 }
-+(XCNum *)numWithString:(NSString *)str {
-    return [[XCNum alloc] initWithString:str];
++(XCNumString *)numWithString:(NSString *)str {
+    return [[XCNumString alloc] initWithString:str];
 }
 -(NSString *)description{
     return _buf;
@@ -39,11 +41,22 @@ static NSNumberFormatter * formatter;
     [NSString stringWithFormat:@"%@_",_buf] :
     _buf;
 }
--(NSNumber *)numericValue {
-    return [formatter numberFromString:_buf];
+
+//evaluate
+-(NSNumber *)eval {
+    NSNumber * rc = [formatter numberFromString:_buf];
+    [self setError: ([rc isNaN])];
+    return rc;
 }
 //trigger
 -(id<XCHasTriggers>)triggerNum:(char)c {
+    if (c==XC_PT) {
+        // suppress second decimal point
+        if (_state.hasDecimalPt) {
+            return self;
+        }
+        _state.hasDecimalPt = YES;
+    }
     [_buf appendFormat: @"%c",c];
     return self;
 }
@@ -59,7 +72,7 @@ static NSNumberFormatter * formatter;
 }
 -(BOOL)isEqual:(id)object {
     if ([object isKindOfClass:[self class]]) {
-        return [[self numericValue] isEqual:[object numericValue]];
+        return [[self eval] isEqual:[object eval]];
     }
     return false;
 }

@@ -14,7 +14,7 @@ static const NSDictionary * functions;
 @implementation XCFunction
 +(void)initialize{
     functions = @{
-    @"√":[XCFuncAlg with: sqrt],
+    XC_SQRT:[XCFuncAlg with: sqrt],
     @"ln":[XCFuncAlg with: log],
     @"exp":[XCFuncAlg with: exp],
     
@@ -48,6 +48,9 @@ static const NSDictionary * functions;
                                     andName:name
                                  andElement: element];
 }
-
+-(NSNumber *)eval {
+    XCFuncAlg * algo = [functions objectForKey:_name];
+    return [algo evaluateArgument:[[[self content] eval] negate]];
+}
 
 @end

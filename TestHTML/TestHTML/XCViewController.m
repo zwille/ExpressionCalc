@@ -33,10 +33,8 @@
     NSUInteger tag = [sender tag];
     char c = tag + '0';
     if (tag==10) {
-        c = '.';
-    } else if(tag==11) {
-        c = 'E';
-    }
+        c = XC_PT;
+    } 
     NSLog(@"VC::numkey %c",c);
     [_kernel triggerNum:c];
     [self print];
@@ -116,5 +114,7 @@
 
 - (void) print {
     [textView loadHTMLString: [_kernel toHTML] baseURL:nil];
+}
+- (IBAction)eval:(id)sender {
 }
 @end

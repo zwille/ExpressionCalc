@@ -9,14 +9,18 @@
 #import <Foundation/Foundation.h>
 #import "XCHasTriggers.h"
 #import "XCHasHtmlOutput.h"
+#import "XCEvaluable.h"
+
 typedef struct {
     Byte focus : 1;
     Byte error : 1;
+    Byte hasDecimalPt : 1; //used by XCNumString
 } XCElementState;
 
-extern NSString * XC_HTML_FOCUS_FORMAT, * XC_HTML_ERROR_FORMAT;
-@interface XCElement : NSObject<XCHasTriggers, XCHasHtmlOutput> {
+
+@interface XCElement : NSObject<XCHasTriggers, XCHasHtmlOutput, XCEvaluable> {
     XCElement * _root;
+    @protected
     XCElementState _state;
 }
 @property (strong) XCElement * root;

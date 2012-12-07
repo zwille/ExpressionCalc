@@ -8,11 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "XCTerminalElement.h"
-@interface XCNum : XCTerminalElement {
+
+@interface XCNumString : XCTerminalElement {
     NSMutableString * _buf;
 }
-+(XCNum*) numWithFirstChar:(char)c;
-+(XCNum*) numWithString:(NSString*) str;
--(NSNumber*) numericValue;
++(XCNumString*) numWithFirstChar:(char)c;
++(XCNumString*) numWithString:(NSString*) str;
+
 
 @end

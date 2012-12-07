@@ -42,6 +42,12 @@
     }
 }
 
+//evaluate
+-(NSNumber *)eval {
+    NSNumber * rc = [[[self content] eval] invert];
+    [self setError:[rc isNaN]];
+    return rc;
+}
 
 
 @end

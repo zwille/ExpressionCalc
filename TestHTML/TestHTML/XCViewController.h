@@ -12,6 +12,7 @@
 @interface XCViewController : UIViewController {
     XCKernel * _kernel;
 }
+
 @property (weak, nonatomic) IBOutlet UIWebView *textView;
 
 - (IBAction)numkey:(id)sender;
@@ -27,7 +28,7 @@
 - (IBAction)left:(id)sender;
 - (IBAction)enter:(id)sender;
 - (IBAction)right:(id)sender;
-
+- (IBAction)eval:(id)sender;
 
 
 

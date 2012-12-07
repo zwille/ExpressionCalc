@@ -84,5 +84,12 @@
     return spacer;
 }
 
-
+//evaluate
+-(NSNumber *)eval {
+    NSNumber * prod = @1;
+    for (XCElement * e in _content) {
+        prod = [prod multNum:[e eval]];
+    }
+    return prod;
+}
 @end

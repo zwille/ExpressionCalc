@@ -76,7 +76,13 @@ BOOL indexOkay(NSUInteger i, NSUInteger len);
     return rc;
 }
 
-
+// fast enumeration
+-(NSUInteger)countByEnumeratingWithState:
+    (NSFastEnumerationState *)state
+                                 objects:(__unsafe_unretained id [])buffer
+                                   count:(NSUInteger)len {
+    return [_operands countByEnumeratingWithState:state objects:buffer count:len];
+}
 @end
 BOOL indexOkay(NSUInteger i, NSUInteger len) {
     return i<len || i==(NSUInteger)-1;

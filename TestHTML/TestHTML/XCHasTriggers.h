@@ -7,11 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-typedef enum {XC_OP_PLUS, XC_OP_MINUS, XC_OP_MULT, XC_OP_DIV, XC_OP_EXP} XCOperator;
-typedef enum {
-    XC_FN_SQRT, XC_FN_LN, XC_FN_EXP,
-    XC_FN_COS, XC_FN_SIN, XC_FN_TAN,
-    XC_FN_ACOS, XC_FN_ASIN, XC_FN_ATAN} XCFunctionSymbol;
+#import "XCGlobal.h"
+
 @protocol XCHasTriggers <NSObject>
 -(id<XCHasTriggers>)triggerNum:(char) c;
 -(id<XCHasTriggers>)triggerOperator: (XCOperator) op;
@@ -20,5 +17,8 @@ typedef enum {
 -(id<XCHasTriggers>)triggerPrevious;
 -(id<XCHasTriggers>)triggerDel;
 -(id<XCHasTriggers>)triggerExpression;
--(id<XCHasTriggers>)triggerFunction: (XCFunctionSymbol) fn;
+-(id<XCHasTriggers>)triggerFunction: (NSString*) functionName;
+-(id<XCHasTriggers>)triggerConstant: (XCConstants) cid;
+-(id<XCHasTriggers>)triggerVariable: (NSUInteger) idx;
+-(id<XCHasTriggers>)triggerAssign: (NSUInteger) varIdx;
 @end

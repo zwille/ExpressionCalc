@@ -87,6 +87,15 @@
 }
 
 
+//evaluate
+-(NSNumber *)eval {
+    NSNumber * sum =@0;
+    for (XCElement * e in _content) {
+        [sum addNum:[e eval]];
+    }
+    return sum;
+}
+
 
 
 

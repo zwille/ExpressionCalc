@@ -41,6 +41,9 @@ withRoot:(XCElement *)root {
         return [super triggerOperator:op];
     }
 }
-
+//evaluate
+-(NSNumber *)eval {
+    return [[[self content] eval] negate];
+}
 
 @end
