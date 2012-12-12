@@ -53,6 +53,9 @@
         if ([el isKindOfClass:[XCInvert class]]) {
             format = ([bufDenom length]) ? formatN : format0;
             [bufDenom appendString: [NSString stringWithFormat:format, [[el content] toHTML]]];
+            if ([el hasError]) {
+                [self setError:YES];
+            }
         } else {
             format = ([bufNum length]) ? formatN : format0;
             [bufNum appendString: [NSString stringWithFormat:format, [el toHTML]]];

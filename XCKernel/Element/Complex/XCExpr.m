@@ -96,14 +96,16 @@
 
 //evaluate
 -(NSNumber *)eval {
-    NSNumber * sum =@0;
+    NSNumber * sum = @0;
     for (XCElement * e in _content) {
-        [sum addNum:[e eval]];
+        sum = [sum addNum:[e eval]];
     }
     return sum;
 }
-
-
-
+-(BOOL)isEmpty {
+    return [super isEmpty] ||
+        ([_content length]==1
+         && [[_content elementAtIndex:0] isKindOfClass:[XCSpacer class]]);
+}
 
 @end

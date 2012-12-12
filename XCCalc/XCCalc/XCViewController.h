@@ -13,6 +13,7 @@
     NSString * _htmlTemplate;
     NSString * _htmlExpression;
     NSString * _htmlOut;
+    NSNumberFormatter * _decformat, * _sciformat;
 }
 
 @property (weak, nonatomic) IBOutlet UIWebView *webView;

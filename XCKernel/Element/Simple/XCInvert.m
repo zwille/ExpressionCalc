@@ -45,7 +45,9 @@
 //evaluate
 -(NSNumber *)eval {
     NSNumber * rc = [[[self content] eval] invert];
+    //NSLog(@"XCInvert::eval rc=%@ is nan? %d",rc,[rc isNaN]);
     [self setError:[rc isNaN]];
+    //NSLog(@"XCInvert::eval isError? %d",[self hasError]);
     return rc;
 }
 

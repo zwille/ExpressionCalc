@@ -55,4 +55,7 @@
     return rc;
     
 }
+-(BOOL)isEmpty {
+    return !_content;
+}
 @end

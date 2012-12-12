@@ -14,13 +14,16 @@
 @synthesize store;
 -(id)init {
     self = [super initWithContent:nil andRoot:nil];
-    [self setContent: [XCExpr emptyExpressionWithRoot: self]];
-    _store = nil;
-    NSLog(@"XCStatement init, self=%@",self);
+    [self reset];
     return self;
 }
 +(id)emptyStatement {
     return [[XCStatement alloc] init];
+}
+-(void)reset {
+    [self setContent: [XCExpr emptyExpressionWithRoot: self]];
+    _store = nil;
+
 }
 
 -(NSString *)description {
@@ -34,7 +37,8 @@
     [NSString stringWithFormat:@"%@",[[self content] toHTML]];
 }
 -(NSNumber *)eval {
-    NSNumber * rc = [[self content] eval];
+    XCElement * content = [self content];
+    NSNumber * rc = ([content isEmpty]) ? @0 : [content eval];
     if (_store) {
         [_store setNumericValue:rc];
     } else {

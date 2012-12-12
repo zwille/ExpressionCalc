@@ -13,5 +13,8 @@
 -(id<XCHasTriggers>)triggerNum:(char)c {
     return self;
 }
+-(BOOL)isEmpty {
+    return NO;
+}
 
 @end

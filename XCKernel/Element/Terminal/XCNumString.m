@@ -66,7 +66,11 @@ static NSNumberFormatter * formatter;
     if (len < 2) {
         return [_root triggerDel];
     } else {
-        NSRange last = {len-1,1};
+        NSUInteger i = len-1;
+        NSRange last = {i,1};
+        if ([_buf characterAtIndex:i]==XC_PT) {
+            _state.hasDecimalPt = NO;
+        }
         [_buf deleteCharactersInRange:last];
         return self;
     }

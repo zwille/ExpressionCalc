@@ -25,6 +25,9 @@
 -(NSString *)description{
     return [NSString stringWithFormat:@"%@%@",[super description],_content];
 }
+-(BOOL)isEmpty {
+    return [_content isEmpty];
+}
 
 //trigger
 

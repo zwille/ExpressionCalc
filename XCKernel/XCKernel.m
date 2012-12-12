@@ -10,22 +10,28 @@
 #import "XCStatement.h"
 
 @implementation XCKernel
+
 -(id)init{
     self = [super init];
-    [self reset];
+    [self newStatement];
     return self;
 }
 
 -(void)reset {
+    [_root reset];
+    [self setHead:[_root head]];
+}
+-(void)newStatement {
     _root = [XCStatement emptyStatement];
     [_statements insertStatement:_root];
     [self setHead:[_root head]];
 }
 - (void) log {
-    NSString * headDesc = [NSString stringWithFormat:@"%@",_head];
+    /*NSString * headDesc = [NSString stringWithFormat:@"%@",_head];
     NSString * rootDesc = [NSString stringWithFormat:@"%@",_root];
     NSLog(@"XCKernel head = %@",headDesc);
     NSLog(@"XCKernel root = %@",rootDesc);
+    */
     //NSLog(@"XCKernel html = %@",[_root toHTML]);
 }
 -(NSString *)toHTML {
@@ -88,6 +94,7 @@
 }
 
 -(NSNumber *)eval {
+    [self setHead:_root]; //toggle focus off
     return [_root eval];
 }
 

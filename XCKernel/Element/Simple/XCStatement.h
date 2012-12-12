@@ -15,4 +15,5 @@
 }
 @property (strong,readwrite) XCVariable * store;
 +(id) emptyStatement;
+-(void) reset;
 @end

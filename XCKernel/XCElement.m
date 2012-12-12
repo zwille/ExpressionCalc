@@ -55,14 +55,17 @@
     return nil;
 }
 -(NSString*) wrapHTML: (NSString*) inner {
+    //NSLog(@"XCElement::wrapHTML self=%@ hasError=%d inner=%@",self,[self hasError],inner);
     if ([self hasError]) {
         inner = [NSString stringWithFormat:
                  @"<mrow class=\"error\">%@</mrow>",inner];
     }
+    //NSLog(@"XCElement::wrapHTML inner=%@",inner);
     if ([self hasFocus]) {
         inner = [NSString stringWithFormat:
                  @"<mrow class=\"hasfocus\">%@</mrow>",inner];
     }
+    //NSLog(@"XCElement::wrapHTML inner=%@",inner);
     return inner;
     
 }
@@ -71,7 +74,6 @@
     assert(false);
 }
 -(BOOL)isEmpty {
-    assert(false);
     return YES;
 }
 
@@ -121,7 +123,9 @@
 }
 // copying
 -(id)copyWithZone:(NSZone *)zone {
-    return [[[self class] allocWithZone:zone] initWithRoot:nil];
+    XCElement * rc = [[[self class] allocWithZone:zone] initWithRoot:nil];
+    rc -> _state = _state;
+    return rc;
 }
 
 @end

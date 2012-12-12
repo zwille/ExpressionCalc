@@ -16,6 +16,7 @@
 @implementation XCViewController
 @synthesize webView;
 - (void)viewDidLoad
+
 {
     [super viewDidLoad];
     _kernel = [[XCKernel alloc] init];
@@ -26,6 +27,17 @@
     //NSLog(@"s=%@",_htmlTemplate);
     [self updateHTMLExpression];
     _htmlOut = @"0";
+    
+    _sciformat = [[NSNumberFormatter alloc] init];
+    [_sciformat setNumberStyle:NSNumberFormatterScientificStyle];
+    [_sciformat setMaximumFractionDigits:10];
+    [_sciformat setMaximumSignificantDigits:15];
+    [_sciformat setExponentSymbol:@"x10^"];
+    _decformat = [[NSNumberFormatter alloc] init];
+    [_decformat setNumberStyle:NSNumberFormatterDecimalStyle];
+    [_decformat setMaximumFractionDigits:10];
+    [_decformat setMaximumSignificantDigits:15];
+    
     [self print];
 }
 
@@ -37,6 +49,7 @@
 - (void) print {
     //[webView loadHTMLString: [_kernel toHTML] baseURL:nil];
     NSString * html = [NSString stringWithFormat:_htmlTemplate, _htmlExpression, _htmlOut];
+    //NSLog(@"VC::print html = %@",html);
     [webView loadHTMLString: html baseURL:nil];
 }
 - (void) updateHTMLExpression {
@@ -51,6 +64,7 @@
 - (IBAction)reset:(id)sender {
     [_kernel reset];
     [self updateHTMLExpression];
+    _htmlOut = @"0";
     [self print];
 }
 // operators
@@ -88,9 +102,25 @@
     [self print];
 }
 - (IBAction)eval:(id)sender {
-    NSNumber * res = [_kernel eval];
-    _htmlOut = ([res isNaN]) ? @"ERROR" : [res description];
+    NSLog(@"ViewController::eval");
+    NSNumber * result = [_kernel eval];
+    if([result isInteger]) {
+        _htmlOut = [_decformat stringFromNumber:result];
+    } else { // result is double
+        if ([result isNaN]) {
+            _htmlOut = @"ERROR";
+        } else {
+            double absval = fabs([result doubleValue]);
+            if (absval > 1e10 || absval < 1e-10) {
+                _htmlOut = [_sciformat stringFromNumber:result];
+            } else {
+                _htmlOut = [_decformat stringFromNumber:result];
+            }
+        }
+    }
+    [self updateHTMLExpression];
     [self print];
+    [_kernel newStatement];
 }
 
 @end

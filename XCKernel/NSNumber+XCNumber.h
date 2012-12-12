@@ -19,6 +19,7 @@ BOOL addOverflows(long * result, long a, long b);
 BOOL isInteger(NSNumber * val);
 BOOL bothInteger(NSNumber * a, NSNumber * b);
 @interface NSNumber (XCNumber)
++(NSNumber*) nan;
 -(NSNumber*) addNum: (NSNumber*) rhs;
 -(NSNumber*) multNum: (NSNumber*) rhs;
 -(NSNumber*) powExp: (NSNumber*) exp;
