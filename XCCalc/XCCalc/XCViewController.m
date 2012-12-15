@@ -19,6 +19,9 @@
 @synthesize landscapeView;
 @synthesize webViews;
 @synthesize angleModeButton;
+@synthesize numkeys;
+@synthesize varButton;
+
 - (void)viewDidLoad
 
 {
@@ -58,14 +61,27 @@
     [_decformat setMaximumFractionDigits:10];
     [_decformat setMaximumSignificantDigits:15];
     
-    [self updateAngleModeButton];
-    [self updateHTMLState];
-    [self updateHTMLExpression];
-    _htmlOut = nil;
-    [self print];
+    [self reset:nil];
+}
+- (void) updateNumKeys {
+    NSString * format = @"%d";
+    if (numbersAsVariables || storing) {
+        format = @"X%d";
+        [varButton setTitle:@"NUM" forState:UIControlStateNormal];
+    } else {
+        [varButton setTitle:@"VAR" forState:UIControlStateNormal];
+    }
+    for (UIButton * b in numkeys) {
+        [b setTitle:[NSString stringWithFormat:format, [b tag]]
+           forState: UIControlStateNormal];
+    }
+    
 }
 - (void) updateHTMLState {
-    _htmlState = ([_kernel isDegreeAngleMode]) ? @"DEG" : @"RAD";
+    _htmlState = [NSString stringWithFormat:@"%@ %@",
+        ([_kernel isDegreeAngleMode]) ? @"DEG" : @"RAD",
+        (storing) ? @"STO" : (numbersAsVariables) ? @"VAR" : @"NUM"
+        ];
 }
 - (void) updateAngleModeButton {
     [angleModeButton setTitle:
@@ -81,12 +97,13 @@
     NSString * html = nil;
     UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
     if (UIInterfaceOrientationIsPortrait(orientation)) {
-        NSString * htmlResult = (_htmlOut) ? _htmlOut : @"0";
+        NSString * htmlResult = (_htmlOut) ?
+        [NSString stringWithFormat:@" = %@",_htmlOut] : @" = 0";
         html = [NSString stringWithFormat:_htmlTemplatePortrait, //format
                 _htmlExpression, htmlResult]; //args
     } else {
         NSString * htmlResult = (_htmlOut) ?
-        [NSString stringWithFormat:@"<mo> = </mo> <mn>%@</mn>",_htmlOut] : @"";
+        [NSString stringWithFormat:@" = %@",_htmlOut] : @" = 0";
         html = [NSString stringWithFormat:_htmlTemplateLandscape, //format
                 _htmlState,_htmlExpression, htmlResult]; //args
     }
@@ -134,33 +151,35 @@
 // actions
 // control
 - (IBAction)del:(id)sender {
+    if (storing) {
+        return;
+    }
     [_kernel triggerDel];
     [self updateHTMLExpression];
     [self print];
 }
 
 - (IBAction)ans:(id)sender {
+    if (storing) {
+        return;
+    }
     [_kernel triggerVariable:XC_ANS_IDX];
     [self updateHTMLExpression];
     [self print];
 }
 
-- (IBAction)recall:(id)sender {
-    //TODO getIndexFromUser
-    [_kernel triggerVariable:0]; //TODO index here
-    [self updateHTMLExpression];
-    [self print];
-}
 
 - (IBAction)store:(id)sender {
-    //TODO getIndexFromUser
-    [_kernel triggerAssign:0];//TODO index here
-    [self updateHTMLExpression];
+    storing = !storing;
+    [self updateNumKeys];
+    [self updateHTMLState];
     [self print];
 }
 
 - (IBAction)eval:(id)sender {
-    NSLog(@"ViewController::eval");
+    if (storing) {
+        return;
+    }
     NSNumber * result = [_kernel eval];
     if([result isInteger]) {
         _htmlOut = [_decformat stringFromNumber:result];
@@ -178,17 +197,24 @@
     }
     [self updateHTMLExpression];
     [self print];
-    [_kernel newStatement];
 }
 
 - (IBAction)reset:(id)sender {
+    storing = NO;
+    numbersAsVariables = NO;
     [_kernel reset];
+    [self updateNumKeys];
+    [self updateAngleModeButton];
+    [self updateHTMLState];
     [self updateHTMLExpression];
     _htmlOut = nil;
     [self print];
 }
 
 - (IBAction)changeAngleMode:(id)sender {
+    if (storing) {
+        return;
+    }
     [_kernel toggleAngleMode];
     [self updateAngleModeButton];
     [self updateHTMLState];
@@ -196,30 +222,57 @@
     
 }
 
+- (IBAction)var:(id)sender {
+    if (storing) {
+        return;
+    }
+    numbersAsVariables = !numbersAsVariables;
+    [self updateNumKeys];
+    [self updateHTMLState];
+    [self print];
+}
+
 // navigation
 - (IBAction)up:(id)sender {
+    if (storing) {
+        return;
+    }
     [_kernel previousStatement];
+    _htmlOut = nil;
     [self updateHTMLExpression];
     [self print];
     
 }
 - (IBAction)down:(id)sender {
+    if (storing) {
+        return;
+    }
     [_kernel nextStatement];
+    _htmlOut = nil;
     [self updateHTMLExpression];
     [self print];
 }
 - (IBAction)right:(id)sender {
+    if (storing) {
+        return;
+    }
     [_kernel triggerNext];
     [self updateHTMLExpression];
     [self print];
 }
 
 - (IBAction)left:(id)sender {
+    if (storing) {
+        return;
+    }
     [_kernel triggerPrevious];
     [self updateHTMLExpression];
     [self print];
 }
 - (IBAction)enter:(id)sender {
+    if (storing) {
+        return;
+    }
     [_kernel triggerEnter];
     [self updateHTMLExpression];
     [self print];
@@ -227,18 +280,27 @@
 
 // literals functions
 - (IBAction)euler:(id)sender {
+    if (storing) {
+        return;
+    }
     [_kernel triggerConstant:XC_EULER_ID];
     [self updateHTMLExpression];
     [self print];
 }
 
 - (IBAction)pi:(id)sender {
+    if (storing) {
+        return;
+    }
     [_kernel triggerConstant:XC_PI_ID];
     [self updateHTMLExpression];
     [self print];
 }
 
 - (IBAction)function:(id)sender {
+    if (storing) {
+        return;
+    }
     NSString * fname = [sender currentTitle];
     assert(fname);
     [_kernel triggerFunction:fname];
@@ -248,40 +310,73 @@
 
 - (IBAction)num:(id)sender {
     NSUInteger tag = [sender tag];
-    char c = (tag==10) ? XC_PT : tag+'0';
-    [_kernel triggerNum:c];
+    if (storing) {
+        if (tag==10) {
+            return;
+        }
+        [_kernel triggerAssign:tag];
+        storing = NO;
+        [self updateNumKeys];
+        [self updateHTMLState];
+    } else if(numbersAsVariables) {
+        if (tag==10) {
+            return;
+        }
+        [_kernel triggerVariable:tag];
+    } else {
+        char c = (tag==10) ? XC_PT : tag+'0';
+        [_kernel triggerNum:c];
+    }
     [self updateHTMLExpression];
     [self print];
 }
 
 // operators
 - (IBAction)plus:(id)sender {
+    if (storing) {
+        return;
+    }
     [_kernel triggerOperator:XC_OP_PLUS];
     [self updateHTMLExpression];
     [self print];
 }
 - (IBAction)minus:(id)sender {
+    if (storing) {
+        return;
+    }
     [_kernel triggerOperator:XC_OP_MINUS];
     [self updateHTMLExpression];
     [self print];
 }
 - (IBAction)mult:(id)sender {
+    if (storing) {
+        return;
+    }
     [_kernel triggerOperator:XC_OP_MULT];
     [self updateHTMLExpression];
     [self print];
 }
 - (IBAction)div:(id)sender {
+    if (storing) {
+        return;
+    }
     [_kernel triggerOperator:XC_OP_DIV];
     [self updateHTMLExpression];
     [self print];
 }
 - (IBAction)exp:(id)sender {
+    if (storing) {
+        return;
+    }
     [_kernel triggerOperator:XC_OP_EXP];
     [self updateHTMLExpression];
     [self print];
 }
 
 - (IBAction)braces:(id)sender {
+    if (storing) {
+        return;
+    }
     [_kernel triggerExpression];
     [self updateHTMLExpression];
     [self print];

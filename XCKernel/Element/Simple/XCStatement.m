@@ -25,6 +25,9 @@
     _store = nil;
 
 }
+-(BOOL)isEmpty {
+    return [[self content] isEmpty];
+}
 
 -(NSString *)description {
     return (_store) ?

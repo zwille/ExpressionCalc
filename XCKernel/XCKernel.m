@@ -13,18 +13,29 @@
 
 -(id)init{
     self = [super init];
+    _statements = [[XCStatementBuffer alloc] init];
     [self newStatement];
     return self;
 }
 
 -(void)reset {
+    if ([self isHeadOnStatement]) {
+        [self newStatement];
+        return;
+    }
     [_root reset];
     [self setHead:[_root head]];
 }
 -(void)newStatement {
-    _root = [XCStatement emptyStatement];
-    [_statements insertStatement:_root];
-    [self setHead:[_root head]];
+    XCStatement * bufhead = [_statements head];
+    if ([bufhead isEmpty]) {
+        [_statements moveToHead];
+        _root = bufhead;
+    } else {
+        _root = [XCStatement emptyStatement];
+        [_statements pushStatement:_root];
+        [self setHead:[_root head]];
+    }
 }
 - (void) log {
     NSString * headDesc = [NSString stringWithFormat:@"%@",_head];
@@ -56,21 +67,20 @@
     [self setHead:_root]; //toggle focus off
     NSNumber * rc = [_root eval];
     return [rc isZero] ? @0 : rc;
-    
 }
 
 -(void)previousStatement {
     if ([_statements hasPrevious]) {
         XCStatement * prev = [_statements previous];
         _root = prev;
-        _head = prev;
+        [self setHead: prev];
     }
 }
 -(void)nextStatement {
     if ([_statements hasNext]) {
-        XCStatement * next = [_statements previous];
+        XCStatement * next = [_statements next];
         _root = next;
-        _head = next;
+        [self setHead: next];
     }
 }
 -(void)toggleAngleMode {
@@ -81,46 +91,78 @@
     XCGlobal * glob = [XCGlobal instance];
     return [glob angleAsDegree];
 }
+-(BOOL) isHeadOnStatement {
+    return [_head isKindOfClass:[XCStatement class]];
+}
 //trigger
 -(id<XCHasTriggers>)triggerAssign: (NSUInteger)varIdx {
+    if ([self isHeadOnStatement]) {
+        [self newStatement];
+    }
     return [_root triggerAssign:varIdx];
 }
 -(id<XCHasTriggers>)triggerNum:(char) c {
+    if ([self isHeadOnStatement]) {
+        [self newStatement];
+    }
     return [self setHead:[_head triggerNum:c]];
 }
 -(id<XCHasTriggers>)triggerOperator: (XCOperator) op {
+    if ([self isHeadOnStatement]) {
+        [self newStatement];
+    }
     return [self setHead:[_head triggerOperator: op]];
 }
 -(id<XCHasTriggers>)triggerEnter {
-    if ([_head isKindOfClass:[XCStatement class]]
-        && ![_statements hasNext]) {
+    if ([self isHeadOnStatement]) {
         // copy previous statements
         _root = [_root copy];
         _head = _root;
-        [_statements insertStatement:_root];
+        [_statements pushStatement:_root];
     }
     return [self setHead: [_head triggerEnter]];
 }
 -(id<XCHasTriggers>)triggerNext {
+    if ([self isHeadOnStatement]) {
+        [self newStatement];
+    }
     return [self setHead:[_head triggerNext]];
 }
 -(id<XCHasTriggers>)triggerPrevious {
+    if ([self isHeadOnStatement]) {
+        [self newStatement];
+    }
     return [self setHead:[_head triggerPrevious]];
 }
 -(id<XCHasTriggers>)triggerDel {
+    if ([self isHeadOnStatement]) {
+        [self newStatement];
+    }
     return [self setHead:[_head triggerDel]];
 }
 -(id<XCHasTriggers>)triggerExpression {
+    if ([self isHeadOnStatement]) {
+        [self newStatement];
+    }
     return [self setHead:[_head triggerExpression]];
 }
 
 -(id<XCHasTriggers>)triggerConstant:(XCConstants)cid {
+    if ([self isHeadOnStatement]) {
+        [self newStatement];
+    }
     return [self setHead:[_head triggerConstant:cid]];
 }
 -(id<XCHasTriggers>)triggerFunction:(NSString *)functionName {
+    if ([self isHeadOnStatement]) {
+        [self newStatement];
+    }
     return [self setHead:[_head triggerFunction:functionName]];
 }
 -(id<XCHasTriggers>)triggerVariable:(NSUInteger)idx {
+    if ([self isHeadOnStatement]) {
+        [self newStatement];
+    }
     return [self setHead:[_head triggerVariable:idx]];
 }
 

@@ -17,9 +17,12 @@
     XCElement * _head;
 }
 
--(void) insertStatement: (XCStatement* ) stmnt;
+-(void) pushStatement: (XCStatement* ) stmnt;
 -(BOOL) hasNext;
 -(BOOL) hasPrevious;
 -(XCStatement*) next;
 -(XCStatement*) previous;
+-(XCStatement*) current;
+-(void) moveToHead;
+-(XCStatement*) head;
 @end

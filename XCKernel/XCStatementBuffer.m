@@ -16,28 +16,42 @@
     return self;
 }
 
--(void)insertStatement:(XCStatement *)stmnt {
+-(void)pushStatement:(XCStatement *)stmnt {
     if([_buf isFull]) {
         [_buf dequeue];
     }
     [_buf push:stmnt];
-    _idx = [_buf size];
+    [self moveToHead];
 }
 
 -(BOOL)hasNext {
-    return _idx < [_buf size];
+    return _idx+1 < [_buf size];
 }
 
 -(BOOL)hasPrevious {
-    return !_idx;
+    return _idx>0;
 }
 -(XCStatement *)next {
     assert([self hasNext]);
     return [_buf elementAtIndex:++_idx];
 }
+-(XCStatement * ) current {
+    assert(_idx < [_buf size]);
+    return [_buf elementAtIndex:_idx];
+}
 -(XCStatement *)previous {
     assert([self hasPrevious]);
     return [_buf elementAtIndex:--_idx];
+}
+-(XCStatement *)head {
+    return [_buf head];
+}
+-(void)moveToHead {
+    _idx = [_buf size]-1;
+}
+
+-(NSString *)description{
+    return [NSString stringWithFormat:@"statements=%@ currentIndex=%d",_buf,_idx];
 }
 
 @end

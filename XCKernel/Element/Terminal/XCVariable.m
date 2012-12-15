@@ -37,9 +37,9 @@ NSArray * variables;
     
 }
 -(NSString *)toHTML {
-    return (_idx<XC_ANS_IDX) ? [NSString stringWithFormat:@"<msub><mi>X</mi><mn>%d</mn></msub>",_idx] : @"<mi>ANS</mi>";
+    return (_idx<XC_ANS_IDX) ? [NSString stringWithFormat:@"<msub><mi>X</mi><mn>%d</mn></msub>",_idx] : @"<csymbol>ANS</csymbol>";
 }
 -(NSString *)description {
-    return (_idx) ? [NSString stringWithFormat:@"X_%d",_idx] : @"ANS";
+    return (_idx<10) ? [NSString stringWithFormat:@"X_%d",_idx] : @"ANS";
 }
 @end
