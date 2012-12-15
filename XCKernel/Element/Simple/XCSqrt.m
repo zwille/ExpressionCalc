@@ -11,6 +11,6 @@
 @implementation XCSqrt
 -(NSString *)toHTML {
     return [super wrapHTML: [NSString stringWithFormat:
-            @"<msqrt>%@</msqrt> %@",_name, [[self content] toHTML]]];
+            @"<msqrt>%@</msqrt>",[[self content] toHTML]]];
 }
 @end

@@ -8,9 +8,10 @@
 
 #import "XCTrigoFuncAlg.h"
 #import "XCGlobal.h"
+#import "NSNumber+XCNumber.h"
 NSNumber * deg2Rad(NSNumber * degree) {
     return [NSNumber numberWithDouble:
-            [degree doubleValue] / 180 * M_PI];
+             M_PI * [degree doubleValue] / 180 ];
 }
 @implementation XCTrigoFuncAlg
 -(NSNumber *)evaluateArgument:(NSNumber *)arg {

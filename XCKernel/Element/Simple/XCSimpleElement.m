@@ -37,9 +37,17 @@
 //trigger
 -(id<XCHasTriggers>)triggerDel {
     assert([self root]);
+    NSLog(@"Simple::triggerDel root=%@",[self root]);
     return [[self root] triggerDel];
 }
-                  
+
+-(id<XCHasTriggers>)triggerNextContent {
+    return [_root triggerNextContent];
+}
+
+-(id<XCHasTriggers>)triggerPreviousContent {
+    return [_root triggerPreviousContent];
+}
 //evaluate
 -(NSNumber *)eval {
     NSNumber * rc = [[self content] eval];

@@ -27,15 +27,18 @@
     [self setHead:[_root head]];
 }
 - (void) log {
-    /*NSString * headDesc = [NSString stringWithFormat:@"%@",_head];
+    NSString * headDesc = [NSString stringWithFormat:@"%@",_head];
     NSString * rootDesc = [NSString stringWithFormat:@"%@",_root];
     NSLog(@"XCKernel head = %@",headDesc);
     NSLog(@"XCKernel root = %@",rootDesc);
-    */
+
     //NSLog(@"XCKernel html = %@",[_root toHTML]);
 }
 -(NSString *)toHTML {
     return [_root toHTML];
+}
+-(NSString *)toHTMLFenced {
+    return [_root toHTMLFenced];
 }
 -(XCElement*) setHead: (id<XCHasTriggers>) head {
     [_head setFocus:NO];
@@ -49,7 +52,35 @@
     [self log];
     return _head;
 }
+-(NSNumber *)eval {
+    [self setHead:_root]; //toggle focus off
+    NSNumber * rc = [_root eval];
+    return [rc isZero] ? @0 : rc;
+    
+}
 
+-(void)previousStatement {
+    if ([_statements hasPrevious]) {
+        XCStatement * prev = [_statements previous];
+        _root = prev;
+        _head = prev;
+    }
+}
+-(void)nextStatement {
+    if ([_statements hasNext]) {
+        XCStatement * next = [_statements previous];
+        _root = next;
+        _head = next;
+    }
+}
+-(void)toggleAngleMode {
+    XCGlobal * glob = [XCGlobal instance];
+    [glob setAngleAsDegree: ![glob angleAsDegree]];
+}
+-(BOOL) isDegreeAngleMode {
+    XCGlobal * glob = [XCGlobal instance];
+    return [glob angleAsDegree];
+}
 //trigger
 -(id<XCHasTriggers>)triggerAssign: (NSUInteger)varIdx {
     return [_root triggerAssign:varIdx];
@@ -93,27 +124,5 @@
     return [self setHead:[_head triggerVariable:idx]];
 }
 
--(NSNumber *)eval {
-    [self setHead:_root]; //toggle focus off
-    return [_root eval];
-}
 
--(void)previousStatement {
-    if ([_statements hasPrevious]) {
-        XCStatement * prev = [_statements previous];
-        _root = prev;
-        _head = prev;
-    }
-}
--(void)nextStatement {
-    if ([_statements hasNext]) {
-        XCStatement * next = [_statements previous];
-        _root = next;
-        _head = next;
-    }
-}
--(void)toggleAngleMode {
-    XCGlobal * glob = [XCGlobal instance];
-    [glob setAngleAsDegree: ![glob angleAsDegree]];
-}
 @end

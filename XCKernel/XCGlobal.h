@@ -18,6 +18,7 @@ typedef enum {
     XC_EULER_ID,
     XC_PI_ID
 } XCConstants;
+
  /*typedef enum {
     XC_FN_SQRT, XC_FN_LN, XC_FN_EXP,
     XC_FN_COS, XC_FN_SIN, XC_FN_TAN,
@@ -26,8 +27,8 @@ extern NSString
     * XC_HTML_FOCUS_FORMAT,
     * XC_HTML_ERROR_FORMAT,
     * XC_SQRT;
-extern const char XC_PT;
-
+extern char XC_PT;
+extern const NSUInteger XC_ANS_IDX;
 @interface XCGlobal : NSObject {
     BOOL _angleAsDegree; // else rad
 }

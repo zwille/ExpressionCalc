@@ -172,10 +172,17 @@
     STAssertEqualObjects(result, asserted, nil);
 }
 -(void)testPow {
+    //test with integer
+    [self base:@-2 powExp:@0 assertResult:@1 asInteger:YES];
+    [self base:@-2 powExp:@1 assertResult:@-2 asInteger:YES];
+    [self base:@-2 powExp:@2 assertResult:@4 asInteger:YES];
+    [self base:@-2 powExp:@3 assertResult:@-8 asInteger:YES];
+    [self base:@-2 powExp:@4 assertResult:@16 asInteger:YES];
     [self base:@2 powExp:@0 assertResult:@1 asInteger:YES];
     [self base:@2 powExp:@1 assertResult:@2 asInteger:YES];
     [self base:@2 powExp:@2 assertResult:@4 asInteger:YES];
     [self base:@2 powExp:@3 assertResult:@8 asInteger:YES];
+    [self base:@2 powExp:@4 assertResult:@16 asInteger:YES];
     // 32 bit long asserted
     [self base:@4 powExp:@10 assertResult:[NSNumber numberWithLong:(long)pow(4,10)] asInteger:YES];
     [self base:@4 powExp:@15 assertResult:[NSNumber numberWithDouble:pow(4,15)] asInteger:NO];

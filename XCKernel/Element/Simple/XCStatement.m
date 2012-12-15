@@ -42,7 +42,7 @@
     if (_store) {
         [_store setNumericValue:rc];
     } else {
-        [[XCVariable variableForIndex:0] setNumericValue:rc];
+        [[XCVariable variableForIndex:XC_ANS_IDX] setNumericValue:rc];
     }
     return rc;
 }
@@ -51,6 +51,10 @@
 -(id<XCHasTriggers>)triggerAssign: (NSUInteger)varIdx {
     _store = [XCVariable variableForIndex: varIdx ];
     return [self content];
+}
+-(id<XCHasTriggers>)triggerDel {
+    [self reset];
+    return [self head];
 }
 
 //copy

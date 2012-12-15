@@ -7,8 +7,7 @@
 //
 
 #import "XCIdentifier.h"
-#import "XCConstant.h"
-#import "XCVariable.h"
+
 
 @implementation XCIdentifier
 -(id)initWithRoot:(XCElement *)root andStorage: (XCStorage*) store {

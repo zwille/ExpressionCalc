@@ -7,6 +7,7 @@
 //
 
 #import "XCComplexElement.h"
+#import "XCStatement.h"
 
 @implementation XCComplexElement
 
@@ -29,45 +30,10 @@
     return [_content isEmpty];
 }
 
-//trigger
-
--(id<XCHasTriggers>)triggerNext {
-    if ([_content hasNext]) {
-        [_content nextIndex];
-        return [_content currentElement];
-    } else if([self root]){
-        return [[self root] triggerNext];
-    } else {
-        return [_content currentElement];
-    }
-}
-
--(id<XCHasTriggers>)triggerPrevious {
-    if ([_content hasPrevious]) {
-        [_content previousIndex];
-        return [_content currentElement];
-    } else if([self root]){
-        return [[self root] triggerPrevious];
-    } else {
-        return [_content currentElement];
-    }
-}
-
--(id<XCHasTriggers>)triggerDel {
-    NSUInteger len = [_content length];
-    if (len<2) {
-        return [[self root] triggerDel];
-    } else {
-        [_content removeCurrent];
-        return [_content currentElement];
-    }
-}
 -(XCElement *)content {
     return [_content currentElement];
 }
--(XCElement *)head {
-    return [[_content currentElement] head];
-}
+
 -(id)copyWithZone:(NSZone *)zone {
     XCComplexElement * rc = [super copyWithZone:zone];
     XCComplexElementContent * contcp = rc->_content;
@@ -77,5 +43,45 @@
         [ecp setRoot:rc];
     }
     return rc;
+}
+
+//trigger
+
+-(id<XCHasTriggers>)triggerNextContent {
+    assert([self root]);
+    if ([_content hasNext]) {
+        [_content nextIndex];
+        return [_content currentElement];
+    }
+    XCElement * root = [self root];
+    if([root isKindOfClass:[XCStatement class]]){
+        return [_content currentElement];
+    } else {
+        return [super triggerNext];
+    }
+}
+
+-(id<XCHasTriggers>)triggerPreviousContent {
+    assert([self root]);
+    if ([_content hasPrevious]) {
+        [_content previousIndex];
+        return [_content currentElement];
+    }
+    XCElement * root = [self root];
+    if([root isKindOfClass:[XCStatement class]]){
+        return [_content currentElement];
+    } else {
+        return [super triggerPrevious];
+    }
+}
+
+-(id<XCHasTriggers>)triggerDel {
+    NSUInteger len = [_content length];
+    if (len<2) {
+        return [super triggerDel];
+    } else {
+        [_content removeCurrent];
+        return [_content currentElement];
+    }
 }
 @end

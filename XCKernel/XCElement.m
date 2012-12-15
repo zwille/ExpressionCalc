@@ -8,6 +8,7 @@
 
 #import "XCElement.h"
 #import "XCNumString.h"
+#import "XCSpacer.h"
 
 
 @implementation XCElement
@@ -54,16 +55,19 @@
     assert(NO);
     return nil;
 }
+-(NSString *)toHTMLFenced {
+    return [NSString stringWithFormat:@"<mfenced separators=\" \">%@</mfenced>",[self toHTML]];
+}
 -(NSString*) wrapHTML: (NSString*) inner {
     //NSLog(@"XCElement::wrapHTML self=%@ hasError=%d inner=%@",self,[self hasError],inner);
     if ([self hasError]) {
         inner = [NSString stringWithFormat:
-                 @"<mrow class=\"error\">%@</mrow>",inner];
+                 @"<mspan class=\"error\">%@</mspan>",inner];
     }
     //NSLog(@"XCElement::wrapHTML inner=%@",inner);
     if ([self hasFocus]) {
         inner = [NSString stringWithFormat:
-                 @"<mrow class=\"hasfocus\">%@</mrow>",inner];
+                 @"<mspan class=\"hasfocus\">%@</mspan>",inner];
     }
     //NSLog(@"XCElement::wrapHTML inner=%@",inner);
     return inner;
@@ -86,6 +90,11 @@
 
 //trigger
 -(id<XCHasTriggers>)triggerDel {
+    //return [[self root] triggerDel];
+    assert([self root]);
+    //XCElement * rc = [XCSpacer spacerWithRoot:nil];
+    //[[self root] replaceContentWithElement:rc];
+    //return rc;
     return [[self root] triggerDel];
 }
 
@@ -94,8 +103,7 @@
 }
 
 -(id<XCHasTriggers>)triggerNum:(char)c {
-    //TODO check
-    return [[self content] triggerNum:c];
+    return self; //pass
 }
 -(id<XCHasTriggers>)triggerExpression {
     return self; //pass
@@ -113,10 +121,16 @@
     return [[self root] triggerAssign: varIdx];
 }
 -(id<XCHasTriggers>)triggerNext {
-    return (_root) ? [_root triggerNext] : self;
+    return [_root triggerNextContent];
+}
+-(id<XCHasTriggers>)triggerNextContent {
+    return self; //pass
 }
 -(id<XCHasTriggers>)triggerPrevious {
-    return (_root) ? [_root triggerPrevious] : self;
+    return [_root triggerPreviousContent];
+}
+-(id<XCHasTriggers>)triggerPreviousContent {
+    return self; //pass
 }
 -(id<XCHasTriggers>)triggerOperator:(XCOperator)op{
     return [_root triggerOperator:op];

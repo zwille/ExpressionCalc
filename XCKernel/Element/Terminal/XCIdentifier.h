@@ -8,6 +8,8 @@
 
 #import "XCTerminalElement.h"
 #import "XCStorage.h"
+#import "XCConstant.h"
+#import "XCVariable.h"
 
 @interface XCIdentifier : XCTerminalElement  {
     XCStorage * _store;

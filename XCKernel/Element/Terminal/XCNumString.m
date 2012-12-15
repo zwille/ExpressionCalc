@@ -15,6 +15,7 @@ static NSNumberFormatter * formatter;
 +(void)initialize {
     formatter = [[NSNumberFormatter alloc] init];
     [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    XC_PT = [[formatter decimalSeparator] characterAtIndex:0];
 }
 -(id)init{
     self = [super init];
@@ -64,7 +65,7 @@ static NSNumberFormatter * formatter;
 -(id<XCHasTriggers>)triggerDel {
     NSUInteger len = [_buf length];
     if (len < 2) {
-        return [_root triggerDel];
+        return [super triggerDel];
     } else {
         NSUInteger i = len-1;
         NSRange last = {i,1};

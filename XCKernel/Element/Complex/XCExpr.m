@@ -12,6 +12,7 @@
 #import "XCNegate.h"
 #import "XCExpo.h"
 #import "XCStatement.h"
+#import "XCSqrt.h"
 
 @implementation XCExpr
 - (id)initWithRoot:(XCElement*)root
@@ -48,9 +49,8 @@
         html : // use XCNegate
         [NSString stringWithFormat:@"<mo>+</mo>%@",[el toHTML]]];
     }
-    return [super wrapHTML: ([[self root] isKindOfClass:[XCStatement class]]) ?
-    [NSString stringWithFormat:@"<mrow>%@</mrow>",buf]:
-    [NSString stringWithFormat:@"<mfenced separators=" ">%@</mfenced>",buf]];
+    assert([self root]);
+    return [super wrapHTML: [NSString stringWithFormat:@"%@",buf]];
 }
 
 

@@ -36,5 +36,7 @@ typedef struct {
 -(XCElement*) replaceContentWithElement: (XCElement*) element;
 -(XCElement*) content;
 -(XCElement*) head;
+-(id<XCHasTriggers>) triggerNextContent;
+-(id<XCHasTriggers>) triggerPreviousContent;
 
 @end

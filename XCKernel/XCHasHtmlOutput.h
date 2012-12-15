@@ -10,5 +10,6 @@
 
 @protocol XCHasHtmlOutput <NSObject>
 -(NSString*) toHTML;
+-(NSString*) toHTMLFenced;
 
 @end

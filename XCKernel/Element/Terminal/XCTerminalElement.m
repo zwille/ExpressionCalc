@@ -9,12 +9,11 @@
 #import "XCTerminalElement.h"
 
 @implementation XCTerminalElement
-//trigger
--(id<XCHasTriggers>)triggerNum:(char)c {
-    return self;
-}
 -(BOOL)isEmpty {
     return NO;
 }
+//trigger
+
+
 
 @end

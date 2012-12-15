@@ -22,6 +22,9 @@
     assert(false);
     return nil;
 }
+-(NSString *)toHTMLFenced {
+    return [NSString stringWithFormat:@"<mfenced separators=\" \">%@</mfenced>",[self toHTML]];
+}
 
 
 @end

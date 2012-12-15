@@ -11,7 +11,9 @@ NSString
     * XC_HTML_FOCUS_FORMAT = @"<b>%@</b>",
     * XC_HTML_ERROR_FORMAT = @"<font color=\"red\">%@</font>",
     * XC_SQRT = @"√";
-const char XC_PT = '.';
+char XC_PT = '.'; // overridden by XCNumString
+const NSUInteger XC_ANS_IDX = 10;
+
 static XCGlobal * _instance;
 @implementation XCGlobal
 @synthesize angleAsDegree = _angleAsDegree;
@@ -26,5 +28,6 @@ static XCGlobal * _instance;
 +(id)instance {
     return _instance;
 }
+
 
 @end

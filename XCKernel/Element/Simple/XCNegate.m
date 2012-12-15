@@ -8,6 +8,7 @@
 
 #import "XCNegate.h"
 #import "XCSpacer.h"
+#import "XCExpr.h"
 
 @implementation XCNegate
 +(id)negateValue:(XCElement*)value
@@ -20,7 +21,12 @@ withRoot:(XCElement *)root {
 }
 
 -(NSString *)toHTML{
-    return [super wrapHTML: [NSString stringWithFormat:@"<mo>-</mo>%@", [[self content] toHTML]]];
+    assert([self content]);
+    XCElement * content = [self content];
+    return [super wrapHTML: [NSString stringWithFormat: @"<mo>-</mo>%@",
+                ([content isKindOfClass:[XCExpr class]]) ?
+                             [content toHTMLFenced]:
+                             [content toHTML]]];
 }
 -(XCElement*)replaceContentWithElement:(XCElement *)element {
     if ([element isKindOfClass:[self class]]) {

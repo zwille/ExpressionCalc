@@ -7,7 +7,9 @@
 //
 
 #import "XCExpo.h"
+#import "XCExpr.h"
 #import "XCSpacer.h"
+#import "XCTerminalElement.h"
 
 @implementation XCExpo
 -(id)initWithRoot:(XCElement *)root
@@ -18,6 +20,7 @@
     [e0 setRoot:self];
     [_content nextIndex];
     
+    e1 = [XCExpr expressionWithElement:e1 andRoot:self];
     [_content insertElement:e1];
     [e1 setRoot:self];
     [_content nextIndex];
@@ -37,15 +40,18 @@
     assert(len>1);
     NSString * exp = [[_content elementAtIndex:len-1] toHTML];
     for (NSUInteger i = len-2; i!=(NSUInteger)-1; --i) {
-        NSString * base =  [[_content elementAtIndex:i] toHTML];
-        exp = [NSString stringWithFormat:@"<msup>%@%@</msup>",base,exp];
+        XCElement * base = [_content elementAtIndex:i];
+        exp = [NSString stringWithFormat:@"<msup> %@ <mrow>%@</mrow> </msup>",
+               ([base isKindOfClass:[XCTerminalElement class] ]) ?
+               [base toHTML] : [base toHTMLFenced]
+               ,exp];
     }
     return [super wrapHTML: exp];
 }
 // override element
--(NSString *)htmlFromElement:(XCElement *)el atIndex:(NSUInteger)i andContentLength:(NSUInteger)len {
+/*-(NSString *)htmlFromElement:(XCElement *)el atIndex:(NSUInteger)i andContentLength:(NSUInteger)len {
     return (i==0) ? [el toHTML] : [NSString stringWithFormat:@"<sup>%@</sup>", [el toHTML]];
-}
+}*/
 // override trigger
 -(id<XCHasTriggers>)triggerOperator:(XCOperator)op {
     switch (op) {
@@ -64,6 +70,20 @@
             assert(false);
     }
     return nil;
+}
+
+-(id<XCHasTriggers>)triggerDel {
+    NSUInteger len = [_content length];
+    assert(len>1);
+    if (len<3) {
+        assert([self root]);
+        XCElement * root = [self root];
+        XCElement * rc = [_content elementAtIndex:0];
+        [root replaceContentWithElement:rc];
+        return rc;
+    } else {
+        return [super triggerDel];
+    }
 }
 // evaluate
 -(NSNumber *)eval {

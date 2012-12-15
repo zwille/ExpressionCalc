@@ -10,6 +10,7 @@
 #import "XCInvert.h"
 #import "XCSpacer.h"
 #import "XCExpo.h"
+#import "XCExpr.h"
 
 @implementation XCProd
 -(id)initWithRoot:(XCElement *)root
@@ -43,40 +44,67 @@
     return [[XCProd alloc] initWithRoot: root andFirstElement:arg0 andSecondElement:arg1 isMultiplication:YES];
     
 }
+-(void) appendElement: (XCElement*) el
+             toBuffer: (NSMutableString*) buf
+           withFormat: (NSString*)format{
+    NSString * html = nil;
+    if([el isKindOfClass:[XCInvert class]]) {
+        XCElement * content = [el content];
+        html = [el wrapHTML:
+                ([content isKindOfClass:[XCExpr class]]) ?
+                [content toHTMLFenced] :
+                [content toHTML]];
+    } else {
+        html = ([el isKindOfClass:[XCExpr class]]) ?
+         [el toHTMLFenced] :
+         [el toHTML];
+    }
+    [buf appendString: [NSString stringWithFormat:format, html]];
+}
+-(NSString*) buildRowWithArray: (NSArray*) a {
+    NSUInteger len = [a count];
+    assert(len>0);
+    if (len > 1) {
+        NSMutableString * buf = [[NSMutableString alloc] init];
+        [self appendElement:a[0] toBuffer:buf withFormat:@"%@"];
+        for (int i=1; i<len; i++) {
+            [self appendElement:a[i] toBuffer:buf withFormat:@"<mo>&#8901;</mo>%@"];
+        }
+        return buf;
+    } else {
+        XCElement * el = a[0];
+        return ([el isKindOfClass:[XCInvert class]]) ?
+        [el wrapHTML: [[el content] toHTML]] :
+        [el toHTML];
+    }
+}
 -(NSString *)toHTML {
-    NSUInteger len = [_content length];
-    assert(len>1);
-    NSString *format0 = @"%@", * formatN = @"<mo>&#8901;</mo>%@", * format=nil;
-    NSMutableString * bufNum = [@""mutableCopy],
-    * bufDenom = [@""mutableCopy];
+    NSMutableArray * num, * denom;
+    num = [[NSMutableArray alloc] init];
+    denom = [[NSMutableArray alloc] init];
     for (XCElement * el in _content) {
         if ([el isKindOfClass:[XCInvert class]]) {
-            format = ([bufDenom length]) ? formatN : format0;
-            [bufDenom appendString: [NSString stringWithFormat:format, [[el content] toHTML]]];
-            if ([el hasError]) {
-                [self setError:YES];
-            }
+            [denom addObject: el];
         } else {
-            format = ([bufNum length]) ? formatN : format0;
-            [bufNum appendString: [NSString stringWithFormat:format, [el toHTML]]];
+            [num addObject:el];
         }
     }
-    NSString * rc =nil;
-    if ([bufNum length]) { 
-        if ([bufDenom length]) { // has a numerator and denominator
-            rc = [NSString stringWithFormat:
-                  @"<mfrac><mrow>%@</mrow><mrow>%@</mrow></mfrac>",
-                  bufNum,bufDenom ];
-        } else { // only has a numerator
-            rc = [NSString stringWithFormat:
-                  @"<mrow>%@</mrow>",bufNum];
-        }
-    } else { // has only a denominator
-        assert([bufDenom length]);
-        rc = [NSString stringWithFormat:
-             @"<mfrac><mn>1</mn><mrow>%@</mrow></mfrac>", bufDenom ];
+    NSUInteger numlen = [num count], denomlen = [denom count];
+    NSString * bufNum, * bufDenom;
+    if (numlen) {
+        bufNum = [self buildRowWithArray: num];
+    } else {
+        bufNum = @"<mn>1</mn>";
     }
-    return [super wrapHTML:rc];
+    if (denomlen) {
+        bufDenom = [self buildRowWithArray: denom];
+    } else {
+        return [super wrapHTML:bufNum];
+    }
+    return [super wrapHTML: [NSString stringWithFormat:
+            @"<mfrac> <mrow>%@</mrow> <mrow>%@</mrow> </mfrac>",
+            bufNum, bufDenom]];
+
 }
 
 // override trigger

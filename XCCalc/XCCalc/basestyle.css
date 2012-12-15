@@ -1,0 +1,23 @@
+body {
+            font-size:1.2em;
+            color:#30395c;
+            background-color:#85a5cc;
+}
+a { // due to some strange behaviour of uiwebview
+    font-weight: normal;
+    color:#30395c;
+    text-decoration:none;
+}
+math {
+            line-height:normal;
+            white-space:nowrap;
+            text-align:left;
+            page-break-inside:avoid;
+}
+.error {
+            color:#cc5853;
+}
+.hasfocus {
+            font-weight: bold;
+            color: #d0e4f2;
+}

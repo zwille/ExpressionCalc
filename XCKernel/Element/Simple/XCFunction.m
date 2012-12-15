@@ -10,6 +10,8 @@
 #import "XCFuncAlg.h"
 #import "XCTrigoFuncAlg.h"
 #import "XCSqrt.h"
+#import "XCExpr.h"
+#import "XCTerminalElement.h"
 
 static const NSDictionary * functions; 
 
@@ -40,20 +42,30 @@ static const NSDictionary * functions;
     return self;
 }
 -(NSString *)toHTML {
+    XCElement * content = [self content];
     return [super wrapHTML: [NSString stringWithFormat:
-            @"<csymbol>%@</csymbol> %@",_name, [[self content] toHTML]]];
+            @"<csymbol>%@ </csymbol> %@",_name,
+            ([[self content] isKindOfClass:[XCTerminalElement class]]) ?
+                             [content toHTML] : [content toHTMLFenced]]];
 }
 +(XCFunction *)functionWithName:(NSString *)name
                     withElement:(XCElement *)element
                         andRoot:(XCElement *)root {
-    Class c = ([name isEqualToString:XC_SQRT]) ? [XCSqrt class] : [XCFunction class];
+    Class c = [XCFunction class];
+    element = [XCExpr expressionWithElement:element
+                                    andRoot:nil];
+    if([name isEqualToString:XC_SQRT]) {
+        c = [XCSqrt class];
+           }
     return [[c alloc] initWithRoot: root
                                     andName:name
                                  andElement: element];
 }
 -(NSNumber *)eval {
+    
     XCFuncAlg * algo = [functions objectForKey:_name];
-    return [algo evaluateArgument:[[[self content] eval] negate]];
+    //NSLog(@"XCFunction::eval %@",_name);
+    return [algo evaluateArgument:[[self content] eval]];
 }
 -(id)copyWithZone:(NSZone *)zone {
     XCFunction * rc = [super copyWithZone:zone];

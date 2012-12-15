@@ -8,6 +8,7 @@
 
 #import "XCInvert.h"
 #import "XCSpacer.h"
+#import "XCExpr.h"
 @implementation XCInvert
 
 
@@ -15,11 +16,14 @@
     if ([value isKindOfClass:[XCInvert class]]) {
         return [((XCSimpleElement*)value) content];
     }
+    value = [XCExpr expressionWithElement:value andRoot:nil];
     return [[XCInvert alloc] initWithContent:value andRoot:root];
 }
 -(NSString *)toHTML {
-    return [super wrapHTML:[NSString stringWithFormat:@"<msup>%@<sup>-1</sup>", [[self content] toHTML]]];
+    return [super wrapHTML:
+            [NSString stringWithFormat:@"<mfrac> <mn>1</mn> <mrow>%@</mrow> </mfrac>", [[self content] toHTML]]];
 }
+
 -(XCElement*)replaceContentWithElement:(XCElement *)element {
     if ([element isKindOfClass:[self class]]) {
         element = [element content];

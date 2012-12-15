@@ -32,10 +32,12 @@ NSArray * variables;
     [[XCVariable alloc] initWithIndex:7 andValue:@0],
     [[XCVariable alloc] initWithIndex:8 andValue:@0],
     [[XCVariable alloc] initWithIndex:9 andValue:@0],
+    [[XCVariable alloc] initWithIndex:10 andValue:@0], //ans
     ];
+    
 }
 -(NSString *)toHTML {
-    return (_idx) ? [NSString stringWithFormat:@"<msub><mi>X</mi><mn>%d</mn></msub>",_idx] : @"<mi>ANS</mi>";
+    return (_idx<XC_ANS_IDX) ? [NSString stringWithFormat:@"<msub><mi>X</mi><mn>%d</mn></msub>",_idx] : @"<mi>ANS</mi>";
 }
 -(NSString *)description {
     return (_idx) ? [NSString stringWithFormat:@"X_%d",_idx] : @"ANS";
