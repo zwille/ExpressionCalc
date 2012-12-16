@@ -49,6 +49,11 @@
 -(void)moveToHead {
     _idx = [_buf size]-1;
 }
+-(void)removeHead {
+    assert([_buf size]>0);
+    [_buf pop];
+
+}
 
 -(NSString *)description{
     return [NSString stringWithFormat:@"statements=%@ currentIndex=%d",_buf,_idx];

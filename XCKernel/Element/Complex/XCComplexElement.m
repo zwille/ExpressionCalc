@@ -36,12 +36,8 @@
 
 -(id)copyWithZone:(NSZone *)zone {
     XCComplexElement * rc = [super copyWithZone:zone];
-    XCComplexElementContent * contcp = rc->_content;
-    for (XCElement * e in _content) {
-        XCElement * ecp = [e copy];
-        [contcp insertElement: ecp];
-        [ecp setRoot:rc];
-    }
+    XCComplexElementContent * contcp = [_content copyWithZone:zone andRoot:rc];
+    rc -> _content = contcp;
     return rc;
 }
 

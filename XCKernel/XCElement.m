@@ -135,11 +135,16 @@
 -(id<XCHasTriggers>)triggerOperator:(XCOperator)op{
     return [_root triggerOperator:op];
 }
+
 // copying
 -(id)copyWithZone:(NSZone *)zone {
     XCElement * rc = [[[self class] allocWithZone:zone] initWithRoot:nil];
     rc -> _state = _state;
+    rc -> _state.error = NO;
     return rc;
 }
-
+-(NSNumber *)checkErrorOn:(NSNumber *)num {
+    [self setError:[num isNaN]];
+    return num;
+}
 @end

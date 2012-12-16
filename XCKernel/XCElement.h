@@ -38,5 +38,6 @@ typedef struct {
 -(XCElement*) head;
 -(id<XCHasTriggers>) triggerNextContent;
 -(id<XCHasTriggers>) triggerPreviousContent;
+-(NSNumber*) checkErrorOn: (NSNumber*) num;
 
 @end

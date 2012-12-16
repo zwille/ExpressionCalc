@@ -54,6 +54,12 @@
 		005BD3AD167B7827005A83C4 /* templatePortrait.html in Resources */ = {isa = PBXBuildFile; fileRef = 005BD3AB167B7827005A83C4 /* templatePortrait.html */; };
 		005BD3AF167B78BF005A83C4 /* basestyle.css in Resources */ = {isa = PBXBuildFile; fileRef = 005BD3AE167B78BF005A83C4 /* basestyle.css */; };
 		009E0F3316788996007E89B5 /* XCNumberTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 009E0F3216788996007E89B5 /* XCNumberTest.m */; };
+		00A19819167DE1EC00AFE799 /* XCTestNumString.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A19818167DE1EC00AFE799 /* XCTestNumString.m */; };
+		00A1981F167DED0900AFE799 /* XCIdentifierTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A1981E167DED0900AFE799 /* XCIdentifierTest.m */; };
+		00A19823167DF1E900AFE799 /* XCFunctionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A19822167DF1E900AFE799 /* XCFunctionTest.m */; };
+		00A19826167DF20400AFE799 /* XCInvertTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A19825167DF20400AFE799 /* XCInvertTest.m */; };
+		00A19829167DF21E00AFE799 /* XCNegateTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A19828167DF21E00AFE799 /* XCNegateTest.m */; };
+		00A1982C167E15DD00AFE799 /* XCKernelTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A1982B167E15DB00AFE799 /* XCKernelTest.m */; };
 		00B112B0167CC54600BEA4B1 /* XCStatementBufferTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B112AF167CC54600BEA4B1 /* XCStatementBufferTest.m */; };
 		00B14D5A1677A29500B27740 /* XCExprTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B14D591677A29500B27740 /* XCExprTest.m */; };
 		00BA2682167760BE00EF209E /* XCSqrt.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BA2681167760BD00EF209E /* XCSqrt.m */; };
@@ -155,6 +161,18 @@
 		005BD3AE167B78BF005A83C4 /* basestyle.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = basestyle.css; sourceTree = "<group>"; };
 		009E0F3116788996007E89B5 /* XCNumberTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCNumberTest.h; sourceTree = "<group>"; };
 		009E0F3216788996007E89B5 /* XCNumberTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCNumberTest.m; sourceTree = "<group>"; };
+		00A19817167DE1EC00AFE799 /* XCTestNumString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCTestNumString.h; sourceTree = "<group>"; };
+		00A19818167DE1EC00AFE799 /* XCTestNumString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCTestNumString.m; sourceTree = "<group>"; };
+		00A1981D167DED0900AFE799 /* XCIdentifierTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCIdentifierTest.h; sourceTree = "<group>"; };
+		00A1981E167DED0900AFE799 /* XCIdentifierTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCIdentifierTest.m; sourceTree = "<group>"; };
+		00A19821167DF1E900AFE799 /* XCFunctionTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFunctionTest.h; sourceTree = "<group>"; };
+		00A19822167DF1E900AFE799 /* XCFunctionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFunctionTest.m; sourceTree = "<group>"; };
+		00A19824167DF20400AFE799 /* XCInvertTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCInvertTest.h; sourceTree = "<group>"; };
+		00A19825167DF20400AFE799 /* XCInvertTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCInvertTest.m; sourceTree = "<group>"; };
+		00A19827167DF21E00AFE799 /* XCNegateTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCNegateTest.h; sourceTree = "<group>"; };
+		00A19828167DF21E00AFE799 /* XCNegateTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCNegateTest.m; sourceTree = "<group>"; };
+		00A1982A167E15DA00AFE799 /* XCKernelTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCKernelTest.h; sourceTree = "<group>"; };
+		00A1982B167E15DB00AFE799 /* XCKernelTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCKernelTest.m; sourceTree = "<group>"; };
 		00B112AE167CC54600BEA4B1 /* XCStatementBufferTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCStatementBufferTest.h; sourceTree = "<group>"; };
 		00B112AF167CC54600BEA4B1 /* XCStatementBufferTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCStatementBufferTest.m; sourceTree = "<group>"; };
 		00B14D581677A29500B27740 /* XCExprTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCExprTest.h; sourceTree = "<group>"; };
@@ -376,6 +394,8 @@
 				009E0F3216788996007E89B5 /* XCNumberTest.m */,
 				00B112AE167CC54600BEA4B1 /* XCStatementBufferTest.h */,
 				00B112AF167CC54600BEA4B1 /* XCStatementBufferTest.m */,
+				00A1982A167E15DA00AFE799 /* XCKernelTest.h */,
+				00A1982B167E15DB00AFE799 /* XCKernelTest.m */,
 			);
 			name = XCKernelTests;
 			path = ../../XCKernelTests;
@@ -384,6 +404,8 @@
 		002B73A91675D4C500A675E2 /* Element */ = {
 			isa = PBXGroup;
 			children = (
+				00A19820167DEF8300AFE799 /* Simple */,
+				00A19815167DE1C700AFE799 /* Terminal */,
 				002B73AA1675D4C500A675E2 /* Complex */,
 			);
 			path = Element;
@@ -402,6 +424,30 @@
 				00CE67091678F055009D580C /* XCExpoTest.m */,
 			);
 			path = Complex;
+			sourceTree = "<group>";
+		};
+		00A19815167DE1C700AFE799 /* Terminal */ = {
+			isa = PBXGroup;
+			children = (
+				00A19817167DE1EC00AFE799 /* XCTestNumString.h */,
+				00A19818167DE1EC00AFE799 /* XCTestNumString.m */,
+				00A1981D167DED0900AFE799 /* XCIdentifierTest.h */,
+				00A1981E167DED0900AFE799 /* XCIdentifierTest.m */,
+			);
+			name = Terminal;
+			sourceTree = "<group>";
+		};
+		00A19820167DEF8300AFE799 /* Simple */ = {
+			isa = PBXGroup;
+			children = (
+				00A19821167DF1E900AFE799 /* XCFunctionTest.h */,
+				00A19822167DF1E900AFE799 /* XCFunctionTest.m */,
+				00A19824167DF20400AFE799 /* XCInvertTest.h */,
+				00A19825167DF20400AFE799 /* XCInvertTest.m */,
+				00A19827167DF21E00AFE799 /* XCNegateTest.h */,
+				00A19828167DF21E00AFE799 /* XCNegateTest.m */,
+			);
+			name = Simple;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -562,6 +608,12 @@
 				00CE67061678EFE4009D580C /* XCProdTest.m in Sources */,
 				00CE670A1678F055009D580C /* XCExpoTest.m in Sources */,
 				00B112B0167CC54600BEA4B1 /* XCStatementBufferTest.m in Sources */,
+				00A19819167DE1EC00AFE799 /* XCTestNumString.m in Sources */,
+				00A1981F167DED0900AFE799 /* XCIdentifierTest.m in Sources */,
+				00A19823167DF1E900AFE799 /* XCFunctionTest.m in Sources */,
+				00A19826167DF20400AFE799 /* XCInvertTest.m in Sources */,
+				00A19829167DF21E00AFE799 /* XCNegateTest.m in Sources */,
+				00A1982C167E15DD00AFE799 /* XCKernelTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

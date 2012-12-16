@@ -57,13 +57,16 @@
         _head = (XCElement*)head;
         [_head setFocus:YES];
     } else {
-        NSLog(@"XCKernel::setHead reset, triggered was null");
+       // NSLog(@"XCKernel::setHead reset, triggered was null");
         [self reset];
     }
-    [self log];
+   // [self log];
     return _head;
 }
 -(NSNumber *)eval {
+    if ([_root isEmpty]) {
+        return @0;
+    }
     [self setHead:_root]; //toggle focus off
     NSNumber * rc = [_root eval];
     return [rc isZero] ? @0 : rc;
@@ -71,6 +74,9 @@
 
 -(void)previousStatement {
     if ([_statements hasPrevious]) {
+        if ([_root isEmpty]) {
+            [_statements removeHead];
+        }
         XCStatement * prev = [_statements previous];
         _root = prev;
         [self setHead: prev];
@@ -80,7 +86,8 @@
     if ([_statements hasNext]) {
         XCStatement * next = [_statements next];
         _root = next;
-        [self setHead: next];
+        [self setHead: ([_root isEmpty]) ?
+         [_root head]: _root];
     }
 }
 -(void)toggleAngleMode {
@@ -123,15 +130,9 @@
     return [self setHead: [_head triggerEnter]];
 }
 -(id<XCHasTriggers>)triggerNext {
-    if ([self isHeadOnStatement]) {
-        [self newStatement];
-    }
     return [self setHead:[_head triggerNext]];
 }
 -(id<XCHasTriggers>)triggerPrevious {
-    if ([self isHeadOnStatement]) {
-        [self newStatement];
-    }
     return [self setHead:[_head triggerPrevious]];
 }
 -(id<XCHasTriggers>)triggerDel {

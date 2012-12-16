@@ -9,6 +9,7 @@
 
 typedef double(*func_t)(double);
 @interface XCFuncAlg : NSObject {
+    @protected
     func_t _alg;
 }
 +(id) with: (func_t) algo;

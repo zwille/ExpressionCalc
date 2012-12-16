@@ -9,6 +9,7 @@
 #import <SenTestingKit/SenTestingKit.h>
 
 @interface XCExpoTest : SenTestCase
--(void)testSimple;
--(void)testComplex;
+-(void) testSimple;
+-(void) testComplex;
+-(void) testCopy;
 @end

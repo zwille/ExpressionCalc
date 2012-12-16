@@ -91,19 +91,19 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    NSLog(@"memory warning");
 }
 - (void) print {
     NSString * html = nil;
     UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
     if (UIInterfaceOrientationIsPortrait(orientation)) {
         NSString * htmlResult = (_htmlOut) ?
-        [NSString stringWithFormat:@" = %@",_htmlOut] : @" = 0";
+        [NSString stringWithFormat:@" = %@",_htmlOut] : @"";
         html = [NSString stringWithFormat:_htmlTemplatePortrait, //format
                 _htmlExpression, htmlResult]; //args
     } else {
         NSString * htmlResult = (_htmlOut) ?
-        [NSString stringWithFormat:@" = %@",_htmlOut] : @" = 0";
+        [NSString stringWithFormat:@" = %@",_htmlOut] : @"";
         html = [NSString stringWithFormat:_htmlTemplateLandscape, //format
                 _htmlState,_htmlExpression, htmlResult]; //args
     }

@@ -23,4 +23,23 @@
     result = [expr eval];
     STAssertEqualObjects(result, @6, nil);
 }
+-(void)testCopy {
+    XCExpr * expr = [XCExpr emptyExpressionWithRoot:nil];
+    id  head = [expr head];
+    head = [head triggerNum:'7'];
+    head = [head triggerOperator:XC_OP_PLUS];
+    head = [head triggerNum:'3'];
+   
+    XCExpr * cp = [expr copy];
+    head = [cp head];
+    NSLog(@"head=%@",head);
+    head = [head triggerOperator:XC_OP_MINUS];
+    NSLog(@"head=%@",head);
+    head = [head triggerNum:'4'];
+    NSLog(@"expr=%@ cp=%@",expr,cp);
+    NSNumber * result = [expr eval];
+    STAssertEqualObjects(result, @10, nil);
+    result = [cp eval];
+    STAssertEqualObjects(result, @6, nil);
+}
 @end

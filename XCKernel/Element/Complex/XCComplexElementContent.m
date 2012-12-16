@@ -16,6 +16,24 @@ BOOL indexOkay(NSUInteger i, NSUInteger len);
     _idx = -1;
     return self;
 }
+-(id)copyWithZone:(NSZone *)zone andRoot:(XCElement *)root {
+    return [[XCComplexElementContent allocWithZone:zone] initCopyWithIndex:_idx andOperands:_operands andRoot:root andZone:zone];
+}
+-(id)initCopyWithIndex: (NSUInteger) index
+           andOperands: (NSMutableArray*) op
+               andRoot: (XCElement*) root
+               andZone: (NSZone*) zone {
+    self = [super init];
+    _operands = [NSMutableArray arrayWithCapacity:[op count]];
+    //deep copy
+    for (XCElement * el in op) {
+        XCElement * cp = [el copyWithZone:zone];
+        [cp setRoot:root];
+        [_operands addObject: cp];
+    }
+    _idx = index;
+    return self;
+}
 -(NSUInteger) length {
     return [_operands count];
 }
@@ -83,7 +101,9 @@ BOOL indexOkay(NSUInteger i, NSUInteger len);
                                    count:(NSUInteger)len {
     return [_operands countByEnumeratingWithState:state objects:buffer count:len];
 }
+
 @end
 BOOL indexOkay(NSUInteger i, NSUInteger len) {
     return i<len || i==(NSUInteger)-1;
 }
+

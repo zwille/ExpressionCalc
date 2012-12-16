@@ -10,4 +10,5 @@
 
 @interface XCProdTest : SenTestCase
 -(void) testSimple;
+-(void) testCopy;
 @end

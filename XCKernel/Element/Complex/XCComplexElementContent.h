@@ -14,6 +14,9 @@
     NSUInteger _idx;
 }
 @property (readonly) NSUInteger index;
+-(id)copyWithZone: (NSZone*) zone
+          andRoot: (XCElement*) root;
+
 -(NSUInteger) length;
 -(bool) isEmpty;
 -(bool) hasNext;

@@ -44,9 +44,10 @@
     NSNumber * rc = ([content isEmpty]) ? @0 : [content eval];
     if (_store) {
         [_store setNumericValue:rc];
-    } else {
-        [[XCVariable variableForIndex:XC_ANS_IDX] setNumericValue:rc];
     }
+    //always store in ans
+    [[XCVariable variableForIndex:XC_ANS_IDX] setNumericValue:rc];
+    
     return rc;
 }
 
@@ -58,6 +59,12 @@
 -(id<XCHasTriggers>)triggerDel {
     [self reset];
     return [self head];
+}
+-(id<XCHasTriggers>)triggerPrevious {
+    return self;
+}
+-(id<XCHasTriggers>)triggerNext {
+    return self ;
 }
 
 //copy

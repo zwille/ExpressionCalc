@@ -32,4 +32,25 @@
     STAssertEqualObjects(result, @10, nil);
 
 }
+-(void)testCopy {
+    XCStatement * stm = [XCStatement emptyStatement];
+    id  head = [stm head]; //spacer
+    head = [head triggerNum:'4'];
+    head = [head triggerOperator:XC_OP_MULT]; //prod
+    head = [head triggerNum:'3'];
+    
+    XCStatement * cp = [stm copy];
+    head = [cp head];
+    head = [head triggerOperator:XC_OP_DIV];
+    head = [head triggerNum:'2'];
+    
+    NSNumber * result = [stm eval];
+    
+    STAssertEqualObjects(result, @12, nil);
+    
+    result = [cp eval];
+    STAssertEqualObjects(result, @6, nil);
+}
+
+
 @end

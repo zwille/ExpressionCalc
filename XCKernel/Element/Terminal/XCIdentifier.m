@@ -40,8 +40,8 @@
     return [NSString stringWithFormat:@"%@[%@]",[super description],_store];
 }
 -(id)copyWithZone:(NSZone *)zone {
-    XCIdentifier * rc = [super copyWithZone:nil];
-    rc -> _store = _store;
+    XCIdentifier * rc = [super copyWithZone:zone];
+    rc -> _store = _store; //no copy global object
     return rc;
 }
 

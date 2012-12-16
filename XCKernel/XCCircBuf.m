@@ -47,6 +47,16 @@
         return true;
     }
 }
+-(id)pop {
+    if(_size) {
+        --_size;
+        id rc = _data[_head];
+        _head = (_head) ? _head-1 : _maxSize-1;
+        return rc;
+    } else {
+        return nil;
+    }
+}
 
 -(id)dequeue {
     if(_size) {

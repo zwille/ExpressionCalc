@@ -56,10 +56,9 @@
 }
 // copying
 -(id)copyWithZone:(NSZone *)zone {
-    XCSimpleElement * rc =
-    [[[self class] allocWithZone:zone]
-     initWithContent: [_content copy]
-                andRoot: nil];
+    XCSimpleElement * rc = [super copyWithZone:zone];
+    rc -> _content = [_content copyWithZone:zone];
+    [rc -> _content setRoot:rc];
     return rc;
     
 }

@@ -24,5 +24,6 @@
 -(XCStatement*) previous;
 -(XCStatement*) current;
 -(void) moveToHead;
+-(void) removeHead;
 -(XCStatement*) head;
 @end

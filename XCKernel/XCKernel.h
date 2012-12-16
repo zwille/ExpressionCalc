@@ -23,7 +23,7 @@
 -(void) previousStatement;
 -(void) toggleAngleMode;
 -(BOOL) isDegreeAngleMode;
--(void) newStatement;
+//-(void) newStatement;
 
 
 @end

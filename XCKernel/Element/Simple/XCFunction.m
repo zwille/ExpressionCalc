@@ -65,7 +65,7 @@ static const NSDictionary * functions;
     
     XCFuncAlg * algo = [functions objectForKey:_name];
     //NSLog(@"XCFunction::eval %@",_name);
-    return [algo evaluateArgument:[[self content] eval]];
+    return [super checkErrorOn:[algo evaluateArgument:[[self content] eval]]];
 }
 -(id)copyWithZone:(NSZone *)zone {
     XCFunction * rc = [super copyWithZone:zone];

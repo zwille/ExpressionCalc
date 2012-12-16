@@ -102,6 +102,70 @@
     STAssertEqualObjects([cb elementAtIndex:3], @1, nil);
     
     
+    STAssertEqualObjects([cb pop], @3,nil);
+    [self checkStateWithCircBuf:cb
+                assertedMaxSize:3
+                        andSize:2
+                        ifEmpty:NO
+                         ifFull:NO
+                  elementAtHead:@2
+                  elementAtTail:@1];
+    STAssertEqualObjects([cb pop], @2,nil);
+    [self checkStateWithCircBuf:cb
+                assertedMaxSize:3
+                        andSize:1
+                        ifEmpty:NO
+                         ifFull:NO
+                  elementAtHead:@1
+                  elementAtTail:@1];
+    STAssertEqualObjects([cb pop], @1,nil);
+    [self checkStateWithCircBuf:cb
+                assertedMaxSize:3
+                        andSize:0
+                        ifEmpty:YES
+                         ifFull:NO
+                  elementAtHead:nil
+                  elementAtTail:nil];
+    [cb push:@0];
+    [cb push:@1];
+    [cb push:@2];
+    [cb dequeue];
+    [cb push:@3];
+    [cb dequeue];
+    [cb push:@4];
+    [self checkStateWithCircBuf:cb
+                assertedMaxSize:3
+                        andSize:3
+                        ifEmpty:NO
+                         ifFull:YES
+                  elementAtHead:@4
+                  elementAtTail:@2];
+    STAssertEqualObjects([cb pop], @4,nil);
+    [cb push:@5];
+    [self checkStateWithCircBuf:cb
+                assertedMaxSize:3
+                        andSize:3
+                        ifEmpty:NO
+                         ifFull:YES
+                  elementAtHead:@5
+                  elementAtTail:@2];
+    STAssertEqualObjects([cb dequeue], @2,nil);
+    [self checkStateWithCircBuf:cb
+                assertedMaxSize:3
+                        andSize:2
+                        ifEmpty:NO
+                         ifFull:NO
+                  elementAtHead:@5
+                  elementAtTail:@3];
+    [cb push:@6];
+    [self checkStateWithCircBuf:cb
+                assertedMaxSize:3
+                        andSize:3
+                        ifEmpty:NO
+                         ifFull:YES
+                  elementAtHead:@6
+                  elementAtTail:@3];
 
+    
 }
 @end

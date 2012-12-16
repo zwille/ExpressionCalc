@@ -11,12 +11,20 @@
 #import "NSNumber+XCNumber.h"
 NSNumber * deg2Rad(NSNumber * degree) {
     return [NSNumber numberWithDouble:
-             M_PI * [degree doubleValue] / 180 ];
+             M_PI * ([degree doubleValue] / 180.0) ];
+}
+NSNumber * rad2Deg(NSNumber * rad) {
+    return [NSNumber numberWithDouble:
+             ([rad doubleValue] * 180.0) / M_PI ];
 }
 @implementation XCTrigoFuncAlg
 -(NSNumber *)evaluateArgument:(NSNumber *)arg {
     if ([[XCGlobal instance] angleAsDegree]) {
-        arg = deg2Rad(arg);
+        if (_alg == acos || _alg == asin || _alg == atan) {
+            return rad2Deg([super evaluateArgument:arg]);
+        } else {
+            return [super evaluateArgument:deg2Rad(arg)];
+        }
     }
     return [super evaluateArgument:arg];
 }

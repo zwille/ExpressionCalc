@@ -1,14 +1,17 @@
 //
-//  XCExprTest.h
+//  XCTestNumString.h
 //  XCCalc
 //
-//  Created by Christoph Cwelich on 11.12.12.
+//  Created by Christoph Cwelich on 16.12.12.
 //  Copyright (c) 2012 Christoph Cwelich. All rights reserved.
 //
 
 #import <SenTestingKit/SenTestingKit.h>
+#import "XCStatement.h"
 
-@interface XCExprTest : SenTestCase
+@interface XCTestNumString : SenTestCase {
+    XCStatement * s;
+}
 -(void) testSimple;
 -(void) testCopy;
 @end

@@ -22,7 +22,7 @@
 -(id) head;
 -(id) tail;
 -(BOOL) push: (id) element;
-//-(id) pop;
+-(id) pop;
 //-(BOOL) queue;
 -(id) dequeue;
 
