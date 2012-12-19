@@ -68,6 +68,11 @@ BOOL indexOkay(NSUInteger i, NSUInteger len);
     //append or insert after current
     [_operands insertObject:element atIndex:_idx+1];
 }
+-(void) insert: (XCComplexElementContent*) elements {
+    for (XCElement * e in elements) {
+        [self insertElement:e];
+    }
+}
 -(void)replaceCurrentWith:(XCElement *)element {
     assert(! [self isEmpty]);
     [_operands replaceObjectAtIndex:_idx withObject:element];

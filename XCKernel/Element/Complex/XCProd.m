@@ -13,22 +13,17 @@
 #import "XCExpr.h"
 
 @implementation XCProd
+
 -(id)initWithRoot:(XCElement *)root
   andFirstElement: (XCElement*) e0
  andSecondElement: (XCElement*) e1
  isMultiplication: (BOOL) isMult {
     self = [super initWithRoot:root];
-    [_content insertElement:e0];
-    [e0 setRoot:self];
-    [_content nextIndex];
+    [self insertElement:e0];
     if(isMult) {
-        [_content insertElement:e1];
-        [e1 setRoot:self];
-        [_content nextIndex];
+        [self insertElement:e1];
     } else {
-        XCInvert * inv = [XCInvert invertValue:e1 withRoot:self];
-        [_content insertElement:inv];
-        [_content nextIndex];
+        [self insertElement:[XCInvert invertValue:e1 withRoot:self]];
     }
     return self;
 }
@@ -108,6 +103,7 @@
 }
 
 // override trigger
+/*
 -(id<XCHasTriggers>)triggerOperator:(XCOperator)op {
     if (op==XC_OP_PLUS || op==XC_OP_MINUS) {
         return [super triggerOperator:op];
@@ -135,8 +131,20 @@
                                  andRoot:self];
     [target replaceContentWithElement:newEl];
     return spacer;
-}
+}*/
 
+
+
+/*
+-(XCElement*)replaceContentWithElement:(XCElement *)element {
+    if ([element isKindOfClass:[XCProd class]]) {
+        XCProd * prod = (XCProd*) element;
+        [_content insert: prod->_content];
+        return self;
+    } else {
+        return [super replaceContentWithElement:element];
+    }
+}*/
 //evaluate
 -(NSNumber *)eval {
     NSNumber * prod = @1;

@@ -12,7 +12,7 @@ NSArray * variables;
 -(void)setNumericValue:(NSNumber*)value {
     _value = value;
 }
-+(id)variableForIndex:(NSUInteger)idx {
++(id) variableForIndex:(NSUInteger)idx {
     return [variables objectAtIndex:idx];
 }
 -(id)initWithIndex:(NSUInteger)index andValue:(NSNumber *)value {

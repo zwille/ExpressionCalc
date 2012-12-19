@@ -15,17 +15,21 @@
 #import "XCSqrt.h"
 
 @implementation XCExpr
+/*
 - (id)initWithRoot:(XCElement*)root
-   andFirstElement:(XCElement*)first {
+   andFirstElement:(XCElement*)first
+andSecondElement: (XCElement*) scnd {
     self = [super initWithRoot:root];
     if (self) {
         [_content insertElement:first];
         [first setRoot:self];
         [_content nextIndex];
-        // current index = 0 with spacer
+        [_content insertElement:scnd];
+        [scnd setRoot:self];
+        [_content nextIndex];
     }
     return self;
-}
+}*/
 +(XCExpr *)emptyExpressionWithRoot:(XCElement *)root{
     
     return [[XCExpr alloc]
@@ -37,17 +41,31 @@
     return [[XCExpr alloc] initWithRoot: root
                         andFirstElement: first];
 }
++(XCExpr*) expressionWithFirstElement: (XCElement*) arg0
+                     andSecondElement: (XCElement*) arg1
+                              andRoot: (XCElement*) root {
+    return [[XCExpr alloc] initWithRoot:root andFirstElement:arg0 andSecondElement:arg1];
+    
+}
+
 -(NSString *)toHTML {
     NSUInteger len = [_content length];
     assert(len>0);
-    NSMutableString * buf =
-    [NSMutableString stringWithString:[[_content elementAtIndex:0] toHTML]];
+    XCElement * el = [_content elementAtIndex:0];
+    NSString * html = ([el isKindOfClass: [XCExpr class]]) ?
+    [el toHTMLFenced] :
+    [el toHTML];
+    NSMutableString * buf = [NSMutableString stringWithString:html];
     for (NSUInteger i = 1; i<len; i++) {
-        XCElement * el = [_content elementAtIndex:i];
-        NSString * html = [el toHTML];
-        [buf appendString: ([el isKindOfClass:[XCNegate class]]) ?
-        html : // use XCNegate
-        [NSString stringWithFormat:@"<mo>+</mo>%@",[el toHTML]]];
+        el = [_content elementAtIndex:i];
+        if ([el isKindOfClass:[XCNegate class]]) {
+            [buf appendString: [el toHTML]];
+        } else {
+            html = ([el isKindOfClass: [XCExpr class]]) ?
+            [el toHTMLFenced] :
+            [el toHTML];
+            [buf appendFormat:@"<mo>+</mo>%@",html];
+        }
     }
     assert([self root]);
     return [super wrapHTML: [NSString stringWithFormat:@"%@",buf]];
@@ -56,7 +74,7 @@
 
 
 //trigger
-
+/*
 -(id<XCHasTriggers>)triggerOperator:(XCOperator)op {
     XCElement * spacer = [XCSpacer spacerWithRoot:self];
     XCElement * newEl = spacer;
@@ -92,6 +110,7 @@
     [target replaceContentWithElement:newEl];
     return spacer;
 }
+ */
 
 
 //evaluate

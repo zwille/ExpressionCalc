@@ -9,6 +9,11 @@
 #import "XCElement.h"
 #import "XCNumString.h"
 #import "XCSpacer.h"
+#import "XCNegate.h"
+#import "XCInvert.h"
+#import "XCExpr.h"
+#import "XCExpo.h"
+#import "XCProd.h"
 
 
 @implementation XCElement
@@ -132,8 +137,43 @@
 -(id<XCHasTriggers>)triggerPreviousContent {
     return self; //pass
 }
+/*
 -(id<XCHasTriggers>)triggerOperator:(XCOperator)op{
     return [_root triggerOperator:op];
+}
+ */
+
+-(id<XCHasTriggers>)triggerOperator:(XCOperator)op {
+    XCElement * spacer = [XCSpacer spacerWithRoot:self];
+    XCElement * newEl = spacer;
+    XCElement * root = [self root];
+    assert(root);
+    switch (op) {
+        case XC_OP_MINUS:
+            newEl = [XCNegate negateValue:spacer withRoot:self];
+        case XC_OP_PLUS:
+            [root replaceContentWithElement:
+             [XCExpr expressionWithFirstElement: self
+                               andSecondElement: newEl
+                                        andRoot: root]];
+            break;
+        case XC_OP_DIV:
+            newEl = [XCInvert invertValue:spacer withRoot:self];
+        case XC_OP_MULT:
+            [root replaceContentWithElement:
+             [XCProd prodWithFirstElement:self
+                        multSecondElement:newEl
+                                  andRoot:root]];
+            break;
+        default:
+            assert(op==XC_OP_EXP);
+            [[self root] replaceContentWithElement:
+             [XCExpo expoWithFirstElement:self
+                         andSecondElement:newEl
+                                  andRoot:root]];
+            break;
+    }
+    return spacer;
 }
 
 // copying

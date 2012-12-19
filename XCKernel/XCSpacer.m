@@ -46,9 +46,6 @@
 }
 -(id<XCHasTriggers>)triggerExpression {
     XCElement * root = [self root];
-    if ([root isKindOfClass:[XCExpr class]]) {
-        return self; // ignore
-    }
     [self swapWithElement:
             [XCExpr expressionWithElement: self
                                   andRoot: nil]

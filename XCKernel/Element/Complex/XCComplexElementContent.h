@@ -26,6 +26,7 @@
 -(NSUInteger) nextIndex;
 -(NSUInteger) previousIndex;
 -(void) insertElement: (XCElement*) element;
+-(void) insert: (XCComplexElementContent*) elements;
 -(void) removeCurrent;
 -(void) replaceCurrentWith: (XCElement*) element;
 

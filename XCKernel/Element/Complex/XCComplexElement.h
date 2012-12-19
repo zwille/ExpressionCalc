@@ -13,5 +13,10 @@
     @protected
     XCComplexElementContent * _content;
 }
-
+-(void) insertElement:(XCElement*) element;
+-(id)initWithRoot:(XCElement *)root
+  andFirstElement: (XCElement*) e0;
+-(id)initWithRoot:(XCElement *)root
+  andFirstElement: (XCElement*) e0
+ andSecondElement: (XCElement*) e1;
 @end

@@ -16,7 +16,7 @@
     if ([value isKindOfClass:[XCInvert class]]) {
         return [((XCSimpleElement*)value) content];
     }
-    value = [XCExpr expressionWithElement:value andRoot:nil];
+    //value = [XCExpr expressionWithElement:value andRoot:nil];
     return [[XCInvert alloc] initWithContent:value andRoot:root];
 }
 -(NSString *)toHTML {
@@ -42,7 +42,7 @@
         [root replaceContentWithElement:element];
         return element;
     } else {
-        return [super triggerOperator:op];
+        return [[self root] triggerOperator:op];
     }
 }
 

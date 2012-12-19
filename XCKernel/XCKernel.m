@@ -57,10 +57,10 @@
         _head = (XCElement*)head;
         [_head setFocus:YES];
     } else {
-       // NSLog(@"XCKernel::setHead reset, triggered was null");
+       NSLog(@"XCKernel::setHead reset, triggered was null");
         [self reset];
     }
-   // [self log];
+    [self log];
     return _head;
 }
 -(NSNumber *)eval {

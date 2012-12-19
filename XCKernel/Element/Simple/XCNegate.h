@@ -8,9 +8,7 @@
 
 #import "XCSimpleElement.h"
 
-@interface XCNegate : XCSimpleElement {
-    XCElement * _value;
-}
+@interface XCNegate : XCSimpleElement
 +(id)negateValue: (XCElement*) value
         withRoot: (XCElement*) root;
 

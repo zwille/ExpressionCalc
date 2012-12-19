@@ -12,21 +12,7 @@
 #import "XCTerminalElement.h"
 
 @implementation XCExpo
--(id)initWithRoot:(XCElement *)root
-  andFirstElement: (XCElement*) e0
- andSecondElement: (XCElement*) e1 {
-    self = [super initWithRoot:root];
-    [_content insertElement:e0];
-    [e0 setRoot:self];
-    [_content nextIndex];
-    
-    e1 = [XCExpr expressionWithElement:e1 andRoot:self];
-    [_content insertElement:e1];
-    [e1 setRoot:self];
-    [_content nextIndex];
-    
-    return self;
-}
+
 +(XCExpo *)expoWithFirstElement:(XCElement *)arg0
                andSecondElement:(XCElement *)arg1
                         andRoot:(XCElement *)root {
@@ -48,11 +34,9 @@
     }
     return [super wrapHTML: exp];
 }
-// override element
-/*-(NSString *)htmlFromElement:(XCElement *)el atIndex:(NSUInteger)i andContentLength:(NSUInteger)len {
-    return (i==0) ? [el toHTML] : [NSString stringWithFormat:@"<sup>%@</sup>", [el toHTML]];
-}*/
+
 // override trigger
+/*
 -(id<XCHasTriggers>)triggerOperator:(XCOperator)op {
     switch (op) {
         case XC_OP_PLUS:
@@ -72,6 +56,15 @@
     return nil;
 }
 
+-(XCElement*)replaceContentWithElement:(XCElement *)element {
+    if ([element isKindOfClass:[XCExpo class]]) {
+        XCExpo * expo = (XCExpo*) element;
+        [_content insert: expo->_content];
+        return self;
+    } else {
+        return [super replaceContentWithElement:element];
+    }
+} */
 -(id<XCHasTriggers>)triggerDel {
     NSUInteger len = [_content length];
     assert(len>1);

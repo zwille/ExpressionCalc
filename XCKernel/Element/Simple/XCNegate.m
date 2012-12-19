@@ -45,7 +45,7 @@ withRoot:(XCElement *)root {
         [root replaceContentWithElement:element];
         return element;
     } else {
-        return [super triggerOperator:op];
+        return [[self root] triggerOperator:op];
     }
 }
 //evaluate

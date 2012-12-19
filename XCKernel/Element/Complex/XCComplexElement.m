@@ -16,11 +16,47 @@
     _content =[[XCComplexElementContent alloc] init];
     return self;
 }
+-(id)initWithRoot:(XCElement *)root
+  andFirstElement: (XCElement*) e0 {
+    self = [self initWithRoot:root];
+    [self insertElement:e0];
+    return self;
+}
+-(id)initWithRoot:(XCElement *)root
+  andFirstElement: (XCElement*) e0
+ andSecondElement: (XCElement*) e1 {
+    self = [self initWithRoot:root];
+    [self insertElement:e0];
+    [self insertElement:e1];
+    
+    return self;
+}
 
 -(XCElement*)replaceContentWithElement:(XCElement *)element {
+    if ([element isKindOfClass:[self class]]) {
+        XCComplexElementContent * co = ((XCComplexElement*)element)->_content;
+        XCElement * el = [co elementAtIndex:0];
+        [el setRoot:self];
+        NSLog(@"XCCE::replace el=%@",el);
+        [_content replaceCurrentWith: el];
+        for (NSUInteger i = 1; i<[co length]; i++) {
+            el = [co elementAtIndex:i];
+            NSLog(@"XCCE::replace el=%@",el);
+            [el setRoot:self];
+            [self insertElement:el];
+        }
+        return self;
+    } else {
+        [element setRoot:self];
+        [_content replaceCurrentWith: element];
+        return element;
+    }
+    
+}
+-(void) insertElement:(XCElement*) element {
+    [_content insertElement:element];
     [element setRoot:self];
-    [_content replaceCurrentWith: element];
-    return element;
+    [_content nextIndex];
 }
 
 -(NSString *)description{
