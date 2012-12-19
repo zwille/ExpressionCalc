@@ -14,7 +14,7 @@
 @interface XCIdentifier : XCTerminalElement  {
     XCStorage * _store;
 }
-+(id) ansWithRoot: (XCElement*) root;
++(id) ansWithParent: (XCElement*) parent;
 +(id) identifierWithVariableIndex: (NSUInteger) idx
                           andRoot: (XCElement*) root;
 +(id) identifierWithConstantId: (XCConstants) cid

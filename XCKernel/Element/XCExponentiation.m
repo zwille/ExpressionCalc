@@ -12,8 +12,8 @@
 @implementation XCExponentiation
 +(id)exponentiationWithBase:(XCElement *)base
                 andExponent:(XCElement *)exp
-                    andRoot:(XCElement *)root {
-    return [[XCExponentiation alloc] initWithRoot:root andFirstElement:base andSecondElement:exp];
+                    andParent:(XCElement *)parent {
+    return [[XCExponentiation alloc] initWithParent:parent andFirstElement:base andSecondElement:exp];
 }
 -(NSString *)description {
     return [NSString stringWithFormat:@"^(%@, %@)",

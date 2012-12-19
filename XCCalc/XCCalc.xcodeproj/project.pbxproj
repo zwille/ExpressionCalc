@@ -23,11 +23,6 @@
 		002B73481675D47900A675E2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 002B731F1675D47700A675E2 /* UIKit.framework */; };
 		002B73491675D47900A675E2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 002B73211675D47700A675E2 /* Foundation.framework */; };
 		002B73511675D47900A675E2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 002B734F1675D47900A675E2 /* InfoPlist.strings */; };
-		002B73911675D4A000A675E2 /* XCComplexElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 002B73611675D4A000A675E2 /* XCComplexElement.m */; };
-		002B73921675D4A000A675E2 /* XCComplexElementContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 002B73631675D4A000A675E2 /* XCComplexElementContent.m */; };
-		002B73931675D4A000A675E2 /* XCExpo.m in Sources */ = {isa = PBXBuildFile; fileRef = 002B73651675D4A000A675E2 /* XCExpo.m */; };
-		002B73941675D4A000A675E2 /* XCExpr.m in Sources */ = {isa = PBXBuildFile; fileRef = 002B73671675D4A000A675E2 /* XCExpr.m */; };
-		002B73951675D4A000A675E2 /* XCProd.m in Sources */ = {isa = PBXBuildFile; fileRef = 002B73691675D4A000A675E2 /* XCProd.m */; };
 		002B73961675D4A000A675E2 /* XCFuncAlg.m in Sources */ = {isa = PBXBuildFile; fileRef = 002B736C1675D4A000A675E2 /* XCFuncAlg.m */; };
 		002B73971675D4A000A675E2 /* XCFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 002B736E1675D4A000A675E2 /* XCFunction.m */; };
 		002B73981675D4A000A675E2 /* XCInvert.m in Sources */ = {isa = PBXBuildFile; fileRef = 002B73701675D4A000A675E2 /* XCInvert.m */; };
@@ -104,16 +99,6 @@
 		002B73461675D47900A675E2 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		002B734E1675D47900A675E2 /* XCCalcTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "XCCalcTests-Info.plist"; sourceTree = "<group>"; };
 		002B73501675D47900A675E2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		002B73601675D4A000A675E2 /* XCComplexElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCComplexElement.h; sourceTree = "<group>"; };
-		002B73611675D4A000A675E2 /* XCComplexElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCComplexElement.m; sourceTree = "<group>"; };
-		002B73621675D4A000A675E2 /* XCComplexElementContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCComplexElementContent.h; sourceTree = "<group>"; };
-		002B73631675D4A000A675E2 /* XCComplexElementContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCComplexElementContent.m; sourceTree = "<group>"; };
-		002B73641675D4A000A675E2 /* XCExpo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCExpo.h; sourceTree = "<group>"; };
-		002B73651675D4A000A675E2 /* XCExpo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCExpo.m; sourceTree = "<group>"; };
-		002B73661675D4A000A675E2 /* XCExpr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCExpr.h; sourceTree = "<group>"; };
-		002B73671675D4A000A675E2 /* XCExpr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCExpr.m; sourceTree = "<group>"; };
-		002B73681675D4A000A675E2 /* XCProd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCProd.h; sourceTree = "<group>"; };
-		002B73691675D4A000A675E2 /* XCProd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCProd.m; sourceTree = "<group>"; };
 		002B736B1675D4A000A675E2 /* XCFuncAlg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFuncAlg.h; sourceTree = "<group>"; };
 		002B736C1675D4A000A675E2 /* XCFuncAlg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCFuncAlg.m; sourceTree = "<group>"; };
 		002B736D1675D4A000A675E2 /* XCFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCFunction.h; sourceTree = "<group>"; };
@@ -140,8 +125,8 @@
 		002B73831675D4A000A675E2 /* XCVariable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCVariable.m; sourceTree = "<group>"; };
 		002B73841675D4A000A675E2 /* NSNumber+XCNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+XCNumber.h"; sourceTree = "<group>"; };
 		002B73851675D4A000A675E2 /* NSNumber+XCNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+XCNumber.m"; sourceTree = "<group>"; };
-		002B73861675D4A000A675E2 /* XCElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCElement.h; sourceTree = "<group>"; };
-		002B73871675D4A000A675E2 /* XCElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCElement.m; sourceTree = "<group>"; };
+		002B73861675D4A000A675E2 /* XCElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XCElement.h; path = ../XCElement.h; sourceTree = "<group>"; };
+		002B73871675D4A000A675E2 /* XCElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XCElement.m; path = ../XCElement.m; sourceTree = "<group>"; };
 		002B73881675D4A000A675E2 /* XCEvaluable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCEvaluable.h; sourceTree = "<group>"; };
 		002B73891675D4A000A675E2 /* XCGlobal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCGlobal.h; sourceTree = "<group>"; };
 		002B738A1675D4A000A675E2 /* XCGlobal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCGlobal.m; sourceTree = "<group>"; };
@@ -149,8 +134,8 @@
 		002B738C1675D4A000A675E2 /* XCHasTriggers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCHasTriggers.h; sourceTree = "<group>"; };
 		002B738D1675D4A000A675E2 /* XCKernel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCKernel.h; sourceTree = "<group>"; };
 		002B738E1675D4A000A675E2 /* XCKernel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCKernel.m; sourceTree = "<group>"; };
-		002B738F1675D4A000A675E2 /* XCSpacer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCSpacer.h; sourceTree = "<group>"; };
-		002B73901675D4A000A675E2 /* XCSpacer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCSpacer.m; sourceTree = "<group>"; };
+		002B738F1675D4A000A675E2 /* XCSpacer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XCSpacer.h; path = ../XCSpacer.h; sourceTree = "<group>"; };
+		002B73901675D4A000A675E2 /* XCSpacer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XCSpacer.m; path = ../XCSpacer.m; sourceTree = "<group>"; };
 		002B73AB1675D4C500A675E2 /* XCComplexElementContentTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCComplexElementContentTest.h; sourceTree = "<group>"; };
 		002B73AC1675D4C500A675E2 /* XCComplexElementContentTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCComplexElementContentTest.m; sourceTree = "<group>"; };
 		002B73E31675E36800A675E2 /* XCStatementBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCStatementBuffer.h; sourceTree = "<group>"; };
@@ -310,8 +295,6 @@
 				002B735E1675D4A000A675E2 /* Element */,
 				002B73841675D4A000A675E2 /* NSNumber+XCNumber.h */,
 				002B73851675D4A000A675E2 /* NSNumber+XCNumber.m */,
-				002B73861675D4A000A675E2 /* XCElement.h */,
-				002B73871675D4A000A675E2 /* XCElement.m */,
 				002B73881675D4A000A675E2 /* XCEvaluable.h */,
 				002B73891675D4A000A675E2 /* XCGlobal.h */,
 				002B738A1675D4A000A675E2 /* XCGlobal.m */,
@@ -319,8 +302,6 @@
 				002B738C1675D4A000A675E2 /* XCHasTriggers.h */,
 				002B738D1675D4A000A675E2 /* XCKernel.h */,
 				002B738E1675D4A000A675E2 /* XCKernel.m */,
-				002B738F1675D4A000A675E2 /* XCSpacer.h */,
-				002B73901675D4A000A675E2 /* XCSpacer.m */,
 				002B73E31675E36800A675E2 /* XCStatementBuffer.h */,
 				002B73E41675E36900A675E2 /* XCStatementBuffer.m */,
 				002B73E61676123200A675E2 /* XCCircBuf.h */,
@@ -333,29 +314,15 @@
 		002B735E1675D4A000A675E2 /* Element */ = {
 			isa = PBXGroup;
 			children = (
+				002B738F1675D4A000A675E2 /* XCSpacer.h */,
+				002B73901675D4A000A675E2 /* XCSpacer.m */,
+				002B73861675D4A000A675E2 /* XCElement.h */,
+				002B73871675D4A000A675E2 /* XCElement.m */,
 				008582041681FF1C00C95225 /* Tuple */,
-				002B735F1675D4A000A675E2 /* Complex */,
 				002B736A1675D4A000A675E2 /* Simple */,
 				002B73771675D4A000A675E2 /* Terminal */,
 			);
 			path = Element;
-			sourceTree = "<group>";
-		};
-		002B735F1675D4A000A675E2 /* Complex */ = {
-			isa = PBXGroup;
-			children = (
-				002B73601675D4A000A675E2 /* XCComplexElement.h */,
-				002B73611675D4A000A675E2 /* XCComplexElement.m */,
-				002B73621675D4A000A675E2 /* XCComplexElementContent.h */,
-				002B73631675D4A000A675E2 /* XCComplexElementContent.m */,
-				002B73641675D4A000A675E2 /* XCExpo.h */,
-				002B73651675D4A000A675E2 /* XCExpo.m */,
-				002B73661675D4A000A675E2 /* XCExpr.h */,
-				002B73671675D4A000A675E2 /* XCExpr.m */,
-				002B73681675D4A000A675E2 /* XCProd.h */,
-				002B73691675D4A000A675E2 /* XCProd.m */,
-			);
-			path = Complex;
 			sourceTree = "<group>";
 		};
 		002B736A1675D4A000A675E2 /* Simple */ = {
@@ -601,11 +568,6 @@
 				002B732C1675D47800A675E2 /* main.m in Sources */,
 				002B73301675D47800A675E2 /* XCAppDelegate.m in Sources */,
 				002B73391675D47800A675E2 /* XCViewController.m in Sources */,
-				002B73911675D4A000A675E2 /* XCComplexElement.m in Sources */,
-				002B73921675D4A000A675E2 /* XCComplexElementContent.m in Sources */,
-				002B73931675D4A000A675E2 /* XCExpo.m in Sources */,
-				002B73941675D4A000A675E2 /* XCExpr.m in Sources */,
-				002B73951675D4A000A675E2 /* XCProd.m in Sources */,
 				002B73961675D4A000A675E2 /* XCFuncAlg.m in Sources */,
 				002B73971675D4A000A675E2 /* XCFunction.m in Sources */,
 				002B73981675D4A000A675E2 /* XCInvert.m in Sources */,

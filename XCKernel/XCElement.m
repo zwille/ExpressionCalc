@@ -19,7 +19,7 @@
 
 
 @implementation XCElement
-@synthesize root=_root;
+@synthesize parent=_parent;
 
 -(XCElement *)content{
     return self;
@@ -30,9 +30,9 @@
 -(void)normalize {
     // pass;
 }
--(id)initWithRoot:(XCElement *)root {
+-(id)initWithParent:(XCElement *)parent {
     self = [super init];
-    _root = root;
+    _parent = parent;
     return self;
 }
 -(void)setFocus:(BOOL)val {
@@ -109,9 +109,9 @@
     return [[self root] triggerDel];
 }*/
 -(id<XCHasTriggers>)triggerDel {
-    assert([self root]);
-    XCElement * rc = [XCSpacer spacerWithRoot:nil];
-    [[self root] replaceContentWithElement:rc];
+    assert([self parent]);
+    XCElement * rc = [XCSpacer spacerWithParent:nil];
+    [[self parent] replaceContentWithElement:rc];
     return rc;
     
 }
@@ -135,18 +135,18 @@
     return self; //pass
 }
 -(id<XCHasTriggers>)triggerAssign: (NSUInteger) varIdx {
-    return [[self root] triggerAssign: varIdx];
+    return [[self parent] triggerAssign: varIdx];
 }
 -(id<XCHasTriggers>)triggerNext {
-    assert(_root);
-    return [_root triggerNextContent];
+    assert(_parent);
+    return [_parent triggerNextContent];
 }
 -(id<XCHasTriggers>)triggerNextContent {
     return self; //pass
 }
 -(id<XCHasTriggers>)triggerPrevious {
-    assert(_root);
-    return [_root triggerPreviousContent];
+    assert(_parent);
+    return [_parent triggerPreviousContent];
 }
 -(id<XCHasTriggers>)triggerPreviousContent {
     return self; //pass
@@ -158,42 +158,42 @@
  */
 
 -(id<XCHasTriggers>)triggerOperator:(XCOperator)op {
-    XCElement * spacer = [XCSpacer spacerWithRoot:self];
+    XCElement * spacer = [XCSpacer spacerWithParent:self];
     XCElement * newEl = spacer;
-    XCElement * root = [self root];
+    XCElement * root = [self parent];
     BOOL hasContainer = [root isKindOfClass:[XCExpression class]]
     || [root isKindOfClass:[XCStatement class]];
     assert(root);
     switch (op) {
         case XC_OP_MINUS:
-            newEl = [XCNegate negateValue:spacer withRoot:self];
+            newEl = [XCNegate negateValue:spacer withParent:self];
         case XC_OP_PLUS:
             if (hasContainer || [root isKindOfClass:[XCSum class]]) {
                 [root replaceContentWithElement:
                  [XCSum sumWithElement0:self
                             andElement1: newEl
-                                andRoot:root]];
+                                andParent:root]];
                 break;
             } 
             return [root triggerOperator: op];
         case XC_OP_DIV:
-            newEl = [XCInvert invertValue:spacer withRoot:self];
+            newEl = [XCInvert invertValue:spacer withParent:self];
         case XC_OP_MULT:
             if (hasContainer || [root isKindOfClass:[XCProduct class]]) {
                 [root replaceContentWithElement:
                  [XCProduct productWithElement0:self
                         andElement1:newEl
-                                  andRoot:root]];
+                                  andParent:root]];
                 break;
             }
             return [root triggerOperator: op];
         default:
             assert(op==XC_OP_EXP);
             if (hasContainer || [root isKindOfClass:[XCExponentiation class]]) {
-                    [[self root] replaceContentWithElement:
+                    [[self parent] replaceContentWithElement:
                 [XCExponentiation exponentiationWithBase: self
                                           andExponent:newEl
-                                              andRoot:root]];
+                                              andParent:root]];
                 break;
             }
             return [root triggerOperator: op];
@@ -204,7 +204,7 @@
 
 // copying
 -(id)copyWithZone:(NSZone *)zone {
-    XCElement * rc = [[[self class] allocWithZone:zone] initWithRoot:nil];
+    XCElement * rc = [[[self class] allocWithZone:zone] initWithParent:nil];
     rc -> _state = _state;
     rc -> _state.error = NO;
     return rc;

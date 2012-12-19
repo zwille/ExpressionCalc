@@ -65,8 +65,9 @@
     if ([_root isEmpty]) {
         return @0;
     }
-    [self setHead:_root]; //toggle focus off
     [_root normalize];
+    [self setHead:_root]; //toggle focus off
+    
     NSNumber * rc = [_root eval];
     return [rc isZero] ? @0 : rc;
 }

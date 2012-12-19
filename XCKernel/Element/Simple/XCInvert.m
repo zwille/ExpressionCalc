@@ -8,16 +8,16 @@
 
 #import "XCInvert.h"
 #import "XCSpacer.h"
-#import "XCExpr.h"
+#import "XCExpression.h"
 @implementation XCInvert
 
 
-+(id)invertValue:(XCElement*)value  withRoot:(XCElement *)root{
++(id)invertValue:(XCElement*)value  withParent:(XCElement *)parent{
     if ([value isKindOfClass:[XCInvert class]]) {
         return [((XCSimpleElement*)value) content];
     }
     //value = [XCExpr expressionWithElement:value andRoot:nil];
-    return [[XCInvert alloc] initWithContent:value andRoot:root];
+    return [[XCInvert alloc] initWithContent:value andParent:parent];
 }
 -(NSString *)description {
     return [NSString stringWithFormat:@"/(%@)",
@@ -31,8 +31,8 @@
 -(XCElement*)replaceContentWithElement:(XCElement *)element {
     if ([element isKindOfClass:[self class]]) {
         element = [element content];
-        id root = [self root];
-        [element setRoot:root];
+        id root = [self parent];
+        [element setParent:root];
         [root replaceContentWithElement:element];
         return element;
     }
@@ -42,7 +42,7 @@
 -(id<XCHasTriggers>)triggerOperator:(XCOperator)op {
     if(op==XC_OP_DIV && [[self content] isKindOfClass:[XCSpacer class]]) {
         XCElement* element = [self content];
-        id root = [self root];
+        id root = [self parent];
         [root replaceContentWithElement:element];
         return element;
     } else {

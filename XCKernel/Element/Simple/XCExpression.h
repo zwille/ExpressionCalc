@@ -10,5 +10,5 @@
 
 @interface XCExpression : XCSimpleElement
 +(id) expressionWithElement:(XCElement*) element
-               andRoot:(XCElement*) root;
+               andParent:(XCElement*) parent;
 @end

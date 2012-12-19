@@ -115,7 +115,7 @@
 }
 - (void) updateHTMLExpression {
     _htmlExpression = [_kernel toHTML];
-    NSLog(@"XCVC update htmlExpr = %@",_htmlExpression);
+    //NSLog(@"XCVC update htmlExpr = %@",_htmlExpression);
 }
 
 -(void)willAnimateRotationToInterfaceOrientation:

@@ -12,7 +12,7 @@
     XCElement * _content[2];
 }
 
--(id)initWithRoot:(XCElement *)root
+-(id)initWithParent:(XCElement *)parent
   andFirstElement: (XCElement*) e0
  andSecondElement: (XCElement*) e1;
 

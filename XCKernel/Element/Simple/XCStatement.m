@@ -12,7 +12,7 @@
 @implementation XCStatement
 @synthesize store;
 -(id)init {
-    self = [super initWithContent:nil andRoot:nil];
+    self = [super initWithContent:nil andParent:nil];
     [self reset];
     return self;
 }
@@ -20,7 +20,7 @@
     return [[XCStatement alloc] init];
 }
 -(void)reset {
-    [self setContent: [XCSpacer spacerWithRoot:self]];
+    [self setContent: [XCSpacer spacerWithParent:self]];
     _store = nil;
 }
 -(BOOL)isEmpty {

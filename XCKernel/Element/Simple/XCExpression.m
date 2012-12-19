@@ -9,8 +9,8 @@
 #import "XCExpression.h"
 
 @implementation XCExpression
-+(id)expressionWithElement:(XCElement *)element andRoot:(XCElement *)root {
-    return [[XCExpression alloc] initWithContent:element andRoot:root];
++(id)expressionWithElement:(XCElement *)element andParent:(XCElement *)parent {
+    return [[XCExpression alloc] initWithContent:element andParent:parent];
 }
 -(NSString *)description {
     return [NSString stringWithFormat:@"[ %@ ]",

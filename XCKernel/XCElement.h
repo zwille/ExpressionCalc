@@ -25,13 +25,13 @@ typedef struct {
 
 
 @interface XCElement : NSObject<NSCopying, XCHasTriggers, XCHasHtmlOutput, XCEvaluable> {
-    XCElement * _root;
+    XCElement * _parent;
     @protected
     XCElementState _state;
 }
-@property (strong) XCElement * root;
+@property (strong) XCElement * parent;
 
--(id) initWithRoot: (XCElement*) root;
+-(id) initWithParent: (XCElement*) parent;
 -(void) setFocus: (BOOL) val;
 -(BOOL) hasFocus;
 -(void) setError: (BOOL) val;

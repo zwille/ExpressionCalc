@@ -10,16 +10,65 @@
 #import "XCInvert.h"
 
 @implementation XCProduct
-+(id)productWithElement0:(XCElement *)e0 andElement1:(XCElement *)e1 andRoot:(XCElement *)root {
-    return [[XCProduct alloc] initWithRoot:root
++(id)productWithElement0:(XCElement *)e0 andElement1:(XCElement *)e1 andParent:(XCElement *)parent {
+    return [[XCProduct alloc] initWithParent:parent
             andFirstElement:e0 andSecondElement:e1];
 }
 -(NSString *)description {
     return [NSString stringWithFormat:@"*(%@, %@)",
             _content[0],_content[1]];
 }
-
+-(void) swapElements {
+    XCElement * t = [self element1];
+    [self setElement:[self element0] at:1];
+    [self setElement:t at:0];
+}
 -(void)normalize {
+    // normalize to (element, element) or (element, product)
+    if ([_content[0] isKindOfClass:[XCProduct class]]) {
+        if ([_content[1] isKindOfClass:[XCProduct class]]) { // both products
+            XCProduct * p1, *p2, * p3;
+            p3 = (XCProduct *) [self element1];
+            p1 = (XCProduct *) [self element0];
+            p2 = [XCProduct productWithElement0:[p1 element1] andElement1:p3 andParent:self];
+            [p1 setElement:p2 at:1];
+        } else {
+            [self swapElements];
+        }
+    }
+    [super normalize];
+    // assert element1 is normalized
+    
+   // if ([[self parent] isKindOfClass:[XCProduct class]]) {
+   //     [((XCProduct) [self parent]) shiftInvert];
+   // }
+    
+    // normalize division
+    if ([_content[0] isKindOfClass:[XCInvert class]]) {
+        if ([_content[1] isKindOfClass:[XCInvert class]]) {
+            // rebuild *(/,/) to /(*,*)
+            [self setElement:[[self element0] content] at: 0];
+            [self setElement:[[self element1] content] at: 1];
+            XCElement * parent = [self parent];
+            [parent replaceContentWithElement:
+             [XCInvert invertValue:self withParent:parent]];
+        } else if ([_content[1] isKindOfClass:[XCProduct class]]) {
+            //shift invert right
+            XCProduct * p = (XCProduct*) [self element1];
+            assert( ![[p element0] isKindOfClass: [XCInvert class]]);
+            XCElement * t = [p element0];
+            [p setElement:[self element0] at:0];
+            [self setElement:t at:0];
+            [[self element1] normalize];
+        } else {
+            [self swapElements];
+        }
+    }
+    
+    // normalize sign
+    // in depth
+    
+    
     
 }
 //HTML

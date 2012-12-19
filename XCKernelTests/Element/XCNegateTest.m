@@ -10,9 +10,9 @@
 
 @implementation XCNegateTest
 -(void)setUp {
-    n0 = [XCNegate negateValue:[XCNumString numWithString:@"-1"] withRoot:nil];
-    n1 = [XCNegate negateValue:[XCNumString numWithString:@"0"] withRoot:nil];
-    n2 = [XCNegate negateValue:[XCNumString numWithString:@"1"] withRoot:nil];
+    n0 = [XCNegate negateValue:[XCNumString numWithString:@"-1"] withParent:nil];
+    n1 = [XCNegate negateValue:[XCNumString numWithString:@"0"] withParent:nil];
+    n2 = [XCNegate negateValue:[XCNumString numWithString:@"1"] withParent:nil];
 }
 -(void)testSimple {
     STAssertEqualObjects([n0 eval], @1, nil);

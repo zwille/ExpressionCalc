@@ -12,8 +12,8 @@
 @implementation XCSum
 +(id)sumWithElement0:(XCElement *)e0
          andElement1:(XCElement *)e1
-             andRoot:(XCElement *)root{
-    return [[XCSum alloc] initWithRoot:root
+             andParent:(XCElement *)parent{
+    return [[XCSum alloc] initWithParent:parent
                        andFirstElement:e0
                       andSecondElement:e1 ];
 }

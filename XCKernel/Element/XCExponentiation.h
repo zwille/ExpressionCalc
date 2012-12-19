@@ -11,5 +11,5 @@
 @interface XCExponentiation : XCTupleElement
 +(id) exponentiationWithBase: (XCElement*) base
               andExponent: (XCElement*) exp
-                  andRoot: (XCElement*) root;
+                  andParent: (XCElement*) parent;
 @end

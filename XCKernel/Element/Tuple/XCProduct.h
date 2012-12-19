@@ -11,5 +11,5 @@
 @interface XCProduct : XCTupleElement
 +(id) productWithElement0: (XCElement*) e0
               andElement1: (XCElement*) e1
-                  andRoot: (XCElement*) root;
+                  andParent: (XCElement*) parent;
 @end

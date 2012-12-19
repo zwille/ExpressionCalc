@@ -10,13 +10,13 @@
 
 @implementation XCTupleElement
 
--(id)initWithRoot:(XCElement *)root
+-(id)initWithParent:(XCElement *)parent
   andFirstElement: (XCElement*) e0
  andSecondElement: (XCElement*) e1 {
-    self = [self initWithRoot:root];
+    self = [self initWithParent:parent];
     assert([self isEmpty]);
-    [self setElement:e0 atEnd:NO];
-    [self setElement:e1 atEnd:YES];
+    [self setElement:e0 at:0];
+    [self setElement:e1 at:1];
     [self setIndex:1];
     return self;
 }
@@ -26,9 +26,9 @@
 -(void) setIndex: (BOOL) value {
     _state.sub1 = value;
 }
--(void) setElement: (XCElement*) el atEnd: (BOOL) idx {
+-(void) setElement: (XCElement*) el at: (BOOL) idx {
     _content[idx] = el;
-    [el setRoot:self];
+    [el setParent:self];
 }
 -(BOOL)isEmpty {
     return _content[0]==nil && _content[1]==nil;
@@ -40,11 +40,16 @@
     XCTupleElement * rc = [super copyWithZone:zone];
     rc->_content[0] = [_content[0] copyWithZone:zone];
     rc->_content[1] = [_content[1] copyWithZone:zone];
+    [rc setIndex:0];
     return rc;
 }
 -(XCElement*)replaceContentWithElement:(XCElement *)element {
     [self setElement:element at:[self index]];
     return element;
+}
+-(void)normalize {
+    [[self element0] normalize];
+    [[self element1] normalize];
 }
 //trigger
 
@@ -78,7 +83,7 @@
     }
 }
 -(id<XCHasTriggers>)triggerDel {
-    assert([self root]);
-    return [[self root] replaceContentWithElement:_content[![self index]]];
+    assert([self parent]);
+    return [[self parent] replaceContentWithElement:_content[![self index]]];
 }
 @end

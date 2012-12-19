@@ -9,6 +9,6 @@
 #import "XCSimpleElement.h"
 
 @interface XCInvert : XCSimpleElement 
-+(id)invertValue: (XCElement*) value withRoot: (XCElement*) root;
++(id)invertValue: (XCElement*) value withParent: (XCElement*) parent;
 
 @end

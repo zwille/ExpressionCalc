@@ -10,8 +10,8 @@
 #import "XCFuncAlg.h"
 #import "XCTrigoFuncAlg.h"
 #import "XCSqrt.h"
-#import "XCExpr.h"
 #import "XCTerminalElement.h"
+
 
 static const NSDictionary * functions; 
 
@@ -34,7 +34,7 @@ static const NSDictionary * functions;
 - (id)initWithRoot:(XCElement*)root
            andName: (NSString*) name
         andElement:(XCElement*)element {
-    self = [super initWithRoot:root];
+    self = [super initWithParent:root];
     if (self) {
         _name = name;
         [self setContent:element];
@@ -54,14 +54,13 @@ static const NSDictionary * functions;
 }
 +(XCFunction *)functionWithName:(NSString *)name
                     withElement:(XCElement *)element
-                        andRoot:(XCElement *)root {
+                        andParent:(XCElement *)parent {
     Class c = [XCFunction class];
-    element = [XCExpr expressionWithElement:element
-                                    andRoot:nil];
+   
     if([name isEqualToString:XC_SQRT]) {
         c = [XCSqrt class];
            }
-    return [[c alloc] initWithRoot: root
+    return [[c alloc] initWithRoot: parent
                                     andName:name
                                  andElement: element];
 }

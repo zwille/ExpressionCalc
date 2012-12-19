@@ -11,12 +11,12 @@
 
 @implementation XCIdentifier
 -(id)initWithRoot:(XCElement *)root andStorage: (XCStorage*) store {
-    self = [super initWithRoot:root];
+    self = [super initWithParent:root];
     _store = store;
     return self;
 }
-+(id)ansWithRoot: (XCElement*) root {
-    return [[XCIdentifier alloc] initWithRoot:root
++(id)ansWithParent: (XCElement*) parent {
+    return [[XCIdentifier alloc] initWithRoot:parent
                                    andStorage:[XCVariable variableForIndex:0]];
 }
 +(id)identifierWithConstantId:(XCConstants)cid andRoot: (XCElement*) root; {

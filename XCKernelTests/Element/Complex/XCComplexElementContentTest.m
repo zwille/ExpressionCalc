@@ -45,7 +45,7 @@
 
 -(void)testAll {
     XCComplexElementContent * cont = [[XCComplexElementContent alloc] init];
-    XCElement * e0 = [XCSpacer spacerWithRoot:nil];
+    XCElement * e0 = [XCSpacer spacerWithParent:nil];
     XCElement * e1 = [XCNumString numWithString:@"1"];
     XCElement * e2 = [XCNumString numWithString:@"2"];
     XCElement * e1a = [XCNumString numWithString:@"1.5"];
