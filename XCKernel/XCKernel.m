@@ -42,8 +42,6 @@
     NSString * rootDesc = [NSString stringWithFormat:@"%@",_root];
     NSLog(@"XCKernel head = %@",headDesc);
     NSLog(@"XCKernel root = %@",rootDesc);
-
-    NSLog(@"XCKernel html = %@",[_root toHTML]);
 }
 -(NSString *)toHTML {
     return [_root toHTML];
@@ -68,6 +66,7 @@
         return @0;
     }
     [self setHead:_root]; //toggle focus off
+    [_root normalize];
     NSNumber * rc = [_root eval];
     return [rc isZero] ? @0 : rc;
 }

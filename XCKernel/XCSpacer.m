@@ -10,7 +10,7 @@
 #import "XCNumString.h"
 #import "XCNegate.h"
 #import "XCInvert.h"
-#import "XCExpr.h"
+#import "XCExpression.h"
 #import "XCIdentifier.h"
 #import "XCFunction.h"
 //#import "XCConstant.h"
@@ -34,6 +34,9 @@
     [root replaceContentWithElement:el];
     return el;
 }
+-(NSString *)description {
+    return @"_";
+}
 //trigger
 -(id<XCHasTriggers>)triggerDel {
     assert([self root]);
@@ -47,7 +50,7 @@
 -(id<XCHasTriggers>)triggerExpression {
     XCElement * root = [self root];
     [self swapWithElement:
-            [XCExpr expressionWithElement: self
+            [XCExpression expressionWithElement: self
                                   andRoot: nil]
                   andRoot:root];
     return self;

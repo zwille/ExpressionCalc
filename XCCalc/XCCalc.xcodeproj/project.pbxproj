@@ -53,6 +53,11 @@
 		005BD3AC167B7827005A83C4 /* templateLandscape.html in Resources */ = {isa = PBXBuildFile; fileRef = 005BD3AA167B7827005A83C4 /* templateLandscape.html */; };
 		005BD3AD167B7827005A83C4 /* templatePortrait.html in Resources */ = {isa = PBXBuildFile; fileRef = 005BD3AB167B7827005A83C4 /* templatePortrait.html */; };
 		005BD3AF167B78BF005A83C4 /* basestyle.css in Resources */ = {isa = PBXBuildFile; fileRef = 005BD3AE167B78BF005A83C4 /* basestyle.css */; };
+		008582081681FF6A00C95225 /* XCTupleElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 008582071681FF6A00C95225 /* XCTupleElement.m */; };
+		0085820F1682099800C95225 /* XCSum.m in Sources */ = {isa = PBXBuildFile; fileRef = 0085820E1682099700C95225 /* XCSum.m */; };
+		0085821216820D5900C95225 /* XCProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = 0085821116820D5900C95225 /* XCProduct.m */; };
+		0085821516821A1300C95225 /* XCExponentiation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0085821416821A1200C95225 /* XCExponentiation.m */; };
+		0085821B16821D2900C95225 /* XCExpression.m in Sources */ = {isa = PBXBuildFile; fileRef = 0085821A16821D2800C95225 /* XCExpression.m */; };
 		009E0F3316788996007E89B5 /* XCNumberTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 009E0F3216788996007E89B5 /* XCNumberTest.m */; };
 		00A19819167DE1EC00AFE799 /* XCTestNumString.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A19818167DE1EC00AFE799 /* XCTestNumString.m */; };
 		00A1981F167DED0900AFE799 /* XCIdentifierTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A1981E167DED0900AFE799 /* XCIdentifierTest.m */; };
@@ -159,6 +164,16 @@
 		005BD3AA167B7827005A83C4 /* templateLandscape.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = templateLandscape.html; sourceTree = "<group>"; };
 		005BD3AB167B7827005A83C4 /* templatePortrait.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = templatePortrait.html; sourceTree = "<group>"; };
 		005BD3AE167B78BF005A83C4 /* basestyle.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = basestyle.css; sourceTree = "<group>"; };
+		008582061681FF6A00C95225 /* XCTupleElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XCTupleElement.h; path = Tuple/XCTupleElement.h; sourceTree = "<group>"; };
+		008582071681FF6A00C95225 /* XCTupleElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XCTupleElement.m; path = Tuple/XCTupleElement.m; sourceTree = "<group>"; };
+		0085820D1682099700C95225 /* XCSum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XCSum.h; path = Tuple/XCSum.h; sourceTree = "<group>"; };
+		0085820E1682099700C95225 /* XCSum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XCSum.m; path = Tuple/XCSum.m; sourceTree = "<group>"; };
+		0085821016820D5800C95225 /* XCProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XCProduct.h; path = Tuple/XCProduct.h; sourceTree = "<group>"; };
+		0085821116820D5900C95225 /* XCProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XCProduct.m; path = Tuple/XCProduct.m; sourceTree = "<group>"; };
+		0085821316821A1200C95225 /* XCExponentiation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCExponentiation.h; sourceTree = "<group>"; };
+		0085821416821A1200C95225 /* XCExponentiation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCExponentiation.m; sourceTree = "<group>"; };
+		0085821916821D2700C95225 /* XCExpression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCExpression.h; sourceTree = "<group>"; };
+		0085821A16821D2800C95225 /* XCExpression.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCExpression.m; sourceTree = "<group>"; };
 		009E0F3116788996007E89B5 /* XCNumberTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCNumberTest.h; sourceTree = "<group>"; };
 		009E0F3216788996007E89B5 /* XCNumberTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCNumberTest.m; sourceTree = "<group>"; };
 		00A19817167DE1EC00AFE799 /* XCTestNumString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCTestNumString.h; sourceTree = "<group>"; };
@@ -318,6 +333,7 @@
 		002B735E1675D4A000A675E2 /* Element */ = {
 			isa = PBXGroup;
 			children = (
+				008582041681FF1C00C95225 /* Tuple */,
 				002B735F1675D4A000A675E2 /* Complex */,
 				002B736A1675D4A000A675E2 /* Simple */,
 				002B73771675D4A000A675E2 /* Terminal */,
@@ -361,6 +377,8 @@
 				002B73741675D4A000A675E2 /* XCSimpleElement.m */,
 				002B73751675D4A000A675E2 /* XCStatement.h */,
 				002B73761675D4A000A675E2 /* XCStatement.m */,
+				0085821916821D2700C95225 /* XCExpression.h */,
+				0085821A16821D2800C95225 /* XCExpression.m */,
 			);
 			path = Simple;
 			sourceTree = "<group>";
@@ -424,6 +442,21 @@
 				00CE67091678F055009D580C /* XCExpoTest.m */,
 			);
 			path = Complex;
+			sourceTree = "<group>";
+		};
+		008582041681FF1C00C95225 /* Tuple */ = {
+			isa = PBXGroup;
+			children = (
+				008582061681FF6A00C95225 /* XCTupleElement.h */,
+				008582071681FF6A00C95225 /* XCTupleElement.m */,
+				0085820D1682099700C95225 /* XCSum.h */,
+				0085820E1682099700C95225 /* XCSum.m */,
+				0085821016820D5800C95225 /* XCProduct.h */,
+				0085821116820D5900C95225 /* XCProduct.m */,
+				0085821316821A1200C95225 /* XCExponentiation.h */,
+				0085821416821A1200C95225 /* XCExponentiation.m */,
+			);
+			name = Tuple;
 			sourceTree = "<group>";
 		};
 		00A19815167DE1C700AFE799 /* Terminal */ = {
@@ -594,6 +627,11 @@
 				002B73E81676123400A675E2 /* XCCircBuf.m in Sources */,
 				002B73EE1676550700A675E2 /* XCTrigoFuncAlg.m in Sources */,
 				00BA2682167760BE00EF209E /* XCSqrt.m in Sources */,
+				008582081681FF6A00C95225 /* XCTupleElement.m in Sources */,
+				0085820F1682099800C95225 /* XCSum.m in Sources */,
+				0085821216820D5900C95225 /* XCProduct.m in Sources */,
+				0085821516821A1300C95225 /* XCExponentiation.m in Sources */,
+				0085821B16821D2900C95225 /* XCExpression.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

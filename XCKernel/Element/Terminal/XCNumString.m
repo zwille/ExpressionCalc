@@ -43,21 +43,27 @@ static NSNumberFormatter * formatter;
     [NSString stringWithFormat:@"%@<mo>_</mo>",rc] :
     rc];
 }
-
+-(BOOL) hasDecimalPoint {
+    return _state.subsub1;
+}
+-(void) setHasDecimalPoint: (BOOL) value {
+    _state.subsub1 = value;
+}
 //evaluate
 -(NSNumber *)eval {
     NSNumber * rc = [formatter numberFromString:_buf];
     [self setError: ([rc isNaN])];
     return rc;
 }
+
 //trigger
 -(id<XCHasTriggers>)triggerNum:(char)c {
     if (c==XC_PT) {
         // suppress second decimal point
-        if (_state.hasDecimalPt) {
+        if ([self hasDecimalPoint]) {
             return self;
         }
-        _state.hasDecimalPt = YES;
+        [self setHasDecimalPoint:YES];
     }
     [_buf appendFormat: @"%c",c];
     return self;
@@ -70,7 +76,7 @@ static NSNumberFormatter * formatter;
         NSUInteger i = len-1;
         NSRange last = {i,1};
         if ([_buf characterAtIndex:i]==XC_PT) {
-            _state.hasDecimalPt = NO;
+            [self setHasDecimalPoint:NO];
         }
         [_buf deleteCharactersInRange:last];
         return self;

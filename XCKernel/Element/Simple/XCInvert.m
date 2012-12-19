@@ -19,6 +19,10 @@
     //value = [XCExpr expressionWithElement:value andRoot:nil];
     return [[XCInvert alloc] initWithContent:value andRoot:root];
 }
+-(NSString *)description {
+    return [NSString stringWithFormat:@"/(%@)",
+            [self content]];
+}
 -(NSString *)toHTML {
     return [super wrapHTML:
             [NSString stringWithFormat:@"<mfrac> <mn>1</mn> <mrow>%@</mrow> </mfrac>", [[self content] toHTML]]];

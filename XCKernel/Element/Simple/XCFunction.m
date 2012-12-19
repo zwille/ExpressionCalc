@@ -41,6 +41,10 @@ static const NSDictionary * functions;
     }
     return self;
 }
+-(NSString *)description {
+    return [NSString stringWithFormat:@"%@(%@)",
+            _name, [self content]];
+}
 -(NSString *)toHTML {
     XCElement * content = [self content];
     return [super wrapHTML: [NSString stringWithFormat:

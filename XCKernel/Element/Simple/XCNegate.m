@@ -19,7 +19,10 @@ withRoot:(XCElement *)root {
     return [[XCNegate alloc] initWithContent:value
                                      andRoot:root];
 }
-
+-(NSString *)description {
+    return [NSString stringWithFormat:@"-(%@)",
+           [self content]];
+}
 -(NSString *)toHTML{
     assert([self content]);
     XCElement * content = [self content];

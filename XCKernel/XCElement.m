@@ -11,9 +11,11 @@
 #import "XCSpacer.h"
 #import "XCNegate.h"
 #import "XCInvert.h"
-#import "XCExpr.h"
-#import "XCExpo.h"
-#import "XCProd.h"
+#import "XCExpression.h"
+#import "XCExponentiation.h"
+#import "XCProduct.h"
+#import "XCStatement.h"
+#import "XCSum.h"
 
 
 @implementation XCElement
@@ -24,6 +26,9 @@
 }
 -(XCElement *)head {
     return [self content];
+}
+-(void)normalize {
+    // pass;
 }
 -(id)initWithRoot:(XCElement *)root {
     self = [super init];
@@ -133,12 +138,14 @@
     return [[self root] triggerAssign: varIdx];
 }
 -(id<XCHasTriggers>)triggerNext {
+    assert(_root);
     return [_root triggerNextContent];
 }
 -(id<XCHasTriggers>)triggerNextContent {
     return self; //pass
 }
 -(id<XCHasTriggers>)triggerPrevious {
+    assert(_root);
     return [_root triggerPreviousContent];
 }
 -(id<XCHasTriggers>)triggerPreviousContent {
@@ -154,35 +161,43 @@
     XCElement * spacer = [XCSpacer spacerWithRoot:self];
     XCElement * newEl = spacer;
     XCElement * root = [self root];
+    BOOL hasContainer = [root isKindOfClass:[XCExpression class]]
+    || [root isKindOfClass:[XCStatement class]];
     assert(root);
     switch (op) {
         case XC_OP_MINUS:
             newEl = [XCNegate negateValue:spacer withRoot:self];
         case XC_OP_PLUS:
-            if ([root isKindOfClass:[XCProd class]]
-                || [root isKindOfClass:[XCNegate class]]) {
-                return [root triggerOperator: op];
-            }
-            [root replaceContentWithElement:
-             [XCExpr expressionWithFirstElement: self
-                               andSecondElement: newEl
-                                        andRoot: root]];
-            break;
+            if (hasContainer || [root isKindOfClass:[XCSum class]]) {
+                [root replaceContentWithElement:
+                 [XCSum sumWithElement0:self
+                            andElement1: newEl
+                                andRoot:root]];
+                break;
+            } 
+            return [root triggerOperator: op];
         case XC_OP_DIV:
             newEl = [XCInvert invertValue:spacer withRoot:self];
         case XC_OP_MULT:
-            [root replaceContentWithElement:
-             [XCProd prodWithFirstElement:self
-                        multSecondElement:newEl
+            if (hasContainer || [root isKindOfClass:[XCProduct class]]) {
+                [root replaceContentWithElement:
+                 [XCProduct productWithElement0:self
+                        andElement1:newEl
                                   andRoot:root]];
-            break;
+                break;
+            }
+            return [root triggerOperator: op];
         default:
             assert(op==XC_OP_EXP);
-            [[self root] replaceContentWithElement:
-             [XCExpo expoWithFirstElement:self
-                         andSecondElement:newEl
-                                  andRoot:root]];
-            break;
+            if (hasContainer || [root isKindOfClass:[XCExponentiation class]]) {
+                    [[self root] replaceContentWithElement:
+                [XCExponentiation exponentiationWithBase: self
+                                          andExponent:newEl
+                                              andRoot:root]];
+                break;
+            }
+            return [root triggerOperator: op];
+
     }
     return spacer;
 }

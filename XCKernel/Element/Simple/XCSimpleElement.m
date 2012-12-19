@@ -34,6 +34,9 @@
 -(NSString *)description {
     return [NSString stringWithFormat:@"%@[%@]",[super description],_content];
 }
+-(void)normalize {
+    [_content normalize];
+}
 //trigger
 /*
 -(id<XCHasTriggers>)triggerDel {

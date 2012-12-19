@@ -7,8 +7,7 @@
 //
 
 #import "XCStatement.h"
-#import "XCExpr.h"
-
+#import "XCSpacer.h"
 
 @implementation XCStatement
 @synthesize store;
@@ -21,9 +20,8 @@
     return [[XCStatement alloc] init];
 }
 -(void)reset {
-    [self setContent: [XCExpr emptyExpressionWithRoot: self]];
+    [self setContent: [XCSpacer spacerWithRoot:self]];
     _store = nil;
-
 }
 -(BOOL)isEmpty {
     return [[self content] isEmpty];
@@ -60,13 +58,19 @@
     [self reset];
     return [self head];
 }
--(id<XCHasTriggers>)triggerPrevious {
-    return self;
-}
--(id<XCHasTriggers>)triggerNext {
-    return self ;
-}
 
+-(id<XCHasTriggers>)triggerNext {
+    return _content;
+}
+-(id<XCHasTriggers>)triggerNextContent {
+    return _content;
+}
+-(id<XCHasTriggers>)triggerPrevious {
+    return _content;
+}
+-(id<XCHasTriggers>)triggerPreviousContent {
+    return _content;
+}
 //copy
 -(id)copyWithZone:(NSZone *)zone {
     XCStatement * rc = [super copyWithZone:zone];
