@@ -103,6 +103,19 @@
 }
 
 // override trigger
+-(id<XCHasTriggers>)triggerOperator:(XCOperator)op {
+    if(op==XC_OP_MULT || op==XC_OP_DIV) {
+        XCElement * spacer = [XCSpacer spacerWithRoot:self];
+        XCElement * newEl = spacer;
+        if (op==XC_OP_DIV) {
+            newEl = [XCInvert invertValue:spacer withRoot:self];
+        }
+        [self insertElement:newEl];
+        return spacer;
+    } else {
+        return [super triggerOperator:op];
+    }
+}
 /*
 -(id<XCHasTriggers>)triggerOperator:(XCOperator)op {
     if (op==XC_OP_PLUS || op==XC_OP_MINUS) {

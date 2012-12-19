@@ -35,11 +35,12 @@
     return [NSString stringWithFormat:@"%@[%@]",[super description],_content];
 }
 //trigger
+/*
 -(id<XCHasTriggers>)triggerDel {
     assert([self root]);
     NSLog(@"Simple::triggerDel root=%@",[self root]);
     return [[self root] triggerDel];
-}
+}*/
 
 -(id<XCHasTriggers>)triggerNextContent {
     return [_root triggerNextContent];

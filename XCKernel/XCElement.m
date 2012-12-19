@@ -61,7 +61,7 @@
     return nil;
 }
 -(NSString *)toHTMLFenced {
-    return [NSString stringWithFormat:@"<mfenced separators=\" \">%@</mfenced>",[self toHTML]];
+    return [self wrapHTML:[NSString stringWithFormat:@"<mfenced separators=\" \">%@</mfenced>",[self toHTML]]];
 }
 -(NSString*) wrapHTML: (NSString*) inner {
     //NSLog(@"XCElement::wrapHTML self=%@ hasError=%d inner=%@",self,[self hasError],inner);
@@ -94,6 +94,7 @@
 }
 
 //trigger
+/*
 -(id<XCHasTriggers>)triggerDel {
     //return [[self root] triggerDel];
     assert([self root]);
@@ -101,8 +102,14 @@
     //[[self root] replaceContentWithElement:rc];
     //return rc;
     return [[self root] triggerDel];
+}*/
+-(id<XCHasTriggers>)triggerDel {
+    assert([self root]);
+    XCElement * rc = [XCSpacer spacerWithRoot:nil];
+    [[self root] replaceContentWithElement:rc];
+    return rc;
+    
 }
-
 -(id<XCHasTriggers>)triggerEnter {
     return [self head];
 }
@@ -152,6 +159,10 @@
         case XC_OP_MINUS:
             newEl = [XCNegate negateValue:spacer withRoot:self];
         case XC_OP_PLUS:
+            if ([root isKindOfClass:[XCProd class]]
+                || [root isKindOfClass:[XCNegate class]]) {
+                return [root triggerOperator: op];
+            }
             [root replaceContentWithElement:
              [XCExpr expressionWithFirstElement: self
                                andSecondElement: newEl

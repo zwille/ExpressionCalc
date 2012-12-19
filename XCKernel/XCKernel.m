@@ -43,7 +43,7 @@
     NSLog(@"XCKernel head = %@",headDesc);
     NSLog(@"XCKernel root = %@",rootDesc);
 
-    //NSLog(@"XCKernel html = %@",[_root toHTML]);
+    NSLog(@"XCKernel html = %@",[_root toHTML]);
 }
 -(NSString *)toHTML {
     return [_root toHTML];

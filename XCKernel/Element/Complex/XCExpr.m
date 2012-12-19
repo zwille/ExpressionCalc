@@ -74,6 +74,21 @@ andSecondElement: (XCElement*) scnd {
 
 
 //trigger
+-(id<XCHasTriggers>)triggerOperator:(XCOperator)op {
+    if (op==XC_OP_PLUS || op==XC_OP_MINUS) {
+        XCElement * spacer = [XCSpacer spacerWithRoot:self];
+        XCElement * newEl = spacer;
+        if (op==XC_OP_MINUS) {
+            newEl = [XCNegate negateValue:spacer withRoot:self];
+        }
+        [_content insertElement:newEl];
+        [_content nextIndex];
+        return spacer;
+    } else {
+        return [super triggerOperator:op];
+    }
+   
+}
 /*
 -(id<XCHasTriggers>)triggerOperator:(XCOperator)op {
     XCElement * spacer = [XCSpacer spacerWithRoot:self];

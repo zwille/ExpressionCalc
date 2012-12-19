@@ -33,7 +33,7 @@
 }
 
 -(XCElement*)replaceContentWithElement:(XCElement *)element {
-    if ([element isKindOfClass:[self class]]) {
+    if ([element isKindOfClass:[self class]]  && ![element isEmpty]) {
         XCComplexElementContent * co = ((XCComplexElement*)element)->_content;
         XCElement * el = [co elementAtIndex:0];
         [el setRoot:self];
