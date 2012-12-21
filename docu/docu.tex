@@ -1,0 +1,71 @@
+\documentclass[11pt, fleqn]{scrreprt}%oldschool: report
+
+\usepackage[utf8]{inputenc}
+\usepackage{ngerman}
+\usepackage{fullpage} % kleinere Ränder
+
+\usepackage{comment} % für größere comments: \begin{comment} ... \end{comment}
+
+% *** figures floats pdf
+\usepackage[pdftex]{graphicx} 
+% ***
+
+\usepackage{enumerate} %für geschachtelte Aufzählungen
+
+% *** code listings
+\usepackage{listings} 
+\usepackage{courier} % courier schrift
+\lstset{
+%	numbers=left, 
+%	numberstyle=\tiny, 
+%	numbersep=5pt, 
+	basicstyle=\ttfamily,
+	tabsize=2, 
+	language=[Objective]C
+}
+% ***
+
+\usepackage{amsmath} %Matheformeln usw.
+\usepackage{amssymb} %mathfrak
+\usepackage[all]{xy}
+%Bäume und Graphen
+%\usepackage[noeepic]{qtree}
+
+% *** Nummerierung, Referenzierung  usw.
+\usepackage[bookmarks=true]{hyperref} % hyperrefs aktivieren
+\setcounter{secnumdepth}{3} %Numerierung bis Tiefe 3, also ab \paragraph ohne
+\setcounter{tocdepth}{3} %Darstellungstiefe des Inhaltsverzeichnis
+
+\usepackage{float}
+\restylefloat{figure}
+
+%*** title usw.
+\title{Studienarbeit\\
+Objective C und iOs Programmierung\\
+ExpressionCalc}
+\author{Christoph Cwelich Inf5} 
+\date{\today}
+%***
+
+%newcommands
+%\newcommand{\neuesKommando}{Was zu tun ist}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\rarr}{\rightarrow}
+\newcommand{\sheq}{\overset{!}{=}}
+%\renewcommand{\emph}{\textbf}
+\newcommand{\limes}[2]{\underset{#1 \rightarrow #2}{\lim}}
+\newcommand{\code}[1]{\lstinline{#1}}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+
+\input{manual.tex}
+\input{swe.tex}
+\end{document}

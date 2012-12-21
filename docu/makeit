@@ -1,0 +1,4 @@
+#!/bin/bash
+pdflatex -output-directory texout docu.tex
+mv texout/docu.pdf .
+
