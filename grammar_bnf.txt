@@ -1,34 +1,26 @@
 // basic definitions
-<Statement> 	::= 'var' <Whitespace> <Variable> '=' <Whitespace>] <Expression>   
-<Expression> 	::=  [ <opSum> ] <Product> ( <opSum> <Product> )*
-<Product> 		::= <Power> ( <opProduct> <Power> )* 
-<Power>			::= <Literal> ( <opExponent> <Literal> )*
-<Literal> 		::= <Number> | <Identifier> | '(' <Expression ')'
-<Identifier> 	::= <Constant> | <Variable> | <Function> 
-<Constant>		::= 'ℯ' | 'π'
-<Variable> 		::= a | b | c | d | p | q | r | s | t
-<Function> 		::= <FunctionName> <Literal>
-<FunctionName> 	::= '√' | 'cos' | 'sin' | 'tan' | 'acos' | 'asin' | 'atan' | 'exp'
+<Statement>	   ::= 'var' <Whitespace> <Variable> '=' ] <Expression>   
+<Expression>   ::=  [ <opSum> ] <Product> ( <opSum> <Product> )*
+<Product>      ::= <Power> ( <opProduct> <Power> )* 
+<Power>        ::= <Literal> ( <opExponent> <Literal> )*
+<Literal>      ::= <Number> | <Identifier> 
+               | '(' <Expression ')' | <Function>
+<Identifier>   ::= <Constant> | <Variable>  
+<Constant>     ::= <pi> | <e>
+<Variable>     ::= ANS | X0 | ... |  X9
+<Function>     ::= <FunctionName> <Literal>
+<FunctionName> ::= 'cos' | 'sin' | 'tan' 
+                | 'acos' | 'asin' | 'atan' 
+				| <sqrt> | 'exp' | 'ln'
 
 //tokentype: operator
-<opSum> 		::=	'+' | '-' 
-<opProduct>		::= '*' | '/'
-<opExponent>	::= '^'
+<opSum>        ::=	'+' | '-' 
+<opProduct>    ::= '*' | '/'
+<opExponent>   ::= '^'
 //tokentype: number
-<Number> 		::= <Decimal> [ 'E' ( <Digit> )+ ]
-<Decimal>  		::= ( ( <Digit> )+ [ '.' ( <Digit> )* ] ) | ( ( <Digit> )* '.' ( <Digit> )+ )
-<Digit> ::= '0' | '1'| '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9'
-
-
+<Number>       ::= <Decimal> [ 'E' ( <Digit> )+ ]
+<Decimal>      ::= ( ( <Digit> )+ [ '.' ( <Digit> )* ] ) 
+                 | ( ( <Digit> )* '.' ( <Digit> )+ )
+<Digit>        ::= '0' | '1'| ... | '9'
 //special
-<Whitespace> ::= ' '
-
-UTF-8 encodings:
-'ℯ' : '\u212f'
-'π' : '\u03c0'
-'√' : '\u221a'
-'ˆ' : '\ucb86'
-
-
-
-
+<Whitespace>   ::= ' '
