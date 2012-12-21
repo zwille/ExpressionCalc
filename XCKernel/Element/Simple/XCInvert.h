@@ -1,14 +1,14 @@
 //
 //  XCInvert.h
-//  ExprCalc
+//  XCCalc
 //
 //  Created by Christoph Cwelich on 25.11.12.
 //  Copyright (c) 2012 Christoph Cwelich. All rights reserved.
 //
 
-#import "XCSimpleElement.h"
+#import "XCValModifier.h"
 
-@interface XCInvert : XCSimpleElement 
+@interface XCInvert : XCValModifier
 +(id)invertValue: (XCElement*) value withParent: (XCElement*) parent;
 
 @end

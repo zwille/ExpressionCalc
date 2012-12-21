@@ -19,6 +19,7 @@
     return [NSString stringWithFormat:@"^(%@, %@)",
             _content[0],_content[1]];
 }
+//HTML
 -(NSString *)toHTML {
     return [super wrapHTML: [NSString stringWithFormat:
             @"<msup> <mrow>%@</mrow> <mrow>%@</mrow> </msup>",

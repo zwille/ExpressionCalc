@@ -13,26 +13,26 @@
 
 @implementation XCIdentifierTest
 -(void)testSimple {
-    XCElement * idf = [XCIdentifier identifierWithConstantId:XC_EULER_ID andRoot:nil];
+    XCElement * idf = [XCIdentifier identifierWithConstantId:XC_EULER_ID andParent:nil];
     STAssertEqualObjects([idf eval],@(M_E), nil);
-    idf = [XCIdentifier identifierWithConstantId:XC_PI_ID andRoot:nil];
+    idf = [XCIdentifier identifierWithConstantId:XC_PI_ID andParent:nil];
     STAssertEqualObjects([idf eval],@(M_PI), nil);
     XCVariable * v0 = [XCVariable variableForIndex:0];
     [v0 setNumericValue:@1.5];
-    idf = [XCIdentifier identifierWithVariableIndex:0 andRoot:nil];
+    idf = [XCIdentifier identifierWithVariableIndex:0 andParent:nil];
     STAssertEqualObjects([idf eval],@1.5, nil);
-    idf = [XCIdentifier identifierWithVariableIndex:9 andRoot:nil];
+    idf = [XCIdentifier identifierWithVariableIndex:9 andParent:nil];
     STAssertEqualObjects([idf eval],@0, nil);
     [v0 setNumericValue:@0];
     
 }
 -(void)testCopy {
-    XCElement * idf = [XCIdentifier identifierWithConstantId:XC_EULER_ID andRoot:nil];
+    XCElement * idf = [XCIdentifier identifierWithConstantId:XC_EULER_ID andParent:nil];
     XCElement * idfcp = [idf copy];
     STAssertEqualObjects([idfcp eval],@(M_E), nil);
     XCVariable * v0 = [XCVariable variableForIndex:0];
     [v0 setNumericValue:@1.5];
-    idf = [XCIdentifier identifierWithVariableIndex:0 andRoot:nil];
+    idf = [XCIdentifier identifierWithVariableIndex:0 andParent:nil];
     idfcp = [idf copy];
     STAssertEqualObjects([idfcp eval],@1.5, nil);
     [v0 setNumericValue:@2.5];

@@ -1,6 +1,6 @@
 //
 //  NSNumber+XCNumber.m
-//  TestHTML
+//  XCCalc
 //
 //  Created by Christoph Cwelich on 07.12.12.
 //  Copyright (c) 2012 Christoph Cwelich. All rights reserved.
@@ -8,6 +8,7 @@
 
 #import "NSNumber+XCNumber.h"
 #define EPS  1e-15
+
 //used by mulOverflows
 //returns 0xfffffff for negative values else 0
 //neg ^ neg = pos
@@ -17,10 +18,7 @@
 int msgn(long a) {
     return (a<0) ? -1 : 0;
 }
-double dabs(double x){
-    return (x<0) ? -x : x;
-}
-
+// return YES if a*b overflows
 BOOL mulOverflows(long * result, long a, long b) {
     if (a && b) { //both not zero
         *result = a*b;
@@ -31,6 +29,8 @@ BOOL mulOverflows(long * result, long a, long b) {
     *result = 0;
     return NO;
 }
+
+// return YES if a+b overflows
 BOOL addOverflows(long * result, long a, long b) {
     if ((b > 0 && a > LONG_MAX - b) 
         || (b < 0 && a < LONG_MIN - b)) {
@@ -40,6 +40,8 @@ BOOL addOverflows(long * result, long a, long b) {
     *result = a + b;
     return NO;
 }
+// return the position of the leftmost bit
+// = ceil( log(x) / log(2) )
 unsigned int lbit(long x) {
     unsigned int rc = 0;
     if (x<0) {
@@ -70,6 +72,7 @@ unsigned int lbit(long x) {
 BOOL isLPowNoOverflowGuessed(long base, unsigned int exp) {
     return lbit(base) * exp < sizeof(long)*8-1;
 }
+
 long lpow(long x, unsigned int exp) {
     long rc = 1;
     int odd;
@@ -78,16 +81,11 @@ long lpow(long x, unsigned int exp) {
         exp >>=1;
         if(odd) rc*=x;
         x*=x;
-       /* if(odd && mulOverflows(&rc, x, rc)) {
-            return -1;
-        }
-        if(mulOverflows(&x, x, x)) {
-            return -1;
-        }*/
     }
     return rc;
 }
-BOOL isInteger(NSNumber * val) {
+
+BOOL isObjcTypeInteger(NSNumber * val) {
     const char * t = [val objCType];
     return 
     !strcmp(t, @encode(int)) ||
@@ -102,6 +100,7 @@ BOOL bothInteger(NSNumber * a, NSNumber * b) {
 +(NSNumber *)nan {
     return [NSNumber numberWithDouble:NAN];
 }
+
 -(NSNumber *)addNum:(NSNumber *)rhs {
     if(bothInteger(self, rhs)) {
         // try int
@@ -152,7 +151,7 @@ BOOL bothInteger(NSNumber * a, NSNumber * b) {
     1.0 / [self doubleValue]];
 }
 -(NSNumber *)negate {
-    if(isInteger(self)) {
+    if(isObjcTypeInteger(self)) {
         long rc = [self longValue];
         if (rc!=LONG_MIN) {
             return [NSNumber numberWithLong:-rc];
@@ -163,21 +162,21 @@ BOOL bothInteger(NSNumber * a, NSNumber * b) {
 
 -(BOOL)isInteger {
     double d = [self doubleValue];
-    return isInteger(self) || (fabs(d - (long)d) < EPS);
+    return isObjcTypeInteger(self) || (fabs(d - (long)d) < EPS);
 }
 
 -(BOOL)isNaN {
-    return !isInteger(self) && isnan([self doubleValue]);
+    return !isObjcTypeInteger(self) && isnan([self doubleValue]);
 }
 
 -(BOOL)isZero {
-    if (isInteger(self)) {
+    if (isObjcTypeInteger(self)) {
         return [self longValue] == 0;
     } else {
         double d = [self doubleValue];
         return (isnan(d)) ?
         NO :
-        dabs([self doubleValue]) < EPS;
+        fabs([self doubleValue]) < EPS;
     }
 }
 

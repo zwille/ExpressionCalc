@@ -27,38 +27,6 @@
     [super normalize];
     [self normalizeToElementSelf];
     [self normalizeRShiftClass:[XCNegate class]];
-    /*
-    BOOL isNeg[2];
-    for (NSUInteger i=0; i<2; i++) {
-        isNeg[i] = [_content[i] isKindOfClass:[XCNegate class]];
-    }
-    
-    // normalize negation
-    if (isNeg[0]) {
-        if (isNeg[1]) { // -a-b
-            XCNegate * neg = (XCNegate*)[self element0];
-            XCElement * cc[2], * p =  [self parent];
-            cc[0] = [neg content],
-            cc[1] = [[self element1] content],
-            [p replaceContentWithElement:neg];
-            [neg setContent:self];
-            for (NSUInteger i=0; i<2; i++) {
-                _content[i] = cc[i];
-            }
-        } else if ([_content[1] isKindOfClass:[self class]]) {
-            //shift invert right
-            XCSum * s = (XCSum*) [self element1];
-            assert( ![[s element0] isKindOfClass: [XCNegate class]]);
-            XCElement * t = [s element0];
-            [s setElement:[self element0] at:0];
-            [self setElement:t at:0];
-            [[self element1] normalize];
-        } else { // -a+b
-            [self swapElements];
-        }
-    }*/
-    
- 
 }
 
 //HTML

@@ -22,9 +22,7 @@
 @synthesize numkeys;
 @synthesize varButton;
 
-- (void)viewDidLoad
-
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     _kernel = [[XCKernel alloc] init];
     
@@ -63,9 +61,17 @@
     
     [self reset:nil];
 }
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    NSLog(@"memory warning");
+}
+
+// update
 - (void) updateNumKeys {
     NSString * format = @"%d";
-    if (numbersAsVariables || storing) {
+    if (_numbersAsVariables || _storing) {
         format = @"X%d";
         [varButton setTitle:@"NUM" forState:UIControlStateNormal];
     } else {
@@ -77,11 +83,12 @@
     }
     
 }
+
 - (void) updateHTMLState {
     _htmlState = [NSString stringWithFormat:@"%@   %@   %@",
         ([_kernel isInExpression]) ? @"( )" : @"",
         ([_kernel isDegreeAngleMode]) ? @"DEG" : @"RAD",
-        (storing) ? @"STO" : (numbersAsVariables) ? @"VAR" : @"NUM"
+        (_storing) ? @"STO" : (_numbersAsVariables) ? @"VAR" : @"NUM"
         ];
 }
 - (void) updateAngleModeButton {
@@ -89,11 +96,11 @@
      ([_kernel isDegreeAngleMode]) ? @"RAD" : @"DEG"
                      forState:UIControlStateNormal];
 }
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    NSLog(@"memory warning");
+
+- (void) updateHTMLExpression {
+    _htmlExpression = [_kernel toHTML];
 }
+
 - (void) print {
     NSString * html = nil;
     UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
@@ -114,10 +121,8 @@
         [webView loadHTMLString: html baseURL:nil];
     }
 }
-- (void) updateHTMLExpression {
-    _htmlExpression = [_kernel toHTML];
-}
 
+//rotate
 -(void)willAnimateRotationToInterfaceOrientation:
 (UIInterfaceOrientation) orientation
                                         duration:
@@ -152,7 +157,7 @@
 // actions
 // control
 - (IBAction)del:(id)sender {
-    if (storing) {
+    if (_storing) {
         return;
     }
     [_kernel triggerDel];
@@ -162,7 +167,7 @@
 }
 
 - (IBAction)ans:(id)sender {
-    if (storing) {
+    if (_storing) {
         return;
     }
     [_kernel triggerVariable:XC_ANS_IDX];
@@ -170,16 +175,15 @@
     [self print];
 }
 
-
 - (IBAction)store:(id)sender {
-    storing = !storing;
+    _storing = !_storing;
     [self updateNumKeys];
     [self updateHTMLState];
     [self print];
 }
 
 - (IBAction)eval:(id)sender {
-    if (storing) {
+    if (_storing) {
         return;
     }
     NSNumber * result = [_kernel eval];
@@ -203,8 +207,8 @@
 }
 
 - (IBAction)reset:(id)sender {
-    storing = NO;
-    numbersAsVariables = NO;
+    _storing = NO;
+    _numbersAsVariables = NO;
     [_kernel reset];
     [self updateNumKeys];
     [self updateAngleModeButton];
@@ -215,7 +219,7 @@
 }
 
 - (IBAction)changeAngleMode:(id)sender {
-    if (storing) {
+    if (_storing) {
         return;
     }
     [_kernel toggleAngleMode];
@@ -226,10 +230,10 @@
 }
 
 - (IBAction)var:(id)sender {
-    if (storing) {
+    if (_storing) {
         return;
     }
-    numbersAsVariables = !numbersAsVariables;
+    _numbersAsVariables = !_numbersAsVariables;
     [self updateNumKeys];
     [self updateHTMLState];
     [self print];
@@ -237,7 +241,7 @@
 
 // navigation
 - (IBAction)up:(id)sender {
-    if (storing) {
+    if (_storing) {
         return;
     }
     [_kernel previousStatement];
@@ -248,7 +252,7 @@
     
 }
 - (IBAction)down:(id)sender {
-    if (storing) {
+    if (_storing) {
         return;
     }
     [_kernel nextStatement];
@@ -258,7 +262,7 @@
     [self print];
 }
 - (IBAction)right:(id)sender {
-    if (storing) {
+    if (_storing) {
         return;
     }
     [_kernel triggerNext];
@@ -267,7 +271,7 @@
 }
 
 - (IBAction)left:(id)sender {
-    if (storing) {
+    if (_storing) {
         return;
     }
     [_kernel triggerPrevious];
@@ -276,7 +280,7 @@
     [self print];
 }
 - (IBAction)enter:(id)sender {
-    if (storing) {
+    if (_storing) {
         return;
     }
     [_kernel triggerEnter];
@@ -287,7 +291,7 @@
 
 // literals functions
 - (IBAction)euler:(id)sender {
-    if (storing) {
+    if (_storing) {
         return;
     }
     [_kernel triggerConstant:XC_EULER_ID];
@@ -296,7 +300,7 @@
 }
 
 - (IBAction)pi:(id)sender {
-    if (storing) {
+    if (_storing) {
         return;
     }
     [_kernel triggerConstant:XC_PI_ID];
@@ -305,7 +309,7 @@
 }
 
 - (IBAction)function:(id)sender {
-    if (storing) {
+    if (_storing) {
         return;
     }
     NSString * fname = [sender currentTitle];
@@ -317,15 +321,15 @@
 
 - (IBAction)num:(id)sender {
     NSUInteger tag = [sender tag];
-    if (storing) {
+    if (_storing) {
         if (tag==10) {
             return;
         }
-        [_kernel triggerAssign:tag];
-        storing = NO;
+        [_kernel assignToVar:tag];
+        _storing = NO;
         [self updateNumKeys];
         [self updateHTMLState];
-    } else if(numbersAsVariables) {
+    } else if(_numbersAsVariables) {
         if (tag==10) {
             return;
         }
@@ -340,7 +344,7 @@
 
 // operators
 - (IBAction)plus:(id)sender {
-    if (storing) {
+    if (_storing) {
         return;
     }
     [_kernel triggerOperator:XC_OP_PLUS];
@@ -349,7 +353,7 @@
     [self print];
 }
 - (IBAction)minus:(id)sender {
-    if (storing) {
+    if (_storing) {
         return;
     }
     [_kernel triggerOperator:XC_OP_MINUS];
@@ -358,7 +362,7 @@
     [self print];
 }
 - (IBAction)mult:(id)sender {
-    if (storing) {
+    if (_storing) {
         return;
     }
     [_kernel triggerOperator:XC_OP_MULT];
@@ -367,7 +371,7 @@
     [self print];
 }
 - (IBAction)div:(id)sender {
-    if (storing) {
+    if (_storing) {
         return;
     }
     [_kernel triggerOperator:XC_OP_DIV];
@@ -376,7 +380,7 @@
     [self print];
 }
 - (IBAction)exp:(id)sender {
-    if (storing) {
+    if (_storing) {
         return;
     }
     [_kernel triggerOperator:XC_OP_EXP];
@@ -386,7 +390,7 @@
 }
 
 - (IBAction)braces:(id)sender {
-    if (storing) {
+    if (_storing) {
         return;
     }
     [_kernel triggerExpression];

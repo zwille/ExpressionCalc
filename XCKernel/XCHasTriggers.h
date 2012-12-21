@@ -1,6 +1,6 @@
 //
 //  XCHasTriggers.h
-//  TestHTML
+//  XCCalc
 //
 //  Created by Christoph Cwelich on 04.12.12.
 //  Copyright (c) 2012 Christoph Cwelich. All rights reserved.
@@ -20,5 +20,5 @@
 -(id<XCHasTriggers>)triggerFunction: (NSString*) functionName;
 -(id<XCHasTriggers>)triggerConstant: (XCConstants) cid;
 -(id<XCHasTriggers>)triggerVariable: (NSUInteger) idx;
--(id<XCHasTriggers>)triggerAssign: (NSUInteger) varIdx;
+
 @end

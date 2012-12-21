@@ -1,6 +1,6 @@
 //
 //  XCKernel.m
-//  TestHTML
+//  XCCalc
 //
 //  Created by Christoph Cwelich on 04.12.12.
 //  Copyright (c) 2012 Christoph Cwelich. All rights reserved.
@@ -107,11 +107,11 @@
     return [_head isKindOfClass:[XCStatement class]];
 }
 //trigger
--(id<XCHasTriggers>)triggerAssign: (NSUInteger)varIdx {
+-(void)assignToVar: (NSUInteger)varIdx {
     if ([self isHeadOnStatement]) {
         [self newStatement];
     }
-    return [_root triggerAssign:varIdx];
+    [_root assignToVar:varIdx];
 }
 -(id<XCHasTriggers>)triggerNum:(char) c {
     if ([self isHeadOnStatement]) {

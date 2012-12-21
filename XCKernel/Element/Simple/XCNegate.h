@@ -1,12 +1,12 @@
 //
 //  XCNegate.h
-//  ExprCalc
+//  XCCalc
 //
 //  Created by Christoph Cwelich on 25.11.12.
 //  Copyright (c) 2012 Christoph Cwelich. All rights reserved.
 //
 
-#import "XCSimpleElement.h"
+#import "XCValModifier.h"
 
 @interface XCNegate : XCSimpleElement
 +(id)negateValue: (XCElement*) value

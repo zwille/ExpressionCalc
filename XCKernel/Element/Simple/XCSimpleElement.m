@@ -1,6 +1,6 @@
 //
 //  XCSimpleElement.m
-//  TestHTML
+//  XCCalc
 //
 //  Created by Christoph Cwelich on 04.12.12.
 //  Copyright (c) 2012 Christoph Cwelich. All rights reserved.
@@ -10,16 +10,20 @@
 
 
 @implementation XCSimpleElement
-
+//init
 -(id)initWithContent:(XCElement *)content
              andParent:(XCElement *)parent {
     self = [super initWithParent:parent];
     [self setContent:content];
     return self;
 }
+//methods setter getter
 -(void)setContent:(XCElement *)content {
     [content setParent:self];
     _content = content;
+}
+-(BOOL)isEmpty {
+    return !_content;
 }
 -(XCElement*)replaceContentWithElement:(XCElement *)element {
     [self setContent:element];
@@ -36,22 +40,9 @@
 }
 -(void)normalize {
     [_content normalize];
-    // if content has same type as self 
-    XCElement * content = [self content];
-    if ([content isKindOfClass:[self class]]) {
-        id parent = [self parent];
-        assert(parent);
-        [parent replaceContentWithElement:[content content]];
-    }
 }
-//trigger
-/*
--(id<XCHasTriggers>)triggerDel {
-    assert([self root]);
-    NSLog(@"Simple::triggerDel root=%@",[self root]);
-    return [[self root] triggerDel];
-}*/
 
+//trigger
 -(id<XCHasTriggers>)triggerNextContent {
     return [_parent triggerNextContent];
 }
@@ -73,7 +64,5 @@
     return rc;
     
 }
--(BOOL)isEmpty {
-    return !_content;
-}
+
 @end

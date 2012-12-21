@@ -1,6 +1,6 @@
 //
 //  XCElement.m
-//  TestHTML
+//  XCCalc
 //
 //  Created by Christoph Cwelich on 29.11.12.
 //  Copyright (c) 2012 Christoph Cwelich. All rights reserved.
@@ -20,21 +20,21 @@
 
 @implementation XCElement
 @synthesize parent=_parent;
-
--(XCElement *)content{
-    return self;
-}
--(XCElement *)head {
-    return [self content];
-}
--(void)normalize {
-    // pass;
-}
+//init
 -(id)initWithParent:(XCElement *)parent {
     self = [super init];
     _parent = parent;
     return self;
 }
+//getter setter
+-(XCElement *)content{
+    return self;
+}
+
+-(XCElement *)head {
+    return [self content];
+}
+
 -(void)setFocus:(BOOL)val {
     _state.focus = val;
 }
@@ -48,6 +48,16 @@
     return _state.error;
 }
 
+-(void)normalize {
+    // pass;
+}
+
+-(XCElement*)replaceContentWithElement:(XCElement *)element {
+    assert(false);
+}
+-(BOOL)isEmpty {
+    return YES;
+}
 
 -(NSString *)description {
     NSString * format = @"%@";
@@ -60,35 +70,27 @@
             ];
 }
 
-
+// HTML
 -(NSString*) toHTML {
     assert(NO);
     return nil;
 }
+
 -(NSString *)toHTMLFenced {
     return [self wrapHTML:[NSString stringWithFormat:@"<mfenced separators=\" \">%@</mfenced>",[self toHTML]]];
 }
+
 -(NSString*) wrapHTML: (NSString*) inner {
-    //NSLog(@"XCElement::wrapHTML self=%@ hasError=%d inner=%@",self,[self hasError],inner);
     if ([self hasError]) {
         inner = [NSString stringWithFormat:
                  @"<mspan class=\"error\">%@</mspan>",inner];
     }
-    //NSLog(@"XCElement::wrapHTML inner=%@",inner);
     if ([self hasFocus]) {
         inner = [NSString stringWithFormat:
                  @"<mspan class=\"hasfocus\">%@</mspan>",inner];
     }
-    //NSLog(@"XCElement::wrapHTML inner=%@",inner);
     return inner;
     
-}
-
--(XCElement*)replaceContentWithElement:(XCElement *)element {
-    assert(false);
-}
--(BOOL)isEmpty {
-    return YES;
 }
 
 //evaluate
@@ -98,16 +100,13 @@
     return [NSNumber numberWithDouble:NAN];
 }
 
+-(NSNumber *)checkErrorOn:(NSNumber *)num {
+    [self setError:[num isNaN]];
+    return num;
+}
+
 //trigger
-/*
--(id<XCHasTriggers>)triggerDel {
-    //return [[self root] triggerDel];
-    assert([self root]);
-    //XCElement * rc = [XCSpacer spacerWithRoot:nil];
-    //[[self root] replaceContentWithElement:rc];
-    //return rc;
-    return [[self root] triggerDel];
-}*/
+
 -(id<XCHasTriggers>)triggerDel {
     assert([self parent]);
     XCElement * rc = [XCSpacer spacerWithParent:nil];
@@ -134,9 +133,7 @@
 -(id<XCHasTriggers>)triggerVariable:(NSUInteger)idx {
     return self; //pass
 }
--(id<XCHasTriggers>)triggerAssign: (NSUInteger) varIdx {
-    return [[self parent] triggerAssign: varIdx];
-}
+
 -(id<XCHasTriggers>)triggerNext {
     assert(_parent);
     return [_parent triggerNextContent];
@@ -151,11 +148,6 @@
 -(id<XCHasTriggers>)triggerPreviousContent {
     return self; //pass
 }
-/*
--(id<XCHasTriggers>)triggerOperator:(XCOperator)op{
-    return [_root triggerOperator:op];
-}
- */
 
 -(id<XCHasTriggers>)triggerOperator:(XCOperator)op {
     XCElement * spacer = [XCSpacer spacerWithParent:self];
@@ -215,8 +207,5 @@
     rc -> _state.error = NO;
     return rc;
 }
--(NSNumber *)checkErrorOn:(NSNumber *)num {
-    [self setError:[num isNaN]];
-    return num;
-}
+
 @end
