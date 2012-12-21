@@ -37,7 +37,7 @@
     return [super wrapHTML: [_store toHTML]];
 }
 -(NSString *)description {
-    return [NSString stringWithFormat:@"%@[%@]",[super description],_store];
+    return [NSString stringWithFormat:@"%@",_store];
 }
 -(id)copyWithZone:(NSZone *)zone {
     XCIdentifier * rc = [super copyWithZone:zone];

@@ -40,7 +40,6 @@
 		002B73A41675D4A000A675E2 /* XCGlobal.m in Sources */ = {isa = PBXBuildFile; fileRef = 002B738A1675D4A000A675E2 /* XCGlobal.m */; };
 		002B73A51675D4A000A675E2 /* XCKernel.m in Sources */ = {isa = PBXBuildFile; fileRef = 002B738E1675D4A000A675E2 /* XCKernel.m */; };
 		002B73A61675D4A000A675E2 /* XCSpacer.m in Sources */ = {isa = PBXBuildFile; fileRef = 002B73901675D4A000A675E2 /* XCSpacer.m */; };
-		002B73AD1675D4C500A675E2 /* XCComplexElementContentTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 002B73AC1675D4C500A675E2 /* XCComplexElementContentTest.m */; };
 		002B73E51675E36A00A675E2 /* XCStatementBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 002B73E41675E36900A675E2 /* XCStatementBuffer.m */; };
 		002B73E81676123400A675E2 /* XCCircBuf.m in Sources */ = {isa = PBXBuildFile; fileRef = 002B73E71676123300A675E2 /* XCCircBuf.m */; };
 		002B73EB16761F7D00A675E2 /* XCTestCircBuf.m in Sources */ = {isa = PBXBuildFile; fileRef = 002B73EA16761F7D00A675E2 /* XCTestCircBuf.m */; };
@@ -136,8 +135,6 @@
 		002B738E1675D4A000A675E2 /* XCKernel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCKernel.m; sourceTree = "<group>"; };
 		002B738F1675D4A000A675E2 /* XCSpacer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XCSpacer.h; path = ../XCSpacer.h; sourceTree = "<group>"; };
 		002B73901675D4A000A675E2 /* XCSpacer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XCSpacer.m; path = ../XCSpacer.m; sourceTree = "<group>"; };
-		002B73AB1675D4C500A675E2 /* XCComplexElementContentTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCComplexElementContentTest.h; sourceTree = "<group>"; };
-		002B73AC1675D4C500A675E2 /* XCComplexElementContentTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCComplexElementContentTest.m; sourceTree = "<group>"; };
 		002B73E31675E36800A675E2 /* XCStatementBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCStatementBuffer.h; sourceTree = "<group>"; };
 		002B73E41675E36900A675E2 /* XCStatementBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCStatementBuffer.m; sourceTree = "<group>"; };
 		002B73E61676123200A675E2 /* XCCircBuf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCCircBuf.h; sourceTree = "<group>"; };
@@ -175,14 +172,14 @@
 		00A1982B167E15DB00AFE799 /* XCKernelTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCKernelTest.m; sourceTree = "<group>"; };
 		00B112AE167CC54600BEA4B1 /* XCStatementBufferTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCStatementBufferTest.h; sourceTree = "<group>"; };
 		00B112AF167CC54600BEA4B1 /* XCStatementBufferTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCStatementBufferTest.m; sourceTree = "<group>"; };
-		00B14D581677A29500B27740 /* XCExprTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCExprTest.h; sourceTree = "<group>"; };
-		00B14D591677A29500B27740 /* XCExprTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCExprTest.m; sourceTree = "<group>"; };
+		00B14D581677A29500B27740 /* XCExprTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XCExprTest.h; path = Complex/XCExprTest.h; sourceTree = "<group>"; };
+		00B14D591677A29500B27740 /* XCExprTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XCExprTest.m; path = Complex/XCExprTest.m; sourceTree = "<group>"; };
 		00BA2680167760BB00EF209E /* XCSqrt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCSqrt.h; sourceTree = "<group>"; };
 		00BA2681167760BD00EF209E /* XCSqrt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCSqrt.m; sourceTree = "<group>"; };
-		00CE67041678EFE4009D580C /* XCProdTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCProdTest.h; sourceTree = "<group>"; };
-		00CE67051678EFE4009D580C /* XCProdTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCProdTest.m; sourceTree = "<group>"; };
-		00CE67081678F055009D580C /* XCExpoTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCExpoTest.h; sourceTree = "<group>"; };
-		00CE67091678F055009D580C /* XCExpoTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCExpoTest.m; sourceTree = "<group>"; };
+		00CE67041678EFE4009D580C /* XCProdTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XCProdTest.h; path = Complex/XCProdTest.h; sourceTree = "<group>"; };
+		00CE67051678EFE4009D580C /* XCProdTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XCProdTest.m; path = Complex/XCProdTest.m; sourceTree = "<group>"; };
+		00CE67081678F055009D580C /* XCExpoTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XCExpoTest.h; path = Complex/XCExpoTest.h; sourceTree = "<group>"; };
+		00CE67091678F055009D580C /* XCExpoTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XCExpoTest.m; path = Complex/XCExpoTest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -314,10 +311,10 @@
 		002B735E1675D4A000A675E2 /* Element */ = {
 			isa = PBXGroup;
 			children = (
-				002B738F1675D4A000A675E2 /* XCSpacer.h */,
-				002B73901675D4A000A675E2 /* XCSpacer.m */,
 				002B73861675D4A000A675E2 /* XCElement.h */,
 				002B73871675D4A000A675E2 /* XCElement.m */,
+				002B738F1675D4A000A675E2 /* XCSpacer.h */,
+				002B73901675D4A000A675E2 /* XCSpacer.m */,
 				008582041681FF1C00C95225 /* Tuple */,
 				002B736A1675D4A000A675E2 /* Simple */,
 				002B73771675D4A000A675E2 /* Terminal */,
@@ -389,6 +386,7 @@
 		002B73A91675D4C500A675E2 /* Element */ = {
 			isa = PBXGroup;
 			children = (
+				00A0D669168301100096C345 /* Tuple */,
 				00A19820167DEF8300AFE799 /* Simple */,
 				00A19815167DE1C700AFE799 /* Terminal */,
 				002B73AA1675D4C500A675E2 /* Complex */,
@@ -399,14 +397,6 @@
 		002B73AA1675D4C500A675E2 /* Complex */ = {
 			isa = PBXGroup;
 			children = (
-				002B73AB1675D4C500A675E2 /* XCComplexElementContentTest.h */,
-				002B73AC1675D4C500A675E2 /* XCComplexElementContentTest.m */,
-				00B14D581677A29500B27740 /* XCExprTest.h */,
-				00B14D591677A29500B27740 /* XCExprTest.m */,
-				00CE67041678EFE4009D580C /* XCProdTest.h */,
-				00CE67051678EFE4009D580C /* XCProdTest.m */,
-				00CE67081678F055009D580C /* XCExpoTest.h */,
-				00CE67091678F055009D580C /* XCExpoTest.m */,
 			);
 			path = Complex;
 			sourceTree = "<group>";
@@ -422,6 +412,19 @@
 				0085821116820D5900C95225 /* XCProduct.m */,
 				0085821316821A1200C95225 /* XCExponentiation.h */,
 				0085821416821A1200C95225 /* XCExponentiation.m */,
+			);
+			name = Tuple;
+			sourceTree = "<group>";
+		};
+		00A0D669168301100096C345 /* Tuple */ = {
+			isa = PBXGroup;
+			children = (
+				00B14D581677A29500B27740 /* XCExprTest.h */,
+				00B14D591677A29500B27740 /* XCExprTest.m */,
+				00CE67041678EFE4009D580C /* XCProdTest.h */,
+				00CE67051678EFE4009D580C /* XCProdTest.m */,
+				00CE67081678F055009D580C /* XCExpoTest.h */,
+				00CE67091678F055009D580C /* XCExpoTest.m */,
 			);
 			name = Tuple;
 			sourceTree = "<group>";
@@ -601,7 +604,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				002B73AD1675D4C500A675E2 /* XCComplexElementContentTest.m in Sources */,
 				002B73EB16761F7D00A675E2 /* XCTestCircBuf.m in Sources */,
 				00B14D5A1677A29500B27740 /* XCExprTest.m in Sources */,
 				009E0F3316788996007E89B5 /* XCNumberTest.m in Sources */,

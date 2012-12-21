@@ -7,6 +7,7 @@
 //
 
 #import "XCTupleElement.h"
+#import "XCSimpleElement.h"
 
 @implementation XCTupleElement
 
@@ -36,11 +37,61 @@
 -(XCElement *)content {
     return _content[[self index]];
 }
+-(void) swapElements {
+    XCElement * t = [self element1];
+    [self setElement:[self element0] at:1];
+    [self setElement:t at:0];
+}
+-(void)normalizeToElementSelf {
+    // normalize to order (element, element) or (element, self)
+    if ([_content[0] isKindOfClass:[self class]]) {
+        if ([_content[1] isKindOfClass:[self class]]) { // both self
+            XCTupleElement * e1, *e2, * e3;
+            e3 = (XCTupleElement *) [self element1];
+            e1 = (XCTupleElement *) [self element0];
+            e2 = [[[self class] alloc] initWithParent: self andFirstElement: [e1 element1]
+                             andSecondElement: e3];
+        } else {
+            [self swapElements];
+        }
+    }
+}
+-(void) normalizeRShiftClass: (Class) cls {
+    BOOL isClass[2];
+    for (NSUInteger i=0; i<2; i++) {
+        isClass[i] = [_content[i] isKindOfClass:cls];
+    }
+    
+    if (isClass[0]) {
+        if (isClass[1]) { // -a-b
+            XCSimpleElement * neg = (XCSimpleElement *) [self element0];
+            XCElement * cc[2], * p =  [self parent];
+            cc[0] = [neg content],
+            cc[1] = [[self element1] content],
+            [p replaceContentWithElement:neg];
+            [neg setContent:self];
+            for (NSUInteger i=0; i<2; i++) {
+                _content[i] = cc[i];
+            }
+        } else if ([_content[1] isKindOfClass:[self class]]) {
+            //shift invert right
+            id sub = [self element1];
+            assert( ![[sub element0] isKindOfClass: cls]);
+            XCElement * t = [sub element0];
+            [sub setElement:[self element0] at:0];
+            [self setElement:t at:0];
+            [[self element1] normalize];
+        } else { // -a+b
+            [self swapElements];
+        }
+    }
+}
+        
 -(id)copyWithZone:(NSZone *)zone {
     XCTupleElement * rc = [super copyWithZone:zone];
-    rc->_content[0] = [_content[0] copyWithZone:zone];
-    rc->_content[1] = [_content[1] copyWithZone:zone];
-    [rc setIndex:0];
+    [rc setElement:[_content[0] copyWithZone:zone] at:0];
+    [rc setElement:[_content[1] copyWithZone:zone] at:1];
+    
     return rc;
 }
 -(XCElement*)replaceContentWithElement:(XCElement *)element {

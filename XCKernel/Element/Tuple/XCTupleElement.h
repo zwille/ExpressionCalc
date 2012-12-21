@@ -21,4 +21,7 @@
 -(XCElement*) element0;
 -(XCElement*) element1;
 -(BOOL) index;
+-(void) swapElements;
+-(void) normalizeToElementSelf;
+-(void) normalizeRShiftClass: (Class) cls;
 @end

@@ -2,8 +2,12 @@ body {
             font-size:1.2em;
             color:#30395c;
             background-color:#85a5cc;
+            border: 2px inset #b7b7b7;
+            margin: 0 0 0 0;
+            padding: 0 0 0 0;
 }
-a { // due to some strange behaviour of uiwebview
+
+a { /* due to some strange behaviour of uiwebview */
     font-weight: normal;
     color:#30395c;
     text-decoration:none;

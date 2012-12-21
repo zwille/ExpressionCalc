@@ -1,17 +1,36 @@
 <html>
-	<head>
+<head>
 	<style type="text/css">
         %@
+        #box {
+            position: absolute;
+            /*outline: 1px solid red;*/
+            width:260px;
+            height:145px;
+            padding: 5px 5px 5px 5px;
+        }
+        #expr {
+            position: relative;
+            /*outline: 1px solid green;*/
+            width:260px;
+            height:118px;
+            overflow: scroll;
+        }
+        
         #out {
-            position: fixed;
+            position: absolute;
+            /*outline: 1px solid black;*/
+            text-align: left;
+            bottom:0;
+            left:5px;
             font-size:1.5em;
-            bottom: 0.3em;
-            left: 0.3em;
         }
     </style>
-	</head>
+</head>
 <body>
+    <div id="box">
+        <div id="expr"><math>%@</math> </div>
+        <div id="out">%@</div>
+    </div>
 </body>
-<div id="expr"><math>%@</math> </div>
-<div id="out">%@</div>
 </html>

@@ -160,43 +160,49 @@
 -(id<XCHasTriggers>)triggerOperator:(XCOperator)op {
     XCElement * spacer = [XCSpacer spacerWithParent:self];
     XCElement * newEl = spacer;
-    XCElement * root = [self parent];
-    BOOL hasContainer = [root isKindOfClass:[XCExpression class]]
-    || [root isKindOfClass:[XCStatement class]];
-    assert(root);
+    XCElement * parent = [self parent];
+    assert(parent);
+    BOOL hasContainer = [parent isKindOfClass:[XCExpression class]]
+    || [parent isKindOfClass:[XCStatement class]];
+    
     switch (op) {
         case XC_OP_MINUS:
             newEl = [XCNegate negateValue:spacer withParent:self];
         case XC_OP_PLUS:
-            if (hasContainer || [root isKindOfClass:[XCSum class]]) {
-                [root replaceContentWithElement:
+            if (hasContainer) {
+                [parent replaceContentWithElement:
                  [XCSum sumWithElement0:self
                             andElement1: newEl
-                                andParent:root]];
+                                andParent:parent]];
                 break;
             } 
-            return [root triggerOperator: op];
+            return [parent triggerOperator: op];
         case XC_OP_DIV:
             newEl = [XCInvert invertValue:spacer withParent:self];
         case XC_OP_MULT:
-            if (hasContainer || [root isKindOfClass:[XCProduct class]]) {
-                [root replaceContentWithElement:
+            if (hasContainer
+                || [parent isKindOfClass:[XCSum class]]
+                || [parent isKindOfClass:[XCProduct class]]) {
+                [parent replaceContentWithElement:
                  [XCProduct productWithElement0:self
                         andElement1:newEl
-                                  andParent:root]];
+                                  andParent:parent]];
                 break;
             }
-            return [root triggerOperator: op];
+            return [parent triggerOperator: op];
         default:
             assert(op==XC_OP_EXP);
-            if (hasContainer || [root isKindOfClass:[XCExponentiation class]]) {
+            if (hasContainer
+                || [parent isKindOfClass:[XCSum class]]
+                || [parent isKindOfClass:[XCProduct class]]
+                || [parent isKindOfClass:[XCExponentiation class]]) {
                     [[self parent] replaceContentWithElement:
                 [XCExponentiation exponentiationWithBase: self
                                           andExponent:newEl
-                                              andParent:root]];
+                                              andParent:parent]];
                 break;
             }
-            return [root triggerOperator: op];
+            return [parent triggerOperator: op];
 
     }
     return spacer;

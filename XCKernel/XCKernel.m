@@ -8,6 +8,8 @@
 
 #import "XCKernel.h"
 #import "XCStatement.h"
+#import "XCGlobal.h"
+#import "XCExpression.h"
 
 @implementation XCKernel
 
@@ -26,6 +28,9 @@
     [_root reset];
     [self setHead:[_root head]];
 }
+-(BOOL)isInExpression {
+    return [[_head parent] isKindOfClass:[XCExpression class]];
+}
 -(void)newStatement {
     XCStatement * bufhead = [_statements head];
     if ([bufhead isEmpty]) {
@@ -40,8 +45,8 @@
 - (void) log {
     NSString * headDesc = [NSString stringWithFormat:@"%@",_head];
     NSString * rootDesc = [NSString stringWithFormat:@"%@",_root];
-    NSLog(@"XCKernel head = %@",headDesc);
-    NSLog(@"XCKernel root = %@",rootDesc);
+    DLOG(@"XCKernel::log head = %@",headDesc);
+    DLOG(@"XCKernel::log root = %@",rootDesc);
 }
 -(NSString *)toHTML {
     return [_root toHTML];

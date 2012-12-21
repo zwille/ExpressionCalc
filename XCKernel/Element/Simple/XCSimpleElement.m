@@ -36,6 +36,13 @@
 }
 -(void)normalize {
     [_content normalize];
+    // if content has same type as self 
+    XCElement * content = [self content];
+    if ([content isKindOfClass:[self class]]) {
+        id parent = [self parent];
+        assert(parent);
+        [parent replaceContentWithElement:[content content]];
+    }
 }
 //trigger
 /*

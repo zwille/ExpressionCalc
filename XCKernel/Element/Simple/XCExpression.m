@@ -17,7 +17,10 @@
             [self content]];
 }
 -(NSString *)toHTML {
-    return [[self content] toHTMLFenced];
+    XCElement * c = [self content];
+    NSString * html = ([c isKindOfClass:[self class]]) ?
+    [c toHTMLFenced] : [c toHTML];
+    return [super wrapHTML:html];
 }
 
 @end

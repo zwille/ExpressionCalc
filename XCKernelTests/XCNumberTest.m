@@ -28,7 +28,7 @@
     [self checkStateWithNumber:num asInteger:YES ifNan:NO ifZero:YES];
     STAssertTrue([num longValue]==0, nil);
     num = @0.0;
-    [self checkStateWithNumber:num asInteger:NO ifNan:NO ifZero:YES];
+    [self checkStateWithNumber:num asInteger:YES ifNan:NO ifZero:YES];
     STAssertTrue([num doubleValue]==0.0, nil);
 
     num = @1;
@@ -103,7 +103,7 @@
 -(void)testAdd {
     [self addNum: @-1.5 withNum:@-1 assertResult:@-2.5 asInteger:NO ifNan:NO ifZero:NO];
     [self addNum: @-1 withNum:@1 assertResult:@0 asInteger:YES ifNan:NO ifZero:YES];
-    [self addNum: @-1.5 withNum:@1.5 assertResult:@0.0 asInteger:NO ifNan:NO ifZero:YES];
+    [self addNum: @-1.5 withNum:@1.5 assertResult:@0.0 asInteger:YES ifNan:NO ifZero:YES];
     
     [self addNum: imin withNum:imax assertResult:@-1 asInteger:YES ifNan:NO ifZero:NO];
     [self addNum: imin withNum:@0 assertResult:imin asInteger:YES ifNan:NO ifZero:NO];
@@ -135,7 +135,7 @@
     [self multNum:@-1.5 withNum:@-1 assertResult:@1.5 asInteger:NO ifNan:NO ifZero:NO];
     [self multNum:@1 withNum:@-1 assertResult:@-1 asInteger:YES ifNan:NO ifZero:NO];
     [self multNum:@3 withNum:@5 assertResult:@15 asInteger:YES ifNan:NO ifZero:NO];
-    [self multNum:@-1 withNum:@0.0 assertResult:@0.0 asInteger:NO ifNan:NO ifZero:YES];
+    [self multNum:@-1 withNum:@0.0 assertResult:@0.0 asInteger:YES ifNan:NO ifZero:YES];
     [self multNum:@-1.5 withNum:@1.5 assertResult:@-2.25 asInteger:NO ifNan:NO ifZero:NO];
     
     //blackbox overflow check
@@ -185,7 +185,7 @@
     [self base:@2 powExp:@4 assertResult:@16 asInteger:YES];
     // 32 bit long asserted
     [self base:@4 powExp:@10 assertResult:[NSNumber numberWithLong:(long)pow(4,10)] asInteger:YES];
-    [self base:@4 powExp:@15 assertResult:[NSNumber numberWithDouble:pow(4,15)] asInteger:NO];
+    [self base:@4 powExp:@15 assertResult:[NSNumber numberWithDouble:pow(4,15)] asInteger:YES];
     [self base:@63 powExp:@5 assertResult:[NSNumber numberWithLong:(long)pow(63, 5)] asInteger:YES];
     [self base:@63 powExp:@6 assertResult:[NSNumber numberWithDouble:pow(63,6)] asInteger:NO];
     //
@@ -196,7 +196,7 @@
     
     [self base:@1.5 powExp:@2 assertResult:[NSNumber numberWithDouble:pow(1.5, 2)] asInteger:NO];
     [self base:@2 powExp:@0.5 assertResult:[NSNumber numberWithDouble:pow(2,0.5)] asInteger:NO];
-    [self base:@2 powExp:@0.0 assertResult:@1.0 asInteger:NO];
+    [self base:@2 powExp:@0.0 assertResult:@1.0 asInteger:YES];
     [self base:@2 powExp:@-2 assertResult:@.25 asInteger:NO];
 
 
@@ -204,22 +204,23 @@
 }
 -(void)invertNum: (NSNumber*) num
   assertResult: (NSNumber*) asserted
-        ifNan: (BOOL) isNaN {
+        ifNan: (BOOL) isNaN
+        ifInt: (BOOL) isInt {
     NSNumber * result = [num invert];
   //  NSLog(@">>> invert %@: %@",num,result);
-    [self checkStateWithNumber:result asInteger:NO ifNan:isNaN ifZero:NO];
+    [self checkStateWithNumber:result asInteger:isInt ifNan:isNaN ifZero:NO];
     STAssertEqualObjects(result, asserted, nil);
 }
 -(void)testInvert {
-    [self invertNum:@-2 assertResult:@-.5 ifNan:NO];
-    [self invertNum:@-1 assertResult:@-1 ifNan:NO];
-    [self invertNum:@-.5 assertResult:@-2.0 ifNan:NO];
-    [self invertNum:@0 assertResult:nan ifNan:YES];
-    [self invertNum:@0.0 assertResult:nan ifNan:YES];
-    [self invertNum:@.5 assertResult:@2.0 ifNan:NO];
-    [self invertNum:@1 assertResult:@1 ifNan:NO];
-    [self invertNum:@2 assertResult:@.5 ifNan:NO];
-    [self invertNum:imin assertResult:[NSNumber numberWithDouble:1.0/LONG_MIN] ifNan:NO];
-    [self invertNum:imax assertResult:[NSNumber numberWithDouble:1.0/LONG_MAX] ifNan:NO];
+    [self invertNum:@-2 assertResult:@-.5 ifNan:NO ifInt:NO];
+    [self invertNum:@-1 assertResult:@-1 ifNan:NO ifInt:YES];
+    [self invertNum:@-.5 assertResult:@-2.0 ifNan:NO ifInt:YES];
+    [self invertNum:@0 assertResult:nan ifNan:YES ifInt:NO];
+    [self invertNum:@0.0 assertResult:nan ifNan:YES ifInt:NO];
+    [self invertNum:@.5 assertResult:@2.0 ifNan:NO ifInt:YES];
+    [self invertNum:@1 assertResult:@1 ifNan:NO ifInt:YES];
+    [self invertNum:@2 assertResult:@.5 ifNan:NO ifInt:NO];
+    [self invertNum:imin assertResult:[NSNumber numberWithDouble:1.0/LONG_MIN] ifNan:NO ifInt:NO];
+    [self invertNum:imax assertResult:[NSNumber numberWithDouble:1.0/LONG_MAX] ifNan:NO ifInt:NO];
 }
 @end

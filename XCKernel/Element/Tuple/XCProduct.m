@@ -8,6 +8,10 @@
 
 #import "XCProduct.h"
 #import "XCInvert.h"
+#import "XCExpression.h"
+#import "XCSum.h"
+#import "XCSpacer.h"
+#import "XCNegate.h"
 
 @implementation XCProduct
 +(id)productWithElement0:(XCElement *)e0 andElement1:(XCElement *)e1 andParent:(XCElement *)parent {
@@ -18,31 +22,14 @@
     return [NSString stringWithFormat:@"*(%@, %@)",
             _content[0],_content[1]];
 }
--(void) swapElements {
-    XCElement * t = [self element1];
-    [self setElement:[self element0] at:1];
-    [self setElement:t at:0];
-}
+   
 -(void)normalize {
-    // normalize to (element, element) or (element, product)
-    if ([_content[0] isKindOfClass:[XCProduct class]]) {
-        if ([_content[1] isKindOfClass:[XCProduct class]]) { // both products
-            XCProduct * p1, *p2, * p3;
-            p3 = (XCProduct *) [self element1];
-            p1 = (XCProduct *) [self element0];
-            p2 = [XCProduct productWithElement0:[p1 element1] andElement1:p3 andParent:self];
-            [p1 setElement:p2 at:1];
-        } else {
-            [self swapElements];
-        }
-    }
+  
     [super normalize];
     // assert element1 is normalized
-    
-   // if ([[self parent] isKindOfClass:[XCProduct class]]) {
-   //     [((XCProduct) [self parent]) shiftInvert];
-   // }
-    
+    [self normalizeToElementSelf];
+    [self normalizeRShiftClass:[XCInvert class]];
+    /*
     // normalize division
     if ([_content[0] isKindOfClass:[XCInvert class]]) {
         if ([_content[1] isKindOfClass:[XCInvert class]]) {
@@ -63,13 +50,33 @@
         } else {
             [self swapElements];
         }
-    }
+    }*/
     
     // normalize sign
-    // in depth
-    
-    
-    
+    for (NSUInteger i=0; i<2; i++) {
+        if([_content[i] isKindOfClass:[XCNegate class]]) {
+            [self setElement:[_content[i] content] at: i];
+            XCElement * parent = [self parent];
+            assert(parent);
+            [parent replaceContentWithElement:
+             [XCNegate negateValue:self withParent:parent]];
+        }
+    }   
+}
+// trigger
+-(id<XCHasTriggers>)triggerOperator:(XCOperator)op {
+    if (op==XC_OP_MULT || op==XC_OP_DIV) {
+        XCElement * spacer = [XCSpacer spacerWithParent:nil];
+        XCElement * newEl = (op==XC_OP_DIV) ?
+        [XCInvert invertValue:spacer withParent:nil] :
+        spacer;
+        newEl = [XCProduct productWithElement0:[self element1]
+                           andElement1: newEl andParent:self];
+        [self setElement:newEl at:1];
+        return spacer;
+    } else {
+        return [super triggerOperator:op];
+    }
 }
 //HTML
 
@@ -81,23 +88,35 @@
     for (int i=0; i<2; i++) {
         isInvert[i] = [_content[i] isKindOfClass:[XCInvert class]];
     }
-    if (isInvert[0] || isInvert[1]) {
+    if (isInvert[0] || isInvert[1]) { // div
         if (isInvert[0] && isInvert[1]) {
-            NSString * tmp = [NSString stringWithFormat:mulFormat,
-                    [[_content[0] content] toHTML],
-                    [[_content[1] content] toHTML]];
-            html = [NSString stringWithFormat:divFormat,@"1",tmp];
-        }
-        BOOL divIdx =  isInvert[1];
-        html = [NSString stringWithFormat:
+            NSString * h[2];
+            for (int i=0; i<2; i++) {
+                XCElement * c = _content[i];
+                h[i] = [c wrapHTML: [[c content] toHTML]];
+            }
+            NSString * tmp = [NSString stringWithFormat:mulFormat,h[0],h[1]];
+            html = [NSString stringWithFormat:divFormat,@"<mn>1</mn>",tmp];
+        } else {
+            BOOL divIdx =  isInvert[1];
+            XCElement * num = _content[!divIdx],
+                * denom = _content[divIdx];
+            html = [NSString stringWithFormat:
                     divFormat,
-                    [_content[!divIdx] toHTML],
-                    [[_content[divIdx] content] toHTML]];
-    } else {
-        return [NSString stringWithFormat:
-                mulFormat,
-                [_content[0] toHTML],
-                [_content[1] toHTML]];
+                    [num toHTML],
+                    [denom wrapHTML:[[denom content] toHTML]]];
+        }
+    } else { // mul
+        NSString * h[2];
+        for (int i=0; i<2; i++) {
+            XCElement * c = _content[i];
+            h[i] = ([c isKindOfClass:[XCExpression class]]
+                    || [c isKindOfClass:[XCSum class]]
+                    || [c isKindOfClass:[XCNegate class]]) ?
+            [c toHTMLFenced] : [c toHTML];
+        }
+        return [super wrapHTML:
+                [NSString stringWithFormat:mulFormat, h[0], h[1]]];
     }
     return [super wrapHTML: html];
     

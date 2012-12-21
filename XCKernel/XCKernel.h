@@ -23,7 +23,6 @@
 -(void) previousStatement;
 -(void) toggleAngleMode;
 -(BOOL) isDegreeAngleMode;
-//-(void) newStatement;
-
+-(BOOL) isInExpression;
 
 @end

@@ -9,6 +9,7 @@
 #import "XCInvert.h"
 #import "XCSpacer.h"
 #import "XCExpression.h"
+#import "XCNegate.h"
 @implementation XCInvert
 
 
@@ -16,7 +17,6 @@
     if ([value isKindOfClass:[XCInvert class]]) {
         return [((XCSimpleElement*)value) content];
     }
-    //value = [XCExpr expressionWithElement:value andRoot:nil];
     return [[XCInvert alloc] initWithContent:value andParent:parent];
 }
 -(NSString *)description {
@@ -28,12 +28,23 @@
             [NSString stringWithFormat:@"<mfrac> <mn>1</mn> <mrow>%@</mrow> </mfrac>", [[self content] toHTML]]];
 }
 
+-(void)normalize {
+    [super normalize];
+    XCElement * c = [self content];
+    if ([c isKindOfClass:[XCNegate class]]) {
+        XCElement * p = [self parent];
+        XCElement * cc = [c content];
+        [p replaceContentWithElement:c];
+        [c replaceContentWithElement:self];
+        [self setContent:cc];
+    }
+}
 -(XCElement*)replaceContentWithElement:(XCElement *)element {
     if ([element isKindOfClass:[self class]]) {
         element = [element content];
-        id root = [self parent];
-        [element setParent:root];
-        [root replaceContentWithElement:element];
+        id parent = [self parent];
+        [element setParent:parent];
+        [parent replaceContentWithElement:element];
         return element;
     }
     return [super replaceContentWithElement:element];
@@ -42,8 +53,8 @@
 -(id<XCHasTriggers>)triggerOperator:(XCOperator)op {
     if(op==XC_OP_DIV && [[self content] isKindOfClass:[XCSpacer class]]) {
         XCElement* element = [self content];
-        id root = [self parent];
-        [root replaceContentWithElement:element];
+        id parent = [self parent];
+        [parent replaceContentWithElement:element];
         return element;
     } else {
         return [super triggerOperator:op];

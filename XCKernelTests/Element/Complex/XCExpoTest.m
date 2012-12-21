@@ -7,7 +7,6 @@
 //
 
 #import "XCExpoTest.h"
-#import "XCExpr.h"
 #import "XCStatement.h"
 @implementation XCExpoTest
 -(void)testSimple {
@@ -34,6 +33,7 @@
     head = [head triggerNum:'2'];
     head = [head triggerOperator:XC_OP_EXP];
     head = [head triggerNum:'3'];
+    
     
     XCStatement * cp = [stm copy];
     head = [cp head];

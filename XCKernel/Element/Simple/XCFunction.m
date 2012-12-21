@@ -45,11 +45,14 @@ static const NSDictionary * functions;
     return [NSString stringWithFormat:@"%@(%@)",
             _name, [self content]];
 }
+-(void)normalize {
+    [_content normalize];
+}
 -(NSString *)toHTML {
     XCElement * content = [self content];
     return [super wrapHTML: [NSString stringWithFormat:
             @"<csymbol>%@ </csymbol> %@",_name,
-            ([[self content] isKindOfClass:[XCTerminalElement class]]) ?
+            ([content isKindOfClass:[XCTerminalElement class]]) ?
                              [content toHTML] : [content toHTMLFenced]]];
 }
 +(XCFunction *)functionWithName:(NSString *)name

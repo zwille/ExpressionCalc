@@ -7,6 +7,7 @@
 //
 
 #import "XCStatement.h"
+#import "XCExpression.h"
 #import "XCSpacer.h"
 
 @implementation XCStatement
@@ -33,9 +34,12 @@
     [NSString stringWithFormat:@"<%@>",[self content]];
 }
 -toHTML {
+    XCElement * c = [self content];
+    NSString * html = ([c isKindOfClass:[XCExpression class]]) ?
+                        [c toHTMLFenced] : [c toHTML];
     return (_store) ?
-    [NSString stringWithFormat:@"%@<mo>&larr;</mo>%@",[_store toHTML],[[self content] toHTML]] :
-    [NSString stringWithFormat:@"%@",[[self content] toHTML]];
+    [NSString stringWithFormat:@"%@<mo>&larr;</mo>%@",[_store toHTML],html]: html;
+   
 }
 -(NSNumber *)eval {
     XCElement * content = [self content];

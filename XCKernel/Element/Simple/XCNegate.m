@@ -9,6 +9,7 @@
 #import "XCNegate.h"
 #import "XCSpacer.h"
 #import "XCExpression.h"
+#import "XCSum.h"
 
 @implementation XCNegate
 +(id)negateValue:(XCElement*)value
@@ -26,7 +27,9 @@ withParent:(XCElement *)parent {
 -(NSString *)toHTML{
     assert([self content]);
     XCElement * content = [self content];
-    return [super wrapHTML: [NSString stringWithFormat: @"<mo>-</mo>%@",[content toHTML]]];
+    NSString * html = ([content isKindOfClass:[XCExpression class]] || [content isKindOfClass:[XCSum class]]) ?
+    [content toHTMLFenced] : [content toHTML];
+    return [super wrapHTML: [NSString stringWithFormat: @"<mo>-</mo>%@", html]];
 }
 -(XCElement*)replaceContentWithElement:(XCElement *)element {
     if ([element isKindOfClass:[self class]]) {

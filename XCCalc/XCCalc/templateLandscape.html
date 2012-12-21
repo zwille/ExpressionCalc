@@ -1,22 +1,46 @@
 <html>
-	<head>
+<head>
 	<style type="text/css">
         %@
-        #state {
-            text-align: right;
-            font-size: 0.3em;
+        #box {
+            position: absolute;
+/*           outline: 1px solid red;*/
+            width:527px;
+            height:75px;
+            padding: 2px 5px 2px 5px;
         }
+        #state {
+            position: absolute;
+/*            outline: 1px solid blue;*/
+            top: 0;
+            right: 0;
+            text-align: right;
+            font-size: 8px;
+        }
+        #expr {
+            position: relative;
+/*            outline: 1px solid red;*/
+            width:270px;
+            height:75px;
+            overflow: scroll;
+        }
+        
         #out {
-            position: fixed;
+            position: absolute;
+/*            outline: 1px solid red;*/
+            text-align: right;
+            bottom:0;
+            right:0;
             font-size:1.5em;
-            bottom: 0.3em;
-            right: 0.3em;
         }
     </style>
-	</head>
+</head>
 <body>
+    <div id="box">
+        <div id="state">%@</div>
+        <div id="expr"><math>%@</math> </div>
+        <div id="out">%@</div>
+    </div>
+    
 </body>
-<div id="state">%@</div>
-<div id="expr"><math>%@</math> </div>
-<div id="out">%@</div>
 </html>
