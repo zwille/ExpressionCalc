@@ -13,7 +13,7 @@
 }
 
 -(id) initWithContent: (XCElement*) content
-              andRoot: (XCElement*) root;
+              andParent: (XCElement*) parent;
 -(void) setContent:(XCElement *)content;
 
 

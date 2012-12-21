@@ -14,13 +14,13 @@
     [[XCGlobal instance] setAngleAsDegree:YES];
     xccos0 = [XCFunction functionWithName:@"cos"
                              withElement:[XCNumString numWithString:@"0"]
-                                 andRoot:nil];
+                                 andParent:nil];
     xccos1 = [XCFunction functionWithName:@"cos"
                               withElement:[XCNumString numWithString:@"90"]
-                                  andRoot:nil];
+                                  andParent:nil];
     xcsqrt = [XCFunction functionWithName:@"√"
                              withElement:[XCNumString numWithString:@"2"]
-                                 andRoot:nil];
+                                 andParent:nil];
 }
 -(void)testSimple {
     STAssertEqualObjects([xccos0 eval], @1, nil);

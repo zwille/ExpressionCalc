@@ -9,5 +9,5 @@
 #import "XCElement.h"
 
 @interface XCSpacer : XCElement
-+(id) spacerWithRoot: (XCElement*) root;
++(id) spacerWithParent: (XCElement*) parent;
 @end

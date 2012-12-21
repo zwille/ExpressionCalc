@@ -7,7 +7,7 @@
 //
 
 #import "NSNumber+XCNumber.h"
-
+#define EPS  1e-15
 //used by mulOverflows
 //returns 0xfffffff for negative values else 0
 //neg ^ neg = pos
@@ -93,8 +93,9 @@ BOOL isInteger(NSNumber * val) {
     !strcmp(t, @encode(int)) ||
     !strcmp(t, @encode(long));
 }
+
 BOOL bothInteger(NSNumber * a, NSNumber * b) {
-    return isInteger(a) && isInteger(b);
+    return [a isInteger] && [b isInteger];
 }
 
 @implementation NSNumber (XCNumber)
@@ -161,7 +162,8 @@ BOOL bothInteger(NSNumber * a, NSNumber * b) {
 }
 
 -(BOOL)isInteger {
-    return isInteger(self);
+    double d = [self doubleValue];
+    return isInteger(self) || (fabs(d - (long)d) < EPS);
 }
 
 -(BOOL)isNaN {
@@ -175,7 +177,7 @@ BOOL bothInteger(NSNumber * a, NSNumber * b) {
         double d = [self doubleValue];
         return (isnan(d)) ?
         NO :
-        dabs([self doubleValue]) < 1e-15;
+        dabs([self doubleValue]) < EPS;
     }
 }
 

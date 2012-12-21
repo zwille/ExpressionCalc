@@ -78,7 +78,8 @@
     
 }
 - (void) updateHTMLState {
-    _htmlState = [NSString stringWithFormat:@"%@ %@",
+    _htmlState = [NSString stringWithFormat:@"%@   %@   %@",
+        ([_kernel isInExpression]) ? @"( )" : @"",
         ([_kernel isDegreeAngleMode]) ? @"DEG" : @"RAD",
         (storing) ? @"STO" : (numbersAsVariables) ? @"VAR" : @"NUM"
         ];
@@ -108,7 +109,7 @@
                 _htmlState,_htmlExpression, htmlResult]; //args
     }
     _htmlOut = nil;
-    //NSLog(@"VC::print html = %@",html);
+     //DLOG(@"XCVC::print html = %@",html);
     for (id webView in webViews) {
         [webView loadHTMLString: html baseURL:nil];
     }
@@ -156,6 +157,7 @@
     }
     [_kernel triggerDel];
     [self updateHTMLExpression];
+     [self updateHTMLState];
     [self print];
 }
 
@@ -196,6 +198,7 @@
         }
     }
     [self updateHTMLExpression];
+    [self updateHTMLState];
     [self print];
 }
 
@@ -240,6 +243,7 @@
     [_kernel previousStatement];
     _htmlOut = nil;
     [self updateHTMLExpression];
+     [self updateHTMLState];
     [self print];
     
 }
@@ -250,6 +254,7 @@
     [_kernel nextStatement];
     _htmlOut = nil;
     [self updateHTMLExpression];
+     [self updateHTMLState];
     [self print];
 }
 - (IBAction)right:(id)sender {
@@ -267,6 +272,7 @@
     }
     [_kernel triggerPrevious];
     [self updateHTMLExpression];
+     [self updateHTMLState];
     [self print];
 }
 - (IBAction)enter:(id)sender {
@@ -275,6 +281,7 @@
     }
     [_kernel triggerEnter];
     [self updateHTMLExpression];
+     [self updateHTMLState];
     [self print];
 }
 
@@ -338,6 +345,7 @@
     }
     [_kernel triggerOperator:XC_OP_PLUS];
     [self updateHTMLExpression];
+     [self updateHTMLState];
     [self print];
 }
 - (IBAction)minus:(id)sender {
@@ -346,6 +354,7 @@
     }
     [_kernel triggerOperator:XC_OP_MINUS];
     [self updateHTMLExpression];
+     [self updateHTMLState];
     [self print];
 }
 - (IBAction)mult:(id)sender {
@@ -354,6 +363,7 @@
     }
     [_kernel triggerOperator:XC_OP_MULT];
     [self updateHTMLExpression];
+     [self updateHTMLState];
     [self print];
 }
 - (IBAction)div:(id)sender {
@@ -362,6 +372,7 @@
     }
     [_kernel triggerOperator:XC_OP_DIV];
     [self updateHTMLExpression];
+     [self updateHTMLState];
     [self print];
 }
 - (IBAction)exp:(id)sender {
@@ -370,6 +381,7 @@
     }
     [_kernel triggerOperator:XC_OP_EXP];
     [self updateHTMLExpression];
+     [self updateHTMLState];
     [self print];
 }
 
@@ -379,6 +391,7 @@
     }
     [_kernel triggerExpression];
     [self updateHTMLExpression];
+    [self updateHTMLState];
     [self print];
 }
 

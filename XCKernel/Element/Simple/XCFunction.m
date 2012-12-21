@@ -10,8 +10,8 @@
 #import "XCFuncAlg.h"
 #import "XCTrigoFuncAlg.h"
 #import "XCSqrt.h"
-#import "XCExpr.h"
 #import "XCTerminalElement.h"
+
 
 static const NSDictionary * functions; 
 
@@ -34,30 +34,36 @@ static const NSDictionary * functions;
 - (id)initWithRoot:(XCElement*)root
            andName: (NSString*) name
         andElement:(XCElement*)element {
-    self = [super initWithRoot:root];
+    self = [super initWithParent:root];
     if (self) {
         _name = name;
         [self setContent:element];
     }
     return self;
 }
+-(NSString *)description {
+    return [NSString stringWithFormat:@"%@(%@)",
+            _name, [self content]];
+}
+-(void)normalize {
+    [_content normalize];
+}
 -(NSString *)toHTML {
     XCElement * content = [self content];
     return [super wrapHTML: [NSString stringWithFormat:
             @"<csymbol>%@ </csymbol> %@",_name,
-            ([[self content] isKindOfClass:[XCTerminalElement class]]) ?
+            ([content isKindOfClass:[XCTerminalElement class]]) ?
                              [content toHTML] : [content toHTMLFenced]]];
 }
 +(XCFunction *)functionWithName:(NSString *)name
                     withElement:(XCElement *)element
-                        andRoot:(XCElement *)root {
+                        andParent:(XCElement *)parent {
     Class c = [XCFunction class];
-    element = [XCExpr expressionWithElement:element
-                                    andRoot:nil];
+   
     if([name isEqualToString:XC_SQRT]) {
         c = [XCSqrt class];
            }
-    return [[c alloc] initWithRoot: root
+    return [[c alloc] initWithRoot: parent
                                     andName:name
                                  andElement: element];
 }

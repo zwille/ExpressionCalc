@@ -10,15 +10,15 @@
 #import "XCNumString.h"
 #import "XCNegate.h"
 #import "XCInvert.h"
-#import "XCExpr.h"
+#import "XCExpression.h"
 #import "XCIdentifier.h"
 #import "XCFunction.h"
 //#import "XCConstant.h"
 //#import "XCVariable.h"
 
 @implementation XCSpacer
-+(id)spacerWithRoot: (XCElement*) root {
-    return [[XCSpacer alloc] initWithRoot:root];
++(id)spacerWithParent: (XCElement*) parent {
+    return [[XCSpacer alloc] initWithParent:parent];
 }
 -(NSString *)toHTML {
     //return @"&#9643";
@@ -34,57 +34,57 @@
     [root replaceContentWithElement:el];
     return el;
 }
+-(NSString *)description {
+    return @"_";
+}
 //trigger
 -(id<XCHasTriggers>)triggerDel {
-    assert([self root]);
-    return [[self root]triggerDel];
+    assert([self parent]);
+    return [[self parent]triggerDel];
 }
 -(id<XCHasTriggers>)triggerNum:(char) c {
     return [self swapWithElement:
             [XCNumString numWithFirstChar: c]
-                         andRoot:[self root]];
+                         andRoot:[self parent]];
 }
 -(id<XCHasTriggers>)triggerExpression {
-    XCElement * root = [self root];
-    if ([root isKindOfClass:[XCExpr class]]) {
-        return self; // ignore
-    }
+    XCElement * root = [self parent];
     [self swapWithElement:
-            [XCExpr expressionWithElement: self
-                                  andRoot: nil]
+            [XCExpression expressionWithElement: self
+                                  andParent: nil]
                   andRoot:root];
     return self;
 }
 -(id<XCHasTriggers>)triggerFunction: (NSString*) fn {
-    XCElement * root = [self root];
+    XCElement * root = [self parent];
     [self swapWithElement:
             [XCFunction functionWithName:fn
                              withElement:self
-                                 andRoot: nil]
+                                 andParent: nil]
                   andRoot:root];
     return self;
 }
 -(id<XCHasTriggers>)triggerConstant:(XCConstants)cid {
     return [self swapWithElement: [XCIdentifier identifierWithConstantId:cid andRoot:nil]
-                         andRoot:[self root]];
+                         andRoot:[self parent]];
 }
 -(id<XCHasTriggers>)triggerVariable:(NSUInteger)idx {
     return [self swapWithElement: [XCIdentifier identifierWithVariableIndex:idx andRoot:nil]
-                         andRoot:[self root]];
+                         andRoot:[self parent]];
 }
 -(id<XCHasTriggers>)triggerAssign:(NSUInteger) varIdx {
     return self;
 }
 
 -(id<XCHasTriggers>)triggerOperator: (XCOperator) op {
-    assert([self root]);
-    XCElement * root = [self root];
+    assert([self parent]);
+    XCElement * root = [self parent];
     // only catch invert or minus, suppress other ops
     // urges user to fill spacer with value
     if (op==XC_OP_MINUS || op==XC_OP_DIV) {
         XCElement * el = (op==XC_OP_DIV) ?
-        [XCInvert invertValue: self withRoot:nil] :
-        [XCNegate negateValue: self withRoot:nil];
+        [XCInvert invertValue: self withParent:nil] :
+        [XCNegate negateValue: self withParent:nil];
         [self swapWithElement: el andRoot:root];
     }
     return self;
@@ -101,7 +101,7 @@
     XCElement* ans = [self swapWithElement:
             [XCIdentifier identifierWithVariableIndex:XC_ANS_IDX
                                               andRoot:nil]
-                                   andRoot:[self root]];
+                                   andRoot:[self parent]];
     return [ans eval];
 }
 

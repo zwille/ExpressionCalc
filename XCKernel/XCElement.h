@@ -15,24 +15,30 @@
 typedef struct {
     Byte focus : 1;
     Byte error : 1;
-    Byte hasDecimalPt : 1; //used by XCNumString
+    Byte sub1  : 1; 
+    Byte sub2  : 1;
+    Byte sub3  : 1;
+    Byte subsub1  : 1;
+    Byte subsub2  : 1;
+    Byte subsub3  : 1;
 } XCElementState;
 
 
 @interface XCElement : NSObject<NSCopying, XCHasTriggers, XCHasHtmlOutput, XCEvaluable> {
-    XCElement * _root;
+    XCElement * _parent;
     @protected
     XCElementState _state;
 }
-@property (strong) XCElement * root;
+@property (strong) XCElement * parent;
 
--(id) initWithRoot: (XCElement*) root;
+-(id) initWithParent: (XCElement*) parent;
 -(void) setFocus: (BOOL) val;
 -(BOOL) hasFocus;
 -(void) setError: (BOOL) val;
 -(BOOL) hasError;
 -(NSString*) wrapHTML: (NSString*) inner;
 -(BOOL) isEmpty;
+-(void) normalize;
 -(XCElement*) replaceContentWithElement: (XCElement*) element;
 -(XCElement*) content;
 -(XCElement*) head;

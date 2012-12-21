@@ -14,7 +14,6 @@
 @interface XCStatementBuffer : NSObject {
     XCCircBuf * _buf;
     NSUInteger _idx;
-    XCElement * _head;
 }
 
 -(void) pushStatement: (XCStatement* ) stmnt;

@@ -11,7 +11,7 @@
 @interface XCVariable : XCStorage {
     NSUInteger _idx;
 }
-+variableForIndex:(NSUInteger) idx;
++(id) variableForIndex:(NSUInteger) idx;
 -(void) setNumericValue:(NSNumber*) val;
 @end
 

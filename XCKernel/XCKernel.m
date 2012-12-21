@@ -8,6 +8,8 @@
 
 #import "XCKernel.h"
 #import "XCStatement.h"
+#import "XCGlobal.h"
+#import "XCExpression.h"
 
 @implementation XCKernel
 
@@ -26,6 +28,9 @@
     [_root reset];
     [self setHead:[_root head]];
 }
+-(BOOL)isInExpression {
+    return [[_head parent] isKindOfClass:[XCExpression class]];
+}
 -(void)newStatement {
     XCStatement * bufhead = [_statements head];
     if ([bufhead isEmpty]) {
@@ -40,10 +45,8 @@
 - (void) log {
     NSString * headDesc = [NSString stringWithFormat:@"%@",_head];
     NSString * rootDesc = [NSString stringWithFormat:@"%@",_root];
-    NSLog(@"XCKernel head = %@",headDesc);
-    NSLog(@"XCKernel root = %@",rootDesc);
-
-    //NSLog(@"XCKernel html = %@",[_root toHTML]);
+    DLOG(@"XCKernel::log head = %@",headDesc);
+    DLOG(@"XCKernel::log root = %@",rootDesc);
 }
 -(NSString *)toHTML {
     return [_root toHTML];
@@ -57,17 +60,19 @@
         _head = (XCElement*)head;
         [_head setFocus:YES];
     } else {
-       // NSLog(@"XCKernel::setHead reset, triggered was null");
+       NSLog(@"XCKernel::setHead reset, triggered was null");
         [self reset];
     }
-   // [self log];
+    [self log];
     return _head;
 }
 -(NSNumber *)eval {
     if ([_root isEmpty]) {
         return @0;
     }
+    [_root normalize];
     [self setHead:_root]; //toggle focus off
+    
     NSNumber * rc = [_root eval];
     return [rc isZero] ? @0 : rc;
 }

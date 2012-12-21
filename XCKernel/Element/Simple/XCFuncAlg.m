@@ -16,6 +16,7 @@
     _alg = algo;
     return self;
 }
+
 -(NSNumber *)evaluateArgument:(NSNumber *)arg {
     double rc = _alg([arg doubleValue]);
     return [NSNumber numberWithDouble:rc];

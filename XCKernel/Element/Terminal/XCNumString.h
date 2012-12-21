@@ -14,6 +14,6 @@
 }
 +(XCNumString*) numWithFirstChar:(char)c;
 +(XCNumString*) numWithString:(NSString*) str;
-
+-(BOOL) hasDecimalPoint;
 
 @end

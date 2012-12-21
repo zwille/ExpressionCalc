@@ -10,9 +10,9 @@
 
 @implementation XCInvertTest
 -(void)setUp {
-    invm2 = [XCInvert invertValue:[XCNumString numWithString:@"-2"] withRoot:nil];
-    inv0 = [XCInvert invertValue:[XCNumString numWithString:@"0"] withRoot:nil];
-    inv2 = [XCInvert invertValue:[XCNumString numWithString:@"2"] withRoot:nil];
+    invm2 = [XCInvert invertValue:[XCNumString numWithString:@"-2"] withParent:nil];
+    inv0 = [XCInvert invertValue:[XCNumString numWithString:@"0"] withParent:nil];
+    inv2 = [XCInvert invertValue:[XCNumString numWithString:@"2"] withParent:nil];
 }
 -(void)testSimple {
     STAssertFalse([invm2 hasError], nil);

@@ -12,13 +12,13 @@
 @implementation XCSimpleElement
 
 -(id)initWithContent:(XCElement *)content
-             andRoot:(XCElement *)root {
-    self = [super initWithRoot:root];
+             andParent:(XCElement *)parent {
+    self = [super initWithParent:parent];
     [self setContent:content];
     return self;
 }
 -(void)setContent:(XCElement *)content {
-    [content setRoot:self];
+    [content setParent:self];
     _content = content;
 }
 -(XCElement*)replaceContentWithElement:(XCElement *)element {
@@ -34,19 +34,30 @@
 -(NSString *)description {
     return [NSString stringWithFormat:@"%@[%@]",[super description],_content];
 }
+-(void)normalize {
+    [_content normalize];
+    // if content has same type as self 
+    XCElement * content = [self content];
+    if ([content isKindOfClass:[self class]]) {
+        id parent = [self parent];
+        assert(parent);
+        [parent replaceContentWithElement:[content content]];
+    }
+}
 //trigger
+/*
 -(id<XCHasTriggers>)triggerDel {
     assert([self root]);
     NSLog(@"Simple::triggerDel root=%@",[self root]);
     return [[self root] triggerDel];
-}
+}*/
 
 -(id<XCHasTriggers>)triggerNextContent {
-    return [_root triggerNextContent];
+    return [_parent triggerNextContent];
 }
 
 -(id<XCHasTriggers>)triggerPreviousContent {
-    return [_root triggerPreviousContent];
+    return [_parent triggerPreviousContent];
 }
 //evaluate
 -(NSNumber *)eval {
@@ -58,7 +69,7 @@
 -(id)copyWithZone:(NSZone *)zone {
     XCSimpleElement * rc = [super copyWithZone:zone];
     rc -> _content = [_content copyWithZone:zone];
-    [rc -> _content setRoot:rc];
+    [rc -> _content setParent:rc];
     return rc;
     
 }

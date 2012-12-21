@@ -7,13 +7,13 @@
 //
 
 #import "XCStatement.h"
-#import "XCExpr.h"
-
+#import "XCExpression.h"
+#import "XCSpacer.h"
 
 @implementation XCStatement
 @synthesize store;
 -(id)init {
-    self = [super initWithContent:nil andRoot:nil];
+    self = [super initWithContent:nil andParent:nil];
     [self reset];
     return self;
 }
@@ -21,9 +21,8 @@
     return [[XCStatement alloc] init];
 }
 -(void)reset {
-    [self setContent: [XCExpr emptyExpressionWithRoot: self]];
+    [self setContent: [XCSpacer spacerWithParent:self]];
     _store = nil;
-
 }
 -(BOOL)isEmpty {
     return [[self content] isEmpty];
@@ -35,9 +34,12 @@
     [NSString stringWithFormat:@"<%@>",[self content]];
 }
 -toHTML {
+    XCElement * c = [self content];
+    NSString * html = ([c isKindOfClass:[XCExpression class]]) ?
+                        [c toHTMLFenced] : [c toHTML];
     return (_store) ?
-    [NSString stringWithFormat:@"%@<mo>&larr;</mo>%@",[_store toHTML],[[self content] toHTML]] :
-    [NSString stringWithFormat:@"%@",[[self content] toHTML]];
+    [NSString stringWithFormat:@"%@<mo>&larr;</mo>%@",[_store toHTML],html]: html;
+   
 }
 -(NSNumber *)eval {
     XCElement * content = [self content];
@@ -60,13 +62,19 @@
     [self reset];
     return [self head];
 }
--(id<XCHasTriggers>)triggerPrevious {
-    return self;
-}
--(id<XCHasTriggers>)triggerNext {
-    return self ;
-}
 
+-(id<XCHasTriggers>)triggerNext {
+    return _content;
+}
+-(id<XCHasTriggers>)triggerNextContent {
+    return _content;
+}
+-(id<XCHasTriggers>)triggerPrevious {
+    return _content;
+}
+-(id<XCHasTriggers>)triggerPreviousContent {
+    return _content;
+}
 //copy
 -(id)copyWithZone:(NSZone *)zone {
     XCStatement * rc = [super copyWithZone:zone];

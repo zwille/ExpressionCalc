@@ -7,10 +7,12 @@
 //
 
 #import "XCSqrt.h"
+#import "XCExpression.h"
 
 @implementation XCSqrt
 -(NSString *)toHTML {
     return [super wrapHTML: [NSString stringWithFormat:
             @"<msqrt>%@</msqrt>",[[self content] toHTML]]];
 }
+
 @end

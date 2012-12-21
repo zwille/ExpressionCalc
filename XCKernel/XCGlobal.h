@@ -8,6 +8,14 @@
 
 
 #import <Foundation/Foundation.h>
+#ifndef DLOG
+#ifdef DEBUG
+#   define DLOG(...) NSLog(__VA_ARGS__)
+#else
+#   define DLOG(...) /* */
+#endif
+#endif
+
 typedef enum {
     XC_OP_PLUS,
     XC_OP_MINUS,

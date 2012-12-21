@@ -9,10 +9,17 @@
 #import "XCElement.h"
 #import "XCNumString.h"
 #import "XCSpacer.h"
+#import "XCNegate.h"
+#import "XCInvert.h"
+#import "XCExpression.h"
+#import "XCExponentiation.h"
+#import "XCProduct.h"
+#import "XCStatement.h"
+#import "XCSum.h"
 
 
 @implementation XCElement
-@synthesize root=_root;
+@synthesize parent=_parent;
 
 -(XCElement *)content{
     return self;
@@ -20,9 +27,12 @@
 -(XCElement *)head {
     return [self content];
 }
--(id)initWithRoot:(XCElement *)root {
+-(void)normalize {
+    // pass;
+}
+-(id)initWithParent:(XCElement *)parent {
     self = [super init];
-    _root = root;
+    _parent = parent;
     return self;
 }
 -(void)setFocus:(BOOL)val {
@@ -56,7 +66,7 @@
     return nil;
 }
 -(NSString *)toHTMLFenced {
-    return [NSString stringWithFormat:@"<mfenced separators=\" \">%@</mfenced>",[self toHTML]];
+    return [self wrapHTML:[NSString stringWithFormat:@"<mfenced separators=\" \">%@</mfenced>",[self toHTML]]];
 }
 -(NSString*) wrapHTML: (NSString*) inner {
     //NSLog(@"XCElement::wrapHTML self=%@ hasError=%d inner=%@",self,[self hasError],inner);
@@ -89,6 +99,7 @@
 }
 
 //trigger
+/*
 -(id<XCHasTriggers>)triggerDel {
     //return [[self root] triggerDel];
     assert([self root]);
@@ -96,8 +107,14 @@
     //[[self root] replaceContentWithElement:rc];
     //return rc;
     return [[self root] triggerDel];
+}*/
+-(id<XCHasTriggers>)triggerDel {
+    assert([self parent]);
+    XCElement * rc = [XCSpacer spacerWithParent:nil];
+    [[self parent] replaceContentWithElement:rc];
+    return rc;
+    
 }
-
 -(id<XCHasTriggers>)triggerEnter {
     return [self head];
 }
@@ -118,27 +135,82 @@
     return self; //pass
 }
 -(id<XCHasTriggers>)triggerAssign: (NSUInteger) varIdx {
-    return [[self root] triggerAssign: varIdx];
+    return [[self parent] triggerAssign: varIdx];
 }
 -(id<XCHasTriggers>)triggerNext {
-    return [_root triggerNextContent];
+    assert(_parent);
+    return [_parent triggerNextContent];
 }
 -(id<XCHasTriggers>)triggerNextContent {
     return self; //pass
 }
 -(id<XCHasTriggers>)triggerPrevious {
-    return [_root triggerPreviousContent];
+    assert(_parent);
+    return [_parent triggerPreviousContent];
 }
 -(id<XCHasTriggers>)triggerPreviousContent {
     return self; //pass
 }
+/*
 -(id<XCHasTriggers>)triggerOperator:(XCOperator)op{
     return [_root triggerOperator:op];
+}
+ */
+
+-(id<XCHasTriggers>)triggerOperator:(XCOperator)op {
+    XCElement * spacer = [XCSpacer spacerWithParent:self];
+    XCElement * newEl = spacer;
+    XCElement * parent = [self parent];
+    assert(parent);
+    BOOL hasContainer = [parent isKindOfClass:[XCExpression class]]
+    || [parent isKindOfClass:[XCStatement class]];
+    
+    switch (op) {
+        case XC_OP_MINUS:
+            newEl = [XCNegate negateValue:spacer withParent:self];
+        case XC_OP_PLUS:
+            if (hasContainer) {
+                [parent replaceContentWithElement:
+                 [XCSum sumWithElement0:self
+                            andElement1: newEl
+                                andParent:parent]];
+                break;
+            } 
+            return [parent triggerOperator: op];
+        case XC_OP_DIV:
+            newEl = [XCInvert invertValue:spacer withParent:self];
+        case XC_OP_MULT:
+            if (hasContainer
+                || [parent isKindOfClass:[XCSum class]]
+                || [parent isKindOfClass:[XCProduct class]]) {
+                [parent replaceContentWithElement:
+                 [XCProduct productWithElement0:self
+                        andElement1:newEl
+                                  andParent:parent]];
+                break;
+            }
+            return [parent triggerOperator: op];
+        default:
+            assert(op==XC_OP_EXP);
+            if (hasContainer
+                || [parent isKindOfClass:[XCSum class]]
+                || [parent isKindOfClass:[XCProduct class]]
+                || [parent isKindOfClass:[XCExponentiation class]]) {
+                    [[self parent] replaceContentWithElement:
+                [XCExponentiation exponentiationWithBase: self
+                                          andExponent:newEl
+                                              andParent:parent]];
+                break;
+            }
+            return [parent triggerOperator: op];
+
+    }
+    return spacer;
 }
 
 // copying
 -(id)copyWithZone:(NSZone *)zone {
-    XCElement * rc = [[[self class] allocWithZone:zone] initWithRoot:nil];
+    XCElement * rc = [[[self class] allocWithZone:zone] initWithParent:nil];
     rc -> _state = _state;
     rc -> _state.error = NO;
     return rc;

@@ -13,5 +13,5 @@
 }
 +(XCFunction *)functionWithName: (NSString* ) name
                     withElement: (XCElement *) element
-                        andRoot: (XCElement *) root;
+                        andParent: (XCElement *) parent;
 @end
