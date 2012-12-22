@@ -1,7 +1,8 @@
 \part{Dokumentation}
 \chapter{Einleitung}
 Die vorliegende Dokumentation beschreibt den Programmablauf sowie die Klassenstruktur.
-Bei der App handelt es sich um einen Taschenrechner, der komplexe Ausdrücke nach den gängigen Regeln berechnen kann und diese in einer ansehnlichen mathematischen Form (mathml) auf das Display ausgibt.
+Bei der App handelt es sich um einen Taschenrechner, 
+der komplexe Ausdrücke nach den gängigen Regeln berechnen kann und diese in einer ansehnlichen mathematischen Form (mathml) auf das Display ausgibt.
 Ein solcher Ausdruck kann mit einer Grammatik beschrieben werden. 
 
 Folgende erweiterte Backus-Naur-Form bildet die Grundlage für das vorliegende Programm:
@@ -152,10 +153,11 @@ und XCViewController-Bereich, in dem die View gesteuert wird. Der XCViewControll
 	\caption{Klassendiagramm}
 \end{figure}
 Der ViewController verwaltet seinen Zustand den er zum Darstellen des Displays und zum Ansteuern der Trigger im Kernel benötigt.
-Außerdem wird geregelt, wie die Tasten dargestellt werden sollen (z.B. Zahlen$\iff$ Variablen, DEG$\iff$RAD). Der Kernel (s.u.) übernimmt die eigentliche Aufgabe der Eingabe neuer Zeichen und der Berechnung.
+Außerdem wird geregelt, wie die Tasten dargestellt werden sollen (z.B. Zahlen$\iff$ Variablen, DEG$\iff$RAD). 
+Der Kernel (s.u.) übernimmt die eigentliche Aufgabe der Eingabe neuer Zeichen und der Berechnung.
 
 \section{Kernel}
-(siehe auch extra Klassendiagramm)
+(siehe auch extra beiliegends Klassendiagramm)
 \subsection{Schnittstellen (Protocols)}
 Viele Schnittstellen von häufig verwendeten Methoden(-gruppen) werden in folgenden Protocols zusammengefasst:
 \begin{description}
