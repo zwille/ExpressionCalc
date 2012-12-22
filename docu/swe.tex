@@ -6,7 +6,7 @@ Ein solcher Ausdruck kann mit einer Grammatik beschrieben werden.
 
 Folgende erweiterte Backus-Naur-Form bildet die Grundlage für das vorliegende Programm:
 
-\lstinputlisting{../grammar_bnf.txt}
+\lstinputlisting{grammar_bnf.txt}
 Die Grammatik gibt dabei an, wie der Syntaxbaum im Rechner aufgebaut wird.
 Gleichzeitig wird damit die Bindungsstärke der Operatoren geregelt, 
 nämlich von außen die Addition/Subtraktion (schwache Bindung) bis nach innen der Exponentialoperator (starke Bindung). 
@@ -15,7 +15,7 @@ nämlich von außen die Addition/Subtraktion (schwache Bindung) bis nach innen d
 Normalerweise dient eine Grammatik dazu, Text von der Tastatur oder aus Textfiles zu parsen. Für den Taschenrechner auf iOs-Basis bringt dies aber Nachteile mit sich:
 \begin{itemize}
 	\item Es wird nur eine beschränkte Anzahl von Zeichen und Symbolen benötigt, 
-		wobei die benötigten Symbole überwiegend mathematisch sind
+		wobei die benötigten Symbole überwiegend mathematisch sind.
 	\item Beim Navigieren über den Ausdruck (und Löschen von Elementen) gibt es Schwierigkeiten, 
 		schließlich hat mein keinen Texteditor vor sich.
 	\item Eine ``schöne'' mathematische Darstellung ist kaum möglich, es müsste eine Art Programmiersprachensyntax verwendet werden, oder die Ausgabe im getrennten Display erfolgen (Platzmangel)
@@ -51,27 +51,30 @@ Dieser Abschnitt zeigt den generellen Ablauf bei Eingaben durch den Benutzer. An
 \subsection{Allgemein}
 Diagramm \ref{dia:sq:trigger} zeigt den allgemeinen Ablauf, wenn der Benutzer einen Button auf der View betätigt.
 \begin{enumerate}
-	\item Durch Betätigung des Buttons wird im ViewController eine Action ausgelöst.
-	\item Im VC wird eine entsprechende \code{trigger}-Nachricht an den Kernel geschickt.
+	\item Durch Betätigung eines Buttons wird im ViewController eine Action ausgelöst.
+	\item Im VC wird eine entsprechende \code{trigger}-Nachricht an den Kernel (XCKernel-Klasse) geschickt.
 		Triggernachrichten haben immer die Form:
 		\begin{lstlisting}
-		hasTriggers triggerXXX [ args ]
-	\end{lstlisting}
-	\begin{itemize}
-		\item \code{hasTriggers} ist dabei der Rückgabewert, also ein Element welches wieder Trigger besitzt. Tatsächlich implementieren alle Elemente des Syntaxbaums sowie der Kernel das Protocol XCHasTriggers. 
-		\item \code{triggerXXX} ist der Methodenname, wobei ``trigger'' immer als Präfix steht und XXX das eigentliche ``Zeichen'' ist, welches eingegeben werden soll.
-		\item \code{[ args ]} bei manchen Triggermethoden müssen noch Argumente mitgegeben werden.
-	\end{itemize}
-\item Der Kernel gibt den Triggeraufruf an das Headelement weiter. Head ist praktisch das Element im Syntaxbaum, auf dem der Focus steht. Dieses wird dann im HTML-output hervorgehoben.
-\item Das Element entscheidet nun wie mit dem Triggeraufruf zu verfahren ist. 
-	Dabei gibt es in der Regel folgende Möglichkeiten:
-	\begin{itemize}
-		\item Je nach Element und Kontext können dabei neue Elemente erzeugt und im Baum eingehängt werden. Dabei wird auch meist eine neuer Platzhalter erzeugt, der zurückgegeben wird. 
-		\item Das Element gibt den Aufruf an sein Elternelement im Baum weiter, z.B. bei Operatoren
-		\item Im Zweifelsfall gibt sich das Element selbst zurück, ignoriert also den Knopfdruck des Benutzers.
-	\end{itemize}
-\item Der Kernel setzt nun den head neu, löscht den Focus (Bitflag) vom ehemaligen Head und setzt den Focus beim neuen Head
-\item Anschließend ruft der der ViewController die \code{toHTML}-Methode im Kernel auf, welcher diesen Aufruf an das Root-element des Baums weitergibt. Das HTML wird nun rekursiv erzeugt und nach Fertigstellung in ein Template eingesetzt und in einer UIWebView dargestellt.
+			hasTriggers triggerXXX [ args ]
+		\end{lstlisting}
+		\begin{itemize}
+			\item \code{hasTriggers} ist dabei der Rückgabewert, also ein Element welches wieder Trigger besitzt. Tatsächlich implementieren alle Elemente des Syntaxbaums sowie der Kernel das Protocol XCHasTriggers. 
+			\item \code{triggerXXX} ist der Methodenname, wobei ``trigger'' immer als Präfix steht und ``XXX'' das eigentliche ``Zeichen'' ist, welches eingegeben werden soll.
+			\item \code{[ args ]} bei manchen Triggermethoden müssen noch Argumente mitgegeben werden.
+		\end{itemize}
+	\item Der Kernel gibt den Triggeraufruf an das Headelement weiter. Head ist praktisch das Element im Syntaxbaum, auf dem der Focus bzw. der Cursor steht. Dieses wird dann im HTML-output hervorgehoben.
+	\item Das Element entscheidet nun wie mit dem Triggeraufruf zu verfahren ist. 
+		Dabei gibt es in der Regel folgende Möglichkeiten:
+		\begin{enumerate}[I]
+			\item Je nach Element und Kontext werden neue Elemente erzeugt und im Baum eingehängt, 
+				wobei es vorkommen kann, dass sich das aufgerufene Objekt dabei selbst ersetzt. 
+				Dabei wird auch meist eine neuer Platzhalter erzeugt, der zurückgegeben wird. 
+			\item Das Element gibt den Aufruf an sein Elternelement im Baum weiter. 
+			\item Im Zweifelsfall gibt sich das Element selbst zurück, ignoriert also den Knopfdruck des Benutzers.
+		\end{enumerate}
+
+	\item Der Kernel setzt nun den head neu, löscht den Focus (Bitflag) vom ehemaligen Head und setzt den Focus beim neuen Head
+	\item Anschließend ruft der der ViewController die \code{toHTML}-Methode im Kernel auf, welcher diesen Aufruf an das Root-element des Baums weitergibt. Das HTML wird nun rekursiv erzeugt und nach Fertigstellung in ein Template eingesetzt und in einer UIWebView dargestellt.
 \end{enumerate}
 
 \subsection{Beispiel XCSpacer-triggerNum}
@@ -93,6 +96,30 @@ XCSpacer ist das Analogon zum Literal in der Grammatik und fungiert als Platzhal
 	\item zuletzt wird das neue XCNumString-objekt zurückgegeben und wie oben beschrieben weiterverfahren (Head neu gesetzt, HTML ausgegeben\ldots).
 	\item Nachdem der Spacer weder im Kernel noch im Syntaxbaum referenziert ist, wird er zerstört.
 \end{enumerate}
+\subsection{Beispiel Operatoraufruf}
+Hier noch ein kurzes Beispiel in Textform:
+\begin{enumerate}
+	\item Es wurde bereits folgendes eingegeben: '5+4*3', der Focus steht auf der '3'.
+		In der \code{description}-Methodenschreibweise sieht der Ausdruck so Aus: \code{+(5, *(4, 3))}
+		\footnote{Bei den Elementen handelt es sich entweder wie bei den Operatoren um Tupel 
+			mit der Schreibweise \code{<Operator>(<Operand1>, Operand2)}, 
+			Elemente mit einem Element als Inhalt (\code{<Name>(<Element>)}) oder um Terminalsymbol (-elemente).
+		}
+	\item Nun  wird '+' eingegeben.
+		Es wird die Methode \code{triggerOperator} auf dem Element '3' aufgerufen. 
+		Diese erkennt, dass das Elternelement ein Produkt ist und 
+		gibt den Aufruf an dieses weiter.
+		\begin{lstlisting}
+			return [parent triggerOperator: op];
+		\end{lstlisting}
+	\item Da das Elternlement des Produktelements '4*3' eine Summe ist, 
+		erzeugt dieses ein neues Summenelement mit sich selbst und einem Platzhalter als Parameter. Anschließend ersetzt es sich selbst im Elternknoten mit der neuen Summe. Der Ausdruck sieht nun wie folgt aus: \code{+(5, +(*(4, 3), _))}
+	\item Zuletzt wird der Platzhalter als neues Head-Element zurückgegeben.
+	\item Es wird nun noch die '2' gedrückt, welche den Platzhalter ersetzt.
+	\item Die Ausgabe auf dem Bildschirm ist nun '5 + 4 * 3 + 2'
+	\item Drückt man '=' wird der Ausdruck wie folgt ausgewertet: $((4 \cdot 3) + 2) + 5 = 19$ s.u.
+\end{enumerate}
+
 
 \section{Berechnung von Ausdrücken}
 \begin{figure}[H]
@@ -101,12 +128,16 @@ XCSpacer ist das Analogon zum Literal in der Grammatik und fungiert als Platzhal
 	\includegraphics[angle=270, width=1\textwidth]{sq_eval.pdf}
 	\caption{Sequenzdiagramm: eval}
 \end{figure}
-Die Berechnung von Ausdrücken anhand des erzeugten Syntaxbaums ist nun denkbar einfach:
+Es wird nun die Berechnung von Ausdrücken in allgemeiner Form beschrieben:
 \begin{enumerate}
-	\item Nach dem Drücken des ``=''-Buttons wird nun den Syntaxbaum absteigend die \code{eval}-Methode an allen Elementen aufgerufen. 
-		Dabei wird Bottom-Up der Ausdruck ausgewertet (evtl. Fehlerflags gesetzt) und die Zwischenergebnisse in Form vonNSNumber objekten an den Aufrufer zurückgegeben.
-	\item im obersten Element des Baums (immer XCStatement) wird schließlich noch der Wert in der ANS-Variable gesetzt. Eine eventuell mit ``STO'' gesetzte Variable wird auch noch überschrieben.
-	\item das zurückgegebene Ergebnis wird im ViewController in der WebView dargestellt.
+	\item Nach dem Drücken des ``=''-Buttons wird die \code{eval} am Kernel aufgerufen. 
+
+	\item Diese leitet einen Normalisierung auf dem Syntaxbaum ein. Dabei werden z.B. Vorzeichen aufgelöst (z.B. $\frac 1 {-3} \implies -\frac1 3$).  
+	\item Anschließend wird der Baum rekursiv evaluiert.
+	Dabei wird Bottom-Up der Ausdruck ausgewertet (evtl. Fehlerflags gesetzt) und 
+	die Zwischenergebnisse in Form von NSNumber objekten an den Aufrufer zurückgegeben.  
+	\item im Root-Element des Baums (immer XCStatement) wird schließlich noch der Wert in der ANS-Variable gesetzt. Eine eventuell mit ``STO'' gesetzte Variable wird auch noch überschrieben.  
+	\item Das zurückgegebene Ergebnis wird im ViewController in der WebView dargestellt.
 \end{enumerate}
 
 \chapter{Klassen}
@@ -126,43 +157,53 @@ Außerdem wird geregelt, wie die Tasten dargestellt werden sollen (z.B. Zahlen$\
 \section{Kernel}
 (siehe auch extra Klassendiagramm)
 \subsection{Schnittstellen (Protocols)}
-Viele Schnittstellen von häufig verwendeten Methoden(-gruppen) werden in folgenden Protocolszusammengefasst:
+Viele Schnittstellen von häufig verwendeten Methoden(-gruppen) werden in folgenden Protocols zusammengefasst:
 \begin{description}
 	\item[XCHasHtmlOutput] Die Implementierung kann ihren Inhalt in (mathml)-HTML ausgeben. 
-	\item[XCHasTriggers] Die Implementierung hat Trigger (siehe oben)
+	\item[XCHasTriggers] Die Implementierung hat Trigger (siehe oben), kann also Eingabe durch den Benutzer verarbeiten.
 	\item[XCEvaluable] Die Implementierung kann ihren Inhalt als NSNumber (berechnen und) zurückgeben.
 \end{description}
 \subsection{XCKernel}
 Der Kernel verwaltet das Root-Element (XCStatement) des Syntaxtrees und das Head-Element, auf welchem der Focus steht. Außerdem enthält er einen Buffer (XCStatementBuffer), der die letzten Eingaben in einem Ringpuffer (XCCircBuf) abrufbar verwaltet.
 \subsection{Hilfsklassen}
 \begin{description}
-	\item[NSNumber+XCNumber] Hierbei handelt es sich um eine Obj C Category, welche NSNumber um die unten benötigten Operatoren und einige Zustandsabfragen erweitert. Außerdem wird eine interne Typ und Überlaufskontrolle durchgeführt. Dabei werden eingegebene Integerwerte erhalten und im Fall von Überläufen in double konvertiert.
-		\paragraph{Anmerkung:} Eine Erkennung von ganzzahligen double-Werten ist noch nicht enthalten.
-	\item[XCGlobal] Dies ist zum einen eine Art global.h, welche globale symbolische Konstanten enthält, aber auch eine Singleton-Klasse, welche globale Werte verwaltet (derzeit nur die Grad/Rad Winkeleinstellung)
+	\item[NSNumber+XCNumber] Hierbei handelt es sich um eine Obj C Category, welche NSNumber um die unten benötigten Operatoren und einige Zustandsabfragen erweitert. 
+		Außerdem wird eine interne Typ und Überlaufskontrolle durchgeführt. 
+		Dabei werden eingegebene Integerwerte erhalten und im Fall von Überläufen in double konvertiert.
+	Eine Erkennung von ganzzahligen double-Werten ist auch enthalten.
+	\item[XCGlobal] Dies ist zum einen eine Art global.h, welche globale symbolische Konstanten enthält, aber auch eine Singleton-Klasse, welche globale Werte verwaltet (derzeit nur die Grad/Bogenmaß Winkeleinstellung)
 \end{description}
 \subsection{Syntax-Tree}
 Die Oberklasse für alle Elemente des Syntaxbaums ist die Klasse XCElement.
-Diese ist konform zu allen oben genannten Protokollen und NSCopying \footnote{Wird beim Wiederholen aus dem Statementbuffer benötigt, damit beim Ändern keine alten Ausdrücke überschrieben werden}. Für alle Methoden werden Standardimplementierung angeboten. Unterklassen müssen dann nur ihr eigenes Verhalten implementieren.
+Diese ist konform zu allen oben genannten Protokollen und NSCopying 
+\footnote{Wird beim Wiederholen aus dem Statementbuffer benötigt, damit beim Ändern keine alten Ausdrücke überschrieben werden}. 
+Für alle Methoden wird eine Standardimplementierung angeboten. 
+Unterklassen müssen dann nur ihr eigenes Verhalten implementieren.
+
 
 Desweiteren ist ein Bitflag-struct zur Speicherung des inneren Zustands nebst Hilfsmethoden enthalten, die von den Unterklassen zur Erstellung der HTMLs benötigt werden.
 
-Außerdem ist ein root-Element vorhanden, damit ist \footnote{etwas missverständlich} das Elternelement der Instanz gemeint. Mittels content-Methode und root ist der Syntaxbaum damit in beide Richtungen navigierbar.
+
+Außerdem ist ein parent-Element vorhanden. 
+Mittels content-Methode und parent ist der Syntaxbaum aufwärts und abwärts navigierbar.
 
 Eine Ableitung von XCElement ist der bereits besprochene XCSpacer.
 Alle weiteren Unterklassen von XCElement werden nochmals in drei Kategorien eingeteilt:
 
-\subsubsection{XCComplexElement}
-Die komplexen Elemente enthalten mindestens ein (oder min. zwei) weitere Elemente.
-Diese werden gekapselt von einer XCComplexElementContent-instanz verwaltet, welche auch den Zeiger auf das aktuelle Element beinhaltet.
+\subsubsection{XCTupleElement}
+Diese Elemente enthalten zwei weitere Kindelemente und werden derzeit ausschließlich zur Implementierung der Operatoren verwendet.
+\footnote{
+	In einer vorherigen Version waren diese als ``komplexe'' Elemente mit einem MutableArray vorhanden. Die Tupleversion hat sich aber letztendlich als einfacher erwiesen.
+}
 
 \paragraph{Unterklassen sind:} 
 \begin{description}
-	\item[XCExpr] Die Summe. Negative Werte werden in XCNegate verpackt.
-		Die Klasse bildet gleichzeitig die Implementierung für ``Ausdrücke''.
-	\item[XCExpo] Das Produkt. Divisionen werden in Form von XCInvert dargestellt.
-	\item[XCProd] Der Exponetialoperator, alle Operatoren werden der Form nach berechnet:
-		\[b_0^{(b_1^{(\ldots^{b_n})})} \]
+	\item[XCSum] Die Summe. Negative Werte werden in XCNegate verpackt.
+		Anders als in Grammatik wird der ``geklammerte Ausdruck'' aber extra behandelt: siehe XCExpression.
+	\item[XCProduct] Das Produkt. Divisionen werden in Form von XCInvert dargestellt.
+	\item[XCExponentiation] Der Exponetialoperator
 \end{description}
+
 \subsubsection{XCSimpleElement}
 Die simplen Elemente enthalten immer nur ein weiteres Element.
 \paragraph{Unterklassen sind:} 
@@ -170,20 +211,41 @@ Die simplen Elemente enthalten immer nur ein weiteres Element.
 	\item[XCStatement]
 		Analog zur Grammatik bildet das Statement immer das Root-Element eines Syntaxbaums. Es enthält einen Ausdruck, der berechnet werden kann sowie optional eine explizit zugewiesene Variable, welcher nach der Berechnung das Ergebnis eingesetzt wird. Implizit wird immer das Ergebnis der ANS-Variable zugewiesen. 
 	\item[XCFunction] Die Funktion besteht aus einem Name und einem Ausdruck, dessen Ergebnis in die Funktion eingesetzt wird. Die Klasse verwaltet ein Dictionary von XCFuncAlg-instanzen (XCTrigoFuncAlg für Winkelfunktionen). Diese enthalten die eigentliche Funktion als Functionpointer.
-		XCSqrt ist eine Spezialisierung von XCFunction, es wird lediglich die toHTML-Methode für Wurzeldarstellung verändert.
-	\item[XCInvert]
-		Invertiert einen Wert. Wird unter anderem von XCProd, da diese Klasse nur multiplizieren kann.
-	\item[XCNegate] Der enthaltene Wert wird negiert. Analog zu XCInvert von XCExpr zur 
-		Darstellung von Minus benutzt.
+		XCSqrt ist eine Spezialisierung von XCFunction, es wird lediglich die toHTML-Methode für die Wurzeldarstellung überschrieben.
+	\item[XCValModifier] Diese Elemente neutralisieren sich selbst und ein hinzugefügtes Element, falls dieses vom gleichen Typ ist.
+		Beispiel: aus -(-2) wird 2.
+		Weitere Unterklassen sind:
+		\begin{description}
+			\item[XCInvert]
+				Invertiert einen Wert. Wird unter anderem von XCProduct verwendet, da diese Klasse nur multiplizieren kann.
+			\item[XCNegate] Der enthaltene Wert wird negiert. Analog zu XCInvert: von XCSum zur 
+				Darstellung von Minus benutzt.
+			\item[XCExpression] Kapselt einen weiteren Ausdruck.
+		\end{description}
 \end{description}
 \subsubsection{XCTerminalElement}
-Wie der Name schon andeutet handelt es sich dabei um die Implementierung der Terminalsymboleaus der Grammatik. Naturgemäß enthalten diese keine weiteren Syntaxelemente und bilden die Blätterdes Syntaxbaums.
+Wie der Name schon andeutet handelt es sich dabei um die Implementierung der Terminalsymboleaus der Grammatik. Naturgemäß enthalten diese keine weiteren Syntaxelemente und bilden die Blätter des Syntaxbaums.
 
 \paragraph{Unterklassen sind:} 
 \begin{description}
 	\item[XCIdentifier] enthält ein XCStorage-objekt, also eine Variable (XCVariable) oder eine Konstante (XCConstant).
-	\item[XCNumString] Diese Klasse hat lediglich einen String-Buffer mit dem Dezimalzahlen erstellt werden können (also Digits und Komma). Die Klasse ist so intelligent um falsche Eingaben, wie mehrfach Komma abzufangen.
-		Beim Aufruf von eval wird der Buffer geparst und in ein NSNumber umgewandelt
+	\item[XCNumString] Diese Klasse hat lediglich einen String-Buffer mit dem Dezimalzahlen erstellt werden können (also Digits und Komma). Die Klasse ist hinreichend intelligent um falsche Eingaben, wie mehrfaches Komma abzufangen.
+		Beim Aufruf von eval wird der Buffer geparst und in ein NSNumber umgewandelt.
 \end{description}
 
 \chapter{Tests}
+Grundlegende Funktionalitäten wurden mit Unittests erfasst, dabei wurde folgendes getestet:
+\begin{itemize}
+	\item korrekte Berechnung duch die NSNumber-Category
+	\item richtige Auswertung von Ausdrücken anhand der einzelnen Elemente.
+	\item XCKernelTest: Hier wird mittels der trigger-Methoden mehrere Eingaben von Ausdrücken getestet.
+	\item Auswertung nach der Normalisierung.
+	\item Grundlegende Klassen wie der XCStatementBuffer
+\end{itemize}
+Das dynamische Verhalten wurde ``am lebenden Objekt'' immer wieder getestet:
+\begin{itemize}
+	\item Ausgabe von HTML
+	\item Verhalten bei der Navigation und beim Löschen
+	\item Aufrufreihenfolge bei Operatoren.
+	\item Verhalten des XCViewControllers
+\end{itemize}
