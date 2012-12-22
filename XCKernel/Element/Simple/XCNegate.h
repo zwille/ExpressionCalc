@@ -8,7 +8,7 @@
 
 #import "XCValModifier.h"
 
-@interface XCNegate : XCSimpleElement
+@interface XCNegate : XCValModifier
 +(id)negateValue: (XCElement*) value
         withParent: (XCElement*) parent;
 

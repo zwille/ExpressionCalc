@@ -14,9 +14,7 @@
 @implementation XCNegate
 +(id)negateValue:(XCElement*)value
       withParent:(XCElement *)parent {
-    if ([value isKindOfClass:[XCNegate class]]) {
-        return [((XCSimpleElement*)value) content];
-    }
+    assert(![value isKindOfClass:[self class]]);
     return [[XCNegate alloc] initWithContent:value
                                      andParent:parent];
 }

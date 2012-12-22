@@ -18,6 +18,7 @@
     XCStatementBuffer * _statements;
     
 }
+@property (strong, readonly) XCStatement * root;
 -(void) reset;
 -(void) nextStatement;
 -(void) previousStatement;

@@ -14,15 +14,25 @@
 
 //invert
 +(id)invertValue:(XCElement*)value  withParent:(XCElement *)parent{
-    if ([value isKindOfClass:[XCInvert class]]) {
-        return [((XCSimpleElement*)value) content];
-    }
+    assert(![value isKindOfClass:[self class]]);
     return [[XCInvert alloc] initWithContent:value andParent:parent];
 }
 
 -(NSString *)description {
     return [NSString stringWithFormat:@"/(%@)",
             [self content]];
+}
+
+-(void)normalize {
+    [super normalize];
+    XCElement * c = [self content];
+    if ([c isKindOfClass:[XCNegate class]]) {
+        XCElement * p = [self parent];
+        assert(p);
+        [self setContent:[c content]];
+        [p replaceContentWithElement: c];
+        [c replaceContentWithElement: self];
+    }
 }
 
 //HTML

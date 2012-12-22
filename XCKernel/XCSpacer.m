@@ -84,9 +84,9 @@
     // urges user to fill spacer with value
     if (op==XC_OP_MINUS || op==XC_OP_DIV) {
         XCElement * el = (op==XC_OP_DIV) ?
-        [XCInvert invertValue: self withParent:nil] :
-        [XCNegate negateValue: self withParent:nil];
-        [self swapWithElement: el andParent:parent];
+        [XCInvert invertValue: self withParent:parent] :
+        [XCNegate negateValue: self withParent:parent];
+        [parent replaceContentWithElement:el];
     }
     return self;
 }

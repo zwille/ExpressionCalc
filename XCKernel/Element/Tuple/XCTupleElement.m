@@ -53,7 +53,10 @@
     return element;
 }
 -(void)normalize {
+    // children need index to replace themselfes
+    [self setIndex:0];
     [[self element0] normalize];
+    [self setIndex:1];
     [[self element1] normalize];
 }
 

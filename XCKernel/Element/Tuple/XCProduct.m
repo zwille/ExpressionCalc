@@ -25,17 +25,18 @@
    
 -(void)normalize {
     [super normalize];
-    // assert element1 is normalized
     [self normalizeToElementSelf];
     [self normalizeRShiftClass:[XCInvert class]];
-    // normalize sign
+    // normalize sign lshift
     for (NSUInteger i=0; i<2; i++) {
         if([_content[i] isKindOfClass:[XCNegate class]]) {
-            [self setElement:[_content[i] content] at: i];
             XCElement * parent = [self parent];
             assert(parent);
-            [parent replaceContentWithElement:
-             [XCNegate negateValue:self withParent:parent]];
+            XCNegate * neg = (XCNegate*)_content[i];
+            [self setElement:[neg content] at: i];
+            [neg setContent:self];
+            [parent replaceContentWithElement:neg];
+            [self normalize];
         }
     }   
 }

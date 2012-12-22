@@ -31,9 +31,8 @@
 }
 
 -(NSString *)description {
-    return (_store) ?
-    [NSString stringWithFormat:@"<%@ := %@>",_store,[self content]] :
-    [NSString stringWithFormat:@"<%@>",[self content]];
+    return [NSString stringWithFormat:@"%@ <= %@",
+            (_store) ? _store : @"ANS",[self content]];
 }
 
 -(void)assignToVar: (NSUInteger)varIdx {

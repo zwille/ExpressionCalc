@@ -12,6 +12,7 @@
 #import "XCExpression.h"
 
 @implementation XCKernel
+@synthesize root = _root;
 
 -(id)init{
     self = [super init];

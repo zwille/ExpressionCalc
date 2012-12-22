@@ -10,24 +10,20 @@
 
 @implementation XCValModifier
 
+-(void)setContent:(XCElement *)c {
+    if ([c isKindOfClass:[self class]]) {
+        XCElement * cc = [c content];
+        assert(cc);
+        id p = [self parent];
+        assert(p);
+        [p replaceContentWithElement:cc];
+    } else {
+        [super setContent:c];
+    }
+}
 -(void)normalize {
-    [_content normalize];
-    // if content has same type as self
-    XCElement * content = [self content];
-    if ([content isKindOfClass:[self class]]) {
-        id parent = [self parent];
-        assert(parent);
-        [parent replaceContentWithElement:[content content]];
-    }
+    [super normalize];
+    assert(![[self content] isKindOfClass:[self class]]);
 }
--(XCElement*)replaceContentWithElement:(XCElement *)element {
-    if ([element isKindOfClass:[self class]]) {
-        element = [element content];
-        id parent = [self parent];
-        [element setParent:parent];
-        [parent replaceContentWithElement:element];
-        return element;
-    }
-    return [super replaceContentWithElement:element];
-}
+
 @end

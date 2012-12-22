@@ -10,4 +10,5 @@
 
 @interface XCKernelTest : SenTestCase
 -(void)testInput;
+-(void)testNormalize;
 @end
