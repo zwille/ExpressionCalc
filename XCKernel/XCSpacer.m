@@ -92,7 +92,7 @@
 }
 -(id<XCHasTriggers>)triggerPrevious {
     id parent = [self triggerDel];
-    return [parent triggerPrevious];
+    return [parent triggerPreviousContent];
 }
 -(id<XCHasTriggers>)triggerNext {
     return [self triggerDel];
