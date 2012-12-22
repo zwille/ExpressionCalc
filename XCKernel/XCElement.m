@@ -83,11 +83,11 @@
 -(NSString*) wrapHTML: (NSString*) inner {
     if ([self hasError]) {
         inner = [NSString stringWithFormat:
-                 @"<mspan class=\"error\">%@</mspan>",inner];
+                 @"<mrow class=\"error\">%@</mrow>",inner];
     }
     if ([self hasFocus]) {
         inner = [NSString stringWithFormat:
-                 @"<mspan class=\"hasfocus\">%@</mspan>",inner];
+                 @"<mrow class=\"hasfocus\">%@</mrow>",inner];
     }
     return inner;
     

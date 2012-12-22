@@ -8,6 +8,7 @@
 
 #import "XCTupleElement.h"
 #import "XCSimpleElement.h"
+#import "XCSpacer.h"
 
 @implementation XCTupleElement
 
@@ -46,6 +47,10 @@
 }
 -(XCElement *)content {
     return _content[[self index]];
+}
+-(XCElement *)head {
+    XCElement * rc = [super head];
+    return ([rc isKindOfClass:[self class]]) ? [rc head] : rc;
 }
 
 -(XCElement*)replaceContentWithElement:(XCElement *)element {
@@ -113,12 +118,18 @@
 
 
 //trigger
+//helper
+-(id<XCHasTriggers>)triggerContentAtIndex: (NSUInteger) idx {
+    [self setIndex:idx];
+    XCElement * c = _content[idx];
+    return ([c isKindOfClass:[self class]]) ?
+    [c head]: c;
 
+}
 -(id<XCHasTriggers>)triggerNextContent {
     BOOL idx = ![self index];
     if (idx) {
-        [self setIndex:idx];
-        return _content[idx];
+        return [self triggerContentAtIndex:idx];
     } else {
         return [super triggerNext];
     }
@@ -127,16 +138,22 @@
 -(id<XCHasTriggers>)triggerPreviousContent {
     BOOL idx = [self index];
     if (idx) {
-        [self setIndex:!idx];
-        return _content[!idx];
+        return [self triggerContentAtIndex:!idx];
     } else {
         return [super triggerPrevious];
     }
 }
+
 -(id<XCHasTriggers>)triggerDel {
     assert([self parent]);
-    return [[self parent] replaceContentWithElement:_content[![self index]]];
+    XCElement * c = [self content];
+    if ([c isKindOfClass:[XCSpacer class]]) {
+        return [[self parent] replaceContentWithElement:_content[![self index]]];
+    }
+    return [super triggerDel];
 }
+
+
 
 // copying
 -(id)copyWithZone:(NSZone *)zone {

@@ -116,7 +116,7 @@
                 _htmlState,_htmlExpression, htmlResult]; //args
     }
     _htmlOut = nil;
-     //DLOG(@"XCVC::print html = %@",html);
+     DLOG(@"XCVC::print html = %@",html);
     for (id webView in webViews) {
         [webView loadHTMLString: html baseURL:nil];
     }
