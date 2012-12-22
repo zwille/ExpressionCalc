@@ -1,6 +1,6 @@
 //
 //  XCFunction.m
-//  TestHTML
+//  XCCalc
 //
 //  Created by Christoph Cwelich on 05.12.12.
 //  Copyright (c) 2012 Christoph Cwelich. All rights reserved.
@@ -31,23 +31,35 @@ static const NSDictionary * functions;
     @"atan":[XCTrigoFuncAlg with: atan]
     };
 }
-- (id)initWithRoot:(XCElement*)root
+//init
+- (id)initWithParent:(XCElement*)parent
            andName: (NSString*) name
         andElement:(XCElement*)element {
-    self = [super initWithParent:root];
+    self = [super initWithParent:parent];
     if (self) {
         _name = name;
         [self setContent:element];
     }
     return self;
 }
++(XCFunction *)functionWithName:(NSString *)name
+                    withElement:(XCElement *)element
+                      andParent:(XCElement *)parent {
+    Class c = [XCFunction class];
+    
+    if([name isEqualToString:XC_SQRT]) {
+        c = [XCSqrt class];
+    }
+    return [[c alloc] initWithParent: parent
+                           andName:name
+                        andElement: element];
+}
 -(NSString *)description {
     return [NSString stringWithFormat:@"%@(%@)",
             _name, [self content]];
 }
--(void)normalize {
-    [_content normalize];
-}
+
+//HTML
 -(NSString *)toHTML {
     XCElement * content = [self content];
     return [super wrapHTML: [NSString stringWithFormat:
@@ -55,24 +67,16 @@ static const NSDictionary * functions;
             ([content isKindOfClass:[XCTerminalElement class]]) ?
                              [content toHTML] : [content toHTMLFenced]]];
 }
-+(XCFunction *)functionWithName:(NSString *)name
-                    withElement:(XCElement *)element
-                        andParent:(XCElement *)parent {
-    Class c = [XCFunction class];
-   
-    if([name isEqualToString:XC_SQRT]) {
-        c = [XCSqrt class];
-           }
-    return [[c alloc] initWithRoot: parent
-                                    andName:name
-                                 andElement: element];
-}
+
+
+//evaluate
 -(NSNumber *)eval {
     
     XCFuncAlg * algo = [functions objectForKey:_name];
     //NSLog(@"XCFunction::eval %@",_name);
     return [super checkErrorOn:[algo evaluateArgument:[[self content] eval]]];
 }
+//copying
 -(id)copyWithZone:(NSZone *)zone {
     XCFunction * rc = [super copyWithZone:zone];
     rc -> _name = _name;

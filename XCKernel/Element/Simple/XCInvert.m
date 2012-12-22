@@ -1,6 +1,6 @@
 //
 //  XCInvert.m
-//  ExprCalc
+//  XCCalc
 //
 //  Created by Christoph Cwelich on 25.11.12.
 //  Copyright (c) 2012 Christoph Cwelich. All rights reserved.
@@ -12,20 +12,15 @@
 #import "XCNegate.h"
 @implementation XCInvert
 
-
+//invert
 +(id)invertValue:(XCElement*)value  withParent:(XCElement *)parent{
-    if ([value isKindOfClass:[XCInvert class]]) {
-        return [((XCSimpleElement*)value) content];
-    }
+    assert(![value isKindOfClass:[self class]]);
     return [[XCInvert alloc] initWithContent:value andParent:parent];
 }
+
 -(NSString *)description {
     return [NSString stringWithFormat:@"/(%@)",
             [self content]];
-}
--(NSString *)toHTML {
-    return [super wrapHTML:
-            [NSString stringWithFormat:@"<mfrac> <mn>1</mn> <mrow>%@</mrow> </mfrac>", [[self content] toHTML]]];
 }
 
 -(void)normalize {
@@ -33,21 +28,17 @@
     XCElement * c = [self content];
     if ([c isKindOfClass:[XCNegate class]]) {
         XCElement * p = [self parent];
-        XCElement * cc = [c content];
-        [p replaceContentWithElement:c];
-        [c replaceContentWithElement:self];
-        [self setContent:cc];
+        assert(p);
+        [self setContent:[c content]];
+        [p replaceContentWithElement: c];
+        [c replaceContentWithElement: self];
     }
 }
--(XCElement*)replaceContentWithElement:(XCElement *)element {
-    if ([element isKindOfClass:[self class]]) {
-        element = [element content];
-        id parent = [self parent];
-        [element setParent:parent];
-        [parent replaceContentWithElement:element];
-        return element;
-    }
-    return [super replaceContentWithElement:element];
+
+//HTML
+-(NSString *)toHTML {
+    return [super wrapHTML:
+            [NSString stringWithFormat:@"<mfrac> <mn>1</mn> <mrow>%@</mrow> </mfrac>", [[self content] toHTML]]];
 }
 //trigger
 -(id<XCHasTriggers>)triggerOperator:(XCOperator)op {

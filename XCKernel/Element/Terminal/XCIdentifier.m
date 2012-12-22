@@ -1,6 +1,6 @@
 //
 //  XCIdentifier.m
-//  TestHTML
+//  XCCalc
 //
 //  Created by Christoph Cwelich on 07.12.12.
 //  Copyright (c) 2012 Christoph Cwelich. All rights reserved.
@@ -10,23 +10,23 @@
 
 
 @implementation XCIdentifier
--(id)initWithRoot:(XCElement *)root andStorage: (XCStorage*) store {
-    self = [super initWithParent:root];
+-(id)initWithParent:(XCElement *)parent andStorage: (XCStorage*) store {
+    self = [super initWithParent:parent];
     _store = store;
     return self;
 }
 +(id)ansWithParent: (XCElement*) parent {
-    return [[XCIdentifier alloc] initWithRoot:parent
+    return [[XCIdentifier alloc] initWithParent:parent
                                    andStorage:[XCVariable variableForIndex:0]];
 }
-+(id)identifierWithConstantId:(XCConstants)cid andRoot: (XCElement*) root; {
-    return [[XCIdentifier alloc] initWithRoot:root
++(id)identifierWithConstantId:(XCConstants)cid andParent: (XCElement*) parent; {
+    return [[XCIdentifier alloc] initWithParent:parent
                                    andStorage:
             [XCConstant constantForID:cid]];
     
 }
-+(id)identifierWithVariableIndex:(NSUInteger)idx andRoot:(XCElement *)root {
-    return [[XCIdentifier alloc] initWithRoot:root
++(id)identifierWithVariableIndex:(NSUInteger)idx andParent:(XCElement *)parent {
+    return [[XCIdentifier alloc] initWithParent:parent
                                    andStorage:
             [XCVariable variableForIndex:idx]];
 }

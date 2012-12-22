@@ -1,6 +1,6 @@
 //
 //  XCKernel.h
-//  TestHTML
+//  XCCalc
 //
 //  Created by Christoph Cwelich on 04.12.12.
 //  Copyright (c) 2012 Christoph Cwelich. All rights reserved.
@@ -18,11 +18,12 @@
     XCStatementBuffer * _statements;
     
 }
+@property (strong, readonly) XCStatement * root;
 -(void) reset;
 -(void) nextStatement;
 -(void) previousStatement;
 -(void) toggleAngleMode;
 -(BOOL) isDegreeAngleMode;
 -(BOOL) isInExpression;
-
+-(void) assignToVar: (NSUInteger) varIdx;
 @end

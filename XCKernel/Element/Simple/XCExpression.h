@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 Christoph Cwelich. All rights reserved.
 //
 
-#import "XCSimpleElement.h"
+#import "XCValModifier.h"
 
-@interface XCExpression : XCSimpleElement
+@interface XCExpression : XCValModifier
 +(id) expressionWithElement:(XCElement*) element
                andParent:(XCElement*) parent;
 @end

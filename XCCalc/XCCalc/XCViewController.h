@@ -11,15 +11,17 @@
 
 @interface XCViewController : UIViewController {
     XCKernel * _kernel;
+    // html output
     NSString * _htmlTemplatePortrait;
     NSString * _htmlTemplateLandscape;
     NSString * _htmlState;
     NSString * _htmlExpression;
     NSString * _htmlOut;
+    // number output
     NSNumberFormatter * _decformat, * _sciformat;
     // state
-    BOOL storing;
-    BOOL numbersAsVariables;
+    BOOL _storing;
+    BOOL _numbersAsVariables;
 }
 @property (strong, nonatomic) IBOutlet UIView *portraitView;
 @property (strong, nonatomic) IBOutlet UIView *landscapeView;

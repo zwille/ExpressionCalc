@@ -21,6 +21,7 @@
     [self setIndex:1];
     return self;
 }
+
 -(BOOL)index {
     return _state.sub1;
 }
@@ -31,19 +32,42 @@
     _content[idx] = el;
     [el setParent:self];
 }
+-(XCElement*) elementAt:(BOOL)idx {
+    return _content[idx];
+}
+-(XCElement *)element0 {
+    return _content[0];
+}
+-(XCElement *)element1 {
+    return _content[1];
+}
 -(BOOL)isEmpty {
     return _content[0]==nil && _content[1]==nil;
 }
 -(XCElement *)content {
     return _content[[self index]];
 }
+
+-(XCElement*)replaceContentWithElement:(XCElement *)element {
+    [self setElement:element at:[self index]];
+    return element;
+}
+-(void)normalize {
+    // children need index to replace themselfes
+    [self setIndex:0];
+    [[self element0] normalize];
+    [self setIndex:1];
+    [[self element1] normalize];
+}
+
+
 -(void) swapElements {
     XCElement * t = [self element1];
     [self setElement:[self element0] at:1];
     [self setElement:t at:0];
 }
 -(void)normalizeToElementSelf {
-    // normalize to order (element, element) or (element, self)
+    // normalize to order (element, element) or (element, self class)
     if ([_content[0] isKindOfClass:[self class]]) {
         if ([_content[1] isKindOfClass:[self class]]) { // both self
             XCTupleElement * e1, *e2, * e3;
@@ -86,22 +110,8 @@
         }
     }
 }
-        
--(id)copyWithZone:(NSZone *)zone {
-    XCTupleElement * rc = [super copyWithZone:zone];
-    [rc setElement:[_content[0] copyWithZone:zone] at:0];
-    [rc setElement:[_content[1] copyWithZone:zone] at:1];
-    
-    return rc;
-}
--(XCElement*)replaceContentWithElement:(XCElement *)element {
-    [self setElement:element at:[self index]];
-    return element;
-}
--(void)normalize {
-    [[self element0] normalize];
-    [[self element1] normalize];
-}
+
+
 //trigger
 
 -(id<XCHasTriggers>)triggerNextContent {
@@ -114,16 +124,6 @@
     }
     
 }
--(XCElement*) elementAt:(BOOL)idx {
-    return _content[idx];
-}
--(XCElement *)element0 {
-    return _content[0];
-}
--(XCElement *)element1 {
-    return _content[1];
-}
-
 -(id<XCHasTriggers>)triggerPreviousContent {
     BOOL idx = [self index];
     if (idx) {
@@ -136,5 +136,14 @@
 -(id<XCHasTriggers>)triggerDel {
     assert([self parent]);
     return [[self parent] replaceContentWithElement:_content[![self index]]];
+}
+
+// copying
+-(id)copyWithZone:(NSZone *)zone {
+    XCTupleElement * rc = [super copyWithZone:zone];
+    [rc setElement:[_content[0] copyWithZone:zone] at:0];
+    [rc setElement:[_content[1] copyWithZone:zone] at:1];
+    
+    return rc;
 }
 @end

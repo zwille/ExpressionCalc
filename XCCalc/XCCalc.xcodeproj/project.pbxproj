@@ -59,6 +59,7 @@
 		00A19826167DF20400AFE799 /* XCInvertTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A19825167DF20400AFE799 /* XCInvertTest.m */; };
 		00A19829167DF21E00AFE799 /* XCNegateTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A19828167DF21E00AFE799 /* XCNegateTest.m */; };
 		00A1982C167E15DD00AFE799 /* XCKernelTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A1982B167E15DB00AFE799 /* XCKernelTest.m */; };
+		00AA77CB16850ACD004553D2 /* XCValModifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 00AA77CA16850ABE004553D2 /* XCValModifier.m */; };
 		00B112B0167CC54600BEA4B1 /* XCStatementBufferTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B112AF167CC54600BEA4B1 /* XCStatementBufferTest.m */; };
 		00B14D5A1677A29500B27740 /* XCExprTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B14D591677A29500B27740 /* XCExprTest.m */; };
 		00BA2682167760BE00EF209E /* XCSqrt.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BA2681167760BD00EF209E /* XCSqrt.m */; };
@@ -170,6 +171,8 @@
 		00A19828167DF21E00AFE799 /* XCNegateTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCNegateTest.m; sourceTree = "<group>"; };
 		00A1982A167E15DA00AFE799 /* XCKernelTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCKernelTest.h; sourceTree = "<group>"; };
 		00A1982B167E15DB00AFE799 /* XCKernelTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCKernelTest.m; sourceTree = "<group>"; };
+		00AA77C916850AB5004553D2 /* XCValModifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCValModifier.h; sourceTree = "<group>"; };
+		00AA77CA16850ABE004553D2 /* XCValModifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCValModifier.m; sourceTree = "<group>"; };
 		00B112AE167CC54600BEA4B1 /* XCStatementBufferTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCStatementBufferTest.h; sourceTree = "<group>"; };
 		00B112AF167CC54600BEA4B1 /* XCStatementBufferTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCStatementBufferTest.m; sourceTree = "<group>"; };
 		00B14D581677A29500B27740 /* XCExprTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XCExprTest.h; path = Complex/XCExprTest.h; sourceTree = "<group>"; };
@@ -343,6 +346,8 @@
 				002B73761675D4A000A675E2 /* XCStatement.m */,
 				0085821916821D2700C95225 /* XCExpression.h */,
 				0085821A16821D2800C95225 /* XCExpression.m */,
+				00AA77C916850AB5004553D2 /* XCValModifier.h */,
+				00AA77CA16850ABE004553D2 /* XCValModifier.m */,
 			);
 			path = Simple;
 			sourceTree = "<group>";
@@ -597,6 +602,7 @@
 				0085821216820D5900C95225 /* XCProduct.m in Sources */,
 				0085821516821A1300C95225 /* XCExponentiation.m in Sources */,
 				0085821B16821D2900C95225 /* XCExpression.m in Sources */,
+				00AA77CB16850ACD004553D2 /* XCValModifier.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

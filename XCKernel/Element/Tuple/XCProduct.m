@@ -24,42 +24,19 @@
 }
    
 -(void)normalize {
-  
     [super normalize];
-    // assert element1 is normalized
     [self normalizeToElementSelf];
     [self normalizeRShiftClass:[XCInvert class]];
-    /*
-    // normalize division
-    if ([_content[0] isKindOfClass:[XCInvert class]]) {
-        if ([_content[1] isKindOfClass:[XCInvert class]]) {
-            // rebuild *(/,/) to /(*,*)
-            [self setElement:[[self element0] content] at: 0];
-            [self setElement:[[self element1] content] at: 1];
-            XCElement * parent = [self parent];
-            [parent replaceContentWithElement:
-             [XCInvert invertValue:self withParent:parent]];
-        } else if ([_content[1] isKindOfClass:[XCProduct class]]) {
-            //shift invert right
-            XCProduct * p = (XCProduct*) [self element1];
-            assert( ![[p element0] isKindOfClass: [XCInvert class]]);
-            XCElement * t = [p element0];
-            [p setElement:[self element0] at:0];
-            [self setElement:t at:0];
-            [[self element1] normalize];
-        } else {
-            [self swapElements];
-        }
-    }*/
-    
-    // normalize sign
+    // normalize sign lshift
     for (NSUInteger i=0; i<2; i++) {
         if([_content[i] isKindOfClass:[XCNegate class]]) {
-            [self setElement:[_content[i] content] at: i];
             XCElement * parent = [self parent];
             assert(parent);
-            [parent replaceContentWithElement:
-             [XCNegate negateValue:self withParent:parent]];
+            XCNegate * neg = (XCNegate*)_content[i];
+            [self setElement:[neg content] at: i];
+            [neg setContent:self];
+            [parent replaceContentWithElement:neg];
+            [self normalize];
         }
     }   
 }

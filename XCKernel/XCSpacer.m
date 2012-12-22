@@ -1,6 +1,6 @@
 //
 //  XCSpacer.m
-//  TestHTML
+//  XCCalc
 //
 //  Created by Christoph Cwelich on 04.12.12.
 //  Copyright (c) 2012 Christoph Cwelich. All rights reserved.
@@ -20,23 +20,27 @@
 +(id)spacerWithParent: (XCElement*) parent {
     return [[XCSpacer alloc] initWithParent:parent];
 }
--(NSString *)toHTML {
-    //return @"&#9643";
-    return [super wrapHTML:@"<mo>_</mo>"];
-}
+
 
 -(BOOL)isEmpty { return YES; }
 -(BOOL)isEqual:(id)object {
     return [object isKindOfClass:[XCSpacer class]];
 }
--(XCElement*) swapWithElement: (XCElement*) el andRoot: (XCElement*) root {
-    assert(root);
-    [root replaceContentWithElement:el];
+-(XCElement*) swapWithElement: (XCElement*) el andParent: (XCElement*) parent {
+    assert(parent);
+    [parent replaceContentWithElement:el];
     return el;
 }
 -(NSString *)description {
     return @"_";
 }
+
+//HTML
+-(NSString *)toHTML {
+    //return @"&#9643";
+    return [super wrapHTML:@"<mo>_</mo>"];
+}
+
 //trigger
 -(id<XCHasTriggers>)triggerDel {
     assert([self parent]);
@@ -45,63 +49,62 @@
 -(id<XCHasTriggers>)triggerNum:(char) c {
     return [self swapWithElement:
             [XCNumString numWithFirstChar: c]
-                         andRoot:[self parent]];
+                         andParent:[self parent]];
 }
 -(id<XCHasTriggers>)triggerExpression {
-    XCElement * root = [self parent];
+    XCElement * parent = [self parent];
     [self swapWithElement:
             [XCExpression expressionWithElement: self
                                   andParent: nil]
-                  andRoot:root];
+                  andParent:parent];
     return self;
 }
 -(id<XCHasTriggers>)triggerFunction: (NSString*) fn {
-    XCElement * root = [self parent];
+    XCElement * parent = [self parent];
     [self swapWithElement:
             [XCFunction functionWithName:fn
                              withElement:self
                                  andParent: nil]
-                  andRoot:root];
+                  andParent:parent];
     return self;
 }
 -(id<XCHasTriggers>)triggerConstant:(XCConstants)cid {
-    return [self swapWithElement: [XCIdentifier identifierWithConstantId:cid andRoot:nil]
-                         andRoot:[self parent]];
+    return [self swapWithElement: [XCIdentifier identifierWithConstantId:cid andParent:nil]
+                         andParent:[self parent]];
 }
 -(id<XCHasTriggers>)triggerVariable:(NSUInteger)idx {
-    return [self swapWithElement: [XCIdentifier identifierWithVariableIndex:idx andRoot:nil]
-                         andRoot:[self parent]];
-}
--(id<XCHasTriggers>)triggerAssign:(NSUInteger) varIdx {
-    return self;
+    return [self swapWithElement: [XCIdentifier identifierWithVariableIndex:idx andParent:nil]
+                         andParent:[self parent]];
 }
 
 -(id<XCHasTriggers>)triggerOperator: (XCOperator) op {
     assert([self parent]);
-    XCElement * root = [self parent];
+    XCElement * parent = [self parent];
     // only catch invert or minus, suppress other ops
     // urges user to fill spacer with value
     if (op==XC_OP_MINUS || op==XC_OP_DIV) {
         XCElement * el = (op==XC_OP_DIV) ?
-        [XCInvert invertValue: self withParent:nil] :
-        [XCNegate negateValue: self withParent:nil];
-        [self swapWithElement: el andRoot:root];
+        [XCInvert invertValue: self withParent:parent] :
+        [XCNegate negateValue: self withParent:parent];
+        [parent replaceContentWithElement:el];
     }
     return self;
 }
 -(id<XCHasTriggers>)triggerPrevious {
-    id root = [self triggerDel];
-    return [root triggerPrevious];
+    id parent = [self triggerDel];
+    return [parent triggerPrevious];
 }
 -(id<XCHasTriggers>)triggerNext {
     return [self triggerDel];
 }
+
 //evaluate
 -(NSNumber *)eval {
+    // use ans instead of errors
     XCElement* ans = [self swapWithElement:
             [XCIdentifier identifierWithVariableIndex:XC_ANS_IDX
-                                              andRoot:nil]
-                                   andRoot:[self parent]];
+                                              andParent:nil]
+                                   andParent:[self parent]];
     return [ans eval];
 }
 

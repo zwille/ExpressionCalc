@@ -23,7 +23,7 @@
 -(id) tail;
 -(BOOL) push: (id) element;
 -(id) pop;
-//-(BOOL) queue;
+//-(BOOL) queue; // not needed yet
 -(id) dequeue;
 
 @end

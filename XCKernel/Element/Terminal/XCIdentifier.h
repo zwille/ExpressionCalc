@@ -1,6 +1,6 @@
 //
 //  XCIdentifier.h
-//  TestHTML
+//  XCCalc
 //
 //  Created by Christoph Cwelich on 07.12.12.
 //  Copyright (c) 2012 Christoph Cwelich. All rights reserved.
@@ -16,7 +16,7 @@
 }
 +(id) ansWithParent: (XCElement*) parent;
 +(id) identifierWithVariableIndex: (NSUInteger) idx
-                          andRoot: (XCElement*) root;
+                          andParent: (XCElement*) parent;
 +(id) identifierWithConstantId: (XCConstants) cid
-                       andRoot: (XCElement*) root;
+                       andParent: (XCElement*) parent;
 @end

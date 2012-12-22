@@ -42,7 +42,7 @@
     
     // (3): x0 = x0 + 1;
     [k triggerVariable:0];
-    [k triggerAssign:0];
+    [k assignToVar:0];
     [k triggerOperator:XC_OP_PLUS];
     [k triggerNum:'1'];
     result = [k eval];
@@ -163,19 +163,19 @@
     STAssertEqualObjects(result, @4, nil);
     
     // (15): x2=0.5, x1=-2, x0=3/2, (-x1 + sqrt(x1^2 - 4*x2*x0)) / (2*x2)
-    [k triggerAssign:2];
+    [k assignToVar:2];
     [k triggerNum:'.'];
     [k triggerNum:'5'];
     result = [k eval];
     STAssertEqualObjects(result, @.5, nil);
     
-    [k triggerAssign:1];
+    [k assignToVar:1];
     [k triggerOperator:XC_OP_MINUS];
     [k triggerNum:'2'];
     result = [k eval];
     STAssertEqualObjects(result, @-2, nil);
     
-    [k triggerAssign:0];
+    [k assignToVar:0];
     [k triggerNum:'3'];
     [k triggerOperator:XC_OP_DIV];
     [k triggerNum:'2'];
@@ -251,7 +251,97 @@
     result = [k eval];
     STAssertEqualObjects(result, @-.5, nil);
 
+}
+-(void)checkNormalizedResultWithKernel: (XCKernel*) k {
+    XCElement * root = [k root];
+    NSNumber * result1 = [root eval];
+    // k eval including normalizing
+    NSNumber * result2 = [k eval];
+    STAssertEqualObjects(result1, result2, nil);
+}
+-(void)testNormalize {
+    XCKernel * k = [[XCKernel alloc] init];
     
- 
+    // /-4
+    [k triggerOperator:XC_OP_DIV];
+    [k triggerOperator:XC_OP_MINUS];
+    [k triggerNum:'4'];
+    [self checkNormalizedResultWithKernel:k];
+    
+    // /-4 * 2
+    [k triggerOperator:XC_OP_DIV];
+    [k triggerOperator:XC_OP_MINUS];
+    [k triggerNum:'4'];
+    [k triggerOperator:XC_OP_MULT];
+    [k triggerNum:'2'];
+    [self checkNormalizedResultWithKernel:k];
+    
+    // 2 /-4
+    [k triggerNum:'2'];
+    [k triggerOperator:XC_OP_DIV];
+    [k triggerOperator:XC_OP_MINUS];
+    [k triggerNum:'4'];
+    [self checkNormalizedResultWithKernel:k];
+    
+    // /-4 / -2
+    [k triggerOperator:XC_OP_DIV];
+    [k triggerOperator:XC_OP_MINUS];
+    [k triggerNum:'4'];
+    [k triggerOperator:XC_OP_DIV];
+    [k triggerOperator:XC_OP_MINUS];
+    [k triggerNum:'2'];
+    [self checkNormalizedResultWithKernel:k];
+    
+    // -2 * 2
+    [k triggerOperator:XC_OP_MINUS];
+    [k triggerNum:'2'];
+    [k triggerOperator:XC_OP_MULT];
+    [k triggerNum:'2'];
+    [self checkNormalizedResultWithKernel:k];
+    
+    // /-3 * -2 /4 /2 *3 *-4 = -2 * 3 * -4 / (2 * -3 * 4) = 1
+    [k triggerOperator:XC_OP_DIV];
+    [k triggerOperator:XC_OP_MINUS];
+    [k triggerNum:'3'];
+    [k triggerOperator:XC_OP_MULT];
+    [k triggerOperator:XC_OP_MINUS];
+    [k triggerNum:'2'];
+    [k triggerOperator:XC_OP_DIV];
+    [k triggerNum:'4'];
+    [k triggerOperator:XC_OP_DIV];
+    [k triggerNum:'2'];
+    [k triggerOperator:XC_OP_MULT];
+    [k triggerNum:'3'];
+    [k triggerOperator:XC_OP_MULT];
+    [k triggerOperator:XC_OP_MINUS];
+    [k triggerNum:'4'];
+    [self checkNormalizedResultWithKernel:k];
+    
+    // -2 + 5
+    [k triggerOperator:XC_OP_MINUS];
+    [k triggerNum:'2'];
+    [k triggerOperator:XC_OP_PLUS];
+    [k triggerNum:'5'];
+    
+    // 5-2
+    [k triggerNum:'5'];
+    [k triggerOperator:XC_OP_MINUS];
+    [k triggerNum:'2'];
+    
+    // -5 + 3 -2
+    [k triggerOperator:XC_OP_MINUS];
+    [k triggerNum:'5'];
+    [k triggerOperator:XC_OP_PLUS];
+    [k triggerNum:'3'];
+    [k triggerOperator:XC_OP_MINUS];
+    [k triggerNum:'2'];
+
+    
+    
+
+    
+    
+    
+    
 }
 @end

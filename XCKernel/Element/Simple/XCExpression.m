@@ -13,7 +13,7 @@
     return [[XCExpression alloc] initWithContent:element andParent:parent];
 }
 -(NSString *)description {
-    return [NSString stringWithFormat:@"[ %@ ]",
+    return [NSString stringWithFormat:@"( %@ )",
             [self content]];
 }
 -(NSString *)toHTML {

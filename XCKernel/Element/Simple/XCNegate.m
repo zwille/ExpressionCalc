@@ -1,6 +1,6 @@
 //
 //  XCNegate.m
-//  ExprCalc
+//  XCCalc
 //
 //  Created by Christoph Cwelich on 25.11.12.
 //  Copyright (c) 2012 Christoph Cwelich. All rights reserved.
@@ -13,10 +13,8 @@
 
 @implementation XCNegate
 +(id)negateValue:(XCElement*)value
-withParent:(XCElement *)parent {
-    if ([value isKindOfClass:[XCNegate class]]) {
-        return [((XCSimpleElement*)value) content];
-    }
+      withParent:(XCElement *)parent {
+    assert(![value isKindOfClass:[self class]]);
     return [[XCNegate alloc] initWithContent:value
                                      andParent:parent];
 }
@@ -24,6 +22,8 @@ withParent:(XCElement *)parent {
     return [NSString stringWithFormat:@"-(%@)",
            [self content]];
 }
+
+//HTML
 -(NSString *)toHTML{
     assert([self content]);
     XCElement * content = [self content];
@@ -31,21 +31,12 @@ withParent:(XCElement *)parent {
     [content toHTMLFenced] : [content toHTML];
     return [super wrapHTML: [NSString stringWithFormat: @"<mo>-</mo>%@", html]];
 }
--(XCElement*)replaceContentWithElement:(XCElement *)element {
-    if ([element isKindOfClass:[self class]]) {
-        element = [element content];
-        id root = [self parent];
-        [root replaceContentWithElement:element];
-        return element;
-    }
-    return [super replaceContentWithElement:element];
-}
 //trigger
 -(id<XCHasTriggers>)triggerOperator:(XCOperator)op {
     if(op==XC_OP_MINUS && [[self content] isKindOfClass:[XCSpacer class]]) {
         XCElement* element = [self content];
-        id root = [self parent];
-        [root replaceContentWithElement:element];
+        id parent = [self parent];
+        [parent replaceContentWithElement:element];
         return element;
     } else {
         return [super triggerOperator:op];
