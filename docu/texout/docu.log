@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Arch Linux) (format=pdflatex 2012.10.30)  21 DEC 2012 20:34
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Arch Linux) (format=pdflatex 2012.10.30)  22 DEC 2012 18:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -804,7 +804,7 @@ LaTeX Info: Redefining \nameref on input line 64.
 
  (./manual.tex [2
 
-]
+] [3]
 Kapitel 1.
 
 Class scrreprt Warning: \float@addtolists detected!
@@ -813,72 +813,92 @@ Class scrreprt Warning: \float@addtolists detected!
 (scrreprt)              Support for \float@addtolists may be removed from
 (scrreprt)              `scrreprt' soon .
 
-) (./swe.tex [3
+<portrait.png, id=202, 368.87813pt x 578.91281pt>
+File: portrait.png Graphic file (type png)
+ <use portrait.png>
+Package pdftex.def Info: portrait.png used on input line 14.
+(pdftex.def)             Requested size: 208.01126pt x 326.45346pt.
+ [4
 
-] [4
+ <./portrait.png>] <landscape.png, id=208, 670.00313pt x 318.43968pt>
+File: landscape.png Graphic file (type png)
 
-]
-Kapitel 2.
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 9.
-(/usr/share/texmf-dist/tex/latex/psnfss/ot1pcr.fd
-File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
-) (../grammar_bnf.txt
-LaTeX Font Info:    Font shape `OT1/pcr/m/it' in size <10.95> not available
-(Font)              Font shape `OT1/pcr/m/sl' tried instead on input line 1.
-)
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 17.
+<use landscape.png>
+Package pdftex.def Info: landscape.png used on input line 22.
+(pdftex.def)             Requested size: 452.96796pt x 215.28735pt.
+ [5 <./landscape.png>] [6]
+<landscape_var.png, id=230, 263.48438pt x 204.01219pt>
+File: landscape_var.png Graphic file (type png)
+ <use landscape_var.png>
+Package pdftex.def Info: landscape_var.png used on input line 92.
+(pdftex.def)             Requested size: 135.89175pt x 105.22466pt.
 
-(/usr/share/texmf-dist/tex/latex/base/omscmr.fd
+[7 <./landscape_var.png>]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 119.
+
+ (/usr/share/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 17.
- [5
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 119.
+)
+(./swe.tex [8] [9
 
-] [6]
+]
+Kapitel 2.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 10.
+(/usr/share/texmf-dist/tex/latex/psnfss/ot1pcr.fd
+File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
+) (./grammar_bnf.txt
+LaTeX Font Info:    Font shape `OT1/pcr/m/it' in size <10.95> not available
+(Font)              Font shape `OT1/pcr/m/sl' tried instead on input line 1.
+) [10
+
+]
+[11]
 Kapitel 3.
-<sq_trigger.pdf, id=169, 597.50786pt x 845.04686pt>
+<sq_trigger.pdf, id=286, 597.50786pt x 845.04686pt>
 File: sq_trigger.pdf Graphic file (type pdf)
  <use sq_trigger.pdf>
-Package pdftex.def Info: sq_trigger.pdf used on input line 44.
+Package pdftex.def Info: sq_trigger.pdf used on input line 45.
 (pdftex.def)             Requested size: 597.5064pt x 845.0448pt.
 
-[7
+[12
 
- <./sq_trigger.pdf>] <sq_spacer.pdf, id=186, 597.50786pt x 845.04686pt>
+ <./sq_trigger.pdf>] <sq_spacer.pdf, id=302, 597.50786pt x 845.04686pt>
 File: sq_spacer.pdf Graphic file (type pdf)
 
 <use sq_spacer.pdf>
-Package pdftex.def Info: sq_spacer.pdf used on input line 84.
+Package pdftex.def Info: sq_spacer.pdf used on input line 85.
 (pdftex.def)             Requested size: 597.5064pt x 845.0448pt.
- [8] [9 <./sq_spacer.pdf>]
-Overfull \hbox (31.60036pt too wide) in paragraph at lines 102--108
+ [13] [14 <./sq_spacer.pdf>]
+Overfull \hbox (31.60036pt too wide) in paragraph at lines 103--109
 []\OT1/cmr/m/n/10.95 Es wur-de be-reits fol-gen-des ein-ge-ge-ben: '5+4*3', der
  Fo-cus steht auf der '3'. In der []-
  []
 
 LaTeX Font Info:    Font shape `OT1/pcr/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/pcr/b/n' tried instead on input line 113.
-<sq_eval.pdf, id=221, 597.50786pt x 845.04686pt>
+(Font)              Font shape `OT1/pcr/b/n' tried instead on input line 114.
+<sq_eval.pdf, id=338, 597.50786pt x 845.04686pt>
 File: sq_eval.pdf Graphic file (type pdf)
  <use sq_eval.pdf>
-Package pdftex.def Info: sq_eval.pdf used on input line 128.
+Package pdftex.def Info: sq_eval.pdf used on input line 129.
 (pdftex.def)             Requested size: 597.5064pt x 845.0448pt.
- [10]
-[11 <./sq_eval.pdf>]
+ [15]
+[16 <./sq_eval.pdf>]
 Kapitel 4.
-<cl_vc.pdf, id=259, 597.50786pt x 845.04686pt>
+<cl_vc.pdf, id=374, 597.50786pt x 845.04686pt>
 File: cl_vc.pdf Graphic file (type pdf)
  <use cl_vc.pdf>
-Package pdftex.def Info: cl_vc.pdf used on input line 151.
+Package pdftex.def Info: cl_vc.pdf used on input line 152.
 (pdftex.def)             Requested size: 597.5064pt x 845.0448pt.
- [12
+ [17
 
- <./cl_vc.pdf>] [13] [14] [15]
+ <./cl_vc.pdf>] [18] [19] [20]
 Kapitel 5.
 )
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 71.
- [16
+ [21
 
 ]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 71.
@@ -894,27 +914,29 @@ LaTeX Warning: There were multiply-defined labels.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 71.
  ) 
 Here is how much of TeX's memory you used:
- 12361 strings out of 493488
- 170579 string characters out of 3146891
- 371938 words of memory out of 3000000
- 15330 multiletter control sequences out of 15000+200000
- 18439 words of font info for 75 fonts, out of 3000000 for 9000
+ 12427 strings out of 493488
+ 171586 string characters out of 3146891
+ 371940 words of memory out of 3000000
+ 15360 multiletter control sequences out of 15000+200000
+ 18747 words of font info for 76 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
  36i,8n,58p,3215b,1205s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-r6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/sha
-re/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/share/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/sh
-are/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texmf-dist/fonts/
-type1/urw/courier/ucrro8a.pfb>
-Output written on texout/docu.pdf (16 pages, 194688 bytes).
+ts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr
+/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmr9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><
+/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/t
+ype1/urw/courier/ucrb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/courier/ucrr
+8a.pfb></usr/share/texmf-dist/fonts/type1/urw/courier/ucrro8a.pfb>
+Output written on texout/docu.pdf (21 pages, 364098 bytes).
 PDF statistics:
- 366 PDF objects out of 1000 (max. 8388607)
- 319 compressed objects within 4 object streams
- 106 named destinations out of 1000 (max. 500000)
- 189 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 496 PDF objects out of 1000 (max. 8388607)
+ 437 compressed objects within 5 object streams
+ 138 named destinations out of 1000 (max. 500000)
+ 324 words of extra memory for PDF output out of 10000 (max. 10000000)
 

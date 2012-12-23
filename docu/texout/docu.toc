@@ -1,25 +1,48 @@
-\contentsline {chapter}{\numberline {1}Kurzanleitung}{3}{chapter.1}
-\contentsline {part}{\numberline {I}Dokumentation}{4}{part.1}
-\contentsline {chapter}{\numberline {2}Einleitung}{5}{chapter.2}
-\contentsline {section}{\numberline {2.1}Umsetzung f\IeC {\"u}r iOs}{5}{section.2.1}
-\contentsline {chapter}{\numberline {3}Programmablauf}{7}{chapter.3}
-\contentsline {section}{\numberline {3.1}Eingabe von Symbolen}{7}{section.3.1}
-\contentsline {subsection}{\numberline {3.1.1}Allgemein}{7}{subsection.3.1.1}
-\contentsline {subsection}{\numberline {3.1.2}Beispiel XCSpacer-triggerNum}{9}{subsection.3.1.2}
-\contentsline {paragraph}{Nun zum Beispiel:}{9}{section*.2}
-\contentsline {subsection}{\numberline {3.1.3}Beispiel Operatoraufruf}{10}{subsection.3.1.3}
-\contentsline {section}{\numberline {3.2}Berechnung von Ausdr\IeC {\"u}cken}{11}{section.3.2}
-\contentsline {chapter}{\numberline {4}Klassen}{12}{chapter.4}
-\contentsline {section}{\numberline {4.1}XCViewController}{12}{section.4.1}
-\contentsline {section}{\numberline {4.2}Kernel}{13}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Schnittstellen (Protocols)}{13}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}XCKernel}{13}{subsection.4.2.2}
-\contentsline {subsection}{\numberline {4.2.3}Hilfsklassen}{13}{subsection.4.2.3}
-\contentsline {subsection}{\numberline {4.2.4}Syntax-Tree}{13}{subsection.4.2.4}
-\contentsline {subsubsection}{\numberline {4.2.4.1}XCTupleElement}{14}{subsubsection.4.2.4.1}
-\contentsline {paragraph}{Unterklassen sind:}{14}{section*.3}
-\contentsline {subsubsection}{\numberline {4.2.4.2}XCSimpleElement}{14}{subsubsection.4.2.4.2}
-\contentsline {paragraph}{Unterklassen sind:}{14}{section*.4}
-\contentsline {subsubsection}{\numberline {4.2.4.3}XCTerminalElement}{14}{subsubsection.4.2.4.3}
-\contentsline {paragraph}{Unterklassen sind:}{14}{section*.5}
-\contentsline {chapter}{\numberline {5}Tests}{16}{chapter.5}
+\contentsline {chapter}{\numberline {1}Anleitung Taschenrechner f\IeC {\"u}r das iPhone}{4}{chapter.1}
+\contentsline {section}{\numberline {1.1}Vorwort}{4}{section.1.1}
+\contentsline {section}{\numberline {1.2}Portrait-View}{4}{section.1.2}
+\contentsline {section}{\numberline {1.3}Landscape-View}{5}{section.1.3}
+\contentsline {section}{\numberline {1.4}Funktionsumfang}{5}{section.1.4}
+\contentsline {subsection}{\numberline {1.4.1}Grundlagen}{5}{subsection.1.4.1}
+\contentsline {subsubsection}{\numberline {1.4.1.1}Der Platzhalter}{5}{subsubsection.1.4.1.1}
+\contentsline {paragraph}{Klammern verwenden:}{5}{section*.2}
+\contentsline {paragraph}{Hinweis:}{5}{section*.3}
+\contentsline {subsubsection}{\numberline {1.4.1.2}Navigation und der Focus}{5}{subsubsection.1.4.1.2}
+\contentsline {subsubsection}{\numberline {1.4.1.3}Zahlen}{6}{subsubsection.1.4.1.3}
+\contentsline {subsubsection}{\numberline {1.4.1.4}Operatoren}{6}{subsubsection.1.4.1.4}
+\contentsline {subsubsection}{\numberline {1.4.1.5}Auswertung}{6}{subsubsection.1.4.1.5}
+\contentsline {paragraph}{Sonderfunktionen:}{6}{section*.4}
+\contentsline {subsection}{\numberline {1.4.2}Weitere Funktionalit\IeC {\"a}ten}{6}{subsection.1.4.2}
+\contentsline {subsubsection}{\numberline {1.4.2.1}Mathematische Funktionen}{6}{subsubsection.1.4.2.1}
+\contentsline {paragraph}{Folgende Funktionen sind enthalten:}{6}{section*.5}
+\contentsline {subsubsection}{\numberline {1.4.2.2}Konstanten}{7}{subsubsection.1.4.2.2}
+\contentsline {subsubsection}{\numberline {1.4.2.3}Variablen}{7}{subsubsection.1.4.2.3}
+\contentsline {paragraph}{Variablen}{7}{section*.6}
+\contentsline {subparagraph}{Hinweis:}{7}{section*.7}
+\contentsline {paragraph}{Speichern}{7}{section*.8}
+\contentsline {paragraph}{ANS}{7}{section*.9}
+\contentsline {subsubsection}{\numberline {1.4.2.4}Sondertasten}{8}{subsubsection.1.4.2.4}
+\contentsline {part}{\numberline {I}Dokumentation}{9}{part.1}
+\contentsline {chapter}{\numberline {2}Einleitung}{10}{chapter.2}
+\contentsline {section}{\numberline {2.1}Umsetzung f\IeC {\"u}r iOs}{10}{section.2.1}
+\contentsline {chapter}{\numberline {3}Programmablauf}{12}{chapter.3}
+\contentsline {section}{\numberline {3.1}Eingabe von Symbolen}{12}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Allgemein}{12}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}Beispiel XCSpacer-triggerNum}{14}{subsection.3.1.2}
+\contentsline {paragraph}{Nun zum Beispiel:}{14}{section*.10}
+\contentsline {subsection}{\numberline {3.1.3}Beispiel Operatoraufruf}{15}{subsection.3.1.3}
+\contentsline {section}{\numberline {3.2}Berechnung von Ausdr\IeC {\"u}cken}{16}{section.3.2}
+\contentsline {chapter}{\numberline {4}Klassen}{17}{chapter.4}
+\contentsline {section}{\numberline {4.1}XCViewController}{17}{section.4.1}
+\contentsline {section}{\numberline {4.2}Kernel}{18}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Schnittstellen (Protocols)}{18}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}XCKernel}{18}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.3}Hilfsklassen}{18}{subsection.4.2.3}
+\contentsline {subsection}{\numberline {4.2.4}Syntax-Tree}{18}{subsection.4.2.4}
+\contentsline {subsubsection}{\numberline {4.2.4.1}XCTupleElement}{19}{subsubsection.4.2.4.1}
+\contentsline {paragraph}{Unterklassen sind:}{19}{section*.11}
+\contentsline {subsubsection}{\numberline {4.2.4.2}XCSimpleElement}{19}{subsubsection.4.2.4.2}
+\contentsline {paragraph}{Unterklassen sind:}{19}{section*.12}
+\contentsline {subsubsection}{\numberline {4.2.4.3}XCTerminalElement}{19}{subsubsection.4.2.4.3}
+\contentsline {paragraph}{Unterklassen sind:}{20}{section*.13}
+\contentsline {chapter}{\numberline {5}Tests}{21}{chapter.5}
