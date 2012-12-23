@@ -110,7 +110,7 @@
             [p replaceContentWithElement:neg];
             [neg setContent:self];
             for (NSUInteger i=0; i<2; i++) {
-                _content[i] = cc[i];
+                [self setElement:cc[i] at:i];
             }
         } else if ([_content[1] isKindOfClass:[self class]]) {
             //shift invert right
