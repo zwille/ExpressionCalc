@@ -69,6 +69,9 @@
             ([self hasFocus]) ? [text uppercaseString] : text
             ];
 }
+-(void) unlink {
+    [self setParent: nil];
+}
 
 // HTML
 -(NSString*) toHTML {
@@ -111,6 +114,7 @@
     assert([self parent]);
     XCElement * rc = [XCSpacer spacerWithParent:nil];
     [[self parent] replaceContentWithElement:rc];
+    [self unlink];
     return rc;
     
 }

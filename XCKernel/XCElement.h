@@ -53,5 +53,6 @@ typedef struct {
 -(id<XCHasTriggers>) triggerPreviousContent;
 // checks if num is errorneous, if YES set self state.error to YES
 -(NSNumber*) checkErrorOn: (NSNumber*) num;
+-(void) unlink;
 
 @end
