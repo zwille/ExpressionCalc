@@ -42,6 +42,12 @@
     [_content normalize];
 }
 
+-(void) unlink {
+    [_content unlink];
+    _content = nil;
+    [super unlink];
+}
+
 //trigger
 -(id<XCHasTriggers>)triggerNextContent {
     return [_parent triggerNextContent];

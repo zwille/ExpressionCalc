@@ -57,6 +57,16 @@
     [self setElement:element at:[self index]];
     return element;
 }
+
+-(void) unlink {
+    for (NSUInteger i=0; i<2; i++) {
+        [_content[i] unlink];
+        _content[i] = nil;
+    }
+    [super unlink];
+}
+
+//normalize
 -(void)normalize {
     // children need index to replace themselfes
     [self setIndex:0];
@@ -100,7 +110,7 @@
             [p replaceContentWithElement:neg];
             [neg setContent:self];
             for (NSUInteger i=0; i<2; i++) {
-                _content[i] = cc[i];
+                [self setElement:cc[i] at:i];
             }
         } else if ([_content[1] isKindOfClass:[self class]]) {
             //shift invert right
@@ -148,7 +158,12 @@
     assert([self parent]);
     XCElement * c = [self content];
     if ([c isKindOfClass:[XCSpacer class]]) {
-        return [[self parent] replaceContentWithElement:_content[![self index]]];
+        XCElement * p = [self parent];
+        NSUInteger i = ![self index];
+        XCElement * c = _content[i];
+        _content[i] = nil; // protect c
+        [self unlink];
+        return [p replaceContentWithElement:c];
     }
     return [super triggerDel];
 }

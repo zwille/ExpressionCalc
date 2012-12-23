@@ -18,7 +18,8 @@
 
 -(void)pushStatement:(XCStatement *)stmnt {
     if([_buf isFull]) {
-        [_buf dequeue];
+        XCStatement * trash = [_buf dequeue];
+        [trash unlink];
     }
     [_buf push:stmnt];
     [self moveToHead];

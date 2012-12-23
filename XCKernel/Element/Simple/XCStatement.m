@@ -23,6 +23,10 @@
 }
 //methods setter getter
 -(void)reset {
+    XCElement * c = [self content];
+    if (c) {
+        [c unlink];
+    }
     [self setContent: [XCSpacer spacerWithParent:self]];
     _store = nil;
 }
