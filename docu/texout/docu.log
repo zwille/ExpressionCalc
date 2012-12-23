@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Arch Linux) (format=pdflatex 2012.10.30)  22 DEC 2012 18:00
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Arch Linux) (format=pdflatex 2012.10.30)  23 DEC 2012 13:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -896,6 +896,12 @@ Package pdftex.def Info: cl_vc.pdf used on input line 152.
 
  <./cl_vc.pdf>] [18] [19] [20]
 Kapitel 5.
+
+Overfull \hbox (3.03922pt too wide) in paragraph at lines 257--258
+[]\OT1/cmr/m/n/10.95 das De-al-lo-zie-ren nicht mehr ben[]otig-ter oder gel[]os
+chter Ele-men-te, mit-tels log-gen der dealloc-
+ []
+
 )
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 71.
  [21
@@ -933,7 +939,7 @@ m/cmr9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><
 mf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/t
 ype1/urw/courier/ucrb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/courier/ucrr
 8a.pfb></usr/share/texmf-dist/fonts/type1/urw/courier/ucrro8a.pfb>
-Output written on texout/docu.pdf (21 pages, 364098 bytes).
+Output written on texout/docu.pdf (21 pages, 364558 bytes).
 PDF statistics:
  496 PDF objects out of 1000 (max. 8388607)
  437 compressed objects within 5 object streams

@@ -156,6 +156,8 @@ Der ViewController verwaltet seinen Zustand den er zum Darstellen des Displays u
 Außerdem wird geregelt, wie die Tasten dargestellt werden sollen (z.B. Zahlen$\iff$ Variablen, DEG$\iff$RAD). 
 Der Kernel (s.u.) übernimmt die eigentliche Aufgabe der Eingabe neuer Zeichen und der Berechnung.
 
+Derzeit verwaltet der VC zwei starre Views für das Retina 4 Display, die je nach Drehung geladen werden.
+
 \section{Kernel}
 (siehe auch extra beiliegends Klassendiagramm)
 \subsection{Schnittstellen (Protocols)}
@@ -166,7 +168,9 @@ Viele Schnittstellen von häufig verwendeten Methoden(-gruppen) werden in folgen
 	\item[XCEvaluable] Die Implementierung kann ihren Inhalt als NSNumber (berechnen und) zurückgeben.
 \end{description}
 \subsection{XCKernel}
-Der Kernel verwaltet das Root-Element (XCStatement) des Syntaxtrees und das Head-Element, auf welchem der Focus steht. Außerdem enthält er einen Buffer (XCStatementBuffer), der die letzten Eingaben in einem Ringpuffer (XCCircBuf) abrufbar verwaltet.
+Der Kernel verwaltet das Root-Element (XCStatement) des Syntaxtrees und das Head-Element, 
+auf welchem der Focus steht. 
+Außerdem enthält er einen Buffer (XCStatementBuffer), der die letzten Eingaben in einem Ringpuffer (XCCircBuf) abrufbar enthält.
 \subsection{Hilfsklassen}
 \begin{description}
 	\item[NSNumber+XCNumber] Hierbei handelt es sich um eine Obj C Category, welche NSNumber um die unten benötigten Operatoren und einige Zustandsabfragen erweitert. 
@@ -250,4 +254,5 @@ Das dynamische Verhalten wurde ``am lebenden Objekt'' immer wieder getestet:
 	\item Verhalten bei der Navigation und beim Löschen
 	\item Aufrufreihenfolge bei Operatoren.
 	\item Verhalten des XCViewControllers
+	\item das Deallozieren nicht mehr benötigter oder gelöschter Elemente, mittels loggen der dealloc-Methode
 \end{itemize}
